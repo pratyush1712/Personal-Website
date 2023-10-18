@@ -1,95 +1,71 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
+import { links } from "./pages/links";
+import Iframe from "react-iframe";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Pratyush Sudhakar"
+};
+
+const NeverSayNeverComponent = () => {
+	return (
+		<Grid display="flex" justifyContent={{ xs: "flex-start" }}>
+			<Iframe
+				url="https://open.spotify.com/embed/track/5rAUZy2eDdegBxUVYxePK2?utm_source=generator"
+				allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+				loading="lazy"
+				styles={{ border: "none", maxHeight: "80px", borderRadius: "13px", margin: "7px 0px", width: "400px" }}
+			></Iframe>
+		</Grid>
+	);
+};
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+	const iconLink = (link: any) => {
+		return (
+			<Tooltip key={link.index} title={link.title} arrow>
+				<Link target="_blank" href={link.href} underline="none" color="inherit">
+					<IconButton color="inherit">{link.icon}</IconButton>
+				</Link>
+			</Tooltip>
+		);
+	};
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+	return (
+		<Grid
+			container
+			spacing={0}
+			marginTop={{ xs: -20, sm: -8 }}
+			marginLeft={{ xs: 2, sm: -3 }}
+			direction="column"
+			alignItems="center"
+			justifyContent="center"
+			sx={{ minHeight: `calc(100vh - 20px - 33px)` }}
+		>
+			<Grid item xs={3}>
+				<Stack direction={{ xs: "column", sm: "row-reverse" }} spacing={2}>
+					<Box
+						display="flex"
+						sx={{
+							justifyContent: "center",
+							display: { xs: "none", md: "block" }
+						}}
+					></Box>
+					<Box>
+						<Grid display="flex" justifyContent={{ xs: "center", sm: "flex-start" }}>
+							<Typography variant="h3">{process.env.REACT_APP_NAME}</Typography>
+						</Grid>
+						<NeverSayNeverComponent />
+						<Grid display="flex" justifyContent={"flex-start"}>
+							<Stack direction="row" spacing={2.2}>
+								{links.filter(link => link.type === "professional").map(link => iconLink(link))}
+								<Divider sx={{ m: 0.5 }} orientation={"vertical"} />
+								{links.filter(link => link.type === "social").map(link => iconLink(link))}
+							</Stack>
+						</Grid>
+					</Box>
+				</Stack>
+			</Grid>
+		</Grid>
+	);
 }

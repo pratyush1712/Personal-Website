@@ -1,0 +1,5 @@
+build/
+public/**.html
+public/**.json
+node_modules
+venv
