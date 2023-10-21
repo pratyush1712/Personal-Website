@@ -5,7 +5,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { VscFiles, VscSettingsGear } from "react-icons/vsc";
 import { BiGitBranch } from "react-icons/bi";
 import Divider from "@mui/material/Divider";
-import { links } from "@/app/pages/links";
+import { links } from "@/lib/links";
 
 interface Props {
 	expanded: boolean;

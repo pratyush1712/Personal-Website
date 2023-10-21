@@ -4,14 +4,7 @@ import { IoIosGitBranch } from "react-icons/io";
 
 export default function Footer() {
 	return (
-		<Box
-			component={Paper}
-			square
-			elevation={0}
-			// sx={{ height: '3vh' }}
-			sx={{ height: "20px", color: "white" }}
-			display="flex"
-		>
+		<Box component={Paper} square elevation={0} sx={{ height: "20px", color: "white" }} display="flex">
 			<Grid container>
 				<Grid
 					item
@@ -31,14 +24,6 @@ export default function Footer() {
 				</Grid>
 				<Grid item sx={{ backgroundColor: "#3279CB", width: "200px" }} display="flex">
 					<Stack direction="row" spacing={0.5} sx={{ pl: 1 }}>
-						{/* <Stack direction="row" spacing={0.5}> */}
-						{/* <Tooltip title="react-vscode-portoflio (Git)" arrow> */}
-						{/* <Link
-              href="https://github.com/noworneverev/react-vscode-portfolio"
-              underline="none"
-              color="white"
-              target="_blank"
-            > */}
 						<Box
 							component={Link}
 							href="https://github.com/pratyush1712"
@@ -50,28 +35,20 @@ export default function Footer() {
 								px: 0.5,
 								justifyContent: "center",
 								alignItems: "center",
-								// cursor: "pointer",
-								"&:hover": {
-									background: "#1f8ad2"
-								}
+								"&:hover": { background: "#1f8ad2" }
 							}}
 						>
 							<IoIosGitBranch fontSize="0.9rem" />
-							<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem" }}>main</Typography>
+							<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem" }}>master</Typography>
 						</Box>
-						{/* </Link> */}
 
-						{/* </Tooltip> */}
-						{/* </Stack> */}
 						<Stack
 							direction="row"
 							spacing={0.5}
 							sx={{
 								px: 0.5,
 								cursor: "pointer",
-								"&:hover": {
-									background: "#1f8ad2"
-								}
+								"&:hover": { background: "#1f8ad2" }
 							}}
 						>
 							<Box
@@ -118,13 +95,7 @@ export default function Footer() {
 						</Stack>
 					</Stack>
 				</Grid>
-				<Grid
-					item
-					// sx={{ backgroundColor: '#3279CB', minWidth: `calc(100% - 35px)` }}
-					sx={{ backgroundColor: "#3279CB", minWidth: `calc(100% - 235px)` }}
-					display="flex"
-					justifyContent="flex-end"
-				>
+				<Grid item sx={{ backgroundColor: "#3279CB", minWidth: `calc(100% - 235px)` }} display="flex" justifyContent="flex-end">
 					<Box display="flex" justifyContent="flex-end">
 						<Stack
 							// display="flex"
@@ -140,9 +111,7 @@ export default function Footer() {
 									justifyContent: "center",
 									alignItems: "center",
 									cursor: "pointer",
-									"&:hover": {
-										background: "#1f8ad2"
-									}
+									"&:hover": { background: "#1f8ad2" }
 								}}
 							>
 								<VscCheck fontSize="0.9rem" />
@@ -157,9 +126,7 @@ export default function Footer() {
 									py: 0.3,
 									px: 0.5,
 									cursor: "pointer",
-									"&:hover": {
-										background: "#1f8ad2"
-									}
+									"&:hover": { background: "#1f8ad2" }
 								}}
 							>
 								<VscFeedback fontSize="0.9rem" />
@@ -173,9 +140,7 @@ export default function Footer() {
 									py: 0.3,
 									px: 0.5,
 									cursor: "pointer",
-									"&:hover": {
-										background: "#1f8ad2"
-									}
+									"&:hover": { background: "#1f8ad2" }
 								}}
 							>
 								<VscBell fontSize="0.9rem" />

@@ -20,9 +20,9 @@
     -   Developed and maintained a dynamic, responsive website using React and Express, as part of a five-member development team.
     -   Successfully reimagined the design of the homepage to improve user engagement.
 
-**Key Technologies:** `React.js` `TypeScript` `AWS DynamoDB` `Docker` `Express` `Google Cloud Project` `Flutter`
+**Key Technologies:** `React.js` `TypeScript` `AWS DynamoDB` `Docker` `Express` `Google Cloud Project` `Flutter`<br><br>
 
-<hr />
+<hr /><br>
 
 ### **Head of Engineering** at [Cornell Perfect Match](https://perfectmatch.ai/)
 
@@ -32,9 +32,9 @@
 -   Developed complex optimization algorithm for the Perfect Match matchmaking platform's match generation and collaborated with a cross-functional team to optimize deployment, improve code readability, and ensure server stability with rapid response times.
 -   Achieved rapid response times and consistently delivered a 95%+ Vercel User Experience Score.
 
-**Key Technologies:** `Next.js` `TypeScript` `Google OR Tools` `MongoDB` `Google Cloud Project` `Vercel`
+**Key Technologies:** `Next.js` `TypeScript` `Google OR Tools` `MongoDB` `Google Cloud Project` `Vercel`<br><br>
 
-<hr />
+<hr /><br>
 
 ### **Vice-President** at [Cornell Wushu - Chinese Martial Arts Club](https://cornellwushu.github.io/)
 
@@ -49,5 +49,6 @@
 
     -   Promoted to the role of Vice-President for the 2022-23 academic year.
     -   Working alongside the President and Practice Leaders to guide practices, helping newcomers improve their skills.
-    -   Assisting with planning practice sessions for competitions and arranging events.
-    <hr />
+    -   Assisting with planning practice sessions for competitions and arranging events. <br>
+
+<hr />

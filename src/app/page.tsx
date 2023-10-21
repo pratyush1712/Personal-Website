@@ -1,5 +1,5 @@
 import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
-import { links } from "./pages/links";
+import { links } from "../lib/links";
 import Iframe from "react-iframe";
 import { Metadata } from "next";
 
@@ -35,25 +35,19 @@ export default function Home() {
 		<Grid
 			container
 			spacing={0}
-			marginTop={{ xs: -20, sm: -8 }}
+			marginTop={{ xs: -20, sm: -6.75 }}
 			marginLeft={{ xs: 2, sm: -3 }}
 			direction="column"
 			alignItems="center"
 			justifyContent="center"
-			sx={{ minHeight: `calc(100vh - 20px - 33px)` }}
+			sx={{ minHeight: `calc(100vh)`, background: "#1E1F1F" }}
 		>
 			<Grid item xs={3}>
 				<Stack direction={{ xs: "column", sm: "row-reverse" }} spacing={2}>
-					<Box
-						display="flex"
-						sx={{
-							justifyContent: "center",
-							display: { xs: "none", md: "block" }
-						}}
-					></Box>
+					<Box display="flex" sx={{ justifyContent: "center", display: { xs: "none", md: "block" } }}></Box>
 					<Box>
 						<Grid display="flex" justifyContent={{ xs: "center", sm: "flex-start" }}>
-							<Typography variant="h3">{process.env.REACT_APP_NAME}</Typography>
+							<Typography variant="h3">Pratyush Sudhakar</Typography>
 						</Grid>
 						<NeverSayNeverComponent />
 						<Grid display="flex" justifyContent={"flex-start"}>

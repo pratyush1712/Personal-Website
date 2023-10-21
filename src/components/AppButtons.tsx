@@ -1,5 +1,6 @@
 "use client";
 import { Button, Box, Paper } from "@mui/material";
+import Link from "next/link";
 import React from "react";
 import { VscMarkdown, VscChromeClose } from "react-icons/vsc";
 import { useTheme } from "@mui/material/styles";
@@ -87,56 +88,57 @@ export default function AppButtons({
 					borderColor: theme.palette.mode === "dark" ? "#252525" : "#f3f3f3"
 				}}
 			>
-				<Button
-					key={index}
-					disableRipple
-					disableElevation
-					disableFocusRipple
-					onClick={() => {
-						setSelectedIndex(index);
-						setCurrentComponent("button");
-					}}
-					sx={{
-						borderRadius: 0,
-						px: 2,
-						textTransform: "none",
-						backgroundColor: renderButtonBgColor(index),
-						color: renderButtonColor(index),
-						"&.MuiButtonBase-root:hover": {
-							bgcolor: renderButtonBgColor(index)
-						},
-						transition: "none",
-						pb: 0.2
-					}}
-				>
-					<Box sx={{ color: "#6997d5", width: 20, height: 20, mr: 0.4, ml: -1 }}>
-						<VscMarkdown />
-					</Box>
-					{name}
-					<Box
-						component={Paper}
-						sx={{
-							ml: 1,
-							mr: -1,
-							backgroundColor: renderCloseButtonBgColor(index),
-							color: renderCloseButtonColor(index),
-							"&.MuiPaper-root:hover": {
-								bgcolor: renderCloseButtonHoverBgColor(index),
-								color: renderCloseButtonHoverColor(index)
-							},
-							width: 20,
-							height: 20,
-							transition: "none"
+				<Link href={route}>
+					<Button
+						key={index}
+						disableRipple
+						disableElevation
+						disableFocusRipple
+						onClick={() => {
+							setSelectedIndex(index);
+							setCurrentComponent("button");
 						}}
-						elevation={0}
-						onClick={(e: any) => {
-							e.stopPropagation();
-							setVisiblePageIndexs(visiblePageIndexs.filter(x => x !== index));
+						sx={{
+							borderRadius: 0,
+							px: 2,
+							textTransform: "none",
+							backgroundColor: renderButtonBgColor(index),
+							color: renderButtonColor(index),
+							"&.MuiButtonBase-root:hover": { bgcolor: renderButtonBgColor(index) },
+							transition: "none",
+							pb: 0.2
 						}}
 					>
-						<VscChromeClose />
-					</Box>
-				</Button>
+						<Box sx={{ color: "#6997d5", width: 20, height: 20, mr: 0.4, ml: -1 }}>
+							<VscMarkdown />
+						</Box>
+						{name}
+						<Box
+							component={Paper}
+							sx={{
+								ml: 1,
+								mr: -1,
+								backgroundColor: renderCloseButtonBgColor(index),
+								color: renderCloseButtonColor(index),
+								"&.MuiPaper-root:hover": {
+									bgcolor: renderCloseButtonHoverBgColor(index),
+									color: renderCloseButtonHoverColor(index)
+								},
+								width: 20,
+								height: 20,
+								transition: "none"
+							}}
+							elevation={0}
+							onClick={(e: any) => {
+								e.preventDefault();
+								e.stopPropagation();
+								setVisiblePageIndexs(visiblePageIndexs.filter(x => x !== index));
+							}}
+						>
+							<VscChromeClose />
+						</Box>
+					</Button>
+				</Link>
 			</Box>
 		);
 	}
@@ -150,7 +152,8 @@ export default function AppButtons({
 				overflowX: "auto",
 				overflowY: "hidden",
 				whiteSpace: "nowrap",
-				backgroundColor: theme.palette.mode === "dark" ? "#252527" : "#f3f3f3",
+				minHeight: "32px",
+				backgroundColor: pages.length !== 0 ? (theme.palette.mode === "dark" ? "#252527" : "#f3f3f3") : "#1E1F1F",
 				"&::-webkit-scrollbar": {
 					height: "3px"
 					// backgroundColor: 'red',

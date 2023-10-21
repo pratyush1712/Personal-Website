@@ -14,7 +14,7 @@ interface Page {
 	index: number;
 	name: string;
 	route: string;
-	content: string;
+	description: string;
 }
 
 interface Props {
@@ -41,6 +41,7 @@ export default function AppTree({
 	const page: Page = pages.find(x => x.route === pathname)!;
 
 	useEffect(() => {
+		console.log("rerendering");
 		if (page) setSelectedIndex(page.index);
 	}, [page, setSelectedIndex]);
 
@@ -63,48 +64,54 @@ export default function AppTree({
 	return (
 		<TreeView
 			aria-label="file system navigator"
-			defaultCollapseIcon={<ExpandMoreIcon />}
+			defaultCollapseIcon={
+				<Link href="/" style={{ alignItems: "center", justifyContent: "center", display: "flex" }}>
+					<ExpandMoreIcon />
+				</Link>
+			}
 			defaultExpandIcon={<ChevronRightIcon />}
 			sx={{ minWidth: 220 }}
 			defaultExpanded={["-1"]}
 		>
-			<Link href="/">
-				<TreeItem
-					nodeId="-1"
-					label="Home"
-					color="#bdc3cf"
-					onClick={() => {
-						setSelectedIndex(-1);
-					}}
-				>
-					{pages.map(({ index, name, route }) => (
-						<TreeItem
-							key={index}
-							nodeId={index.toString()}
-							label={
-								<Link href={route}>
-									<span style={{ textDecoration: "none", color: "inherit" }}>{name}</span>
-								</Link>
+			<TreeItem
+				nodeId="-1"
+				label={
+					<Link href="/">
+						<span style={{ textDecoration: "none", color: "inherit" }}>Home</span>
+					</Link>
+				}
+				color="#bdc3cf"
+				onClick={() => {
+					setSelectedIndex(-1);
+				}}
+			>
+				{pages.map(({ index, name, route }) => (
+					<TreeItem
+						key={index}
+						nodeId={index.toString()}
+						label={
+							<Link href={route}>
+								<span style={{ textDecoration: "none", color: "inherit" }}>{name}</span>
+							</Link>
+						}
+						sx={{
+							color: renderTreeItemColor(index),
+							backgroundColor: renderTreeItemBgColor(index),
+							"&& .Mui-selected": { backgroundColor: renderTreeItemBgColor(index) }
+						}}
+						icon={<VscMarkdown color="#6997d5" />}
+						onClick={(e: any) => {
+							e.preventDefault();
+							if (!visiblePageIndexs.includes(index)) {
+								const newIndexs = [...visiblePageIndexs, index];
+								setVisiblePageIndexs(newIndexs);
 							}
-							sx={{
-								color: renderTreeItemColor(index),
-								backgroundColor: renderTreeItemBgColor(index),
-								"&& .Mui-selected": { backgroundColor: renderTreeItemBgColor(index) }
-							}}
-							icon={<VscMarkdown color="#6997d5" />}
-							onClick={(e: any) => {
-								e.preventDefault();
-								if (!visiblePageIndexs.includes(index)) {
-									const newIndexs = [...visiblePageIndexs, index];
-									setVisiblePageIndexs(newIndexs);
-								}
-								setSelectedIndex(index);
-								setCurrentComponent("tree");
-							}}
-						/>
-					))}
-				</TreeItem>
-			</Link>
+							setSelectedIndex(index);
+							setCurrentComponent("tree");
+						}}
+					/>
+				))}
+			</TreeItem>
 		</TreeView>
 	);
 }

@@ -1,6 +1,15 @@
+import React from "react";
 import { FaEnvelope, FaFacebook, FaFilePdf, FaGithub, FaInstagram, FaLinkedin, FaSpotify } from "react-icons/fa";
 
-export const links = [
+type Link = {
+	index: number;
+	type: string;
+	title: string;
+	href: string;
+	icon: React.ReactNode;
+};
+
+export const links: Link[] = [
 	{
 		index: 0,
 		type: "professional",
@@ -26,7 +35,7 @@ export const links = [
 		index: 3,
 		type: "professional",
 		title: "Checkout my Resume",
-		href: process.env.PUBLIC_URL + "/resume.pdf",
+		href: "/resume.pdf",
 		icon: <FaFilePdf />
 	},
 	{

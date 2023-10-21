@@ -2,13 +2,12 @@
 import { useEffect, useState } from "react";
 import { Container, CssBaseline, Grid, Stack, ThemeProvider, Typography, createTheme, darkScrollbar } from "@mui/material";
 import { isBrowser } from "react-device-detect";
-import usePageTracking from "../hooks/usePageTracking";
-import AppButtons from "@/layout/AppButtons";
-import AppTree from "@/layout/AppTree";
-import Footer from "@/layout/Footer";
-import Sidebar from "@/layout/Sidebar";
-import pages from "@/app/pages/pages";
-import { useRouter } from "next/navigation";
+import AppButtons from "./AppButtons";
+import AppTree from "./AppTree";
+import Footer from "./Footer";
+import Sidebar from "./Sidebar";
+import pages, { routeToPage } from "@/lib/pages";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 interface Page {
 	index: number;
@@ -25,41 +24,24 @@ function initVisiblePageIndexs(pages: Page[]) {
 	return tabs;
 }
 
-let darkTheme = true;
-if (typeof window !== "undefined") {
-	darkTheme = localStorage.getItem("theme") === "dark" || false;
-}
-
-export default function Theme({ children }: { children: React.ReactNode }) {
+export default function VSCodeLayout({ children }: { children: React.ReactNode }) {
 	const [expanded, setExpanded] = useState(isBrowser);
 	const [selectedIndex, setSelectedIndex] = useState(-1);
 	const [currentComponent, setCurrentComponent] = useState("");
 	const [visiblePageIndexs, setVisiblePageIndexs] = useState(initVisiblePageIndexs(pages));
-	const [darkMode, setDarkMode] = useState(darkTheme);
+	const [darkMode, setDarkMode] = useState(true);
 	const [visiblePages, setVisiblePages] = useState(pages);
 	const paletteType = darkMode ? "dark" : "light";
 	const router = useRouter();
-	usePageTracking();
+	const params = useParams();
 	const theme = createTheme({
 		palette: {
 			mode: paletteType,
-			background: {
-				default: paletteType === "light" ? "#FFFFFF" : "#1e1e1e"
-			}
+			background: { default: paletteType === "light" ? "#FFFFFF" : "#1e1e1e" }
 		},
 		components: {
-			MuiCssBaseline: {
-				styleOverrides: {
-					body: paletteType === "dark" ? darkScrollbar() : null
-				}
-			},
-			MuiDivider: {
-				styleOverrides: {
-					root: {
-						borderColor: "rgba(255, 255, 255, 0.12)"
-					}
-				}
-			}
+			MuiCssBaseline: { styleOverrides: { body: paletteType === "dark" ? darkScrollbar() : null } },
+			MuiDivider: { styleOverrides: { root: { borderColor: "rgba(255, 255, 255, 0.12)" } } }
 		}
 	});
 
@@ -68,7 +50,7 @@ export default function Theme({ children }: { children: React.ReactNode }) {
 		localStorage.setItem("theme", darkMode ? "light" : "dark");
 	}
 
-	const deletedIndex = visiblePages.find(x => !visiblePageIndexs.includes(x.index))?.index;
+	const deletedIndex: number | undefined = visiblePages.find(x => !visiblePageIndexs.includes(x.index))?.index;
 	useEffect(() => {
 		const newPages = [];
 
@@ -84,14 +66,19 @@ export default function Theme({ children }: { children: React.ReactNode }) {
 		} else if (deletedIndex === selectedIndex && deletedIndex > Math.max(...visiblePageIndexs)) {
 			setSelectedIndex(Math.max(...visiblePageIndexs));
 			const page = pages.find(x => x.index === Math.max(...visiblePageIndexs));
-			if (page) router.push(page.route);
+			if (page) router.push(page.route, { scroll: false });
 		} else if (deletedIndex === selectedIndex && deletedIndex < Math.max(...visiblePageIndexs)) {
 			setSelectedIndex(Math.min(...visiblePageIndexs));
 			const page = pages.find(x => x.index === Math.min(...visiblePageIndexs));
-			if (page) router.push(page.route);
+			if (page) router.push(page.route, { scroll: false });
 		} else {
 		}
-	}, [visiblePageIndexs, router.push, deletedIndex, selectedIndex]);
+	}, [visiblePageIndexs, router.push, selectedIndex, deletedIndex]);
+
+	useEffect(() => {
+		const index = routeToPage[params.slug as string]?.index;
+		index && setSelectedIndex(index);
+	}, []);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -126,8 +113,8 @@ export default function Theme({ children }: { children: React.ReactNode }) {
 							</Grid>
 						)}
 
-						<Grid item xs zeroMinWidth>
-							<Grid sx={{ height: "33px" }}>
+						<Grid item xs zeroMinWidth sx={{ width: "100%" }}>
+							<Grid item sx={{ height: "33px", mb: -0.2 }}>
 								<AppButtons
 									pages={visiblePages}
 									selectedIndex={selectedIndex}
@@ -142,10 +129,20 @@ export default function Theme({ children }: { children: React.ReactNode }) {
 								sx={{
 									scrollBehavior: "smooth",
 									overflowY: "auto",
-									maxHeight: "calc(100vh - 53px)"
+									maxHeight: "calc(100vh - 53px)",
+									background: "#1E1F1F"
 								}}
 							>
-								{children}
+								<Container
+									sx={{
+										minHeight: "calc(100vh - 53px)",
+										maxHeight: "calc(100vh - 53px)",
+										overflowY: "auto",
+										overflowX: "hidden"
+									}}
+								>
+									{children}
+								</Container>
 							</Grid>
 						</Grid>
 					</Grid>
