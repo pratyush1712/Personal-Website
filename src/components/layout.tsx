@@ -2,10 +2,10 @@
 import { useEffect, useState } from "react";
 import { Container, CssBaseline, Grid, Stack, ThemeProvider, Typography, createTheme, darkScrollbar } from "@mui/material";
 import { isBrowser } from "react-device-detect";
-import AppButtons from "./appButtons";
-import AppTree from "./appTree";
-import Footer from "./footer";
-import Sidebar from "./sidebar";
+import AppButtons from "./AppButtons";
+import AppTree from "./AppTree";
+import Footer from "./Footer";
+import Sidebar from "./Sidebar";
 import pages, { routeToPage } from "@/lib/pages";
 import { useParams, usePathname, useRouter } from "next/navigation";
 
