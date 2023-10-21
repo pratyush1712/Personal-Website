@@ -5,7 +5,7 @@ import { isBrowser } from "react-device-detect";
 import AppButtons from "./AppButtons";
 import AppTree from "./AppTree";
 import Footer from "./Footer";
-import Sidebar from "./Sidebar";
+import Sidebar from "./sidebar";
 import pages, { routeToPage } from "@/lib/pages";
 import { useParams, usePathname, useRouter } from "next/navigation";
 

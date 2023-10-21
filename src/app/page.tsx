@@ -1,11 +1,6 @@
 import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
 import { links } from "../lib/links";
 import Iframe from "react-iframe";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-	title: "Pratyush Sudhakar"
-};
 
 const NeverSayNeverComponent = () => {
 	return (
