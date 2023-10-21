@@ -1,0 +1,24 @@
+# run pnpm lint and pnpm format-check in parallel on every pull request and push to master branch
+# also check for pnpm build after installing dependencies
+
+name: Continuous Integration
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Install dependencies
+              run: |
+                  pnpm install
+                  pnpm build
+            - name: Lint
+              run: pnpm lint
+            - name: Format check
+              run: pnpm format-check
