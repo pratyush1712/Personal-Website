@@ -80,15 +80,14 @@ export default function AppButtons({
 
 	function renderPageButton(index: number, name: string, route: string) {
 		return (
-			<Box
-				key={index}
-				sx={{
-					display: "inline-block",
-					borderRight: 1,
-					borderColor: theme.palette.mode === "dark" ? "#252525" : "#f3f3f3"
-				}}
-			>
-				<Link href={route}>
+			<Link href={route} key={index}>
+				<Box
+					sx={{
+						display: "inline-block",
+						borderRight: 1,
+						borderColor: theme.palette.mode === "dark" ? "#252525" : "#f3f3f3"
+					}}
+				>
 					<Button
 						key={index}
 						disableRipple
@@ -138,8 +137,8 @@ export default function AppButtons({
 							<VscChromeClose />
 						</Box>
 					</Button>
-				</Link>
-			</Box>
+				</Box>
+			</Link>
 		);
 	}
 

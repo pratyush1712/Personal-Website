@@ -16,7 +16,7 @@ const pages: Page[] = [
 
 const routeToPage: { [key: string]: Page } = {};
 pages.forEach(page => {
-	routeToPage[page.route] = page
+	routeToPage[page.route] = page;
 });
 export { routeToPage };
 

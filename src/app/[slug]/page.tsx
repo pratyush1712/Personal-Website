@@ -34,34 +34,33 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 
 function getContent(page: string) {
 	const readmeContent = readFileSync(`public/readmes/${page}.md`, "utf8");
-	return (
-		<ReactMarkdown
-			children={readmeContent}
-			components={{
-				code: MarkdownCode,
-				a: MarkdownLink,
-				p: MarkdownParagraph,
-				table: MarkdownTable,
-				thead: TableHead,
-				tbody: TableBody,
-				th: MarkdownTableCell,
-				tr: TableRow,
-				td: MarkdownTableCell,
-				tfoot: TableFooter,
-				h1: MarkdownH1,
-				h2: MarkdownH2
-			}}
-			remarkPlugins={[remarkGfm, remarkBreaks]}
-			rehypePlugins={[rehypeRaw]}
-		/>
-	);
+	return readmeContent;
 }
 
 export default async function MDContainer({ params }: Props) {
 	const content = getContent(params.slug);
 	return (
 		<Container maxWidth="md" sx={{ pb: 1, minWidth: "100%" }}>
-			{content}
+			<ReactMarkdown
+				components={{
+					code: MarkdownCode,
+					a: MarkdownLink,
+					p: MarkdownParagraph,
+					table: MarkdownTable,
+					thead: TableHead,
+					tbody: TableBody,
+					th: MarkdownTableCell,
+					tr: TableRow,
+					td: MarkdownTableCell,
+					tfoot: TableFooter,
+					h1: MarkdownH1,
+					h2: MarkdownH2
+				}}
+				remarkPlugins={[remarkGfm, remarkBreaks]}
+				rehypePlugins={[rehypeRaw]}
+			>
+				{content}
+			</ReactMarkdown>
 		</Container>
 	);
 }
