@@ -7,7 +7,10 @@ import AppTree from "./AppTree";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 import pages, { routeToPage } from "@/lib/pages";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import createCache from "@emotion/cache";
+import { useServerInsertedHTML } from "next/navigation";
+import { CacheProvider } from "@emotion/react";
 
 interface Page {
 	index: number;
@@ -24,30 +27,78 @@ function initVisiblePageIndexs(pages: Page[]) {
 	return tabs;
 }
 
-export default function VSCodeLayout({ children }: { children: React.ReactNode }) {
+interface VSCodeLayoutProps {
+	options: any;
+	children: React.ReactNode;
+}
+
+export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 	const [expanded, setExpanded] = useState(isBrowser);
 	const [selectedIndex, setSelectedIndex] = useState(-1);
 	const [currentComponent, setCurrentComponent] = useState("");
 	const [visiblePageIndexs, setVisiblePageIndexs] = useState(initVisiblePageIndexs(pages));
 	const [darkMode, setDarkMode] = useState(true);
 	const [visiblePages, setVisiblePages] = useState(pages);
-	const paletteType = darkMode ? "dark" : "light";
 	const router = useRouter();
 	const params = useParams();
 	const theme = createTheme({
 		palette: {
-			mode: paletteType,
-			background: { default: paletteType === "light" ? "#FFFFFF" : "#1e1e1e" }
+			mode: darkMode ? "dark" : "light",
+			background: { default: !darkMode ? "#FFFFFF" : "#1e1e1e" },
+			primary: { main: !darkMode ? "#007acc" : "#0e639c" },
+			secondary: { main: !darkMode ? "#007acc" : "#0e639c" }
 		},
 		components: {
-			MuiCssBaseline: { styleOverrides: { body: paletteType === "dark" ? darkScrollbar() : null } },
-			MuiDivider: { styleOverrides: { root: { borderColor: "rgba(255, 255, 255, 0.12)" } } }
+			MuiCssBaseline: { styleOverrides: { body: darkMode ? darkScrollbar() : null } },
+			MuiDivider: {
+				styleOverrides: { root: { borderColor: darkMode ? "rgba(255, 255, 255, 0.12)" : "rgba(0,0,0,0.12)" } }
+			},
+			MuiPaper: { styleOverrides: { root: { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" } } },
+			MuiContainer: { styleOverrides: { root: { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" } } },
+			MuiButton: {
+				styleOverrides: {
+					root: {
+						color: !darkMode ? "#000000" : "#FFFFFF",
+						backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
+						"&:hover": { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" }
+					}
+				}
+			},
+			MuiIconButton: {
+				styleOverrides: {
+					root: {
+						color: !darkMode ? "#000000" : "#FFFFFF",
+						backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
+						"&:hover": { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" }
+					}
+				}
+			},
+			MuiTabs: {
+				styleOverrides: {
+					root: {
+						backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
+						color: !darkMode ? "#000000" : "#FFFFFF"
+					}
+				}
+			},
+			MuiTab: {
+				styleOverrides: {
+					root: {
+						color: !darkMode ? "#000000" : "#FFFFFF",
+						"&:hover": { color: !darkMode ? "#000000" : "#FFFFFF" }
+					}
+				}
+			},
+			MuiTypography: {
+				styleOverrides: { root: { color: !darkMode ? "#000000" : "#FFFFFF" } }
+			}
 		}
 	});
 
 	function handleThemeChange() {
 		setDarkMode(!darkMode);
-		localStorage.setItem("theme", darkMode ? "light" : "dark");
+		theme.palette.mode = darkMode ? "dark" : "light";
+		localStorage.setItem("darkMode", JSON.stringify(!darkMode));
 	}
 
 	const deletedIndex: number | undefined = visiblePages.find(x => !visiblePageIndexs.includes(x.index))?.index;
@@ -78,30 +129,87 @@ export default function VSCodeLayout({ children }: { children: React.ReactNode }
 	useEffect(() => {
 		const index = routeToPage[params.slug as string]?.index;
 		index && setSelectedIndex(index);
+		setDarkMode(JSON.parse(localStorage.getItem("darkMode") || "true"));
 	}, []);
 
+	const [{ cache, flush }] = useState(() => {
+		const cache = createCache(options);
+		cache.compat = true;
+		const prevInsert = cache.insert;
+		let inserted: string[] = [];
+		cache.insert = (...args) => {
+			const serialized = args[1];
+			if (cache.inserted[serialized.name] === undefined) {
+				inserted.push(serialized.name);
+			}
+			return prevInsert(...args);
+		};
+		const flush = () => {
+			const prevInserted = inserted;
+			inserted = [];
+			return prevInserted;
+		};
+		return { cache, flush };
+	});
+
+	useServerInsertedHTML(() => {
+		const names = flush();
+		if (names.length === 0) {
+			return null;
+		}
+		let styles = "";
+		for (const name of names) {
+			styles += cache.inserted[name];
+		}
+		return (
+			<style
+				key={cache.key}
+				data-emotion={`${cache.key} ${names.join(" ")}`}
+				dangerouslySetInnerHTML={{
+					__html: styles
+				}}
+			/>
+		);
+	});
+
 	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline enableColorScheme />
-			<Container sx={{ m: 0, p: 0, overflowY: "hidden" }} maxWidth={false} disableGutters>
-				<Grid container sx={{ overflow: "auto", overflowY: "hidden" }}>
-					<Grid container sx={{ overflow: "auto" }}>
-						<Grid item sx={{ width: 50 }}>
-							<Sidebar
-								setExpanded={setExpanded}
-								expanded={expanded}
-								darkMode={darkMode}
-								handleThemeChange={handleThemeChange}
-							/>
-						</Grid>
-						{expanded && (
-							<Grid item sx={{ backgroundColor: darkMode ? "#252527" : "#f3f3f3", width: 220 }}>
-								<Stack sx={{ mt: 1 }}>
-									<Typography variant="caption" color="text.secondary" sx={{ ml: 4 }}>
-										EXPLORER
-									</Typography>
-									<AppTree
-										pages={pages}
+		<CacheProvider value={cache}>
+			<ThemeProvider theme={theme}>
+				<CssBaseline enableColorScheme />
+				<Container sx={{ m: 0, p: 0, overflowY: "hidden" }} maxWidth={false} disableGutters>
+					<Grid container sx={{ overflow: "auto", overflowY: "hidden" }}>
+						<Grid container sx={{ overflow: "auto" }}>
+							<Grid item sx={{ width: 50 }}>
+								<Sidebar
+									setExpanded={setExpanded}
+									expanded={expanded}
+									darkMode={darkMode}
+									handleThemeChange={handleThemeChange}
+								/>
+							</Grid>
+							{expanded && (
+								<Grid item sx={{ backgroundColor: darkMode ? "#252527" : "#f3f3f3", width: 220 }}>
+									<Stack sx={{ mt: 1 }}>
+										<Typography variant="caption" color="text.secondary" sx={{ ml: 4 }}>
+											EXPLORER
+										</Typography>
+										<AppTree
+											pages={pages}
+											selectedIndex={selectedIndex}
+											setSelectedIndex={setSelectedIndex}
+											currentComponent={currentComponent}
+											setCurrentComponent={setCurrentComponent}
+											visiblePageIndexs={visiblePageIndexs}
+											setVisiblePageIndexs={setVisiblePageIndexs}
+										/>
+									</Stack>
+								</Grid>
+							)}
+
+							<Grid item xs zeroMinWidth sx={{ width: "100%" }}>
+								<Grid item sx={{ height: "33px", mb: -0.2 }}>
+									<AppButtons
+										pages={visiblePages}
 										selectedIndex={selectedIndex}
 										setSelectedIndex={setSelectedIndex}
 										currentComponent={currentComponent}
@@ -109,48 +217,34 @@ export default function VSCodeLayout({ children }: { children: React.ReactNode }
 										visiblePageIndexs={visiblePageIndexs}
 										setVisiblePageIndexs={setVisiblePageIndexs}
 									/>
-								</Stack>
-							</Grid>
-						)}
-
-						<Grid item xs zeroMinWidth sx={{ width: "100%" }}>
-							<Grid item sx={{ height: "33px", mb: -0.2 }}>
-								<AppButtons
-									pages={visiblePages}
-									selectedIndex={selectedIndex}
-									setSelectedIndex={setSelectedIndex}
-									currentComponent={currentComponent}
-									setCurrentComponent={setCurrentComponent}
-									visiblePageIndexs={visiblePageIndexs}
-									setVisiblePageIndexs={setVisiblePageIndexs}
-								/>
-							</Grid>
-							<Grid
-								sx={{
-									scrollBehavior: "smooth",
-									overflowY: "auto",
-									maxHeight: "calc(100vh - 53px)",
-									background: "#1E1F1F"
-								}}
-							>
-								<Container
+								</Grid>
+								<Grid
 									sx={{
-										minHeight: "calc(100vh - 53px)",
-										maxHeight: "calc(100vh - 53px)",
+										scrollBehavior: "smooth",
 										overflowY: "auto",
-										overflowX: "hidden"
+										maxHeight: "calc(100vh - 53px)",
+										background: !darkMode ? "#FFFFFF" : "#1e1e1e"
 									}}
 								>
-									{children}
-								</Container>
+									<Container
+										sx={{
+											minHeight: "calc(100vh - 53px)",
+											maxHeight: "calc(100vh - 53px)",
+											overflowY: "auto",
+											overflowX: "hidden"
+										}}
+									>
+										{children}
+									</Container>
+								</Grid>
 							</Grid>
 						</Grid>
+						<Grid item lg={12} md={12} sm={12} xs={12}>
+							<Footer />
+						</Grid>
 					</Grid>
-					<Grid item lg={12} md={12} sm={12} xs={12}>
-						<Footer />
-					</Grid>
-				</Grid>
-			</Container>
-		</ThemeProvider>
+				</Container>
+			</ThemeProvider>
+		</CacheProvider>
 	);
 }

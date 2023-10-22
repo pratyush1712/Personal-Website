@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en">
 			<body className={inter.className}>
 				<GoogleAnalytics />
-				<VSCodeLayout>{children}</VSCodeLayout>
+				<VSCodeLayout options={{ key: "mui" }}>{children}</VSCodeLayout>
 			</body>
 		</html>
 	);

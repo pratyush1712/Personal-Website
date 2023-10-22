@@ -80,7 +80,10 @@ export default function AppTree({
 						<span style={{ textDecoration: "none", color: "inherit" }}>Home</span>
 					</Link>
 				}
-				color="#bdc3cf"
+				sx={{
+					color: renderTreeItemColor(-2),
+					backgroundColor: renderTreeItemBgColor(-2)
+				}}
 				onClick={() => {
 					setSelectedIndex(-1);
 				}}

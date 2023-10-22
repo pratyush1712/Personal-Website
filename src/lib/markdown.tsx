@@ -31,17 +31,11 @@ export function MarkdownTableCell(props: { children: ReactNode }) {
 }
 
 export function MarkdownList(props: { children: ReactNode }) {
-	return (
-		<List sx={{ maxWidth: "100%" }}>
-			{props.children}
-			{/* <Typography>{props.children}</Typography> */}
-		</List>
-	);
+	return <Typography>{props.children}</Typography>;
 }
 
 export function MarkdownListItem(props: { children: ReactNode }) {
-	return <ListItem sx={{ maxWidth: "100%" }}>&#10147; {props.children}</ListItem>;
-	return <ListItem sx={{}}>&#10147; {props.children}</ListItem>;
+	return <Typography>&#10147; {props.children}</Typography>;
 }
 
 export function MarkdownCode(props: { children: ReactNode }) {
@@ -91,7 +85,7 @@ export function MarkdownH2(props: { children: ReactNode }) {
 }
 
 export function MarkdownStrong(props: { children: ReactNode }) {
-	return <Typography> {props.children} </Typography>;
+	return <Typography>{props.children}</Typography>;
 }
 
 export function MarkdownImage(props: any) {

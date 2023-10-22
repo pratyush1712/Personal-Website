@@ -6,7 +6,7 @@ import rehypeRaw from "rehype-raw";
 import { readFileSync } from "fs";
 
 // Markdown Format Imports
-import { Container, TableBody, TableFooter, TableHead, TableRow } from "@mui/material";
+import { Container, TableBody, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
 import { MarkdownH1, MarkdownH2, MarkdownCode, MarkdownImage, MarkdownLink, MarkdownList, MarkdownListItem } from "@/lib/markdown";
 import { MarkdownParagraph, MarkdownStrong, MarkdownTable, MarkdownTableCell } from "@/lib/markdown";
 

@@ -35,7 +35,7 @@ export default function Home() {
 			direction="column"
 			alignItems="center"
 			justifyContent="center"
-			sx={{ minHeight: `calc(100vh)`, background: "#1E1F1F" }}
+			sx={{ minHeight: `calc(100vh)` }}
 		>
 			<Grid item xs={3}>
 				<Stack direction={{ xs: "column", sm: "row-reverse" }} spacing={2}>
