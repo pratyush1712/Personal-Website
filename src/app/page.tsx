@@ -1,5 +1,5 @@
 import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
-import { links } from "../lib/links";
+import { links } from "@/lib/links";
 import Iframe from "react-iframe";
 
 const NeverSayNeverComponent = () => {
