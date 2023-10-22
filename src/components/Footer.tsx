@@ -129,7 +129,7 @@ export default function Footer() {
 								}}
 							>
 								<VscCheck fontSize="0.9rem" />
-								<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem" }}>Prettier</Typography>
+								<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem", color: "white" }}>Prettier</Typography>
 							</Box>
 
 							<Box
