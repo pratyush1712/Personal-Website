@@ -1,9 +1,10 @@
 import React from "react";
 import { FaEnvelope, FaFacebook, FaFilePdf, FaGithub, FaInstagram, FaLinkedin, FaSpotify } from "react-icons/fa";
 
+type LinkType = "professional" | "social";
 type Link = {
 	index: number;
-	type: string;
+	type: LinkType;
 	title: string;
 	href: string;
 	icon: React.ReactNode;

@@ -37,7 +37,8 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 	const slug = params.slug.charAt(0).toUpperCase() + params.slug.slice(1);
 	return {
 		title: `Pratyush | ${slug}`,
-		description: routeToPage[params.slug].description
+		description: routeToPage[params.slug].description,
+		keywords: routeToPage[params.slug].keywords
 	};
 }
 
@@ -54,7 +55,6 @@ export default async function MDContainer({ params }: Props) {
 				components={{
 					code: MarkdownCode,
 					a: MarkdownLink,
-					// strong: MarkdownStrong,
 					p: MarkdownParagraph,
 					table: MarkdownTable,
 					thead: TableHead,
@@ -67,7 +67,6 @@ export default async function MDContainer({ params }: Props) {
 					h2: MarkdownH2,
 					h3: MarkdownH3,
 					li: MarkdownListItem
-					// i: MarkdownItal
 				}}
 				remarkPlugins={[remarkGfm, remarkBreaks]}
 				rehypePlugins={[rehypeRaw]}
