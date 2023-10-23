@@ -17,7 +17,7 @@ import {
 	MarkdownListItem,
 	MarkdownH3
 } from "@/components/Markdown";
-import { MarkdownParagraph, MarkdownStrong, MarkdownTable, MarkdownTableCell, MarkdownItal } from "@/components/Markdown";
+import { MarkdownParagraph, MarkdownTable, MarkdownTableCell } from "@/components/Markdown";
 
 // Static Page Imports
 import pages, { routeToPage } from "@/lib/pages";
