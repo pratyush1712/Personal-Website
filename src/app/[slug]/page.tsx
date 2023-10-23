@@ -7,8 +7,17 @@ import { readFileSync } from "fs";
 
 // Markdown Format Imports
 import { Container, TableBody, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
-import { MarkdownH1, MarkdownH2, MarkdownCode, MarkdownImage, MarkdownLink, MarkdownList, MarkdownListItem } from "@/lib/markdown";
-import { MarkdownParagraph, MarkdownStrong, MarkdownTable, MarkdownTableCell } from "@/lib/markdown";
+import {
+	MarkdownH1,
+	MarkdownH2,
+	MarkdownCode,
+	MarkdownImage,
+	MarkdownLink,
+	MarkdownList,
+	MarkdownListItem,
+	MarkdownH3
+} from "@/components/Markdown";
+import { MarkdownParagraph, MarkdownStrong, MarkdownTable, MarkdownTableCell, MarkdownItal } from "@/components/Markdown";
 
 // Static Page Imports
 import pages, { routeToPage } from "@/lib/pages";
@@ -45,6 +54,7 @@ export default async function MDContainer({ params }: Props) {
 				components={{
 					code: MarkdownCode,
 					a: MarkdownLink,
+					// strong: MarkdownStrong,
 					p: MarkdownParagraph,
 					table: MarkdownTable,
 					thead: TableHead,
@@ -54,7 +64,10 @@ export default async function MDContainer({ params }: Props) {
 					td: MarkdownTableCell,
 					tfoot: TableFooter,
 					h1: MarkdownH1,
-					h2: MarkdownH2
+					h2: MarkdownH2,
+					h3: MarkdownH3,
+					li: MarkdownListItem
+					// i: MarkdownItal
 				}}
 				remarkPlugins={[remarkGfm, remarkBreaks]}
 				rehypePlugins={[rehypeRaw]}
