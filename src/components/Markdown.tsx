@@ -1,17 +1,18 @@
-import { Chip, Container, Divider, Link, List, ListItem, Paper, Typography, Icon } from "@mui/material";
+import { Chip, Container, Divider, Link, List, ListItem, Paper, Typography, Icon, Box, Grid } from "@mui/material";
 import { Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
+import { BiRightArrow, BiSolidHandRight, BiSolidRightArrow } from "react-icons/bi";
 
 export function MarkdownLink(props: any) {
 	return (
-		<Link href={props.href} target="_blank" underline="hover">
+		<Link href={props.href} target="_blank" underline="hover" display="inline">
 			{props.children}
 		</Link>
 	);
 }
 
-export function MarkdownTable(props: { children: ReactNode }) {
+export function MarkdownTable(props: any) {
 	return (
 		<TableContainer component={Paper}>
 			<Table size="small" aria-label="a dense table">
@@ -21,7 +22,7 @@ export function MarkdownTable(props: { children: ReactNode }) {
 	);
 }
 
-export function MarkdownTableCell(props: { children: ReactNode }) {
+export function MarkdownTableCell(props: any) {
 	return (
 		<TableCell>
 			{props.children}
@@ -30,19 +31,24 @@ export function MarkdownTableCell(props: { children: ReactNode }) {
 	);
 }
 
-export function MarkdownList(props: { children: ReactNode }) {
+export function MarkdownList(props: any) {
 	return <Typography>{props.children}</Typography>;
 }
 
-export function MarkdownListItem(props: { children: ReactNode }) {
-	return <Typography>&#10147; {props.children}</Typography>;
+export function MarkdownListItem(props: any) {
+	return (
+		<ListItem>
+			<BiSolidHandRight />
+			<Container>{props.children}</Container>
+		</ListItem>
+	);
 }
 
-export function MarkdownCode(props: { children: ReactNode }) {
-	return <Chip size="small" label={props.children?.toString()} sx={{ borderRadius: 1 }} />;
+export function MarkdownCode(props: any) {
+	return <Chip size="small" label={props.children?.toString()} sx={{ borderRadius: 1, my: 0.2 }} />;
 }
 
-export function MarkdownH1(props: { children: ReactNode }) {
+export function MarkdownH1(props: any) {
 	return (
 		<>
 			<Typography
@@ -63,7 +69,7 @@ export function MarkdownH1(props: { children: ReactNode }) {
 	);
 }
 
-export function MarkdownH2(props: { children: ReactNode }) {
+export function MarkdownH2(props: any) {
 	return (
 		<>
 			<Typography
@@ -84,8 +90,24 @@ export function MarkdownH2(props: { children: ReactNode }) {
 	);
 }
 
-export function MarkdownStrong(props: { children: ReactNode }) {
-	return <Typography>{props.children}</Typography>;
+export function MarkdownH3(props: any) {
+	return (
+		<>
+			<Typography
+				variant="h3"
+				sx={{
+					fontSize: "1.25em",
+					display: "block",
+					marginBlockStart: "0.83em",
+					marginBlockEnd: "0.3em",
+					fontWeight: "bold",
+					lineHeight: 1.25
+				}}
+			>
+				{props.children}
+			</Typography>
+		</>
+	);
 }
 
 export function MarkdownImage(props: any) {
@@ -104,7 +126,7 @@ export function MarkdownImage(props: any) {
 	return <img {...props} />;
 }
 
-export function MarkdownParagraph(props: { children: ReactNode }) {
+export function MarkdownParagraph(props: any) {
 	if (!props.children) return <Typography>{props.children}</Typography>;
 
 	const element: any = props.children;
@@ -120,7 +142,21 @@ export function MarkdownParagraph(props: { children: ReactNode }) {
 	if (anyInlineElement) {
 		for (let e of element) {
 			if (e.type) {
-				result.push({ ...e });
+				if (e.type === "strong") {
+					result.push(
+						<Typography key={e} display="inline" mb={1}>
+							<strong>{e}</strong>
+						</Typography>
+					);
+				} else if (e.type === "em") {
+					result.push(
+						<Typography key={e} display="inline" mb={1}>
+							<i>{e}</i>
+						</Typography>
+					);
+				} else {
+					result.push({ ...e });
+				}
 			} else {
 				result.push(
 					<Typography key={e} display="inline" mb={1}>

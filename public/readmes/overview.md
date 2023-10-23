@@ -24,7 +24,7 @@ I am looking for software engineering internships/co-op for Spring 2024 and Summ
 
 ## 🌟 Experience Highlights
 
--   **Software Engineering Intern** @ rapStudy _(June 2023 - August 2023)_, Los Angeles, California
+-   **Software Engineering Intern** @ rapStudy _(June 2023 - August 2023)_, Los Angeles, California<br>
 
     _Technologies used:_ `React.js`, `Redux`, `Firebase`, `Firestore`
 

@@ -41,7 +41,6 @@ export default function AppTree({
 	const page: Page = pages.find(x => x.route === pathname)!;
 
 	useEffect(() => {
-		console.log("rerendering");
 		if (page) setSelectedIndex(page.index);
 	}, [page, setSelectedIndex]);
 

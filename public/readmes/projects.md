@@ -1,6 +1,6 @@
 # 🧪 Projects
 
-### [Harmonious Sounds](https://nginx-devops-pratyush1712.cloud.okteto.net/)
+### [Harmonious Sounds](https://nginx-devops-pratyush1712.cloud.okteto.net/)<br>
 
 [`Code 🔗`](https://github.com/pratyush1712/react-express/) _Technologies Used:_ `React.js` `Redux.js` `Express.js` `GitHub Actions` `Okteto` `Docker` `Kubernetes`
 
@@ -8,6 +8,13 @@
 -   Established DevOps pipelines with automated linting, building, containerizing, and deployment using <ins>GitHub Actions</ins>.
 -   Orchestrated <ins>preview environments</ins> to enable effective testing and code review prior to merging changes to the master branch, contributing to <ins>streamlined development workflows</ins>.
 -   Demonstrated proficiency in Node.js, Yarn, Docker, and DevOps tools and practices, while maintaining high coding standards with <ins>ESLint, Prettier, and Black formatter</ins>.
+
+### [This Website](https://pratyushsudhakar.com/)<br>
+
+[`Code 🔗`](https://github.com/pratyush1712/personal-website/)<br> _Technologies Used:_ `Next.js 13` `Static Site Generation` `TypeScript` `Vercel` <br> _Gained Experience In:_ `Search Engine Optimization` `Web Accessibility`
+
+-   Designed and developed a <ins>modern, responsive, and accessible</ins> personal website using Next.js 13 App Router, TypeScript, and deployed on Vercel.
+-   Utilized <ins>Static Site Generation</ins> to generate static HTML pages at build time, improving performance and SEO.
 
 ### [Boss Mode... work like a beast!]()
 
@@ -35,9 +42,7 @@ _Technologies Used:_ `React` `Redux` `AWS Lambdas` `AWS S3` `AWS Cognito`
 
 ### [TimeBite](https://timebite.herokuapp.com/) 🔗
 
-[`Code 🔗`](https://github.com/pratyush1712/Timebite-Backend/) _Technologies Used:_ `Flask` `Google-OR Tools` `HTML/CSS/JavaScript` `Heroku` `Docker` `Google Cloud Platform`
-
-_Gained Experience In:_ `Optimization Algorithms` `Linear Programming Models`
+[`Code 🔗`](https://github.com/pratyush1712/Timebite-Backend/) <br> _Technologies Used:_ `Flask` `Google-OR Tools` `HTML/CSS/JavaScript` `Heroku` `Docker` `Google Cloud Platform` <br> _Gained Experience In:_ `Optimization Algorithms` `Linear Programming Models`
 
 -   Developed a web application for <ins>optimized scheduling</ins> using Flask, HTML, CSS, and JavaScript, allowing users to input their to-do list for AI Optimization Algorithm processing.
 -   Integrated <ins>Google OR tools</ins> and an <ins>Integer Linear Program model</ins> to optimize the user's schedule and improve productivity.
@@ -46,9 +51,7 @@ _Gained Experience In:_ `Optimization Algorithms` `Linear Programming Models`
 
 ### Wi-Find 🔗
 
-[`Frontend 🔗`](https://github.com/Archit404Error/WiFindMobile/) [`Backend 🔗`](https://github.com/Archit404Error/WiFindBackend/) _Technologies Used:_ `React-Native` `Expo` `Node.js` `MongoDB`
-
-_Gained Experience In:_ `Clustering Algorithms`
+[`Frontend 🔗`](https://github.com/Archit404Error/WiFindMobile/) [`Backend 🔗`](https://github.com/Archit404Error/WiFindBackend/) <br>_Technologies Used:_ `React-Native` `Expo` `Node.js` `MongoDB` <br> _Gained Experience In:_ `Clustering Algorithms`
 
 -   Developing a cross-platform react-native application that helps <ins>around 20000 students</ins> find locations with high-speed wifi connection on campus.
 -   Used react-native bandwidth library to fetch user's data (location, wifi speed.)
@@ -57,9 +60,7 @@ _Gained Experience In:_ `Clustering Algorithms`
 
 ### [Face Detect](https://cornell-detection.herokuapp.com/) 🔗
 
-[`Code 🔗`](https://github.com/pratyush1712/face-detection/) _Technologies Used:_ `Flask` `Open-CV` `Haar-cascades` `React` `Heroku` `Docker`
-
-_Gained Experience In:_ `Server-side Rendering` `Computer Vision`
+[`Code 🔗`](https://github.com/pratyush1712/face-detection/) <br>_Technologies Used:_ `Flask` `Open-CV` `Haar-cascades` `React` `Heroku` `Docker` <br> _Gained Experience In:_ `Server-side Rendering` `Computer Vision`
 
 -   Designed and deployed a full stack face and eyes detection web application using Flask, React, and Heroku.
 -   Processed and rendered images received from OpenCV Webcam to a React-based frontend.
