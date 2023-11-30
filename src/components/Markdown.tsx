@@ -1,8 +1,8 @@
-import { Chip, Container, Divider, Link, List, ListItem, Paper, Typography, Icon, Box, Grid } from "@mui/material";
-import { Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
+import { Chip, Container, Divider, Link, ListItem, Paper, Typography, Icon } from "@mui/material";
+import { Table, TableCell, TableContainer } from "@mui/material";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
-import { BiRightArrow, BiSolidHandRight, BiSolidRightArrow } from "react-icons/bi";
+import { BiSolidHandRight, BiSolidRightArrow } from "react-icons/bi";
+import Image from "next/image";
 
 export function MarkdownLink(props: any) {
 	return (
@@ -123,7 +123,7 @@ export function MarkdownImage(props: any) {
 	if (pathname.substring(1, pathname.length) === "overview") {
 		return <Icon component="img" src={require(`${props.src}`)} onClick={sendOutbound} />;
 	}
-	return <img {...props} />;
+	return <Image {...props} />;
 }
 
 export function MarkdownParagraph(props: any) {

@@ -142,7 +142,7 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 			if (page) router.push(page.route, { scroll: false });
 		} else {
 		}
-	}, [visiblePageIndexs, router.push, selectedIndex, deletedIndex]);
+	}, [visiblePageIndexs, router, selectedIndex, deletedIndex]);
 
 	useEffect(() => {
 		setDarkMode(JSON.parse(localStorage.getItem("darkMode") || "true"));
