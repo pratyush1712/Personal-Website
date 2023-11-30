@@ -2,8 +2,7 @@ import React from "react";
 import { Box, Link, Paper, Tooltip } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import { VscFiles, VscSettingsGear } from "react-icons/vsc";
-import { BiGitBranch } from "react-icons/bi";
+import { VscFiles, VscSettingsGear, VscSourceControl } from "react-icons/vsc";
 import Divider from "@mui/material/Divider";
 import { links } from "@/lib/links";
 
@@ -94,7 +93,7 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 							justifyContent="center"
 						>
 							<Box mt={0.7}>
-								<BiGitBranch />
+								<VscSourceControl />
 							</Box>
 						</Box>
 					</Link>

@@ -33,14 +33,14 @@ interface VSCodeLayoutProps {
 }
 
 export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
+	const router = useRouter();
+	const params = useParams();
 	const [expanded, setExpanded] = useState(isBrowser);
-	const [selectedIndex, setSelectedIndex] = useState(-1);
+	const [selectedIndex, setSelectedIndex] = useState(routeToPage[params.slug as string]?.index || 0);
 	const [currentComponent, setCurrentComponent] = useState("");
 	const [visiblePageIndexs, setVisiblePageIndexs] = useState(initVisiblePageIndexs(pages));
 	const [darkMode, setDarkMode] = useState(true);
 	const [visiblePages, setVisiblePages] = useState(pages);
-	const router = useRouter();
-	const params = useParams();
 	const theme = createTheme({
 		palette: {
 			mode: darkMode ? "dark" : "light",
@@ -145,8 +145,6 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 	}, [visiblePageIndexs, router.push, selectedIndex, deletedIndex]);
 
 	useEffect(() => {
-		const index = routeToPage[params.slug as string]?.index;
-		index && setSelectedIndex(index);
 		setDarkMode(JSON.parse(localStorage.getItem("darkMode") || "true"));
 	}, []);
 
