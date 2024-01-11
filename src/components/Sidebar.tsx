@@ -73,10 +73,10 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 						<VscFiles />
 					</Box>
 				</Box>
-				<Tooltip title="My Current Project" arrow placement="right">
+				<Tooltip title="Website's Source Code" arrow placement="right">
 					<Link
 						target="_blank"
-						href={"https://github.com/Perfect-Match-Org/perfect-match-web"}
+						href={"https://github.com/pratyush1712/Personal-Website"}
 						underline="none"
 						color="inherit"
 						sx={{ WebkitTapHighlightColor: "rgba(0,0,0,0)" }}
