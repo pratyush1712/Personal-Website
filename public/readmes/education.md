@@ -28,7 +28,7 @@ Cornell University<br> **Bachelor's** in Computer Science & Mathematics <br>
 
 ### Applied Mathematics and Engineering:
 
--   Engineering Applications of Operations Research (ENGRU 1101)
+-   Engineering Applications of Operations Research (ENGRI 1101)
 -   Developing an Entrepreneurial Mindset (HADM 4144)
 
 ### For fun and curiosity:
