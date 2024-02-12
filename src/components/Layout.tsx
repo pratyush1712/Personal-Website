@@ -6,7 +6,7 @@ import AppButtons from "./AppButtons";
 import AppTree from "./AppTree";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
-import pages, { routeToPage } from "@/lib/pages";
+import pages, { routeToPage } from "@/utils/pages";
 import { useParams, useRouter } from "next/navigation";
 import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";

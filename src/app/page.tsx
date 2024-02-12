@@ -1,19 +1,6 @@
 import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
-import { links } from "@/lib/links";
-import Iframe from "react-iframe";
-
-const NeverSayNeverComponent = () => {
-	return (
-		<Grid display="flex" justifyContent={{ xs: "flex-start" }}>
-			<Iframe
-				url="https://open.spotify.com/embed/track/5rAUZy2eDdegBxUVYxePK2?utm_source=generator"
-				allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-				loading="lazy"
-				styles={{ border: "none", maxHeight: "80px", borderRadius: "13px", margin: "7px 0px", width: "400px" }}
-			></Iframe>
-		</Grid>
-	);
-};
+import { links } from "@/utils/links";
+import PlayList from "@/components/PlayList/index";
 
 export default function Home() {
 	const iconLink = (link: any) => {
@@ -29,31 +16,32 @@ export default function Home() {
 	return (
 		<Grid
 			container
-			spacing={0}
-			marginTop={{ xs: -20, sm: -6.75 }}
-			marginLeft={{ xs: 2, sm: -3 }}
 			direction="column"
 			alignItems="center"
 			justifyContent="center"
-			sx={{ minHeight: `calc(100vh)` }}
+			spacing={0}
+			sx={{ minHeight: `calc(100vh)`, width: "100%" }}
 		>
-			<Grid item xs={3}>
-				<Stack direction={{ xs: "column", sm: "row-reverse" }} spacing={2}>
-					<Box display="flex" sx={{ justifyContent: "center", display: { xs: "none", md: "block" } }}></Box>
-					<Box>
-						<Grid display="flex" justifyContent={{ xs: "center", sm: "flex-start" }}>
-							<Typography variant="h3">Pratyush Sudhakar</Typography>
-						</Grid>
-						<NeverSayNeverComponent />
-						<Grid display="flex" justifyContent={"flex-start"}>
-							<Stack direction="row" spacing={2.2}>
-								{links.filter(link => link.type === "professional").map(link => iconLink(link))}
-								<Divider sx={{ m: 0.5 }} orientation={"vertical"} />
-								{links.filter(link => link.type === "social").map(link => iconLink(link))}
-							</Stack>
-						</Grid>
-					</Box>
-				</Stack>
+			<Grid item xs={12}>
+				<Typography variant="h3" align="center" sx={{ margin: "20px 0" }}>
+					Pratyush Sudhakar
+				</Typography>
+			</Grid>
+
+			{/* Playlist occupying most of the screen */}
+			<Grid item xs={12} sx={{ flexGrow: 1, width: "100%", height: "20vh" }}>
+				<PlayList />
+			</Grid>
+
+			{/* Links at the bottom */}
+			<Grid item xs={12}>
+				<Box sx={{ width: "100%", display: "flex", justifyContent: "center", padding: "20px 0" }}>
+					<Stack direction="row" spacing={2}>
+						{links.filter(link => link.type === "professional").map(iconLink)}
+						<Divider orientation="vertical" flexItem />
+						{links.filter(link => link.type === "social").map(iconLink)}
+					</Stack>
+				</Box>
 			</Grid>
 		</Grid>
 	);

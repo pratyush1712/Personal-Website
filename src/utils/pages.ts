@@ -1,10 +1,4 @@
-type Page = {
-	index: number;
-	name: string;
-	route: string;
-	description: string;
-	keywords: string[];
-};
+import { Page } from "@/types";
 
 const pages: Page[] = [
 	{
