@@ -6,9 +6,7 @@ import songs from "@/utils/songs.json";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-const BubbleUI: ComponentType<any> = dynamic(() => import("react-bubble-ui").then(mod => mod.default as ComponentType<any>), {
-	ssr: false
-});
+const BubbleUI: ComponentType<any> = dynamic(() => import("react-bubble-ui").then(mod => mod.default as ComponentType<any>), {});
 
 export default function PlayList() {
 	const [hoverIndex, setHoverIndex] = useState<Number>(-1);
