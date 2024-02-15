@@ -14,14 +14,7 @@ export default function Home() {
 	};
 
 	return (
-		<Grid
-			container
-			direction="column"
-			alignItems="center"
-			justifyContent="center"
-			spacing={0}
-			sx={{ minHeight: `calc(100vh)`, width: "100%" }}
-		>
+		<Grid container direction="column" alignItems="center" sx={{ ml: -8 }}>
 			<Grid item xs={12}>
 				<Typography variant="h3" align="center" sx={{ margin: "20px 0" }}>
 					Pratyush Sudhakar
@@ -29,7 +22,7 @@ export default function Home() {
 			</Grid>
 
 			{/* Playlist occupying most of the screen */}
-			<Grid item xs={12} sx={{ flexGrow: 1, width: "100%", height: "20vh" }}>
+			<Grid item xs={12} sx={{ flexGrow: 1, width: "100%", justifyContent: "center", ml: 8 }}>
 				<PlayList />
 			</Grid>
 

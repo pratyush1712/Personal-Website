@@ -1,18 +1,20 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import BubbleUI from "react-bubble-ui";
 import "react-bubble-ui/dist/index.css";
 import "@/styles/playlist.css";
-import { songs } from "@/utils/songs";
-import Iframe from "react-iframe";
+import songs from "@/utils/songs.json";
+import Image from "next/image";
 
 export default function PlayList() {
+	const [hoverIndex, setHoverIndex] = useState(-1);
+
 	const options = {
-		size: 180, // This might be adjusted based on the bubble size you wish to achieve
+		size: 200,
 		minSize: 50,
 		gutter: 8,
-		provideProps: true, // Change to true to pass custom props to children
-		numCols: 4,
+		provideProps: false,
+		numRows: 3,
 		fringeWidth: 160,
 		yRadius: 130,
 		xRadius: 220,
@@ -22,47 +24,43 @@ export default function PlayList() {
 		gravitation: 5
 	};
 
-	// Adjust bubble size based on song priority
-	const getBubbleSize = (priority: number) => {
-		// Example logic: adjust as needed
-		const baseSize = 50; // Min size
-		const maxSize = 180; // Max size
-		return baseSize + (maxSize - baseSize) * (priority / 10); // Assuming priority is on a scale of 1 to 10
+	const handleBubbleClick = (url: string | URL | undefined) => {
+		window.open(url, "_blank");
 	};
 
-	const songBubbles = songs.map((song, index) => (
-		<div
-			key={index}
-			className="bubble"
-			style={{
-				width: getBubbleSize(song.priority),
-				height: getBubbleSize(song.priority),
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center"
-			}}
-			onMouseOver={e => {
-				const target = e.currentTarget.firstChild as HTMLElement;
-				if (target) {
-					target.style.display = "none";
-				}
-			}}
-			onMouseOut={e => {
-				const target = e.currentTarget.firstChild as HTMLElement;
-				if (target) {
-					target.style.display = "block";
-				}
-			}}
-		>
-			<Iframe
-				url={song.url}
-				allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-				loading="lazy"
-				styles={{ display: "none", border: "none", maxHeight: "80px", borderRadius: "13px", margin: "7px 0px", width: "100%" }}
-			/>
-			<span>{song?.artist}</span>
-		</div>
-	));
+	const songBubbles = songs.map((song, index) => {
+		return (
+			<div
+				key={index}
+				className={`bubble ${hoverIndex === index ? "bubble-hover" : ""}`}
+				style={{
+					width: options.size,
+					height: options.size,
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					transition: "all 0.5s ease",
+					cursor: "pointer",
+					position: "relative"
+				}}
+				onMouseEnter={() => setHoverIndex(index)}
+				onMouseLeave={() => setHoverIndex(-1)}
+				onClick={() => handleBubbleClick(`https://open.spotify.com/track/${song.id}`)}
+			>
+				<Image
+					src={song.image}
+					alt={song.name}
+					width={options.size - 25}
+					height={options.size - 25}
+					style={{
+						borderRadius: "50%",
+						transition: "transform 0.3s ease",
+						zIndex: hoverIndex === index ? -1 : 1
+					}}
+				/>
+			</div>
+		);
+	});
 
 	return (
 		<div className="playlist">

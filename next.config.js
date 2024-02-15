@@ -5,7 +5,13 @@ const nextConfig = {
 	},
 	experimental: {
 		esmExternals: true
-	}
+	},
+	images: {
+		domains: [
+			"i.scdn.co",
+			"images.unsplash.com",
+		],
+	},
 };
 
 module.exports = nextConfig;

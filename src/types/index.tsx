@@ -19,10 +19,12 @@ export type Page = {
 };
 
 export type Song = {
+	id: string;
+	name: string;
 	artist?: ReactNode;
-	priority: number;
 	url: string;
-	tooltip: string;
+	image: string;
+	position: number | null;
 	width?: number;
 	height?: number;
 };
