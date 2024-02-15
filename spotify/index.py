@@ -15,7 +15,7 @@ client_credentials_manager = SpotifyClientCredentials(
 )
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-WEBSITE_PUBLIC_SONGS_PATH = "../src/utils/"
+WEBSITE_PUBLIC_SONGS_PATH = "src/utils/"
 
 
 def get_track_info(track_id):
