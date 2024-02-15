@@ -20,7 +20,7 @@ import {
 import { MarkdownParagraph, MarkdownTable, MarkdownTableCell } from "@/components/Markdown";
 
 // Static Page Imports
-import pages, { routeToPage } from "@/lib/pages";
+import pages, { routeToPage } from "@/utils/pages";
 import { Metadata, ResolvingMetadata } from "next/types";
 
 type Props = { params: { slug: string } };

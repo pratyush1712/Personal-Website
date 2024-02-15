@@ -4,7 +4,7 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { VscFiles, VscSettingsGear, VscSourceControl } from "react-icons/vsc";
 import Divider from "@mui/material/Divider";
-import { links } from "@/lib/links";
+import { links } from "@/utils/links";
 
 interface Props {
 	expanded: boolean;

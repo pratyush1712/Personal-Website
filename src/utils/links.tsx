@@ -1,14 +1,6 @@
 import React from "react";
 import { FaEnvelope, FaFacebook, FaFilePdf, FaGithub, FaInstagram, FaLinkedin, FaSpotify } from "react-icons/fa";
-
-type LinkType = "professional" | "social";
-type Link = {
-	index: number;
-	type: LinkType;
-	title: string;
-	href: string;
-	icon: React.ReactNode;
-};
+import { Link } from "@/types";
 
 export const links: Link[] = [
 	{
