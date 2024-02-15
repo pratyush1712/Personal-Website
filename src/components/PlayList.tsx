@@ -1,13 +1,18 @@
 "use client";
-import React, { useState } from "react";
-import BubbleUI from "react-bubble-ui";
+import React, { ComponentType, useState } from "react";
 import "react-bubble-ui/dist/index.css";
 import "@/styles/playlist.css";
 import songs from "@/utils/songs.json";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const BubbleUI: ComponentType<any> = dynamic(() => import("react-bubble-ui").then(mod => mod.default as ComponentType<any>), {
+	ssr: false
+});
 
 export default function PlayList() {
-	const [hoverIndex, setHoverIndex] = useState(-1);
+	const [hoverIndex, setHoverIndex] = useState<Number>(-1);
+	const [hoverTimeoutId, setHoverTimeoutId] = useState<NodeJS.Timeout | undefined>();
 
 	const options = {
 		size: 200,
@@ -43,8 +48,16 @@ export default function PlayList() {
 					cursor: "pointer",
 					position: "relative"
 				}}
-				onMouseEnter={() => setHoverIndex(index)}
-				onMouseLeave={() => setHoverIndex(-1)}
+				onMouseEnter={() => {
+					const timeoutId = setTimeout(() => {
+						setHoverIndex(index);
+					}, 600);
+					setHoverTimeoutId(timeoutId);
+				}}
+				onMouseLeave={() => {
+					clearTimeout(hoverTimeoutId);
+					setHoverIndex(-1);
+				}}
 				onClick={() => handleBubbleClick(`https://open.spotify.com/track/${song.id}`)}
 			>
 				<Image
@@ -54,19 +67,19 @@ export default function PlayList() {
 					height={options.size - 25}
 					style={{
 						borderRadius: "50%",
-						transition: "transform 0.3s ease",
-						zIndex: hoverIndex === index ? -1 : 1
+						transition: "transform 0.3s ease"
 					}}
 				/>
+				<div className="tooltip">
+					{song.name} By: {song.artist}
+				</div>
 			</div>
 		);
 	});
 
 	return (
-		<div className="playlist">
-			<BubbleUI options={options} className="myBubbleUI">
-				{songBubbles}
-			</BubbleUI>
-		</div>
+		<BubbleUI options={options} className="myBubbleUI">
+			{songBubbles}
+		</BubbleUI>
 	);
 }

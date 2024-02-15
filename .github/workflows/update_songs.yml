@@ -23,6 +23,9 @@ jobs:
                   pip install spotipy python-dotenv
 
             - name: Run index.py to update utils folder
+              env:
+                  SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+                  SPOTIFY_SECRET: ${{ secrets.SPOTIFY_SECRET }}
               run: python spotify/index.py
 
             - name: Commit model
