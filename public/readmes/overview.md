@@ -12,7 +12,7 @@ I am looking for software engineering internships/co-op for Spring 2024 and Summ
 
 **Cornell University** - Pursuing a Bachelor’s in Computer Science & Mathematics
 
--   <strong>Expected Graduation</strong>: <ins>May 2025</ins>
+-   <strong>Expected Graduation</strong>: <ins>Dec 2024</ins>
 -   **Overall GPA**: <ins>3.87</ins> | **Major GPA**: <ins>3.97</ins>
 
 **Relevant Coursework:**
