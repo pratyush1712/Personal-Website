@@ -28,7 +28,7 @@ export default function Home() {
 
 			{/* Links at the bottom */}
 			<Grid item xs={12}>
-				<Box sx={{ width: "100%", display: "flex", justifyContent: "center", padding: "20px 0" }}>
+				<Box sx={{ width: "100%", display: "flex", justifyContent: "center", mt: -7 }}>
 					<Stack direction="row" spacing={2}>
 						{links.filter(link => link.type === "professional").map(iconLink)}
 						<Divider orientation="vertical" flexItem />

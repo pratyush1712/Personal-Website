@@ -13,7 +13,7 @@ export default function PlayList() {
 	const [hoverTimeoutId, setHoverTimeoutId] = useState<NodeJS.Timeout | undefined>();
 
 	const options = {
-		size: 200,
+		size: 180,
 		minSize: 50,
 		gutter: 8,
 		provideProps: false,
