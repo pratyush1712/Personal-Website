@@ -17,7 +17,7 @@ export default function PlayList() {
 		minSize: 50,
 		gutter: 8,
 		provideProps: false,
-		numCols: 10,
+		numCols: 7,
 		fringeWidth: 160,
 		yRadius: 130,
 		xRadius: 220,
