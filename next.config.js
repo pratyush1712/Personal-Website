@@ -7,11 +7,8 @@ const nextConfig = {
 		esmExternals: true
 	},
 	images: {
-		domains: [
-			"i.scdn.co",
-			"images.unsplash.com",
-		],
-	},
+		domains: ["i.scdn.co", "images.unsplash.com"]
+	}
 };
 
 module.exports = nextConfig;

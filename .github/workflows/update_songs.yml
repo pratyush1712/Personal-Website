@@ -9,7 +9,7 @@ jobs:
     update-and-commit:
         runs-on: ubuntu-latest
         permissions:
-          contents: write
+            contents: write
         steps:
             - name: Checkout Repo
               uses: actions/checkout@v3
