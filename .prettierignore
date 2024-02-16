@@ -4,3 +4,4 @@ public/**.json
 node_modules
 venv
 *.yaml
+src/utils/songs.json
