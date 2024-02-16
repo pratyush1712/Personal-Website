@@ -14,27 +14,26 @@ export default function Home() {
 	};
 
 	return (
-		<Grid container direction="column" alignItems="center" sx={{ ml: -8 }}>
-			<Grid item xs={12}>
+		<Grid container direction="column" alignItems="center" sx={{ ml: -8 }} spacing={0}>
+			<Grid item xs={12} sx={{ mt: -1 }}>
 				<Typography variant="h3" align="center" sx={{ margin: "20px 0" }}>
 					Pratyush Sudhakar
 				</Typography>
 			</Grid>
-
-			{/* Playlist occupying most of the screen */}
-			<Grid item xs={12} sx={{ flexGrow: 1, width: "100%", justifyContent: "center", ml: 8 }}>
-				<PlayList />
-			</Grid>
-
 			{/* Links at the bottom */}
 			<Grid item xs={12}>
-				<Box sx={{ width: "100%", display: "flex", justifyContent: "center", mt: -7 }}>
-					<Stack direction="row" spacing={2}>
+				<Box sx={{ width: "100%", display: "flex", justifyContent: "center", mb: -4, mt: -2 }}>
+					<Stack direction="row" spacing={2.5}>
 						{links.filter(link => link.type === "professional").map(iconLink)}
 						<Divider orientation="vertical" flexItem />
 						{links.filter(link => link.type === "social").map(iconLink)}
 					</Stack>
 				</Box>
+			</Grid>
+
+			{/* Playlist occupying most of the screen */}
+			<Grid item xs={12} sx={{ flexGrow: 1, width: "100%", justifyContent: "center", ml: 8 }}>
+				<PlayList />
 			</Grid>
 		</Grid>
 	);

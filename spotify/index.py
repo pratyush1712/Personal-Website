@@ -43,10 +43,14 @@ def main():
 
     :return: None
     """
+    song_ids = set()
     resp = []
     for song in songs:
+        if song.split("/")[-1].split("?")[0] in song_ids:
+            continue
         track_info = get_track_info(song.split("/")[-1].split("?")[0])
         track_info["url"] = song
+        song_ids.add(song.split("/")[-1].split("?")[0])
         resp.append(track_info)
 
     with open(WEBSITE_PUBLIC_SONGS_PATH + "songs.json", "w+") as f:
