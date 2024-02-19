@@ -14,12 +14,14 @@ Cornell University<br> **Bachelor's** in Computer Science & Mathematics <br>
 
 ### Algorithms and Machine Learning:
 
+-   Advanced Machine Learning Systems (CS 6787)
 -   Intro to Analysis of Algorithms (CS 4820)
 -   Intro to Machine Learning (CS 4780)
 -   Computer Vision (CS 4670)
 
 ### Mathematics:
 
+-   Numerical Analysis (Math 4260)
 -   Basic Probability (Math 4710)
 -   Applicable Algebra (Math 3360)
 -   Discrete Structures (CS 2800)
