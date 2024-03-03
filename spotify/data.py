@@ -16,4 +16,7 @@ songs = [
     "https://open.spotify.com/track/6TGX01ExmdHyOG72fqUU3Q?si=420ea8fe1be74d1b",
     "https://open.spotify.com/track/4bvHCjknZC3evn7NthBZVt?si=65e038c73f9048d5",
     "https://open.spotify.com/track/0Y0MPg9LRfajmMm6vOlj1o?si=9dd4a7acaff8438c",
+    "https://open.spotify.com/track/3TAhWtQnpoL5Vl9VQPl9fU?si=1d4dbf5994f24fd6",
+    "https://open.spotify.com/track/6o1o5SVSqVPLKAnZxRQz4x?si=f50e2794aeaa4707",
+    "https://open.spotify.com/track/7kiZ6Zf66oX6yMovt3gC1a?si=8cf352c791db421e"
 ]
