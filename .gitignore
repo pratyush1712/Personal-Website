@@ -36,3 +36,10 @@ next-env.d.ts
 
 # development
 .vscode
+
+# latex
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out

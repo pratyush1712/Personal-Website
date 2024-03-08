@@ -1,0 +1,223 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\education}[4]{
+  \vspace{-3pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+      \textbf{#1} & #2 \\
+      \small#3 & \small #4 \\
+    \end{tabular*}\vspace{-2pt}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-3pt}\item
+    \begin{tabular*}{0.96\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[1]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5.5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    \vspace*{-1cm}
+    \textbf{\huge \scshape Pratyush Sudhakar} \\ \vspace{1pt} % Use \LARGE for even smaller text
+    \small 607-279-4794 $|$ \href{mailto:ps2245@cornell.edu}{{ps2245@cornell.edu}} $|$ 
+    \href{https://linkedin.com/in/pratyushsudhakar}{{LinkedIn}} $|$
+    \href{https://github.com/pratyush1712}{GitHub} $|$
+    \href{https://pratyushsudhakar.com/}{pratyushsudhakar.com}
+    $|$
+    {Ithaca, NY 14850}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \education
+      {Cornell University}{Ithaca, NY}
+      {Bachelor's in Computer Science, Mathematics $|$ Overall GPA: 3.865 $|$ Major GPA: 3.97}{May 2025}
+    \resumeItem{\textbf{Relevant Coursework}: Advanced Machine Learning Systems, Systems Programming (C++), Analysis of Algorithms, Functional Programming (OCaml), Object-Oriented Programming (Java), Intro to Machine Learning, Computer Vision}
+    \resumeItem{\textbf{Activities}: Cornell Wushu (Vice-President), Object-Oriented Programming (TA), Association of CS Undergrads (Member)}
+  \resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Head of Engineering \& President}{January 2023 - Present}
+      {\href{https://perfectmatch.ai/}{Cornell Perfect Match}}{Ithaca, New York}
+      \resumeItemListStart
+        \resumeItem{Redesigned the website's frontend for improved UX/UI and integrated microservices, enhancing user engagement and system scalability.}
+        \resumeItem{Architected a Flask-based microservice for a live analytics dashboard, analyzing real-time data for 5,000+ users. Utilized MongoDB Map-Reduce for efficient data aggregation and integrated server response caching for optimized latency and data retrieval.}
+        \resumeItem{Initiated the transition from offline to online matching algorithms, deploying a Flask microservice to enable real-time matching, resulting in 50,000+ matches and enhanced system responsiveness.}
+        \resumeItem{Automated personalized user engagement emails via cron jobs, yielding a 600+ increase in active users and enhancing platform interaction.}
+        \resumeItem{Drove innovative marketing strategies, amplifying Instagram engagement by 185\%, while nurturing a strong team dynamic. Enhanced new member orientation to solidify community and team cohesion.}
+
+      \resumeItemListEnd
+
+    \resumeSubheading{Software Engineering Intern}{June 2023 - August 2023}{\href{https://rapstudy.com/}{rapStudy}}{Los Angeles, California}
+    \resumeItemListStart
+        \resumeItem{Spearheaded codebase refactoring to Redux and memoization, boosting frontend rendering speed by 93\%.}
+        \resumeItem{Architected a song-sharing feature using React, Firebase, and 10+ custom Firestore rules, enhancing platform security and enabling controlled access for over 100 potential external users.}
+        \resumeItem{Engineered a standalone SongView component with Redux, ensuring global app access and minimizing synchronization delay between song playback and lyrics update to 500ms, improving user experience.}
+    \resumeItemListEnd
+
+      
+% -----------Multiple Positions Heading-----------
+%   \resumeSubSubheading
+%    {Software Engineer I}{Oct 2014 - Sep 2016}
+%    \resumeItemListStart
+%       \resumeItem{Apache Beam}
+%         {Apache Beam is a unified model for defining both batch and streaming data-parallel processing pipelines}
+%    \resumeItemListEnd
+%-------------------------------------------
+
+    \resumeSubheading
+      {Technical Product Manager}{March 2022 - December 2023}
+      {\href{https://www.cornelldti.org/}{Cornell Design \& Tech Initiative}}{Ithaca, New York}
+      \resumeItemListStart
+        \resumeItem{Led a 7-developers team in Agile project management and introduced Test-Driven Development using Cypress, Mocha, Chai, and Supertest, achieving a 94\% test coverage and contributing to members' learning.}
+        \resumeItem{Dockerized web app and implemented CI/CD pipelines with GitHub Actions and Kubernetes, achieving 90\% faster deployment and testing.}
+    \resumeItemListEnd
+
+    \resumeSubheading
+      {Data Engineer}{June 2023 - Present}{\href{https://www.engineering.cornell.edu/}{Cornell College of Engineering}}{Ithaca, New York}
+      \resumeItemListStart
+
+        \resumeItem{Engineered an ETL pipeline using Selenium and NLP to process financial data of 3000+ companies, achieving an 83\% processing time reduction through parallel processing.}
+        \resumeItem{Developed a full-stack app with Next.js and Flask, featuring Server-Sent-Events for real-time data display and experiencing a 66\% data latency reduction.}
+
+      \resumeItemListEnd
+      
+    \resumeSubheading
+      {Software Engineering Intern}{June 2022 - August 2022}
+      {\href{https://www.sellpoint.io/}{Sellpoint}}{Remote}
+      \resumeItemListStart
+        \resumeItem{Developed an inventory management application leveraging React.js, Redux, and RTK Query for frontend functionality, coupled with AWS services such as API Gateway (server requests management), ECR (containerization), and DynamoDB.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{Harmonious Sounds} $|$ \emph{React, Flask, Express, Docker, Nginx} $|$ April 2023}
+            \resumeItem{Formulated a microservices-based web app incorporating a Logistic Regression model for playlist happiness prediction with 88\% accuracy. Employed Nginx for seamless service interaction, utilized Okteto for deployment, and established automated DevOps pipelines with GitHub Actions, resulting in a 90\% faster deployment.}
+
+      \resumeProjectHeading
+          {\textbf{Cornell Wushu Club Website} $|$ \emph{React, AWS S3, MongoDB, Flask} $|$ July 2022 - August 2022}
+            \resumeItem{Spearheaded React development, introduced internal tooling for automated emails, and fortified member management using Flask and JWT. Leveraged React Quill and AWS S3 to boost text area functionality and image storage respectively.}
+    \resumeSubHeadingListEnd
+
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming Languages}{: Python, Java, JavaScript/TypeScript, C, PHP, OCaml, C++} \\
+     \vspace{2pt}
+     \textbf{Tools/Frameworks/Databases}{: Kubernetes, Grafana, AWS, Jira, Django, Flask, React.js, Redux.js, Next.js, Node.js, Flutter, Express.js, React-Native, Expo, MySQL, DynamoDB, MongoDB, GraphQL, Prisma, Google Cloud Platform, AWS Amplify, AWS
+EC2, Redis} \\
+     \vspace{2pt}
+     \textbf{Machine Learning}{: TensorFlow, MediaPipe, NumPy, Pandas, Neural Networks, Sklearn, Pomegranate, Scikit-learn, OpenCV} \\
+    }}
+ \end{itemize}
+
+
+%-------------------------------------------
+\end{document}
