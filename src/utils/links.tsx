@@ -28,7 +28,7 @@ export const links: Link[] = [
 		index: 3,
 		type: "professional",
 		title: "Checkout my Resume",
-		href: "/resumes/resume.pdf",
+		href: "/resume.pdf",
 		icon: <FaFilePdf />
 	},
 	{
