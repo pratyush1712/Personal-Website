@@ -6,19 +6,19 @@
 
 ### Carriage - Technical Product Manager _(Spring 2023 - Fall 2023)_
 
--   Led and mentored a team of 7 developers in the ongoing development of the Cornell DTI Carriage, leveraging agile development methodologies and a comprehensive project roadmap to effectively mitigate all the stakeholder concerns.
--   Improved overall code quality and reduced time-to-market by establishing a robust testing infrastructure using Cypress for the frontend and Mocha, Chai, and Supertest libraries for the backend resulting in a 94% increase in test coverage across the application.
--   Streamlined the deployment process by Dockerizing the web app, automating deployment by implementing CI/CD pipelines using GitHub actions, and implementing a Kubernetes cluster to improve resource utilization and performance.
+- Led and mentored a team of 7 developers in the ongoing development of the Cornell DTI Carriage, leveraging agile development methodologies and a comprehensive project roadmap to effectively mitigate all the stakeholder concerns.
+- Improved overall code quality and reduced time-to-market by establishing a robust testing infrastructure using Cypress for the frontend and Mocha, Chai, and Supertest libraries for the backend resulting in a 94% increase in test coverage across the application.
+- Streamlined the deployment process by Dockerizing the web app, automating deployment by implementing CI/CD pipelines using GitHub actions, and implementing a Kubernetes cluster to improve resource utilization and performance.
 
 ### Carriage _(August 2022 - Present)_
 
--   Extended my role as a developer in a larger team, improving the website's accessibility and overhauling its authentication flow.
--   Reduced backend calls by 90%, decreasing DynamoDB operations and resulting in lower AWS charges.
+- Extended my role as a developer in a larger team, improving the website's accessibility and overhauling its authentication flow.
+- Reduced backend calls by 90%, decreasing DynamoDB operations and resulting in lower AWS charges.
 
 ### Design @ Cornell _(March 2022 - August 2022)_
 
--   Developed and maintained a dynamic, responsive website using React and Express, as part of a five-member development team.
--   Successfully reimagined the design of the homepage to improve user engagement.
+- Developed and maintained a dynamic, responsive website using React and Express, as part of a five-member development team.
+- Successfully reimagined the design of the homepage to improve user engagement.
 
 **Key Technologies:** `React.js` `TypeScript` `AWS DynamoDB` `Docker` `Express` `Google Cloud Project` `Flutter`<br><br>
 
@@ -28,11 +28,18 @@
 
 **Duration:** January 2023 - Present
 
--   Lead and mentored sub-teams to drive innovative solutions, including implementing a highly performant Next.js web app with MongoDB and advanced SEO techniques, supporting over 10,000 users concurrently.
--   Developed complex optimization algorithm for the Perfect Match matchmaking platform's match generation and collaborated with a cross-functional team to optimize deployment, improve code readability, and ensure server stability with rapid response times.
--   Achieved rapid response times and consistently delivered a 95%+ Vercel User Experience Score.
+- Redesigned the website’s frontend for improved UX/UI and integrated microservices, enhancing user engagement and system scalability.
+- Architected a Flask-based microservice for a live analytics dashboard, analyzing real-time data for 5,000+ users. Utilized
+MongoDB Map-Reduce for efficient data aggregation and integrated server response caching for optimized latency and data
+retrieval.
+- Initiated the transition from offline to online matching algorithms, deploying a Flask microservice to enable real-time
+matching, resulting in 50,000+ matches and enhanced system responsiveness.
+- Automated personalized user engagement emails via cron jobs, yielding a 600+ increase in active users and enhancing
+platform interaction.
+- Drove innovative marketing strategies, amplifying Instagram engagement by 185%, while nurturing a strong team dynamic.
+Enhanced new member orientation to solidify community and team cohesion.
 
-**Key Technologies:** `Next.js` `TypeScript` `Google OR Tools` `MongoDB` `Google Cloud Project` `Vercel`<br><br>
+**Key Technologies:** `Next.js` `TypeScript` `Flask` `Cron Jobs` `Google OR Tools` `MongoDB` `Google Cloud Project` `Vercel`<br><br>
 
 <hr />
 
