@@ -1,6 +1,7 @@
 import React from "react";
 import { FaEnvelope, FaFacebook, FaFilePdf, FaGithub, FaInstagram, FaLinkedin, FaSpotify } from "react-icons/fa";
 import { Link } from "@/types";
+import { LuCoffee } from "react-icons/lu";
 
 export const links: Link[] = [
 	{
@@ -34,19 +35,26 @@ export const links: Link[] = [
 	{
 		index: 4,
 		type: "social",
+		title: "Schedule a coffee chat",
+		href: "https://calendar.app.google/ANDw1PAA9CqYexx48",
+		icon: <LuCoffee />
+	},
+	{
+		index: 5,
+		type: "social",
 		title: "Find me on Instagram",
 		href: "https://www.instagram.com/pratyush.sudhakar/",
 		icon: <FaInstagram />
 	},
 	{
-		index: 5,
+		index: 6,
 		type: "social",
 		title: "Find me on Facebook",
 		href: "https://www.facebook.com/pratyush.sudhakar/",
 		icon: <FaFacebook />
 	},
 	{
-		index: 6,
+		index: 7,
 		type: "social",
 		title: "Find me on Spotify",
 		href: "https://open.spotify.com/user/316666pv6iuuy2nzkpvw6pqbeuxu?si=Bkt1cg33QPql5toe7vfo3A&utm_source=native-share-menu&nd=1/",
