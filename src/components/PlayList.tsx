@@ -15,7 +15,7 @@ export default function PlayList() {
 	const options = {
 		size: 180,
 		minSize: 50,
-		gutter: 8,
+		gutter: 20,
 		provideProps: false,
 		numCols: 7,
 		fringeWidth: 160,
@@ -59,10 +59,11 @@ export default function PlayList() {
 				onClick={() => handleBubbleClick(`https://open.spotify.com/track/${song.id}`)}
 			>
 				<Image
+					loading="lazy"
 					src={song.image}
 					alt={song.name}
-					width={options.size - 25}
-					height={options.size - 25}
+					width={options.size}
+					height={options.size}
 					style={{
 						borderRadius: "50%",
 						transition: "transform 0.3s ease"

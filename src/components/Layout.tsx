@@ -53,9 +53,6 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 			MuiCssBaseline: {
 				styleOverrides: { body: darkMode ? darkScrollbar() : null, textDecorationColor: !darkMode ? "#000000" : "#FFFFFF" }
 			},
-			MuiDivider: {
-				styleOverrides: { root: { borderColor: darkMode ? "rgba(255, 255, 255, 0.12)" : "rgba(0,0,0,0.12)" } }
-			},
 			MuiPaper: { styleOverrides: { root: { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" } } },
 			MuiContainer: {
 				styleOverrides: {
