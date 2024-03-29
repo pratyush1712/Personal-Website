@@ -57,6 +57,7 @@ export default async function MDContainer({ params }: Props) {
 					a: MarkdownLink,
 					p: MarkdownParagraph,
 					table: MarkdownTable,
+					img: MarkdownImage,
 					thead: TableHead,
 					tbody: TableBody,
 					th: MarkdownTableCell,

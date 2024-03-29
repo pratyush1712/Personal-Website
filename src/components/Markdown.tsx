@@ -1,7 +1,7 @@
-import { Chip, Container, Divider, Link, ListItem, Paper, Typography, Icon } from "@mui/material";
+import { Chip, Container, Divider, Link, ListItem, Paper, Typography } from "@mui/material";
 import { Table, TableCell, TableContainer } from "@mui/material";
-import { usePathname } from "next/navigation";
-import { BiSolidHandRight, BiSolidRightArrow } from "react-icons/bi";
+import { BiSolidHandRight } from "react-icons/bi";
+import Icon from "@/components/CustomIcon";
 import Image from "next/image";
 
 export function MarkdownLink(props: any) {
@@ -111,19 +111,12 @@ export function MarkdownH3(props: any) {
 }
 
 export function MarkdownImage(props: any) {
-	const pathname = usePathname();
-	const sendOutbound = (event: any) => {
-		// ReactGA.event({
-		// 	category: "ND",
-		// 	action: "Clicked on Link",
-		// 	label: "ND Video"
-		// });
-	};
-
-	if (pathname.substring(1, pathname.length) === "overview") {
-		return <Icon component="img" src={require(`${props.src}`)} onClick={sendOutbound} />;
+	props.style.width = props.style.width?.split("px")[0] || "15";
+	props.style.height = props.style.height?.split("px")[0] || "25";
+	if (props?.className === "overview") {
+		return <Icon component="img" src={props.src} />;
 	}
-	return <Image {...props} />;
+	return <Image {...props} width={props.style.width} height={props.style.height} />;
 }
 
 export function MarkdownParagraph(props: any) {
@@ -142,15 +135,16 @@ export function MarkdownParagraph(props: any) {
 	if (anyInlineElement) {
 		for (let e of element) {
 			if (e.type) {
+				const uniqueID = `${e.key} ${Math.random()}`;
 				if (e.type === "strong") {
 					result.push(
-						<Typography key={e} display="inline" mb={1}>
+						<Typography key={uniqueID} display="inline" mb={1}>
 							<strong>{e}</strong>
 						</Typography>
 					);
 				} else if (e.type === "em") {
 					result.push(
-						<Typography key={e} display="inline" mb={1}>
+						<Typography key={uniqueID} display="inline" mb={1}>
 							<i>{e}</i>
 						</Typography>
 					);
@@ -158,8 +152,9 @@ export function MarkdownParagraph(props: any) {
 					result.push({ ...e });
 				}
 			} else {
+				const uniqueID = `${e.key} ${Math.random()}`;
 				result.push(
-					<Typography key={e} display="inline" mb={1}>
+					<Typography key={uniqueID} display="inline" mb={1}>
 						{e}
 					</Typography>
 				);
@@ -167,11 +162,12 @@ export function MarkdownParagraph(props: any) {
 		}
 	} else {
 		for (let e of element) {
+			const uniqueID = `${e.key} ${Math.random()}`;
 			if (e.type) {
 				result.push({ ...e });
 			} else {
 				result.push(
-					<Typography key={e} mb={2}>
+					<Typography key={uniqueID} mb={2}>
 						{e}
 					</Typography>
 				);

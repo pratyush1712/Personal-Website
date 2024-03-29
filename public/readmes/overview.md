@@ -1,4 +1,4 @@
-# 📖 Overview <a href="https://www.youtube.com/watch?v=B46EdJApFmI"><img src="/icons/teal_ribbon.ico" style="width:15px;" /></a> <a href="https://youtu.be/DlFkfOqtgR8?si=T-OzRtnyO_S0aW0X"><img src="/icons/orange_ribbon.ico" style="width:15px;" /></a>
+# 📖 Overview <a href="https://www.youtube.com/watch?v=B46EdJApFmI"><img class="overview" src="/icons/teal_ribbon.ico" style="width:15px;" /></a> <a href="https://youtu.be/DlFkfOqtgR8?si=T-OzRtnyO_S0aW0X"><img class="overview" src="/icons/orange_ribbon.ico" style="width:15px;" /></a>
 
 ## 🚀 Summary
 
