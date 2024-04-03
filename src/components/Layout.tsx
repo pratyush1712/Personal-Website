@@ -36,7 +36,7 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 	const router = useRouter();
 	const params = useParams();
 	const [expanded, setExpanded] = useState(isBrowser);
-	const [selectedIndex, setSelectedIndex] = useState(routeToPage[params.slug as string]?.index || 0);
+	const [selectedIndex, setSelectedIndex] = useState(routeToPage[params.slug as string]?.index ?? null);
 	const [currentComponent, setCurrentComponent] = useState("");
 	const [visiblePageIndexs, setVisiblePageIndexs] = useState(initVisiblePageIndexs(pages));
 	const [darkMode, setDarkMode] = useState(true);
