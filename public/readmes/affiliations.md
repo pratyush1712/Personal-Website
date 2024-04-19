@@ -53,6 +53,4 @@
 -   Working alongside the President and Practice Leaders to guide practices, helping newcomers improve their skills.
 -   Assisting with planning practice sessions for competitions and arranging events. <br>
 
-(\*The most wholesome club on campus)
-
 <hr />
