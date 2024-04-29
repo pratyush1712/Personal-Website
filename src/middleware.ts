@@ -39,7 +39,7 @@ export default async function middleware(request: NextRequest) {
 
 	// Handling requests intended for private.pratyushsudhakar.com
 	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`) {
-		if (!session) {
+		if (!session && url.pathname !== "/login") {
 			return NextResponse.redirect(new URL("/login", url));
 		}
 		// If authenticated, serve the content from /close-friends. private.pratyushsudhakar.com/* -> pratyushsudhakar.com/close-friends/*
