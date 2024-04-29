@@ -20,15 +20,6 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 		}
 	});
 
-	if (path === "/close-friends/admin") {
-		return (
-			<ThemeProvider theme={theme}>
-				<CssBaseline enableColorScheme />
-				{children}
-			</ThemeProvider>
-		);
-	}
-
 	const handleSignOut = async () => {
 		await signOut({ callbackUrl: "/" });
 	};
@@ -40,6 +31,15 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			}
 		});
 	}, []);
+
+	if (path === "/close-friends/admin") {
+		return (
+			<ThemeProvider theme={theme}>
+				<CssBaseline enableColorScheme />
+				{children}
+			</ThemeProvider>
+		);
+	}
 
 	return (
 		<ThemeProvider theme={theme}>
