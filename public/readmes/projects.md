@@ -1,5 +1,15 @@
 # 🧪 Projects
 
+### [DTI GPT](#) 🔗
+
+[`Code 🔗`](https://github.com/cornell-dti/mlmn-findoc/)
+
+_Technologies Used:_ `Supabase`, `Zillus Clusters`, `Next.js (TypeScript)`, `Flask`, `LangChain`, `Vector DB Search`, `Vercel`, `Microsoft Azure`
+
+- Developed DTI GPT, an innovative tool designed to summarize and parse syllabuses for academic courses, facilitating enhanced student interaction by allowing follow-up questions directly related to course content.
+- Utilized Supabase for backend management and Zillus clusters for caching, enabling rapid response times through vector database searches that improve the efficiency of querying similar syllabus documents and student inquiries.
+- Implemented a robust frontend in Next.js with TypeScript and a Flask backend, leveraging the LangChain model to handle natural language queries effectively, all while ensuring smooth deployment on Vercel for the frontend and Azure for the backend.
+
 ### [Harmonious Sounds](https://nginx-devops-pratyush1712.cloud.okteto.net/)<br>
 
 [`Code 🔗`](https://github.com/pratyush1712/react-express/) _Technologies Used:_ `React.js` `Redux.js` `Express.js` `GitHub Actions` `Okteto` `Docker` `Kubernetes`
@@ -15,6 +25,13 @@
 
 -   Designed and developed a <ins>modern, responsive, and accessible</ins> personal website using Next.js 13 App Router, TypeScript, and deployed on Vercel.
 -   Utilized <ins>Static Site Generation</ins> to generate static HTML pages at build time, improving performance and SEO.
+
+### [ADHD-Friendly Text Enhancer Extension](https://chromewebstore.google.com/detail/adhd-friendly-text-enhanc/mnagpckgpcigjbenomcdpfifellpehnb) 🔗
+
+[`Code 🔗`](https://github.com/pratyush1712/adhd-friendly-text-enhancer) _Technologies Used:_ `JavaScript` `HTML` `CSS` `Chrome APIs`
+
+- Developed a Chrome extension to enhance webpage readability for individuals with ADHD by implementing visual aids such as text boldening and sentence highlighting.
+- Features include the first few letters of each word boldened and sentences highlighted in alternating colors to help maintain reading focus and comprehension.
 
 ### [Boss Mode... work like a beast!]()
 
