@@ -91,7 +91,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 					}}
 				>
 					<Typography variant="body2" sx={{ color: "#FFFFFF", opacity: 0.7 }}>
-						Isn't it soo cool 🌟
+						Isn&apos;t it soo cool 🌟
 						<Typography component="span" sx={{ color: "#E50914" }}>
 							{" "}
 							|{" "}
