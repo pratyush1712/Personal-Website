@@ -17,7 +17,7 @@ export default function Video({ src, autoPlay, loop, muted }: { src: string; aut
 			muted={muted}
 		>
 			<source src={src} type="video/mp4" />
-			<track kind="captions" srcLang="en" src="/videos/compare_docs.vtt" default />
+			<track kind="captions" srcLang="en" src="/" default />
 			Your browser does not support the video tag.
 		</video>
 	);
