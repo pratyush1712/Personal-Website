@@ -42,8 +42,10 @@ export default async function middleware(request: NextRequest) {
 		if (!session && url.pathname !== "/login") {
 			return NextResponse.redirect(new URL("/login", url));
 		}
-		// If authenticated, serve the content from /close-friends. private.pratyushsudhakar.com/* -> pratyushsudhakar.com/close-friends/*
-		return NextResponse.rewrite(new URL(`/close-friends${url.pathname}`, url));
+		if (url.pathname !== "/login") {
+			// If authenticated, serve the content from /close-friends. private.pratyushsudhakar.com/* -> pratyushsudhakar.com/close-friends/*
+			return NextResponse.rewrite(new URL(`/close-friends${url.pathname}`, url));
+		}
 	}
 
 	// Proceed with other requests normally
