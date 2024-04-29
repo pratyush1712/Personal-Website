@@ -32,7 +32,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 		});
 	}, []);
 
-	if (path === "/close-friends/admin") {
+	if (path.includes("/admin")) {
 		return (
 			<ThemeProvider theme={theme}>
 				<CssBaseline enableColorScheme />
@@ -40,6 +40,8 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			</ThemeProvider>
 		);
 	}
+
+	if (!user) return null;
 
 	return (
 		<ThemeProvider theme={theme}>

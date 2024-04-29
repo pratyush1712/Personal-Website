@@ -1,24 +1,17 @@
-import { getServerSession } from "next-auth/next";
-import { config as authOptions } from "@/utils/auth";
 import { Container, Typography } from "@mui/material";
 import { DashboardLayout } from "@/components/CloseFriends";
 import { VideoUploadForm } from "@/components/CloseFriends";
 import { BlogEditor } from "@/components/CloseFriends";
 import { ContentList } from "@/components/CloseFriends";
 
-export default async function AdminDashboard() {
-	const session = await getServerSession(authOptions);
-	if (!session || !session.user) {
-		return {
-			redirect: {
-				destination: "/login",
-				permanent: false
-			}
-		};
-	} else if (session.user.email !== "pratyushsudhakar03@gmail.com") {
-		return <h1>Unauthorized</h1>;
-	}
+export const metadata = {
+	title: "Blog and Video Sharing Admin Dashboard",
+	description: "Admin dashboard for managing blog and video content.",
+	authors: { name: "Pratyush Sudhakar", url: "https://pratyushsudhakar.com" },
+	icons: "/favicon.ico"
+};
 
+export default async function AdminDashboard() {
 	return (
 		<DashboardLayout>
 			<Container maxWidth="lg">

@@ -21,7 +21,14 @@ export default async function middleware(request: NextRequest) {
 	const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
 	const hostname = request.headers.get("host")!;
 	const normalizedHostname = hostname.replace(/:\d+$/, "");
-	console.log(url.pathname);
+
+	// if path contains /admin, then check if the user is pratyushsudhakar03@gmail.com
+	if (url.pathname.includes("/admin")) {
+		if (!session || session.email !== "pratyushsudhakar03@gmail.com") {
+			return NextResponse.redirect(new URL("/close-friends", request.url));
+		}
+	}
+
 	if (normalizedHostname === "localhost") {
 		if (url.pathname === "/close-friends") {
 			if (!session) {
