@@ -21,7 +21,7 @@ export default async function middleware(request: NextRequest) {
 	const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
 	const hostname = request.headers.get("host")!;
 	const normalizedHostname = hostname.replace(/:\d+$/, "");
-
+	console.log(url.pathname);
 	if (normalizedHostname === "localhost") {
 		if (url.pathname === "/close-friends") {
 			if (!session) {
@@ -42,7 +42,37 @@ export default async function middleware(request: NextRequest) {
 		if (!session && url.pathname !== "/login") {
 			return NextResponse.redirect(new URL("/login", url));
 		}
-		if (url.pathname !== "/login") {
+		if (
+			url.pathname !== "/login" &&
+			!url.pathname.startsWith("/_next/") &&
+			!url.pathname.startsWith("/_vercel/") &&
+			!url.pathname.startsWith("/_static/") &&
+			!url.pathname.startsWith("/api/") &&
+			// public files
+			url.pathname !== "/favicon.ico" &&
+			url.pathname !== "/favicon.png" &&
+			url.pathname !== "/robots.txt" &&
+			url.pathname !== "/sitemap.xml" &&
+			url.pathname !== "/manifest.json" &&
+			!url.pathname.startsWith("/icons/") &&
+			!url.pathname.startsWith("/readmes/") &&
+			!url.pathname.startsWith("/videos/") &&
+			!url.pathname.startsWith("/images/") &&
+			!url.pathname.startsWith("/fonts/") &&
+			!url.pathname.startsWith("/css/") &&
+			!url.pathname.startsWith("/js/") &&
+			!url.pathname.startsWith("/json/") &&
+			!url.pathname.startsWith("/pdf/") &&
+			!url.pathname.startsWith("/txt/") &&
+			!url.pathname.startsWith("/xml/") &&
+			!url.pathname.startsWith("/webfonts/") &&
+			!url.pathname.startsWith("/webp/") &&
+			!url.pathname.startsWith("/svg/") &&
+			!url.pathname.startsWith("/audio/") &&
+			!url.pathname.startsWith("/webm/") &&
+			!url.pathname.startsWith("/mp4/") &&
+			!url.pathname.startsWith("/public/")
+		) {
 			// If authenticated, serve the content from /close-friends. private.pratyushsudhakar.com/* -> pratyushsudhakar.com/close-friends/*
 			return NextResponse.rewrite(new URL(`/close-friends${url.pathname}`, url));
 		}
