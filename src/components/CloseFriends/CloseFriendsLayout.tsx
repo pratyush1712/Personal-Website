@@ -1,14 +1,33 @@
 "use client";
 import { Container, Typography, ThemeProvider, CssBaseline, CardContent, Card, Box, CardMedia, Button } from "@mui/material";
-import createTheme from "@/utils/theme";
+import createTheme from "@/ui/theme";
 import { getSession, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { User } from "@/types";
 import "@mux/mux-player/themes/minimal";
 import Video from "@/ui/Video";
+import { usePathname } from "next/navigation";
 
 export default function CloseFriendsLayout({ children }: { children: React.ReactNode }) {
-	const [user, setUser] = useState<null | User>(null);
+	const [user, setUser] = useState<User | null>(null);
+	const path = usePathname();
+
+	const theme = createTheme(true, {
+		components: {
+			MuiContainer: {
+				styleOverrides: { root: (ownerState: { disableGutters: any }) => ({ minWidth: "100%" }) }
+			}
+		}
+	});
+
+	if (path === "/close-friends/admin") {
+		return (
+			<ThemeProvider theme={theme}>
+				<CssBaseline enableColorScheme />
+				{children}
+			</ThemeProvider>
+		);
+	}
 
 	const handleSignOut = async () => {
 		await signOut({ callbackUrl: "/" });
@@ -21,14 +40,6 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			}
 		});
 	}, []);
-
-	const theme = createTheme(true, {
-		components: {
-			MuiContainer: {
-				styleOverrides: { root: (ownerState: { disableGutters: any }) => ({ minWidth: "100%" }) }
-			}
-		}
-	});
 
 	return (
 		<ThemeProvider theme={theme}>

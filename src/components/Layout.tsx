@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Container, CssBaseline, Grid, Stack, ThemeProvider, Typography } from "@mui/material";
-import createTheme from "@/utils/theme";
+import createTheme from "@/ui/theme";
 import { isBrowser } from "react-device-detect";
 import AppButtons from "./AppButtons";
 import AppTree from "./AppTree";

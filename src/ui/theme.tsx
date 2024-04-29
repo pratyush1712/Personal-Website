@@ -1,4 +1,4 @@
-import { PaletteOptions, createTheme, darkScrollbar } from "@mui/material";
+import { createTheme, darkScrollbar } from "@mui/material";
 
 export default function theme(darkMode: boolean, paletteOverrides?: any) {
 	const defaultPalette = {
