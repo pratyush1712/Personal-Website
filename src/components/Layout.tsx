@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Container, CssBaseline, Grid, Stack, ThemeProvider, Typography, createTheme, darkScrollbar } from "@mui/material";
+import { Container, CssBaseline, Grid, Stack, ThemeProvider, Typography } from "@mui/material";
+import createTheme from "@/utils/theme";
 import { isBrowser } from "react-device-detect";
 import AppButtons from "./AppButtons";
 import AppTree from "./AppTree";
@@ -41,75 +42,8 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 	const [visiblePageIndexs, setVisiblePageIndexs] = useState(initVisiblePageIndexs(pages));
 	const [darkMode, setDarkMode] = useState(true);
 	const [visiblePages, setVisiblePages] = useState(pages);
-	const theme = createTheme({
-		palette: {
-			mode: darkMode ? "dark" : "light",
-			background: { default: !darkMode ? "#FFFFFF" : "#1e1e1e" },
-			primary: { main: !darkMode ? "#007acc" : "#0e639c" },
-			secondary: { main: !darkMode ? "#007acc" : "#0e639c" },
-			text: { primary: !darkMode ? "#000000" : "#FFFFFF" }
-		},
-		components: {
-			MuiCssBaseline: {
-				styleOverrides: { body: darkMode ? darkScrollbar() : null, textDecorationColor: !darkMode ? "#000000" : "#FFFFFF" }
-			},
-			MuiPaper: { styleOverrides: { root: { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" } } },
-			MuiContainer: {
-				styleOverrides: {
-					root: {
-						backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
-						textDecorationColor: !darkMode ? "#000000" : "#FFFFFF"
-					}
-				}
-			},
-			MuiButton: {
-				styleOverrides: {
-					root: {
-						color: !darkMode ? "#000000" : "#FFFFFF",
-						backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
-						"&:hover": { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" }
-					}
-				}
-			},
-			MuiIconButton: {
-				styleOverrides: {
-					root: {
-						color: !darkMode ? "#000000" : "#FFFFFF",
-						backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
-						"&:hover": { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" }
-					}
-				}
-			},
-			MuiTabs: {
-				styleOverrides: {
-					root: {
-						backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
-						color: !darkMode ? "#000000" : "#FFFFFF"
-					}
-				}
-			},
-			MuiTab: {
-				styleOverrides: {
-					root: {
-						color: !darkMode ? "#000000" : "#FFFFFF",
-						"&:hover": { color: !darkMode ? "#000000" : "#FFFFFF" }
-					}
-				}
-			},
-			MuiTypography: {
-				styleOverrides: { root: { color: !darkMode ? "#000000" : "#FFFFFF" } }
-			},
-			MuiListItem: {
-				styleOverrides: {
-					root: {
-						color: !darkMode ? "#000000" : "#FFFFFF",
-						"&:hover": { color: !darkMode ? "#000000" : "#FFFFFF" }
-					}
-				}
-			}
-		}
-	});
 
+	const theme = createTheme(darkMode);
 	function handleThemeChange() {
 		setDarkMode(!darkMode);
 		theme.palette.mode = darkMode ? "dark" : "light";

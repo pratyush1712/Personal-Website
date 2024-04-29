@@ -28,3 +28,11 @@ export type Song = {
 	width?: number;
 	height?: number;
 };
+
+export type User = {
+	name?: string | null | undefined;
+	email?: string | null | undefined;
+	image?: string | null | undefined;
+};
+
+export * from "./close-friends";

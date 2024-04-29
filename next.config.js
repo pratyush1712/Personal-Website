@@ -1,3 +1,7 @@
+const {
+	withNextVideo
+} = require('next-video/process')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	compiler: {
@@ -11,4 +15,12 @@ const nextConfig = {
 	}
 };
 
-module.exports = nextConfig;
+module.exports = withNextVideo(nextConfig, {
+	folder: 'public/videos',
+	async rewrites() {
+		return [{
+			source: '/blog',
+			destination: 'https://private.pratyushsudhakar.com/',
+		}]
+	},
+});
