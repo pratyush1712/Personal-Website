@@ -68,8 +68,8 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 							zIndex: 1
 						}}
 					>
-						Welcome to my Close Friends page! This is a private page for my close friends only. If you're seeing this, you're
-						one of them! 🎉
+						Welcome to my Close Friends page! This is a private page for my close friends only. If you&apos;re seeing this,
+						you&apos;re one of them! 🎉
 					</Typography>
 				</Container>
 				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 7 }}>
