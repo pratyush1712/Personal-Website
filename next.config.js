@@ -19,7 +19,7 @@ module.exports = withNextVideo(nextConfig, {
 	folder: 'public/videos',
 	async rewrites() {
 		return [{
-			source: '/blog',
+			source: '/close-friends',
 			destination: 'https://private.pratyushsudhakar.com/',
 		}]
 	},
