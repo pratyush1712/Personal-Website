@@ -22,6 +22,18 @@ export default async function middleware(request: NextRequest) {
 	const hostname = request.headers.get("host")!;
 	const normalizedHostname = hostname.replace(/:\d+$/, "");
 
+	// secure the api/graphql route
+	if (url.pathname.includes("/api/graphql")) {
+		if (!session) {
+			return NextResponse.redirect(new URL("/login", request.url));
+		}
+		const method = request.method;
+		if (method === "POST" && session.email !== "pratyushsudhakar03@gmail.com") {
+			return NextResponse.error();
+		}
+		return NextResponse.next();
+	}
+
 	// if path contains /admin, then check if the user is pratyushsudhakar03@gmail.com
 	if (url.pathname.includes("/admin")) {
 		if (!session || session.email !== "pratyushsudhakar03@gmail.com") {
