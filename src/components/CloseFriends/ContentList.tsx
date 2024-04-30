@@ -2,10 +2,7 @@
 import React from "react";
 import { Button, List, ListItem, ListItemText, ListItemSecondaryAction } from "@mui/material";
 
-const contents = [
-	{ id: 1, title: "First Post", type: "Blog" },
-	{ id: 2, title: "Second Post", type: "Video" }
-];
+const contents: any[] = [];
 
 export default function ContentList() {
 	const handleEdit = (id: number) => {
