@@ -6,9 +6,11 @@ import dynamic from "next/dynamic";
 const ReactQuill = dynamic(
 	async () => {
 		const { default: RQ } = await import("react-quill");
-		return ({ forwardedRef, ...props }: { forwardedRef: React.RefObject<any>; [key: string]: any }) => (
+		const Component = ({ forwardedRef, ...props }: { forwardedRef: React.RefObject<any>; [key: string]: any }) => (
 			<RQ ref={forwardedRef} {...props} />
 		);
+		Component.displayName = "ReactQuill";
+		return Component;
 	},
 	{ ssr: false }
 );
@@ -148,7 +150,13 @@ export default function BlogEditor({ blog }: { blog: any }) {
 					sx={{ flexGrow: 1 }}
 					renderTags={(value, getTagProps) =>
 						value.map((option, index) => (
-							<Chip variant="outlined" label={option} sx={{ borderRadius: 1.5, p: 2 }} {...getTagProps({ index })} />
+							<Chip
+								variant="outlined"
+								label={option}
+								sx={{ borderRadius: 1.5, p: 2 }}
+								{...getTagProps({ index })}
+								key={index}
+							/>
 						))
 					}
 					renderInput={params => <TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />}
@@ -162,7 +170,13 @@ export default function BlogEditor({ blog }: { blog: any }) {
 					sx={{ flexGrow: 1 }}
 					renderTags={(value, getTagProps) =>
 						value.map((option, index) => (
-							<Chip variant="outlined" label={option} sx={{ borderRadius: 1.5, p: 2 }} {...getTagProps({ index })} />
+							<Chip
+								variant="outlined"
+								label={option}
+								sx={{ borderRadius: 1.5, p: 2 }}
+								{...getTagProps({ index })}
+								key={index}
+							/>
 						))
 					}
 					renderInput={params => <TextField {...params} variant="outlined" label="Keywords" placeholder="Add keywords" />}
