@@ -1,3 +1,5 @@
+import { DashboardLayout } from "@/components/CloseFriends";
+
 export const metadata = {
 	title: "Blog and Video Sharing Admin Dashboard",
 	description: "Admin dashboard for managing blog and video content.",
@@ -8,7 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body>{children}</body>
+			<body>
+				<DashboardLayout>{children}</DashboardLayout>
+			</body>
 		</html>
 	);
 }

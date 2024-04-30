@@ -9,6 +9,15 @@ const resolvers = {
 			}
 		},
 
+		blog: async (_: any, { id }: any, context: { dataSources: { blogs: any } }) => {
+			try {
+				return await context.dataSources.blogs.getBlogById(id);
+			} catch (error) {
+				console.error("Failed to fetch blog:", error);
+				throw new Error("Error fetching blog.");
+			}
+		},
+
 		videos: async (_: any, __: any, context: { dataSources: { videos: any } }) => {
 			try {
 				return await context.dataSources.videos.getAllVideos();
@@ -35,6 +44,15 @@ const resolvers = {
 			} catch (error) {
 				console.error("Failed to create video:", error);
 				throw new Error("Error creating video.");
+			}
+		},
+
+		updateBlog: async (_: any, { id, input }: any, context: any) => {
+			try {
+				return await context.dataSources.blogs.updateBlog(id, input);
+			} catch (error) {
+				console.error("Failed to update blog:", error);
+				throw new Error("Error updating blog.");
 			}
 		}
 	}

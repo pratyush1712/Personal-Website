@@ -11,7 +11,7 @@ const nextConfig = {
 		esmExternals: true
 	},
 	images: {
-		domains: ["i.scdn.co", "images.unsplash.com", "upload.wikimedia.org"]
+		domains: ["i.scdn.co", "images.unsplash.com", "upload.wikimedia.org", "source.unsplash.com"]
 	},
 	async headers() {
 		return [{

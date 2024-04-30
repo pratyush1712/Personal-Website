@@ -42,6 +42,22 @@ export class Blogs extends MongoDataSource<BlogDocument> {
 			throw new Error("Failed to create blog");
 		}
 	}
+
+	async getBlogById(id: string) {
+		try {
+			return await BlogModel.findById(id);
+		} catch (error) {
+			throw new Error("Failed to fetch blog");
+		}
+	}
+
+	async updateBlog(id: string, input: BlogDocument) {
+		try {
+			return await BlogModel.findByIdAndUpdate(id, input, { new: true });
+		} catch (error) {
+			throw new Error("Failed to update blog");
+		}
+	}
 }
 
 export class Videos extends MongoDataSource<VideoDocument> {

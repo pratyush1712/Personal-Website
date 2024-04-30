@@ -34,6 +34,8 @@ const typeDefs = `#graphql
   type Query {
     blogs: [Blog]
     videos: [Video]
+    blog(id: ID!): Blog
+    video(id: ID!): Video
   }
 
   input NewBlogInput {
@@ -59,6 +61,8 @@ const typeDefs = `#graphql
   type Mutation {
     createBlog(input: NewBlogInput!): Blog
     createVideo(input: NewVideoInput!): Video
+    updateBlog(id: ID!, input: NewBlogInput!): Blog
+    updateVideo(id: ID!, input: NewVideoInput!): Video
   }
 `;
 
