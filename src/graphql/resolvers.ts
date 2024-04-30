@@ -54,6 +54,15 @@ const resolvers = {
 				console.error("Failed to update blog:", error);
 				throw new Error("Error updating blog.");
 			}
+		},
+
+		deleteBlog: async (_: any, { id }: any, context: any) => {
+			try {
+				return await context.dataSources.blogs.deleteBlog(id);
+			} catch (error) {
+				console.error("Failed to delete blog:", error);
+				throw new Error("Error deleting blog.");
+			}
 		}
 	}
 };

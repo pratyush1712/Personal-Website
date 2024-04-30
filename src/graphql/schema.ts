@@ -63,6 +63,8 @@ const typeDefs = `#graphql
     createVideo(input: NewVideoInput!): Video
     updateBlog(id: ID!, input: NewBlogInput!): Blog
     updateVideo(id: ID!, input: NewVideoInput!): Video
+    deleteBlog(id: ID!): Blog
+    deleteVideo(id: ID!): Video
   }
 `;
 

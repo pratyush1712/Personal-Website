@@ -58,6 +58,14 @@ export class Blogs extends MongoDataSource<BlogDocument> {
 			throw new Error("Failed to update blog");
 		}
 	}
+
+	async deleteBlog(id: string) {
+		try {
+			return await BlogModel.findByIdAndDelete(id);
+		} catch (error) {
+			throw new Error("Failed to delete blog");
+		}
+	}
 }
 
 export class Videos extends MongoDataSource<VideoDocument> {

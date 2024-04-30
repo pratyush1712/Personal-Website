@@ -1,6 +1,6 @@
 "use client";
 import { Container, Typography, ThemeProvider, CssBaseline, CardContent, Card, Box, CardMedia, Button } from "@mui/material";
-import createTheme from "@/ui/theme";
+import createTheme from "@/ui/Theme";
 import { getSession, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { User } from "@/types";
@@ -88,6 +88,18 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 7 }}>
 					{children}
 				</Container>
+				{user.email === "pratyushsudhakar03@gmail.com" && (
+					<Box sx={{ position: "fixed", bottom: 12, right: 20, zIndex: 1500 }}>
+						<Button
+							variant="contained"
+							color="primary"
+							href={`${window.location.href}/admin`}
+							sx={{ borderColor: "#E50914", borderWidth: 2, borderStyle: "solid" }}
+						>
+							Admin
+						</Button>
+					</Box>
+				)}
 				<Box
 					component="footer"
 					sx={{

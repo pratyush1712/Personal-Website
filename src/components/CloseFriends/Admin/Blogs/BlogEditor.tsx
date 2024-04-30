@@ -1,22 +1,11 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Button, TextField, Typography, Paper, CircularProgress, Alert } from "@mui/material";
-import { Autocomplete, Chip, Box, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(
-	async () => {
-		const { default: RQ } = await import("react-quill");
-		const Component = ({ forwardedRef, ...props }: { forwardedRef: React.RefObject<any>; [key: string]: any }) => (
-			<RQ ref={forwardedRef} {...props} />
-		);
-		Component.displayName = "ReactQuill";
-		return Component;
-	},
-	{ ssr: false }
-);
-import "react-quill/dist/quill.snow.css";
+import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails, Divider } from "@mui/material";
+import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
 import Image from "next/image";
+import { UploadBeforeHandler } from "suneditor-react/dist/types/upload";
 
 const CREATE_BLOG_MUTATION = gql`
 	mutation CreateBlog($input: NewBlogInput!) {
@@ -51,45 +40,62 @@ const UPDATE_BLOG_MUTATION = gql`
 export default function BlogEditor({ blog }: { blog: any }) {
 	const [content, setContent] = useState(blog?.htmlContent || "");
 	const [blogUpdate, setBlogUpdate] = useState(blog);
-	const [htmlEditOpen, setHtmlEditOpen] = useState(false);
-	const [htmlContent, setHtmlContent] = useState("");
-	const quillRef = useRef(null);
-	const [createBlog, { loading: creating, error: createError }] = useMutation(CREATE_BLOG_MUTATION);
-	const [updateBlog, { loading: updating, error: updateError }] = useMutation(UPDATE_BLOG_MUTATION);
+	const [createBlog, { loading: creating, error: createError }] = useMutation(CREATE_BLOG_MUTATION, {
+		refetchQueries: ["GetBlogs"]
+	});
+	const [updateBlog, { loading: updating, error: updateError }] = useMutation(UPDATE_BLOG_MUTATION, {
+		refetchQueries: ["GetBlogs"]
+	});
+	const [imageLoading, setImageLoading] = useState(false);
+	const [imageError, setImageError] = useState("");
 
-	const modules = {
-		toolbar: [
-			[{ header: [1, 2, false] }],
-			["bold", "italic", "underline", "strike", "blockquote"],
-			[{ list: "ordered" }, { list: "bullet" }],
-			["link", "image"],
-			["clean"],
-			["code-block"],
-			["html"]
-		]
+	const handleEditorImageUpload = (files: File[], info: object, uploadHandler: UploadBeforeHandler) => {
+		const formData = new FormData();
+		formData.append("image", files[0]);
+
+		setImageLoading(true);
+		setImageError("");
+
+		fetch("/api/images", {
+			method: "POST",
+			body: formData
+		})
+			.then(response => response.json())
+			.then(data => {
+				setImageLoading(false);
+			})
+			.catch(error => {
+				setImageLoading(false);
+				setImageError(error.message);
+			});
 	};
 
-	const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "link", "image", "code-block"];
+	const handleImageUpload = async (e: any) => {
+		const file = e.target.files[0];
+		if (!file) return;
 
-	const handleHtmlEditOpen = () => {
-		const editor = (quillRef.current as any).getEditor();
-		setHtmlContent(editor.root.innerHTML);
-		setHtmlEditOpen(true);
-	};
+		const formData = new FormData();
+		formData.append("image", file);
 
-	const handleHtmlEditClose = () => {
-		setHtmlEditOpen(false);
-	};
+		setImageLoading(true);
+		setImageError("");
 
-	const handleHtmlSave = () => {
-		const editor = (quillRef.current as any).getEditor();
-		editor.root.innerHTML = htmlContent;
-		setContent(editor.root.innerHTML);
-		setHtmlEditOpen(false);
-	};
-
-	const handleHtmlChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-		setHtmlContent(event.target.value);
+		try {
+			const response = await fetch("/api/images", {
+				method: "POST",
+				body: formData
+			});
+			const data = await response.json();
+			if (response.ok) {
+				setImageLoading(false);
+				setBlogUpdate({ ...blogUpdate, image: data[0] });
+			} else {
+				throw new Error(data.message || "Failed to upload image");
+			}
+		} catch (error: Error | any) {
+			setImageLoading(false);
+			setImageError(error.message);
+		}
 	};
 
 	const handleSubmit = async () => {
@@ -97,7 +103,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 		delete input.id;
 		delete input.__typename;
 
-		if (blog.id) {
+		if (blog?.id) {
 			await updateBlog({ variables: { input, id: blog.id } });
 		} else {
 			await createBlog({ variables: { input } });
@@ -108,100 +114,126 @@ export default function BlogEditor({ blog }: { blog: any }) {
 	if (createError || updateError)
 		return <Alert severity="error">Error saving blog: {createError?.message || updateError?.message}</Alert>;
 
+	if (imageLoading) return <CircularProgress />;
+	if (imageError) return <Alert severity="error">{imageError}</Alert>;
+
 	return (
 		<Paper elevation={3} sx={{ p: 3, maxWidth: "100%" }}>
 			<Typography variant="h4" gutterBottom>
-				Blog Editor
+				{blog?.title ?? "New Blog"}
 			</Typography>
-			<Typography variant="subtitle1">{blog.title}</Typography>
-			<TextField
-				fullWidth
-				label="Title"
-				variant="outlined"
-				margin="normal"
-				defaultValue={blog.title}
-				onBlur={e => setBlogUpdate({ ...blogUpdate, title: e.target.value })}
-			/>
-			{/* description and image */}
-			<TextField
-				fullWidth
-				label="Description"
-				variant="outlined"
-				margin="normal"
-				defaultValue={blog.details}
-				onBlur={e => setBlogUpdate({ ...blogUpdate, details: e.target.value })}
-			/>
-			<TextField
-				fullWidth
-				label="Image URL"
-				variant="outlined"
-				margin="normal"
-				defaultValue={blog.image}
-				onBlur={e => setBlogUpdate({ ...blogUpdate, image: e.target.value })}
-			/>
-			{/* image preview next-image*/}
-			<Image src={blog.image} alt={blog.title} width={200} height={200} />
-			<Box display="flex" gap={2} sx={{ my: 2 }}>
-				<Autocomplete
-					multiple
-					options={[]}
-					defaultValue={blogUpdate.tags}
-					freeSolo
-					sx={{ flexGrow: 1 }}
-					renderTags={(value, getTagProps) =>
-						value.map((option, index) => (
-							<Chip
+			<Accordion sx={{ my: 2 }}>
+				<AccordionSummary>
+					<Box sx={{ display: "flex", alignItems: "center", minWidth: "100%", justifyContent: "space-between" }}>
+						<Typography>Blog's General Information</Typography>
+						<Typography color="textSecondary" sx={{ pr: 2 }}>
+							Click to expand
+						</Typography>
+					</Box>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Box sx={{ display: "flex", alignItems: "flex-start", gap: 2, marginTop: 2, marginBottom: 2 }}>
+						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+							{imageLoading ? (
+								<CircularProgress size={24} />
+							) : (
+								blogUpdate?.image && (
+									<Box sx={{ width: 400, height: 287, position: "relative" }}>
+										<Image
+											src={blogUpdate.image}
+											alt={blog.title}
+											layout="fill"
+											objectFit="contain"
+											quality={100}
+											blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCABrAGsDASIAAhEBAxEB/8QAGwAAAwEBAQEBAAAAAAAAAAAAAgMEBQEABgf/xAAhEAADAQACAgMBAQEAAAAAAAAAAQIDESEEMRIyQSITUf/EABkBAAMBAQEAAAAAAAAAAAAAAAECAwQABf/EAB4RAQEBAQABBQEAAAAAAAAAAAABAhExAxIhMkFR/9oADAMBAAIRAxEAPwD7M8eOP0c5Pt+mfsX7Mz9mdXJa9hR7Br2dj2AVmRXmR5FebGjlCPUcTOUwgRqQ7/pbqyHdgBn7E4/Zk/ICPtgafCCFaUcon2ZBsyvaiHVgroRT7Ch9i6fYUMXp5FuTK82Q5MrzY0o8UpnKYKYNUMXherIN2V6sh3Zxai2ZPyN2om+QqVr7h0J0o87E3YypWtEWtD9aI9aEowun2FDEuuwoon1WRdmyqKIM6KooeU3FSo5VC1RyqGLYDWiHeinWiDegpaiTaiZ12HvfskenYGXeuV9w7E3Rx0KuhmrhetEetDdbI9bJ6p5HHfYUWSVp2Fnp2Z/d8tGctPOimKM7KyuLLSjxWqOVQpUcqhyWB1oh3r2Ua0Qb37OR1EXk37JPmH5WnfBL8xbr+MW52vu3QnSjroTpRRt4TrZn76cFO9mV5W3BHauM9rl7JP2Fnum/ZDzy+WFLJeyNucxt46clmdmJ423D4Zp5X0UwGscXKz1UJmj1UVRsDrRn+RfTKtaM3yr4TBUdZZ3la/0S/wCjO7V8tGxYcz4ZbmSv0BsRoxrZPqxmiRH5FcJmNtfyts0vMviWZNEdeWn05yde5CTF8hywVXNOh8NM0fG05SMySrx74rj/AKNhezsa010eqhMV0E30U4y6hetdGV5l/hobV0ZPkPm2LonEV/ZghX9mCPGHXl97RPr6Hv0T6+jmiMnz3/LM2jR8/wBGdRK+WmfUIUghSChnybI/J8NCJHR+B9P7NefDRzfQxvoVl6Qx+izPpNu+mZWvbZqeR6Zlafomi/iW/swQr+zBGjzteX//2Q=="
+											placeholder="blur"
+											onError={() => setBlogUpdate({ ...blogUpdate, image: blogUpdate.image })}
+										/>
+									</Box>
+								)
+							)}
+							<Button variant="contained" component="label">
+								Upload Image
+								<input type="file" hidden onChange={handleImageUpload} />
+							</Button>
+						</Box>
+						{imageError && <Typography color="error">{imageError}</Typography>}
+						<Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column", mt: -2 }}>
+							<TextField
+								fullWidth
+								label="Title"
 								variant="outlined"
-								label={option}
-								sx={{ borderRadius: 1.5, p: 2 }}
-								{...getTagProps({ index })}
-								key={index}
+								margin="normal"
+								defaultValue={blog?.title}
+								onBlur={e => setBlogUpdate({ ...blogUpdate, title: e.target.value })}
 							/>
-						))
-					}
-					renderInput={params => <TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />}
-					onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, tags: newValue })}
-				/>
-				<Autocomplete
-					multiple
-					options={[]}
-					defaultValue={blogUpdate.keywords}
-					freeSolo
-					sx={{ flexGrow: 1 }}
-					renderTags={(value, getTagProps) =>
-						value.map((option, index) => (
-							<Chip
+							<TextField
+								fullWidth
+								label="Description"
 								variant="outlined"
-								label={option}
-								sx={{ borderRadius: 1.5, p: 2 }}
-								{...getTagProps({ index })}
-								key={index}
+								margin="normal"
+								maxRows={6}
+								minRows={6}
+								multiline
+								defaultValue={blog?.details}
+								onBlur={e => setBlogUpdate({ ...blogUpdate, details: e.target.value })}
 							/>
-						))
-					}
-					renderInput={params => <TextField {...params} variant="outlined" label="Keywords" placeholder="Add keywords" />}
-					onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, keywords: newValue })}
-				/>
-			</Box>
-			<ReactQuill forwardedRef={quillRef} theme="snow" value={content} onChange={setContent} modules={modules} formats={formats} />
-			<Button onClick={handleHtmlEditOpen} variant="outlined" sx={{ mt: 2, mr: 1 }}>
-				Edit HTML
-			</Button>
+							<Box display="flex" gap={2} sx={{ my: 2 }}>
+								<Autocomplete
+									multiple
+									options={[]}
+									defaultValue={blogUpdate?.tags}
+									freeSolo
+									sx={{ flexGrow: 1 }}
+									renderTags={(value, getTagProps) =>
+										value.map((option, index) => (
+											<Chip
+												variant="outlined"
+												label={option}
+												sx={{ borderRadius: 1.5, p: 2 }}
+												{...getTagProps({ index })}
+												key={index}
+											/>
+										))
+									}
+									renderInput={params => <TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />}
+									onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, tags: newValue })}
+								/>
+								<Autocomplete
+									multiple
+									options={[]}
+									defaultValue={blogUpdate?.keywords}
+									freeSolo
+									sx={{ flexGrow: 1 }}
+									renderTags={(value, getTagProps) =>
+										value.map((option, index) => (
+											<Chip
+												variant="outlined"
+												label={option}
+												sx={{ borderRadius: 1.5, p: 2 }}
+												{...getTagProps({ index })}
+												key={index}
+											/>
+										))
+									}
+									renderInput={params => (
+										<TextField {...params} variant="outlined" label="Keywords" placeholder="Add keywords" />
+									)}
+									onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, keywords: newValue })}
+								/>
+							</Box>
+						</Box>
+					</Box>
+				</AccordionDetails>
+			</Accordion>
+			<Divider sx={{ my: 2 }} />
+			<Typography variant="h6" gutterBottom>
+				Edit Blog Content
+			</Typography>
+			<Editor defaultValue={blog?.htmlContent} imageUploadHandler={handleEditorImageUpload} onChange={setContent} />
 			<Button onClick={handleSubmit} variant="contained" color="primary" sx={{ mt: 2 }}>
 				Save Blog
 			</Button>
-			<Dialog open={htmlEditOpen} onClose={handleHtmlEditClose} fullWidth maxWidth="md">
-				<DialogTitle>Edit HTML</DialogTitle>
-				<DialogContent>
-					<TextField fullWidth multiline minRows={10} value={htmlContent} onChange={handleHtmlChange} variant="outlined" />
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={handleHtmlEditClose}>Cancel</Button>
-					<Button onClick={handleHtmlSave} color="primary">
-						Save
-					</Button>
-				</DialogActions>
-			</Dialog>
 		</Paper>
 	);
 }
