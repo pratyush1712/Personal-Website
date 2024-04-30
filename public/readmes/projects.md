@@ -6,9 +6,16 @@
 
 _Technologies Used:_ `Supabase`, `Zillus Clusters`, `Next.js (TypeScript)`, `Flask`, `LangChain`, `Vector DB Search`, `Vercel`, `Microsoft Azure`
 
-- Developed DTI GPT, an innovative tool designed to summarize and parse syllabuses for academic courses, facilitating enhanced student interaction by allowing follow-up questions directly related to course content.
-- Utilized Supabase for backend management and Zillus clusters for caching, enabling rapid response times through vector database searches that improve the efficiency of querying similar syllabus documents and student inquiries.
-- Implemented a robust frontend in Next.js with TypeScript and a Flask backend, leveraging the LangChain model to handle natural language queries effectively, all while ensuring smooth deployment on Vercel for the frontend and Azure for the backend.
+-   Developed DTI GPT, an innovative tool designed to summarize and parse syllabuses for academic courses, facilitating enhanced student interaction by allowing follow-up questions directly related to course content.
+-   Utilized Supabase for backend management and Zillus clusters for caching, enabling rapid response times through vector database searches that improve the efficiency of querying similar syllabus documents and student inquiries.
+-   Implemented a robust frontend in Next.js with TypeScript and a Flask backend, leveraging the LangChain model to handle natural language queries effectively, all while ensuring smooth deployment on Vercel for the frontend and Azure for the backend.
+
+### [Personal Blog and Live Video Sharing Platform](https://private.pratyushsudhakar.com/)
+
+[`Code 🔗`](https://github.com/pratyush1712/personal-website/)<br> _Technologies Used:_ `Next.js 14` `Apollo` `TypeScript` `GraphQL` `MongoDB` `Mux`
+
+-   Designed and developed a personal blog and video sharing platform using Next.js 14, Apollo, and MongoDB, enabling me to create and share blog posts and live videos with friends.
+-   Utilized MUX for live video streaming from my personal camera to the platform, providing a seamless and high-quality video experience for users.
 
 ### [Harmonious Sounds](https://nginx-devops-pratyush1712.cloud.okteto.net/)<br>
 
@@ -30,8 +37,8 @@ _Technologies Used:_ `Supabase`, `Zillus Clusters`, `Next.js (TypeScript)`, `Fla
 
 [`Code 🔗`](https://github.com/pratyush1712/adhd-friendly-text-enhancer) _Technologies Used:_ `JavaScript` `HTML` `CSS` `Chrome APIs`
 
-- Developed a Chrome extension to enhance webpage readability for individuals with ADHD by implementing visual aids such as text boldening and sentence highlighting.
-- Features include the first few letters of each word boldened and sentences highlighted in alternating colors to help maintain reading focus and comprehension.
+-   Developed a Chrome extension to enhance webpage readability for individuals with ADHD by implementing visual aids such as text boldening and sentence highlighting.
+-   Features include the first few letters of each word boldened and sentences highlighted in alternating colors to help maintain reading focus and comprehension.
 
 ### [Boss Mode... work like a beast!]()
 
