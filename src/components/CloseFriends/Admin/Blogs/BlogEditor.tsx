@@ -125,7 +125,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 			<Accordion sx={{ my: 2 }}>
 				<AccordionSummary>
 					<Box sx={{ display: "flex", alignItems: "center", minWidth: "100%", justifyContent: "space-between" }}>
-						<Typography>Blog's General Information</Typography>
+						<Typography>Blog&apos;s General Information</Typography>
 						<Typography color="textSecondary" sx={{ pr: 2 }}>
 							Click to expand
 						</Typography>

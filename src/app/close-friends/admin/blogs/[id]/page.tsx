@@ -19,6 +19,10 @@ const GET_BLOG = gql`
 `;
 
 export default function BlogDetails({ params }: { params: { id: string } }) {
+	const { data, loading, error } = useQuery(GET_BLOG, { variables: { id: params.id } });
+
+	if (loading) return <Container maxWidth="md">Loading...</Container>;
+	if (error) return <Container maxWidth="md">Error: {error.message}</Container>;
 	if (params.id === "new") {
 		return (
 			<Container maxWidth="md">
@@ -26,10 +30,6 @@ export default function BlogDetails({ params }: { params: { id: string } }) {
 			</Container>
 		);
 	}
-	const { data, loading, error } = useQuery(GET_BLOG, { variables: { id: params.id } });
-
-	if (loading) return <Container maxWidth="md">Loading...</Container>;
-	if (error) return <Container maxWidth="md">Error: {error.message}</Container>;
 
 	return (
 		<Container maxWidth="md">
