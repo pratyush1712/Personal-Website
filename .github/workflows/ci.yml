@@ -23,15 +23,9 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: 18
-            - name: Set env vars from vars context JSON
-              run: |
-                  echo "$VARS_CONTEXT" | 
-                  jq -r 'to_entries | 
-                  .[] | 
-                  "\(.key)=\(.value)"' >> $GITHUB_ENV
-            - name: Check env
-              run: printenv
-
+            - uses: oNaiPs/secrets-to-env-action@v1
+              with:
+                secrets: ${{ toJSON(secrets) }}
             - name: Set up pnpm
               uses: pnpm/action-setup@v2
               with:
