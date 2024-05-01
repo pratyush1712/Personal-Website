@@ -7,6 +7,15 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 
 const BubbleUI: ComponentType<any> = dynamic(() => import("react-bubble-ui").then(mod => mod.default as ComponentType<any>), {});
+const shuffle = (array: any[]) => {
+	for (let i = array.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[array[i], array[j]] = [array[j], array[i]];
+	}
+	return array;
+};
+
+const randomSongs = shuffle(songs);
 
 export default function PlayList() {
 	const [hoverIndex, setHoverIndex] = useState<Number>(-1);
@@ -31,7 +40,7 @@ export default function PlayList() {
 		window.open(url, "_blank");
 	};
 
-	const songBubbles = songs.map((song, index) => {
+	const songBubbles = randomSongs.map((song, index) => {
 		return (
 			<div
 				key={index}
