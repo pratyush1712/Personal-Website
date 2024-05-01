@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { ContentDisplay } from "@/components/CloseFriends";
 import Fuse from "fuse.js";
 import { Content } from "@/types";
@@ -46,7 +46,7 @@ export const getData = async (
 	return filteredFeatures;
 };
 
-export default async function AdminDashboard({
+export default async function CloseFriends({
 	searchParams
 }: {
 	searchParams: {
@@ -57,13 +57,9 @@ export default async function AdminDashboard({
 	};
 }) {
 	const data = await getData(searchParams.searchTerm, searchParams.sortKey, searchParams.filterKey, searchParams.tagFilterKeys);
-
 	return (
-		<Container maxWidth="lg">
-			<Typography variant="h4" sx={{ my: 4 }}>
-				Admin Dashboard
-			</Typography>
-			<ContentDisplay data={data} params={searchParams} admin={true} />
+		<Container maxWidth="md" sx={{ minWidth: "100%", margin: "auto" }}>
+			<ContentDisplay params={searchParams} data={data} />
 		</Container>
 	);
 }

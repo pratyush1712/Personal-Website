@@ -1,7 +1,6 @@
 import { CloseFriendsLayout } from "@/components/CloseFriends";
-import "../globals.css";
+import "../../globals.css";
 import { Inter } from "next/font/google";
-import { ApolloProvider } from "@/graphql/apolloProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<ApolloProvider>
-					<CloseFriendsLayout>{children}</CloseFriendsLayout>
-				</ApolloProvider>
+				<CloseFriendsLayout>{children}</CloseFriendsLayout>
 			</body>
 		</html>
 	);

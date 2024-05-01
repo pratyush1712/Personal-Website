@@ -1,49 +1,72 @@
+"use client";
 import { TextField, FormControl, InputLabel, Select, MenuItem, Box, OutlinedInput, Chip } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useState, useEffect, useTransition } from "react";
 
 interface FiltersProps {
-	searchTerm: string;
-	sortKey: string;
-	filterKey: string;
-	tagFilterKeys: string[];
-	onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	onSortChange: (event: SelectChangeEvent) => void;
-	onFilterChange: (event: SelectChangeEvent) => void;
-	onTagFilterChange: (event: SelectChangeEvent<string[]>) => void;
+	searchTerm: string | null | undefined;
+	sortKey: string | null | undefined;
+	filterKey: string | null | undefined;
+	tagFilterKeys: string[] | null | undefined;
+	url: string;
 }
 
-const tags = ["exclusive", "featured", "new", "popular"];
+export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys, url }: FiltersProps) {
+	const router = useRouter();
+	const [searchTermState, setSearchTermState] = useState<string>(searchTerm! || "");
+	const [sortKeyState, setSortKeyState] = useState<string>(sortKey! || "createdAt");
+	const [filterKeyState, setFilterKeyState] = useState<string>(filterKey! || "all");
+	const [tagFilterKeysState, setTagFilterKeysState] = useState<string[]>(tagFilterKeys! || []);
+	const [isPending, startTransition] = useTransition();
+	console.log(searchTermState, sortKeyState, filterKeyState, tagFilterKeysState);
+	const defaultTags = ["exclusive", "featured", "new", "popular"];
+	const tags = [...Array.from(tagFilterKeysState), ...defaultTags];
 
-export default function Filters({
-	searchTerm,
-	sortKey,
-	filterKey,
-	tagFilterKeys,
-	onSearchChange,
-	onSortChange,
-	onFilterChange,
-	onTagFilterChange
-}: FiltersProps) {
+	const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchTermState(e.target.value);
+	};
+
+	const onSortChange = (e: SelectChangeEvent) => {
+		setSortKeyState(e.target.value);
+	};
+
+	const onFilterChange = (e: SelectChangeEvent) => {
+		setFilterKeyState(e.target.value);
+	};
+
+	useEffect(() => {
+		const URL = new URLSearchParams(window.location.search);
+		URL.set("searchTerm", searchTermState);
+		URL.set("sortKey", sortKeyState);
+		URL.set("filterKey", filterKeyState);
+		URL.set("tagFilterKeys", tagFilterKeysState?.join(","));
+		startTransition(() => {
+			router.replace(`${url}?${URL.toString()}`);
+		});
+	}, [searchTermState, sortKeyState, filterKeyState, tagFilterKeysState]);
+
+	console.log(tagFilterKeysState);
 	return (
 		<Box sx={{ display: "flex", flexDirection: "row", my: 2 }}>
 			<TextField
 				label="Search Features"
 				variant="outlined"
 				fullWidth
-				value={searchTerm}
+				value={searchTermState}
 				onChange={onSearchChange}
 				sx={{ flex: "1 1 auto", mr: 1 }}
 			/>
 			<FormControl fullWidth sx={{ flex: "1 1 auto", mr: 1 }}>
 				<InputLabel id="sort-label">Sort By</InputLabel>
-				<Select labelId="sort-label" value={sortKey} label="Sort By" onChange={onSortChange}>
+				<Select labelId="sort-label" value={sortKeyState} label="Sort By" onChange={onSortChange}>
 					<MenuItem value="createdAt">Created At</MenuItem>
 					<MenuItem value="title">Title</MenuItem>
 				</Select>
 			</FormControl>
 			<FormControl fullWidth sx={{ flex: "1 1 auto", mr: 1 }}>
 				<InputLabel id="category-label">Filter By Category</InputLabel>
-				<Select labelId="category-label" value={filterKey} label="Filter By Category" onChange={onFilterChange}>
+				<Select labelId="category-label" value={filterKeyState} label="Filter By Category" onChange={onFilterChange}>
 					<MenuItem value="all">All</MenuItem>
 					<MenuItem value="blog">Blog</MenuItem>
 					<MenuItem value="video">Video</MenuItem>
@@ -53,14 +76,16 @@ export default function Filters({
 				<InputLabel id="tag-label">Filter By Tags</InputLabel>
 				<Select
 					labelId="tag-label"
-					multiple
-					value={tagFilterKeys}
-					onChange={onTagFilterChange}
+					value={tagFilterKeysState}
+					label="Filter By Tags"
+					onChange={(event: SelectChangeEvent<string | string[]>) =>
+						setTagFilterKeysState(Array.isArray(event.target.value) ? event.target.value : [event.target.value])
+					}
 					input={<OutlinedInput label="Filter By Tags" />}
 					renderValue={selected => (
 						<Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
 							{(selected as string[]).map(value => (
-								<Chip key={value} label={value} variant="outlined" />
+								<Chip key={value} label={value} />
 							))}
 						</Box>
 					)}
@@ -70,6 +95,7 @@ export default function Filters({
 							{tag}
 						</MenuItem>
 					))}
+					<MenuItem value="all">All</MenuItem>
 				</Select>
 			</FormControl>
 		</Box>

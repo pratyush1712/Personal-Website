@@ -18,6 +18,7 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 		MuiContainer: {
 			styleOverrides: {
 				root: {
+					ownerState: { disableGutters: true },
 					backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
 					textDecorationColor: !darkMode ? "#000000" : "#FFFFFF"
 				}

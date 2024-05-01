@@ -9,4 +9,6 @@ export type Content = {
 	keywords: string[]; // to improve search
 	tags: string[]; // to categorize content
 	__typename?: string;
+	htmlContent?: string;
+	videoUrl?: string;
 };

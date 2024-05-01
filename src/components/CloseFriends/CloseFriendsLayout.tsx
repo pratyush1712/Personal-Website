@@ -1,5 +1,5 @@
 "use client";
-import { Container, Typography, ThemeProvider, CssBaseline, CardContent, Card, Box, CardMedia, Button } from "@mui/material";
+import { Container, Typography, ThemeProvider, CssBaseline, Box, Button } from "@mui/material";
 import createTheme from "@/ui/Theme";
 import { getSession, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
@@ -32,15 +32,6 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			}
 		});
 	}, []);
-
-	if (path.includes("/admin")) {
-		return (
-			<ThemeProvider theme={theme}>
-				<CssBaseline enableColorScheme />
-				{children}
-			</ThemeProvider>
-		);
-	}
 
 	if (!user) return null;
 
@@ -86,7 +77,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						you&apos;re one of them! 🎉
 					</Typography>
 				</Container>
-				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 7 }}>
+				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 10 }}>
 					{children}
 				</Container>
 				{user.email === "pratyushsudhakar03@gmail.com" && (
