@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	const drawerWidth = 0;
-	const [value, setValue] = useState<number | null>(null);
+	const [value, setValue] = useState<number | null>(0);
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
 	};

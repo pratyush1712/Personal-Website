@@ -5,6 +5,7 @@ const typeDefs = `#graphql
     details: String!
     image: String!
     createdAt: String!
+    updatedAt: String
     keywords: [String]!
     tags: [String]!
   }
@@ -15,6 +16,7 @@ const typeDefs = `#graphql
     details: String!
     image: String!
     createdAt: String!
+    updatedAt: String
     keywords: [String]!
     tags: [String]!
     htmlContent: String!
@@ -26,6 +28,7 @@ const typeDefs = `#graphql
     details: String!
     image: String!
     createdAt: String!
+    updatedAt: String
     keywords: [String]!
     tags: [String]!
     videoUrl: String!
@@ -43,6 +46,7 @@ const typeDefs = `#graphql
     details: String!
     image: String!
     createdAt: String!
+    updatedAt: String
     keywords: [String]!
     tags: [String]!
     htmlContent: String!
@@ -53,6 +57,7 @@ const typeDefs = `#graphql
     details: String!
     image: String!
     createdAt: String!
+    updatedAt: String
     keywords: [String]!
     tags: [String]!
     videoUrl: String!

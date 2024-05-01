@@ -25,6 +25,15 @@ const resolvers = {
 				console.error("Failed to fetch videos:", error);
 				throw new Error("Error fetching videos.");
 			}
+		},
+
+		video: async (_: any, { id }: any, context: { dataSources: { videos: any } }) => {
+			try {
+				return await context.dataSources.videos.getVideoById(id);
+			} catch (error) {
+				console.error("Failed to fetch video:", error);
+				throw new Error("Error fetching video.");
+			}
 		}
 	},
 

@@ -1,11 +1,11 @@
 "use client";
 import { useQuery, gql } from "@apollo/client";
-import { BlogEditor } from "@/components/CloseFriends";
+import { VideoEditor } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
 
-const GET_BLOG = gql`
-	query GetBlog($id: ID!) {
-		blog(id: $id) {
+const GET_VIDEO = gql`
+	query GetVideo($id: ID!) {
+		video(id: $id) {
 			id
 			title
 			details
@@ -14,26 +14,26 @@ const GET_BLOG = gql`
 			updatedAt
 			keywords
 			tags
-			htmlContent
+			videoUrl
 		}
 	}
 `;
 
-export default function BlogDetails({ params }: { params: { id: string } }) {
-	const { data, loading, error } = useQuery(GET_BLOG, { variables: { id: params.id } });
+export default function VideoDetails({ params }: { params: { id: string } }) {
+	const { data, loading, error } = useQuery(GET_VIDEO, { variables: { id: params.id } });
 	if (loading) return <Container maxWidth="md">Loading...</Container>;
 	if (error && params.id !== "new") return <Container maxWidth="md">Error: {error.message}</Container>;
 	if (params.id === "new") {
 		return (
 			<Container maxWidth="md">
-				<BlogEditor blog={null} />
+				<VideoEditor video={null} />
 			</Container>
 		);
 	}
 
 	return (
 		<Container maxWidth="md">
-			<BlogEditor blog={data.blog} />
+			<VideoEditor video={data.video} />
 		</Container>
 	);
 }

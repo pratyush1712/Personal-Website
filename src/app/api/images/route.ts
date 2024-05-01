@@ -14,6 +14,7 @@ const s3 = new S3Client({
 export async function POST(request: Request) {
 	const formData = await request.formData();
 	const files = formData.getAll("image") as File[];
+	const type = formData.get("type") as string;
 
 	const response = await Promise.all(
 		files.map(async file => {
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
 				s3.send(
 					new PutObjectCommand({
 						Bucket,
-						Key: file.name,
+						Key: `${type}/${file.name}`,
 						Body,
 						ACL: "public-read",
 						ContentType: file.type,
@@ -31,7 +32,7 @@ export async function POST(request: Request) {
 						}
 					})
 				);
-				const imageURI = `https://${Bucket}.s3.amazonaws.com/${file.name}`;
+				const imageURI = `https://${Bucket}.s3.amazonaws.com/${type}/${file.name}`;
 				return imageURI;
 			} catch (error) {
 				console.error(error);

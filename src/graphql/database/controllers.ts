@@ -8,6 +8,7 @@ export interface BlogDocument {
 	details: string;
 	image: string;
 	createdAt: string;
+	updatedAt?: string;
 	keywords: string[];
 	tags: string[];
 	htmlContent: string;
@@ -19,6 +20,7 @@ export interface VideoDocument {
 	details: string;
 	image: string;
 	createdAt: string;
+	updatedAt?: string;
 	keywords: string[];
 	tags: string[];
 	videoUrl: string;
@@ -82,6 +84,30 @@ export class Videos extends MongoDataSource<VideoDocument> {
 			return await VideoModel.create(input);
 		} catch (error) {
 			throw new Error("Failed to create video");
+		}
+	}
+
+	async getVideoById(id: string) {
+		try {
+			return await VideoModel.findById(id);
+		} catch (error) {
+			throw new Error("Failed to fetch video");
+		}
+	}
+
+	async updateVideo(id: string, input: VideoDocument) {
+		try {
+			return await VideoModel.findByIdAndUpdate(id, input, { new: true });
+		} catch (error) {
+			throw new Error("Failed to update video");
+		}
+	}
+
+	async deleteVideo(id: string) {
+		try {
+			return await VideoModel.findByIdAndDelete(id);
+		} catch (error) {
+			throw new Error("Failed to delete video");
 		}
 	}
 }

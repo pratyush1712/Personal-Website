@@ -33,7 +33,7 @@ const MyComponent = (props: any) => {
 		if (!imageInfo?.name || !imageInfo?.src) {
 			return;
 		}
-		imageInfo.src = "https://privatewebsitecontent.s3.amazonaws.com/" + imageInfo.name;
+		imageInfo.src = "https://privatewebsitecontent.s3.amazonaws.com/editor/" + imageInfo.name;
 		targetImgElement.src = imageInfo.src;
 		editor.current?.save();
 		return imageInfo;
@@ -46,6 +46,7 @@ const MyComponent = (props: any) => {
 	const handleImageUploadBefore = (files: File[], info: object, uploadHandler: UploadBeforeHandler) => {
 		const formData = new FormData();
 		formData.append("image", files[0]);
+		formData.append("type", "editor");
 		fetch("/api/images", { method: "POST", body: formData })
 			.then(response => response.json())
 			.then(data => true)

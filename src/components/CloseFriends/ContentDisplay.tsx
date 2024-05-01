@@ -21,6 +21,7 @@ const contents: Content[] = [...Array(20)].map((_, index) => ({
 	image: `https://source.unsplash.com/random?sig=${index}`,
 	category: Math.random() > 0.5 ? "blog" : "video",
 	createdAt: new Date().toISOString(),
+	updatedAt: new Date().toISOString(),
 	keywords: ["feature", "close friends"],
 	tags: tags.filter(() => Math.random() > 0.5)
 }));
