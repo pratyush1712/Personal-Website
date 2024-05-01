@@ -4,29 +4,25 @@ import Filters from "./Filters";
 import Fuse from "fuse.js";
 import { useState, useMemo } from "react";
 import { Content } from "@/types";
+import { useQuery, gql } from "@apollo/client";
 
-const randomWords = [
-	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse auctor, eros nec tincidunt luctus, nisl justo bibendum eros, nec fermentum orci elit nec sapien.",
-	"Nullam at nulla in nunc facilisis aliquam quis quis lorem.Nullam nec nunc nec justo ultricies fermentum.",
-	"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed non odio nec mi tincidunt blandit.",
-	"Nulla facilisi. Nullam nec nunc nec justo ultricies fermentum. Nulla facilisi. Nullam nec nunc nec justo ultricies fermentum.",
-	"Nullam nec nunc nec justo ultricies fermentum. Nulla facilisi. Nullam nec nunc nec justo ultricies fermentum."
-];
-const tags = ["exclusive", "featured", "new", "popular"];
-
-const contents: Content[] = [...Array(20)].map((_, index) => ({
-	id: index,
-	title: `Feature ${index + 1}`,
-	details: randomWords[index % randomWords.length],
-	image: `https://source.unsplash.com/random?sig=${index}`,
-	category: Math.random() > 0.5 ? "blog" : "video",
-	createdAt: new Date().toISOString(),
-	updatedAt: new Date().toISOString(),
-	keywords: ["feature", "close friends"],
-	tags: tags.filter(() => Math.random() > 0.5)
-}));
+const GET_CONTENTS = gql`
+	query GetContents {
+		contents {
+			id
+			title
+			details
+			image
+			createdAt
+			keywords
+			tags
+		}
+	}
+`;
 
 export default function ContentDisplay() {
+	const { data, loading, error } = useQuery(GET_CONTENTS);
+	console.log(data);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [sortKey, setSortKey] = useState<string>("createdAt");
 	const [filterKey, setFilterKey] = useState("all");
@@ -38,16 +34,20 @@ export default function ContentDisplay() {
 		threshold: 0.3
 	};
 
-	const fuse = new Fuse(contents, fuseOptions);
-
 	const filteredFeatures = useMemo(() => {
-		const searchResults = searchTerm ? fuse.search(searchTerm).map(result => result.item) : contents;
+		if (!data) return [];
+		const fuse = new Fuse(data.contents, fuseOptions);
+		const searchResults = searchTerm ? fuse.search(searchTerm).map(result => result.item) : data.contents;
 		return searchResults
-			.filter(content => filterKey === "all" || content.category.includes(filterKey))
-			.filter(content => tagFilterKeys.length === 0 || content.tags.some(tag => tagFilterKeys.includes(tag)))
-			.sort((a, b) => (sortKey === "createdAt" ? new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() : a.id - b.id));
-	}, [contents, searchTerm, sortKey, filterKey, tagFilterKeys]);
+			.filter((content: Content) => filterKey === "all" || content.category.includes(filterKey))
+			.filter((content: Content) => tagFilterKeys.length === 0 || content.tags.some(tag => tagFilterKeys.includes(tag)))
+			.sort((a: Content, b: Content) =>
+				sortKey === "createdAt" ? new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() : a.id - b.id
+			);
+	}, [data, searchTerm, sortKey, filterKey, tagFilterKeys]);
 
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p>Error: {error.message}</p>;
 	return (
 		<Container disableGutters>
 			<Filters
@@ -63,7 +63,7 @@ export default function ContentDisplay() {
 				}
 			/>
 			<Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 2 }}>
-				{filteredFeatures.map((feature, index) => (
+				{filteredFeatures.map((feature: Content) => (
 					<Card key={feature.id} sx={{ maxWidth: 345, bgcolor: "background.paper" }}>
 						<CardMedia component="img" height="140" image={feature.image} alt={feature.title} />
 						<CardContent>
@@ -75,7 +75,15 @@ export default function ContentDisplay() {
 							</Typography>
 							<Box sx={{ mt: 1, display: "flex", flexWrap: "wrap", gap: 0.5 }}>
 								{feature.tags.map(tag => (
-									<Chip key={tag} label={tag} variant="outlined" />
+									<Chip
+										key={tag}
+										label={tag}
+										variant="outlined"
+										sx={{
+											borderRadius: 1.5,
+											borderColor: "#E50914"
+										}}
+									/>
 								))}
 							</Box>
 						</CardContent>

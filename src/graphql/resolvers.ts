@@ -1,4 +1,15 @@
 const resolvers = {
+	Content: {
+		__resolveType(content: any) {
+			if (content.htmlContent) {
+				return "Blog";
+			} else if (content.videoUrl) {
+				return "Video";
+			}
+			return "Blog";
+		}
+	},
+
 	Query: {
 		blogs: async (_: any, __: any, context: { dataSources: { blogs: any } }) => {
 			try {
@@ -34,14 +45,25 @@ const resolvers = {
 				console.error("Failed to fetch video:", error);
 				throw new Error("Error fetching video.");
 			}
+		},
+
+		contents: async (_: any, __: any, context: { dataSources: { blogs: any; videos: any } }) => {
+			try {
+				const blogs = context.dataSources.blogs.getAllBlogs();
+				const videos = context.dataSources.videos.getAllVideos();
+				const contents = await Promise.all([blogs, videos]);
+				return contents.flat();
+			} catch (error) {
+				console.error("Failed to fetch content:", error);
+				throw new Error("Error fetching content.");
+			}
 		}
 	},
 
 	Mutation: {
 		createBlog: async (_: any, { input }: any, context: any) => {
 			try {
-				console.log("input:", input);
-				return await context.dataSources.blogs.createBlog(input);
+				return await Promise.all([context.dataSources.blogs.createBlog(input), context.dataSources.blogs.getAllBlogs()]);
 			} catch (error) {
 				console.error("Failed to create blog:", error);
 				throw new Error("Error creating blog.");

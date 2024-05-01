@@ -39,6 +39,7 @@ const typeDefs = `#graphql
     videos: [Video]
     blog(id: ID!): Blog
     video(id: ID!): Video
+    contents: [Content]
   }
 
   input NewBlogInput {

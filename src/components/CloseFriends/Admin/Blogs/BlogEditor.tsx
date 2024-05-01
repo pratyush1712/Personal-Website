@@ -5,7 +5,6 @@ import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails,
 import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
 import Image from "next/image";
-import { UploadBeforeHandler } from "suneditor-react/dist/types/upload";
 
 const CREATE_BLOG_MUTATION = gql`
 	mutation CreateBlog($input: NewBlogInput!) {
