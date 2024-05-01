@@ -59,7 +59,7 @@ export default async function CloseFriends({
 	const data = await getData(searchParams.searchTerm, searchParams.sortKey, searchParams.filterKey, searchParams.tagFilterKeys);
 	return (
 		<Container maxWidth="md" sx={{ minWidth: "100%", margin: "auto" }}>
-			<ContentDisplay params={searchParams} data={data} />
+			<ContentDisplay params={searchParams} data={data} admin={false} />
 		</Container>
 	);
 }

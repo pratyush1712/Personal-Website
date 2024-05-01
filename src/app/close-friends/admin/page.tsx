@@ -29,6 +29,7 @@ const getData = async (
 ) => {
 	const client = createApolloClient();
 	const { data } = await client.query({ query: GET_CONTENTS });
+	console.log(data);
 	const fuseOptions = {
 		keys: ["title", "details", "keywords"],
 		includeScore: true,
@@ -43,6 +44,7 @@ const getData = async (
 		.sort((a: Content, b: Content) =>
 			sortKey === "createdAt" ? new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime() : 0
 		);
+	console.log(filteredFeatures);
 	return filteredFeatures;
 };
 

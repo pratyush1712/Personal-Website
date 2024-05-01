@@ -11,7 +11,6 @@ import Link from "next/link";
 
 export default function CloseFriendsLayout({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<User | null>(null);
-	const path = usePathname();
 
 	const theme = createTheme(true, {
 		components: {
