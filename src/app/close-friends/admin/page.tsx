@@ -21,7 +21,7 @@ const GET_CONTENTS = gql`
 
 export const dynamic = "force-dynamic";
 
-export const getData = async (
+const getData = async (
 	searchTerm: string | null = "",
 	sortKey: string | null = "createdAt",
 	filterKey: string | null = "all",
