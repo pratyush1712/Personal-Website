@@ -12,6 +12,10 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        environment:
+          name: My Environment
+        env:
+          VARS_CONTEXT: ${{ toJson(vars) }}
         steps:
             - name: Check out Git repository
               uses: actions/checkout@v3
@@ -19,6 +23,15 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: 18
+            - name: Set env vars from vars context JSON
+              run: |
+                  echo "$VARS_CONTEXT" | 
+                  jq -r 'to_entries | 
+                  .[] | 
+                  "\(.key)=\(.value)"' >> $GITHUB_ENV
+            - name: Check env
+              run: printenv
+
             - name: Set up pnpm
               uses: pnpm/action-setup@v2
               with:
