@@ -4,7 +4,7 @@ import { Container, Button, Typography } from "@mui/material";
 
 export default function Login() {
 	const handleLogin = async () => {
-		await signIn("google", { callbackUrl: "/close-friends" });
+		await signIn("google", { callbackUrl: process.env.NODE_ENV !== "production" ? "/close-friends" : "/"});
 	};
 
 	return (
