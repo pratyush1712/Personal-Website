@@ -3,7 +3,13 @@ import GoogleProvider from "next-auth/providers/google";
 import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 
-const validEmails = new Set(["ps2245@cornell.edu", "pratyushsudhakar03@gmail.com"]);
+const validEmails = new Set([
+	"ps2245@cornell.edu",
+	"pratyushsudhakar03@gmail.com",
+	"atl82@cornell.edu",
+	"ara227@cornell.edu",
+	"vg245@cornell.edu"
+]);
 
 export const config = {
 	pages: {
