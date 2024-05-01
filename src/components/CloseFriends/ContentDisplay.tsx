@@ -22,7 +22,6 @@ const GET_CONTENTS = gql`
 
 export default function ContentDisplay() {
 	const { data, loading, error } = useQuery(GET_CONTENTS);
-	console.log(data);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [sortKey, setSortKey] = useState<string>("createdAt");
 	const [filterKey, setFilterKey] = useState("all");
@@ -39,7 +38,7 @@ export default function ContentDisplay() {
 		const fuse = new Fuse(data.contents, fuseOptions);
 		const searchResults = searchTerm ? fuse.search(searchTerm).map(result => result.item) : data.contents;
 		return searchResults
-			.filter((content: Content) => filterKey === "all" || content.category.includes(filterKey))
+			.filter((content: Content) => filterKey === "all" || content?.__typename?.toLocaleLowerCase().includes(filterKey))
 			.filter((content: Content) => tagFilterKeys.length === 0 || content.tags.some(tag => tagFilterKeys.includes(tag)))
 			.sort((a: Content, b: Content) =>
 				sortKey === "createdAt" ? new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() : a.id - b.id

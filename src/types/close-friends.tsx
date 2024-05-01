@@ -1,5 +1,3 @@
-export type ContentCategory = "blog" | "video";
-
 export type Content = {
 	id: number;
 	title: string;
@@ -7,7 +5,8 @@ export type Content = {
 	image: string;
 	createdAt: string;
 	updatedAt?: string;
-	category: ContentCategory;
+	category: string;
 	keywords: string[]; // to improve search
 	tags: string[]; // to categorize content
+	__typename?: string;
 };
