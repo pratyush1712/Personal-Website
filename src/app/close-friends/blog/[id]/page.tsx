@@ -31,14 +31,14 @@ const GET_BLOG = gql`
 	}
 `;
 
-export async function getData(params: { id: string }) {
+const getData = async (params: { id: string }) => {
 	const client = createClient();
 	const { data } = await client.query({
 		query: GET_BLOG,
 		variables: { id: params.id }
 	});
 	return data;
-}
+};
 
 export default async function BlogDetails({ params }: { params: { id: string } }) {
 	const data = await getData(params);
