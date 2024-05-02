@@ -1,5 +1,5 @@
 import { Content } from "@/types";
-import { Box, Button, Container, Divider, Paper, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,7 +14,10 @@ export default function BlogView({ blog }: { blog: Content }) {
 
 	return (
 		<Container sx={{ minWidth: "100%" }}>
-			<Typography variant="h4" sx={{ p: 3 }}>
+			<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
+				<Link href="/">Back to Home</Link>
+			</Button>
+			<Typography variant="h4" sx={{ px: 3, pb: 3, pt: 1 }}>
 				{blog.title}
 				<Typography variant="subtitle2" component="p">
 					<strong>Tags</strong>: {blog.tags.join(", ")}
@@ -54,7 +57,7 @@ export default function BlogView({ blog }: { blog: Content }) {
 						{blog.title}
 					</Typography>
 				</Container>
-				<Container disableGutters sx={{ my: 2, px: 3 }}>
+				<Container disableGutters sx={{ mt: 2, px: 3 }}>
 					<Typography variant="body1" dangerouslySetInnerHTML={{ __html: blog.htmlContent! }}></Typography>
 				</Container>
 			</Container>

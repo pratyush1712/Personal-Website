@@ -1,4 +1,5 @@
 import "../globals.css";
+import "@/styles/scrollbar.css";
 
 export const metadata = {
 	title: "Pratyush's Personal Blog and Video Sharing Platform",
