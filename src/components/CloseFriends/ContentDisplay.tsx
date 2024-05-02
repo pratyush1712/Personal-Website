@@ -20,13 +20,15 @@ export default function ContentDisplay({
 	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
 	let url: string;
 	if (process.env.NODE_ENV === "production") {
-		url = `https://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}/admin`;
+		url = `https://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`;
 	} else {
 		url = `http://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}/close-friends`;
 	}
 
-	if (admin && process.env.NODE_ENV === "development") {
+	if (admin) {
 		url += "/admin";
+	} else if (process.env.NODE_ENV === "production") {
+		url += "/home";
 	}
 
 	const contentURL = process.env.NODE_ENV === "production" ? "/" : "close-friends/";
