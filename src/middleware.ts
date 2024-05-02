@@ -58,8 +58,12 @@ export default async function middleware(request: NextRequest) {
 
 	// Handling requests intended for private.pratyushsudhakar.com
 	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`) {
+		console.log(url);
 		if (!session && url.pathname !== "/login") {
 			return NextResponse.redirect(new URL("/login", url));
+		}
+		if (url.pathname === "/home") {
+			return NextResponse.rewrite(new URL(`/close-friends${url.search}`, url));
 		}
 		if (
 			url.pathname !== "/login" &&
