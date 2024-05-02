@@ -4,7 +4,6 @@ import createTheme from "@/ui/Theme";
 import { getSession, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { User } from "@/types";
-import "@mux/mux-player/themes/minimal";
 import Video from "@/ui/Video";
 import Link from "next/link";
 
