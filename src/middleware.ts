@@ -62,7 +62,7 @@ export default async function middleware(request: NextRequest) {
 		if (!session && url.pathname !== "/login") {
 			return NextResponse.redirect(new URL("/login", url));
 		}
-		if (url.pathname === "/home") {
+		if (url.pathname.includes("/home")) {
 			return NextResponse.rewrite(new URL(`/close-friends${url.search}`, url));
 		}
 		if (
