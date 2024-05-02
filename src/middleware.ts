@@ -93,7 +93,7 @@ export default async function middleware(request: NextRequest) {
 			!url.pathname.startsWith("/public/")
 		) {
 			// If authenticated, serve the content from /close-friends. private.pratyushsudhakar.com/* -> pratyushsudhakar.com/close-friends/*
-			return NextResponse.rewrite(new URL(`/close-friends${url.pathname}`, url));
+			return NextResponse.rewrite(new URL(`/close-friends${url.pathname + url.search}`, url));
 		}
 	}
 
