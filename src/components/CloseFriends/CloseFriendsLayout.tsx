@@ -31,6 +31,13 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 		});
 	}, []);
 
+	let adminURL: string;
+	if (process.env.NODE_ENV === "production") {
+		adminURL = `https://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`;
+	} else {
+		adminURL = `http://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}/close-friends`;
+	}
+
 	if (!user) return null;
 
 	return (
@@ -80,7 +87,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 				</Container>
 				{user.email === "pratyushsudhakar03@gmail.com" && (
 					<Box sx={{ position: "fixed", bottom: 12, right: 20, zIndex: 1500 }}>
-						<Link href={`${window.location.href.split("?")[0]}/admin`} passHref>
+						<Link href={`${adminURL}/admin`} passHref>
 							<Button
 								variant="contained"
 								color="primary"
