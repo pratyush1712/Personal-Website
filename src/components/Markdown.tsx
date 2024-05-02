@@ -116,7 +116,7 @@ export function MarkdownImage(props: any) {
 	if (props?.className === "overview") {
 		return <Icon component="img" src={props.src} />;
 	}
-	return <Image {...props} width={props.style.width} height={props.style.height} />;
+	return <Image {...props} width={props.style.width} height={props.style.height} alt={props?.alt || ""} />;
 }
 
 export function MarkdownParagraph(props: any) {
