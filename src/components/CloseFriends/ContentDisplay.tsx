@@ -38,8 +38,6 @@ export default function ContentDisplay({
 		data = data.map((feature: { item: Content }) => feature.item);
 	}
 
-	console.log(`${contentURL}`);
-
 	return (
 		<Container disableGutters>
 			<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={url} />
