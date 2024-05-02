@@ -77,14 +77,3 @@ a {
 		color-scheme: dark;
 	}
 }
-
-/* Snow Theme */
-.ql-snow.ql-toolbar {
-	background: #eaecec;
-	border-top-left-radius: 0.2em;
-	border-top-right-radius: 0.2em;
-}
-
-.ql-editor {
-	min-height: 24em;
-}

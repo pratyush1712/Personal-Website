@@ -1,0 +1,13 @@
+@import "~suneditor/dist/css/suneditor.min.css";
+.se-dialog-content {
+	color: "white";
+	background: "white";
+}
+
+.sun-editor input,
+.sun-editor select,
+.sun-editor textarea {
+	color: "white";
+	background: "white";
+	background-color: white;
+}

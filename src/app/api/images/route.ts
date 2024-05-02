@@ -1,6 +1,6 @@
 import { S3Client } from "@aws-sdk/client-s3";
-import { NextResponse } from "next/server";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { NextRequest, NextResponse } from "next/server";
+import { PutObjectCommand, ListObjectsCommand } from "@aws-sdk/client-s3";
 
 const Bucket = process.env.AWS_BUCKET_NAME as string;
 const s3 = new S3Client({
@@ -10,6 +10,36 @@ const s3 = new S3Client({
 		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string
 	}
 });
+
+const processData = (response: any) => {
+	const data = response.map((item: { Key: string }) => {
+		const tag = item.Key?.split("/")[0];
+		const src = `https://${Bucket}.s3.amazonaws.com/${item.Key}`;
+		const alt = item.Key?.split("/")[1];
+		const name = item.Key?.split("/")[1];
+		return { tag, src, alt, name };
+	});
+	return data;
+};
+
+export async function GET(request: NextRequest) {
+	const type = request.nextUrl.searchParams.get("type");
+	const allowedImagePrefixes = ["editor", "poster", "blog"];
+	let response;
+	if (type === "images") {
+		response = await Promise.all(
+			allowedImagePrefixes.map(async prefix => {
+				const data = await s3.send(new ListObjectsCommand({ Bucket, Prefix: prefix }));
+				return data.Contents;
+			})
+		);
+		response = response.flat();
+	} else {
+		response = await s3.send(new ListObjectsCommand({ Bucket }));
+		response = response.Contents;
+	}
+	return NextResponse.json({ statusCode: 200, result: processData(response) });
+}
 
 export async function POST(request: Request) {
 	const formData = await request.formData();

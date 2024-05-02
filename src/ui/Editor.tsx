@@ -1,43 +1,128 @@
 "use client";
 import { useRef } from "react";
+import dynamic from "next/dynamic";
+
 const SunEditor = dynamic(() => import("suneditor-react"), { ssr: false });
 import SunEditorCore from "suneditor/src/lib/core";
 import "suneditor/dist/css/suneditor.min.css";
-import dynamic from "next/dynamic";
-import { UploadBeforeHandler, UploadBeforeReturn, UploadInfo } from "suneditor-react/dist/types/upload";
+import { UploadBeforeHandler, UploadInfo } from "suneditor-react/dist/types/upload";
+
+import katex from "katex";
+import "katex/dist/katex.min.css";
 
 const MyComponent = (props: any) => {
 	const editor = useRef<SunEditorCore>();
-
 	const options = [
+		// default
 		["undo", "redo"],
-		["font", "fontSize", "formatBlock"],
+		[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
 		["bold", "underline", "italic", "strike", "subscript", "superscript"],
+		["fontColor", "hiliteColor", "textStyle"],
 		["removeFormat"],
-		["fontColor", "hiliteColor"],
 		["outdent", "indent"],
-		["align", "horizontalRule", "list", "table"],
-		["link", "image", "video"],
-		["fullScreen", "showBlocks", "codeView"],
-		["preview", "print"],
-		["save"]
+		["align", "horizontalRule", "list", "lineHeight"],
+		["-right", ":i-More Misc-default.more_vertical", "fullScreen", "showBlocks", "codeView", "preview", "print", "save", "template"],
+		["-right", ":r-More Rich-default.more_plus", "table", "math", "imageGallery"],
+		["-right", "image", "video", "audio", "link"],
+		// (min-width: 992)
+		[
+			"%992",
+			[
+				["undo", "redo"],
+				[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
+				["bold", "underline", "italic", "strike"],
+				[":t-More Text-default.more_text", "subscript", "superscript", "fontColor", "hiliteColor", "textStyle"],
+				["removeFormat"],
+				["outdent", "indent"],
+				["align", "horizontalRule", "list", "lineHeight"],
+				[
+					"-right",
+					":i-More Misc-default.more_vertical",
+					"fullScreen",
+					"showBlocks",
+					"codeView",
+					"preview",
+					"print",
+					"save",
+					"template"
+				],
+				["-right", ":r-More Rich-default.more_plus", "table", "link", "image", "video", "audio", "math", "imageGallery"]
+			]
+		],
+		// (min-width: 767)
+		[
+			"%767",
+			[
+				["undo", "redo"],
+				[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
+				[
+					":t-More Text-default.more_text",
+					"bold",
+					"underline",
+					"italic",
+					"strike",
+					"subscript",
+					"superscript",
+					"fontColor",
+					"hiliteColor",
+					"textStyle"
+				],
+				["removeFormat"],
+				["outdent", "indent"],
+				[":e-More Line-default.more_horizontal", "align", "horizontalRule", "list", "lineHeight"],
+				[":r-More Rich-default.more_plus", "table", "link", "image", "video", "audio", "math", "imageGallery"],
+				[
+					"-right",
+					":i-More Misc-default.more_vertical",
+					"fullScreen",
+					"showBlocks",
+					"codeView",
+					"preview",
+					"print",
+					"save",
+					"template"
+				]
+			]
+		],
+		// (min-width: 480)
+		[
+			"%480",
+			[
+				["undo", "redo"],
+				[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
+				[
+					":t-More Text-default.more_text",
+					"bold",
+					"underline",
+					"italic",
+					"strike",
+					"subscript",
+					"superscript",
+					"fontColor",
+					"hiliteColor",
+					"textStyle",
+					"removeFormat"
+				],
+				[":e-More Line-default.more_horizontal", "outdent", "indent", "align", "horizontalRule", "list", "lineHeight"],
+				[":r-More Rich-default.more_plus", "table", "link", "image", "video", "audio", "math", "imageGallery"],
+				[
+					"-right",
+					":i-More Misc-default.more_vertical",
+					"fullScreen",
+					"showBlocks",
+					"codeView",
+					"preview",
+					"print",
+					"save",
+					"template"
+				]
+			]
+		]
 	];
 
-	const handleImageUpload = (
-		targetImgElement: HTMLImageElement,
-		index: number,
-		state: "create" | "update" | "delete",
-		imageInfo: UploadInfo<HTMLImageElement>,
-		remainingFilesCount: number
-	) => {
-		if (!imageInfo?.name || !imageInfo?.src) {
-			return;
-		}
-		imageInfo.src = "https://privatewebsitecontent.s3.amazonaws.com/editor/" + imageInfo.name;
-		targetImgElement.src = imageInfo.src;
-		editor.current?.save();
-		return imageInfo;
-	};
+	function handleImageUploadError(errorMessage: any, result: any) {
+		console.log(errorMessage, result);
+	}
 
 	const getSunEditorInstance = (sunEditor: SunEditorCore) => {
 		editor.current = sunEditor;
@@ -49,24 +134,34 @@ const MyComponent = (props: any) => {
 		formData.append("type", "editor");
 		fetch("/api/images", { method: "POST", body: formData })
 			.then(response => response.json())
-			.then(data => true)
+			.then(data => {
+				console.log(data);
+				const url = data[0];
+				const name = files[0].name;
+				const size = files[0].size;
+				return uploadHandler({ result: [{ url, name, size }] });
+			})
 			.catch(error => {
 				console.error("Error:", error);
 				return false;
 			});
-		return true;
+		return undefined;
 	};
 
 	return (
 		<SunEditor
 			getSunEditorInstance={getSunEditorInstance}
 			defaultValue={props.defaultValue}
-			setOptions={{ buttonList: options }}
+			autoFocus={true}
+			setOptions={{
+				imageGalleryUrl: "/api/images?type=images",
+				katex: katex,
+				buttonList: options
+			}}
 			lang="en"
 			height="100vh"
 			placeholder="Please type here..."
 			onImageUploadBefore={handleImageUploadBefore}
-			onImageUpload={handleImageUpload}
 			onSave={props.onSave}
 			onChange={props.onChange}
 		/>
