@@ -3,6 +3,33 @@ import Filters from "./Filters";
 import { Content } from "@/types";
 import Link from "next/link";
 
+const CardDisplayContent = ({ feature, url }: { feature: Content; url: string }) => (
+	<Link href={`${url}/${feature?.__typename?.toLowerCase()}/${feature.id}`}>
+		<CardMedia component="img" height="140" image={feature.image} alt={feature.title} />
+		<CardContent>
+			<Typography variant="h5" component="div">
+				{feature.title}
+			</Typography>
+			<Typography variant="body2" color="text.secondary">
+				{feature.details}
+			</Typography>
+			<Box sx={{ mt: 1, display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+				{feature.tags.map((tag: string) => (
+					<Chip
+						key={tag}
+						label={tag}
+						variant="outlined"
+						sx={{
+							borderRadius: 1.5,
+							borderColor: "#E50914"
+						}}
+					/>
+				))}
+			</Box>
+		</CardContent>
+	</Link>
+);
+
 export default function ContentDisplay({
 	params,
 	data,
@@ -29,6 +56,8 @@ export default function ContentDisplay({
 		url += "/admin";
 	}
 
+	const contentURL = admin ? url.replace("/admin", "") : url;
+
 	// data is an array whose contents is sometimes wrapped in item
 	if (data[0]?.item) {
 		data = data.map((feature: { item: Content }) => feature.item);
@@ -40,30 +69,7 @@ export default function ContentDisplay({
 			<Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 2 }}>
 				{data.map((feature: Content) => (
 					<Card key={feature.id} sx={{ maxWidth: 345, bgcolor: "background.paper" }}>
-						<Link key={feature.id} href={`${url}/${feature?.__typename?.toLocaleLowerCase()}/${feature.id}`}>
-							<CardMedia component="img" height="140" image={feature.image} alt={feature.title} />
-							<CardContent>
-								<Typography variant="h5" component="div">
-									{feature.title}
-								</Typography>
-								<Typography variant="body2" color="text.secondary">
-									{feature.details}
-								</Typography>
-								<Box sx={{ mt: 1, display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-									{feature.tags.map((tag: string) => (
-										<Chip
-											key={tag}
-											label={tag}
-											variant="outlined"
-											sx={{
-												borderRadius: 1.5,
-												borderColor: "#E50914"
-											}}
-										/>
-									))}
-								</Box>
-							</CardContent>
-						</Link>
+						<CardDisplayContent feature={feature} url={contentURL} />
 					</Card>
 				))}
 			</Box>
