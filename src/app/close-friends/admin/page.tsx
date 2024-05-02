@@ -29,7 +29,6 @@ const getData = async (
 ) => {
 	const client = createApolloClient();
 	const { data } = await client.query({ query: GET_CONTENTS });
-	console.log(data);
 	const fuseOptions = {
 		keys: ["title", "details", "keywords"],
 		includeScore: true,
@@ -37,14 +36,17 @@ const getData = async (
 	};
 
 	const fuse = new Fuse(data.contents, fuseOptions);
-	const searchResults = searchTerm ? fuse.search(searchTerm) : data.contents;
+	let searchResults = searchTerm ? fuse.search(searchTerm) : data.contents;
+	if (searchResults[0]?.item) {
+		searchResults = searchResults.map((result: { item: Content }) => result.item);
+	}
+
 	const filteredFeatures = searchResults
 		.filter((content: Content) => filterKey === "all" || content?.__typename?.toLocaleLowerCase().includes(filterKey!))
 		.filter((content: Content) => tagFilterKeys?.length === 0 || content.tags.some(tag => tagFilterKeys?.includes(tag)))
 		.sort((a: Content, b: Content) =>
 			sortKey === "createdAt" ? new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime() : 0
 		);
-	console.log(filteredFeatures);
 	return filteredFeatures;
 };
 
@@ -59,7 +61,6 @@ export default async function AdminDashboard({
 	};
 }) {
 	const data = await getData(searchParams.searchTerm, searchParams.sortKey, searchParams.filterKey, searchParams.tagFilterKeys);
-
 	return (
 		<Container maxWidth="lg">
 			<Typography variant="h4" sx={{ my: 4 }}>

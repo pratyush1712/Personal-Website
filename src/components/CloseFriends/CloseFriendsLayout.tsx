@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { User } from "@/types";
 import "@mux/mux-player/themes/minimal";
 import Video from "@/ui/Video";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function CloseFriendsLayout({ children }: { children: React.ReactNode }) {
@@ -81,7 +80,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 				</Container>
 				{user.email === "pratyushsudhakar03@gmail.com" && (
 					<Box sx={{ position: "fixed", bottom: 12, right: 20, zIndex: 1500 }}>
-						<Link href={`${window.location.href}/admin`} passHref>
+						<Link href={`${window.location.href.split("?")[0]}/admin`} passHref>
 							<Button
 								variant="contained"
 								color="primary"

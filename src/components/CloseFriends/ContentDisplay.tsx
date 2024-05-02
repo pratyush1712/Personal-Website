@@ -18,7 +18,7 @@ export default function ContentDisplay({
 	admin?: boolean;
 }) {
 	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
-	let url;
+	let url: string;
 	if (process.env.NODE_ENV === "production") {
 		url = `https://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`;
 	} else {

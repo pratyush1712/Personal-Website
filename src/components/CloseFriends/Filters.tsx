@@ -15,11 +15,10 @@ interface FiltersProps {
 export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys, url }: FiltersProps) {
 	const router = useRouter();
 	const [searchTermState, setSearchTermState] = useState<string>(searchTerm! || "");
-	const [sortKeyState, setSortKeyState] = useState<string>(sortKey! || "createdAt");
-	const [filterKeyState, setFilterKeyState] = useState<string>(filterKey! || "all");
+	const [sortKeyState, setSortKeyState] = useState<string>(sortKey! || "");
+	const [filterKeyState, setFilterKeyState] = useState<string>(filterKey! || "");
 	const [tagFilterKeysState, setTagFilterKeysState] = useState<string[]>(tagFilterKeys! || []);
 	const [isPending, startTransition] = useTransition();
-	console.log(searchTermState, sortKeyState, filterKeyState, tagFilterKeysState);
 	const defaultTags = ["exclusive", "featured", "new", "popular"];
 	const tags = [...Array.from(tagFilterKeysState), ...defaultTags];
 
@@ -37,16 +36,19 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 
 	useEffect(() => {
 		const URL = new URLSearchParams(window.location.search);
-		URL.set("searchTerm", searchTermState);
-		URL.set("sortKey", sortKeyState);
-		URL.set("filterKey", filterKeyState);
-		URL.set("tagFilterKeys", tagFilterKeysState?.join(","));
+		URL.delete("searchTerm");
+		URL.delete("sortKey");
+		URL.delete("filterKey");
+		URL.delete("tagFilterKeys");
+		if (searchTermState !== "" && searchTermState !== null) URL.set("searchTerm", searchTermState);
+		if (sortKeyState !== "createdAt" && sortKeyState !== null) URL.set("sortKey", sortKeyState);
+		if (filterKeyState !== "all" && filterKeyState !== null) URL.set("filterKey", filterKeyState);
+		if (tagFilterKeysState.length !== 0 && tagFilterKeysState !== null) URL.set("tagFilterKeys", tagFilterKeysState?.join(","));
 		startTransition(() => {
 			router.replace(`${url}?${URL.toString()}`);
 		});
 	}, [searchTermState, sortKeyState, filterKeyState, tagFilterKeysState]);
 
-	console.log(tagFilterKeysState);
 	return (
 		<Box sx={{ display: "flex", flexDirection: "row", my: 2 }}>
 			<TextField

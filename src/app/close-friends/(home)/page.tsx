@@ -36,7 +36,11 @@ const getData = async (
 	};
 
 	const fuse = new Fuse(data.contents, fuseOptions);
-	const searchResults = searchTerm ? fuse.search(searchTerm) : data.contents;
+	let searchResults = searchTerm ? fuse.search(searchTerm) : data.contents;
+	if (searchResults[0]?.item) {
+		searchResults = searchResults.map((result: { item: Content }) => result.item);
+	}
+
 	const filteredFeatures = searchResults
 		.filter((content: Content) => filterKey === "all" || content?.__typename?.toLocaleLowerCase().includes(filterKey!))
 		.filter((content: Content) => tagFilterKeys?.length === 0 || content.tags.some(tag => tagFilterKeys?.includes(tag)))
