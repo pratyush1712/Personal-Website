@@ -1,12 +1,10 @@
 "use client";
 import { useRef } from "react";
 import dynamic from "next/dynamic";
-
 const SunEditor = dynamic(() => import("suneditor-react"), { ssr: false });
 import SunEditorCore from "suneditor/src/lib/core";
 import "suneditor/dist/css/suneditor.min.css";
-import { UploadBeforeHandler, UploadInfo } from "suneditor-react/dist/types/upload";
-
+import { UploadBeforeHandler } from "suneditor-react/dist/types/upload";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 
