@@ -125,6 +125,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 								blogUpdate?.image && (
 									<Box sx={{ width: 400, height: 287, position: "relative" }}>
 										<Image
+											unoptimized={true}
 											src={blogUpdate?.image}
 											alt={blogUpdate?.title}
 											layout="fill"
