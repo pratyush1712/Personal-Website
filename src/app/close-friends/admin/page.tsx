@@ -20,7 +20,6 @@ const GET_CONTENTS = gql`
 `;
 
 export const dynamic = "force-dynamic";
-export const revalidate = 5;
 
 const getData = async (
 	searchTerm: string | null = "",
