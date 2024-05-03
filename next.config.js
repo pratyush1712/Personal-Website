@@ -9,14 +9,39 @@ const nextConfig = {
 		esmExternals: true
 	},
 	images: {
-		domains: [
-			"i.scdn.co",
-			"images.unsplash.com",
-			"upload.wikimedia.org",
-			"source.unsplash.com",
-			"privatewebsitecontent.s3.amazonaws.com"
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "i.scdn.co"
+			},
+			{
+				protocol: "https",
+				hostname: "images.unsplash.com"
+			},
+			{
+				protocol: "https",
+				hostname: "upload.wikimedia.org"
+			},
+			{
+				protocol: "https",
+				hostname: "source.unsplash.com"
+			},
+			{
+				protocol: "https",
+				hostname: "privatewebsitecontent.s3.amazonaws.com"
+			}
 		]
 	},
+
+	// images: {
+	// 	domains: [
+	// 		"i.scdn.co",
+	// 		"images.unsplash.com",
+	// 		"upload.wikimedia.org",
+	// 		"source.unsplash.com",
+	// 		"privatewebsitecontent.s3.amazonaws.com"
+	// 	]
+	// },
 	async headers() {
 		return [
 			{
