@@ -60,10 +60,13 @@ export default async function middleware(request: NextRequest) {
 		if (!session && url.pathname !== "/login") {
 			return NextResponse.redirect(new URL("/login", url));
 		}
-		if (url.pathname.includes("/home")) {
+		else if (url.pathname.includes("/home")) {
 			return NextResponse.rewrite(new URL(`/close-friends${url.search}`, url));
 		}
-		if (
+		else if (url.pathname === "/") {
+			return NextResponse.redirect(new URL("/home", url));
+		}
+		else if (
 			url.pathname !== "/login" &&
 			!url.pathname.startsWith("/_next/") &&
 			!url.pathname.startsWith("/_vercel/") &&
