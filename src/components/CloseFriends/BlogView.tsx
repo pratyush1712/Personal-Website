@@ -46,7 +46,6 @@ export default function BlogView({ blog }: { blog: Content }) {
 						objectFit="cover"
 						width={800}
 						height={500}
-						quality={100}
 						style={{
 							borderRadius: 2,
 							padding: 0,
