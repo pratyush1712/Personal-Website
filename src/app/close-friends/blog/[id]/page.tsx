@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { BlogView } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
-import createClient from "@/graphql/apolloClient";
+import { getClient } from "@/graphql/apolloClient";
 import { Metadata, ResolvingMetadata } from "next/types";
 
 type Props = { params: { id: string } };
@@ -32,7 +32,7 @@ const GET_BLOG = gql`
 `;
 
 const getData = async (params: { id: string }) => {
-	const client = createClient();
+	const client = getClient();
 	const { data } = await client.query({
 		query: GET_BLOG,
 		variables: { id: params.id }

@@ -2,7 +2,7 @@
 import { Box, Drawer, Toolbar, AppBar, Tab, Tabs, useTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import Link from "next/link";
 import createTheme from "@/ui/Theme";
-import { ApolloProvider } from "@/graphql/apolloProvider";
+import ApolloProvider from "@/graphql/apolloProvider";
 
 import { useEffect, useState } from "react";
 

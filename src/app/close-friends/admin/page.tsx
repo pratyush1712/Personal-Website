@@ -3,7 +3,7 @@ import { ContentDisplay } from "@/components/CloseFriends";
 import Fuse from "fuse.js";
 import { Content } from "@/types";
 import { gql } from "@apollo/client";
-import createApolloClient from "@/graphql/apolloClient";
+import { getClient } from "@/graphql/apolloClient";
 
 const GET_CONTENTS = gql`
 	query GetContents {
@@ -27,7 +27,7 @@ const getData = async (
 	filterKey: string | null = "all",
 	tagFilterKeys: string[] | null = []
 ) => {
-	const client = createApolloClient();
+	const client = getClient();
 	const { data } = await client.query({ query: GET_CONTENTS });
 	const fuseOptions = {
 		keys: ["title", "details", "keywords"],
