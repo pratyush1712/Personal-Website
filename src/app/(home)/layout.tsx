@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import VSCodeLayout from "@/components/Layout";
+import VSCodeLayout from "@/components/HomeLayout/Layout";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "../globals.css";
 

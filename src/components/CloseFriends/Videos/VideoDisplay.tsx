@@ -1,33 +1,21 @@
-import { Content } from "@/types";
 import { Button, Container, Typography } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import Footer from "./Footer";
 
-export default function BlogView({ blog }: { blog: Content }) {
-	if (!blog) return null;
-	const formattedDate = new Date(blog.createdAt).toLocaleDateString("en-US", {
-		weekday: "long",
-		year: "numeric",
-		month: "long",
-		day: "numeric"
-	});
-
+export default function VideoDisplay() {
 	return (
 		<Container sx={{ minWidth: "100%" }}>
 			<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
-				<Link href="/">Back to Home</Link>
+				Back to Home
 			</Button>
 			<Typography variant="h4" sx={{ px: 3, pb: 3, pt: 1 }}>
-				{blog.title}
+				Video Title
 				<Typography variant="subtitle2" component="p">
-					<strong>Tags</strong>: {blog.tags.join(", ")}
+					<strong>Tags</strong>: Tag1, Tag2
 				</Typography>
 				<Typography variant="caption" component="p" fontStyle="italic">
-					Posted on {formattedDate}
+					Posted on 2021-10-10
 				</Typography>
 				<Typography variant="caption" component="p" fontStyle="italic">
-					{blog.details}
+					Video Description
 				</Typography>
 			</Typography>
 			<Container sx={{ minWidth: "100%" }}>
@@ -41,14 +29,11 @@ export default function BlogView({ blog }: { blog: Content }) {
 						justifyContent: "center"
 					}}
 				>
-					<Image
-						unoptimized={true}
-						src={blog.image}
-						alt={blog.title}
-						objectFit="cover"
+					<video
+						src="https://www.w3schools.com/html/mov_bbb.mp4"
+						controls
 						width={800}
 						height={500}
-						quality={100}
 						style={{
 							borderRadius: 2,
 							padding: 0,
@@ -56,14 +41,10 @@ export default function BlogView({ blog }: { blog: Content }) {
 						}}
 					/>
 					<Typography variant="caption" component="p" fontStyle="italic" align="center">
-						{blog.title}
+						Video Title
 					</Typography>
 				</Container>
-				<Container disableGutters sx={{ mt: 2, px: 3, pb: 10 }}>
-					<Typography variant="body1" dangerouslySetInnerHTML={{ __html: blog.htmlContent! }}></Typography>
-				</Container>
 			</Container>
-			<Footer darkMode={false} />
 		</Container>
 	);
 }

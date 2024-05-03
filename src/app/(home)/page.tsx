@@ -1,6 +1,6 @@
 import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
 import { links } from "@/utils/links";
-import PlayList from "@/components/PlayList";
+import PlayList from "@/components/HomeLayout/PlayList";
 
 export default function Home() {
 	const iconLink = (link: any) => {

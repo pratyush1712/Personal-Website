@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { BlogView } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
-import { getClient } from "@/graphql/apolloClient";
+import { getClient } from "@/graphql/client/apolloClient";
 import { Metadata, ResolvingMetadata } from "next/types";
 import { getServerSession } from "next-auth";
 

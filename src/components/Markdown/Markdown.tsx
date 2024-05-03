@@ -1,7 +1,7 @@
 import { Chip, Container, Divider, Link, ListItem, Paper, Typography } from "@mui/material";
 import { Table, TableCell, TableContainer } from "@mui/material";
 import { BiSolidHandRight } from "react-icons/bi";
-import Icon from "@/components/CustomIcon";
+import Icon from "@/components/Markdown/CustomIcon";
 import Image from "next/image";
 
 export function MarkdownLink(props: any) {

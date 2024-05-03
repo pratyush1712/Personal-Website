@@ -3,7 +3,7 @@ import { ContentDisplay } from "@/components/CloseFriends";
 import Fuse from "fuse.js";
 import { Content } from "@/types";
 import { gql } from "@apollo/client";
-import { getClient } from "@/graphql/apolloClient";
+import { getClient } from "@/graphql/client/apolloClient";
 import { getServerSession } from "next-auth";
 
 const GET_CONTENTS = gql`

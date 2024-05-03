@@ -45,7 +45,7 @@ export default function ContentDisplay({
 				{data.map((feature: Content) => (
 					<Card
 						key={feature.id}
-						sx={{ maxWidth: 345, bgcolor: "background.paper" }}
+						sx={{ maxWidth: "100%", bgcolor: "background.paper" }}
 						component={Link}
 						href={`${contentURL}${feature?.__typename?.toLowerCase()}/${feature.id}`}
 					>
