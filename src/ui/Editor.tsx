@@ -118,10 +118,6 @@ const MyComponent = (props: any) => {
 		]
 	];
 
-	function handleImageUploadError(errorMessage: any, result: any) {
-		console.log(errorMessage, result);
-	}
-
 	const getSunEditorInstance = (sunEditor: SunEditorCore) => {
 		editor.current = sunEditor;
 	};
@@ -133,7 +129,6 @@ const MyComponent = (props: any) => {
 		fetch("/api/images", { method: "POST", body: formData })
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
 				const url = data[0];
 				const name = files[0].name;
 				const size = files[0].size;

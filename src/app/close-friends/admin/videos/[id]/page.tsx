@@ -10,6 +10,7 @@ const GET_VIDEO = gql`
 			title
 			details
 			image
+			access
 			createdAt
 			updatedAt
 			keywords

@@ -4,13 +4,15 @@ import Fuse from "fuse.js";
 import { Content } from "@/types";
 import { gql } from "@apollo/client";
 import { getClient } from "@/graphql/apolloClient";
+import { getServerSession } from "next-auth";
 
 const GET_CONTENTS = gql`
-	query GetContents {
-		contents {
+	query GetContents($access: String!) {
+		accessContents(access: $access) {
 			id
 			title
 			details
+			access
 			image
 			createdAt
 			keywords
@@ -27,16 +29,18 @@ const getData = async (
 	filterKey: string | null = "all",
 	tagFilterKeys: string[] | null = []
 ) => {
+	const session = await getServerSession();
+	const access = !session ? "public" : session?.user?.email === "pratyushsudhakar03@gmail.com" ? "private" : "close-friends";
 	const client = getClient();
-	const { data } = await client.query({ query: GET_CONTENTS });
+	const { data } = await client.query({ query: GET_CONTENTS, variables: { access } });
 	const fuseOptions = {
 		keys: ["title", "details", "keywords"],
 		includeScore: true,
 		threshold: 0.3
 	};
 
-	const fuse = new Fuse(data.contents, fuseOptions);
-	let searchResults = searchTerm ? fuse.search(searchTerm) : data.contents;
+	const fuse = new Fuse(data.accessContents, fuseOptions);
+	let searchResults = searchTerm ? fuse.search(searchTerm) : data.accessContents;
 	if (searchResults[0]?.item) {
 		searchResults = searchResults.map((result: { item: Content }) => result.item);
 	}

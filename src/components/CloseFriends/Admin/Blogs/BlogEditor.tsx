@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Button, TextField, Typography, Paper, CircularProgress, Alert } from "@mui/material";
+import { Button, TextField, Typography, Paper, CircularProgress, Alert, Select, MenuItem, Menu } from "@mui/material";
 import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails, Divider } from "@mui/material";
 import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
@@ -12,6 +12,7 @@ const CREATE_BLOG_MUTATION = gql`
 			id
 			title
 			details
+			access
 			image
 			createdAt
 			updatedAt
@@ -28,6 +29,7 @@ const UPDATE_BLOG_MUTATION = gql`
 			id
 			title
 			details
+			access
 			image
 			createdAt
 			updatedAt
@@ -164,6 +166,18 @@ export default function BlogEditor({ blog }: { blog: any }) {
 								defaultValue={blogUpdate?.details}
 								onBlur={e => setBlogUpdate({ ...blogUpdate, details: e.target.value })}
 							/>
+							{/* a select for access level. one of 3 options: public, private, close-friends */}
+							<Select
+								fullWidth
+								variant="outlined"
+								label="Access"
+								defaultValue={blogUpdate?.access}
+								onChange={e => setBlogUpdate({ ...blogUpdate, access: e.target.value })}
+							>
+								<MenuItem value="public">Public</MenuItem>
+								<MenuItem value="private">Private</MenuItem>
+								<MenuItem value="close-friends">Close Friends</MenuItem>
+							</Select>
 							<Box display="flex" gap={2} sx={{ my: 2 }}>
 								<Autocomplete
 									multiple

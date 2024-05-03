@@ -3,12 +3,11 @@ import GoogleProvider from "next-auth/providers/google";
 import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 
-const validEmails = new Set([
+export const closeFriendsEmails = new Set([
 	"ps2245@cornell.edu",
 	"pratyushsudhakar03@gmail.com",
 	"atl82@cornell.edu",
-	"ara227@cornell.edu",
-	"vg245@cornell.edu"
+	"ara227@cornell.edu"
 ]);
 
 export const config = {
@@ -23,7 +22,7 @@ export const config = {
 	],
 	callbacks: {
 		async signIn({ user }) {
-			if (validEmails.has(user?.email!)) return true;
+			if (closeFriendsEmails.has(user?.email!)) return true;
 			return false;
 		}
 	},

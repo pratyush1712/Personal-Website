@@ -57,6 +57,18 @@ const resolvers = {
 				console.error("Failed to fetch content:", error);
 				throw new Error("Error fetching content.");
 			}
+		},
+
+		accessContents: async (_: any, { access }: { access: string }, context: { dataSources: { blogs: any; videos: any } }) => {
+			try {
+				const blogs = context.dataSources.blogs.getBlogsByAccess(access);
+				const videos = context.dataSources.videos.getVideosByAccess(access);
+				const contents = await Promise.all([blogs, videos]);
+				return contents.flat();
+			} catch (error) {
+				console.error("Failed to fetch content:", error);
+				throw new Error("Error fetching content.");
+			}
 		}
 	},
 

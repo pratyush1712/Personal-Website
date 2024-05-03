@@ -9,6 +9,7 @@ const GET_BLOG = gql`
 			id
 			title
 			details
+			access
 			image
 			createdAt
 			updatedAt

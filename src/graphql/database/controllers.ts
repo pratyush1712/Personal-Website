@@ -6,6 +6,7 @@ export interface BlogDocument {
 	_id: ObjectId;
 	title: string;
 	details: string;
+	access?: string;
 	image: string;
 	createdAt: string;
 	updatedAt?: string;
@@ -18,6 +19,7 @@ export interface VideoDocument {
 	_id: ObjectId;
 	title: string;
 	details: string;
+	access?: string;
 	image: string;
 	createdAt: string;
 	updatedAt?: string;
@@ -55,6 +57,7 @@ export class Blogs extends MongoDataSource<BlogDocument> {
 
 	async updateBlog(id: string, input: BlogDocument) {
 		try {
+			console.log("controller input:", input);
 			return await BlogModel.findByIdAndUpdate(id, input, { new: true });
 		} catch (error) {
 			throw new Error("Failed to update blog");
@@ -66,6 +69,20 @@ export class Blogs extends MongoDataSource<BlogDocument> {
 			return await BlogModel.findByIdAndDelete(id);
 		} catch (error) {
 			throw new Error("Failed to delete blog");
+		}
+	}
+
+	async getBlogsByAccess(access: string) {
+		try {
+			if (access === "private") {
+				return await BlogModel.find();
+			} else if (access === "close-friends") {
+				return await BlogModel.find({ access: { $ne: "private" } });
+			} else {
+				return await BlogModel.find({ access });
+			}
+		} catch (error) {
+			throw new Error("Failed to fetch blogs");
 		}
 	}
 }
@@ -108,6 +125,20 @@ export class Videos extends MongoDataSource<VideoDocument> {
 			return await VideoModel.findByIdAndDelete(id);
 		} catch (error) {
 			throw new Error("Failed to delete video");
+		}
+	}
+
+	async getVideosByAccess(access: string) {
+		try {
+			if (access === "private") {
+				return await VideoModel.find();
+			} else if (access === "close-friends") {
+				return await VideoModel.find({ access: { $ne: "private" } });
+			} else {
+				return await VideoModel.find({ access });
+			}
+		} catch (error) {
+			throw new Error("Failed to fetch videos");
 		}
 	}
 }

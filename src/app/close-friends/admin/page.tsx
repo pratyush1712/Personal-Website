@@ -11,6 +11,7 @@ const GET_CONTENTS = gql`
 			id
 			title
 			details
+			access
 			image
 			createdAt
 			keywords

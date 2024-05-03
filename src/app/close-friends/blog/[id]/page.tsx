@@ -3,6 +3,7 @@ import { BlogView } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
 import { getClient } from "@/graphql/apolloClient";
 import { Metadata, ResolvingMetadata } from "next/types";
+import { getServerSession } from "next-auth";
 
 type Props = { params: { id: string } };
 
@@ -21,6 +22,7 @@ const GET_BLOG = gql`
 			id
 			title
 			details
+			access
 			image
 			createdAt
 			updatedAt
@@ -32,11 +34,21 @@ const GET_BLOG = gql`
 `;
 
 const getData = async (params: { id: string }) => {
+	const session = await getServerSession();
 	const client = getClient();
 	const { data } = await client.query({
 		query: GET_BLOG,
 		variables: { id: params.id }
 	});
+	if (!data.blog.access) throw new Error("Unauthorized");
+	if (data.blog.access !== "public") {
+		if (!session) throw new Error("Unauthorized");
+		if (data.blog.access === "private") {
+			if (session.user && session.user.email === "pratyushsudhakar03@gmail.com") return data;
+			throw new Error("Unauthorized");
+		}
+		return data;
+	}
 	return data;
 };
 

@@ -1,6 +1,7 @@
 const typeDefs = `#graphql
   interface Content {
     id: ID!
+    access: String  # public, close-friends, private
     title: String!
     details: String!
     image: String!
@@ -13,6 +14,7 @@ const typeDefs = `#graphql
   type Blog implements Content {
     id: ID!
     title: String!
+    access: String  # public, close-friends, private
     details: String!
     image: String!
     createdAt: String!
@@ -25,6 +27,7 @@ const typeDefs = `#graphql
   type Video implements Content {
     id: ID!
     title: String!
+    access: String  # public, close-friends, private
     details: String!
     image: String!
     createdAt: String!
@@ -40,11 +43,13 @@ const typeDefs = `#graphql
     blog(id: ID!): Blog
     video(id: ID!): Video
     contents: [Content]
+    accessContents(access: String!): [Content]
   }
 
   input NewBlogInput {
     title: String!
     details: String!
+    access: String!  # public, close-friends, private
     image: String!
     createdAt: String!
     updatedAt: String
@@ -56,6 +61,7 @@ const typeDefs = `#graphql
   input NewVideoInput {
     title: String!
     details: String!
+    access: String!  # public, close-friends, private
     image: String!
     createdAt: String!
     updatedAt: String

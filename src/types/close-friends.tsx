@@ -2,6 +2,7 @@ export type Content = {
 	id: number;
 	title: string;
 	details: string;
+	access?: string;
 	image: string;
 	createdAt: string;
 	updatedAt?: string;

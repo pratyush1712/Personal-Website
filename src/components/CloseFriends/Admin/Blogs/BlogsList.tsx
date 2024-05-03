@@ -13,6 +13,7 @@ const GET_BLOGS = gql`
 			id
 			title
 			details
+			access
 			image
 			createdAt
 			updatedAt
@@ -85,7 +86,12 @@ export default function BlogList() {
 					<Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
 						<CardContent sx={{ flex: "1 0 auto" }}>
 							<Typography variant="h5" gutterBottom>
-								{blog.title}
+								{blog.title}{" "}
+								{blog?.access === "private" && (
+									<Typography variant="body2" color="error">
+										[Private]
+									</Typography>
+								)}
 							</Typography>
 							<Typography variant="body2">{blog.details}</Typography>
 							<Typography variant="caption" color="textSecondary">

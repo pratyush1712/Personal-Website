@@ -31,6 +31,7 @@ const CREATE_VIDEO = gql`
 			id
 			title
 			details
+			access
 			image
 			createdAt
 			updatedAt
@@ -47,6 +48,7 @@ const UPDATE_VIDEO = gql`
 			id
 			title
 			details
+			access
 			image
 			createdAt
 			updatedAt

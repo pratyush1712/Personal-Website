@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+const accessEnum = ["public", "private", "close-friends"];
+
 const blogSchema = new Schema({
 	title: { type: String, required: [true, "Title is required"] },
 	details: { type: String, required: [true, "Details are required"] },
+	access: { type: String, enum: accessEnum, required: [true, "Access is required"] },
 	image: { type: String, required: [true, "Image URL is required"] },
 	createdAt: { type: String, required: [true, "Creation date is required"] },
 	updatedAt: { type: String },
@@ -15,6 +18,7 @@ const blogSchema = new Schema({
 const videoSchema = new Schema({
 	title: { type: String, required: [true, "Title is required"] },
 	details: { type: String, required: [true, "Details are required"] },
+	access: { type: String, enum: accessEnum, required: [true, "Access is required"] },
 	image: { type: String, required: [true, "Image URL is required"] },
 	createdAt: { type: String, required: [true, "Creation date is required"] },
 	updatedAt: { type: String },
