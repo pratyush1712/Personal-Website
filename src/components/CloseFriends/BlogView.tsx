@@ -41,11 +41,13 @@ export default function BlogView({ blog }: { blog: Content }) {
 					}}
 				>
 					<Image
+						unoptimized={true}
 						src={blog.image}
 						alt={blog.title}
 						objectFit="cover"
 						width={800}
 						height={500}
+						quality={100}
 						style={{
 							borderRadius: 2,
 							padding: 0,
