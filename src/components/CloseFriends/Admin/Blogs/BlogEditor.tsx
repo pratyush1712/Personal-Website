@@ -68,8 +68,8 @@ export default function BlogEditor({ blog }: { blog: any }) {
 			});
 			const data = await response.json();
 			if (response.ok) {
-				setImageLoading(false);
 				setBlogUpdate({ ...blogUpdate, image: data[0] });
+				setImageLoading(false);
 			} else {
 				throw new Error(data.message || "Failed to upload image");
 			}
