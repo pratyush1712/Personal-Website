@@ -9,7 +9,6 @@ import Image from "next/image";
 const CREATE_BLOG_MUTATION = gql`
 	mutation CreateBlog($input: NewBlogInput!) {
 		createBlog(input: $input) {
-			id
 			title
 			details
 			image
