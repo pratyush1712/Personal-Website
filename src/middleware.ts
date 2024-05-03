@@ -59,14 +59,11 @@ export default async function middleware(request: NextRequest) {
 	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`) {
 		if (!session && url.pathname !== "/login" && url.pathname.includes("/blog/") && url.pathname.includes("/video/")) {
 			return NextResponse.redirect(new URL("/login", url));
-		}
-		else if (url.pathname.includes("/home")) {
+		} else if (url.pathname.includes("/home")) {
 			return NextResponse.rewrite(new URL(`/close-friends${url.search}`, url));
-		}
-		else if (url.pathname === "/") {
+		} else if (url.pathname === "/") {
 			return NextResponse.redirect(new URL("/home", url));
-		}
-		else if (
+		} else if (
 			url.pathname !== "/login" &&
 			!url.pathname.startsWith("/_next/") &&
 			!url.pathname.startsWith("/_vercel/") &&
