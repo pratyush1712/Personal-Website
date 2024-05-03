@@ -2,6 +2,7 @@ import { Content } from "@/types";
 import { Button, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "./Footer";
 
 export default function BlogView({ blog }: { blog: Content }) {
 	if (!blog) return null;
@@ -29,7 +30,7 @@ export default function BlogView({ blog }: { blog: Content }) {
 					{blog.details}
 				</Typography>
 			</Typography>
-			<Container>
+			<Container sx={{ minWidth: "100%" }}>
 				<Container
 					sx={{
 						width: "100%",
@@ -58,10 +59,11 @@ export default function BlogView({ blog }: { blog: Content }) {
 						{blog.title}
 					</Typography>
 				</Container>
-				<Container disableGutters sx={{ mt: 2, px: 3 }}>
+				<Container disableGutters sx={{ mt: 2, px: 3, pb: 10 }}>
 					<Typography variant="body1" dangerouslySetInnerHTML={{ __html: blog.htmlContent! }}></Typography>
 				</Container>
 			</Container>
+			<Footer darkMode={false} />
 		</Container>
 	);
 }

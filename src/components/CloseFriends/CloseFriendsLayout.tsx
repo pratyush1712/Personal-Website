@@ -1,11 +1,12 @@
 "use client";
 import { Container, Typography, ThemeProvider, CssBaseline, Box, Button } from "@mui/material";
 import createTheme from "@/ui/Theme";
-import { getSession, signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { User } from "@/types";
 import Video from "@/ui/Video";
 import Link from "next/link";
+import Footer from "./Footer";
 
 export default function CloseFriendsLayout({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<User | null>(null);
@@ -17,10 +18,6 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			}
 		}
 	});
-
-	const handleSignOut = async () => {
-		await signOut({ callbackUrl: "/" });
-	};
 
 	useEffect(() => {
 		getSession().then(session => {
@@ -98,39 +95,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						</Button>
 					</Box>
 				)}
-				<Box
-					component="footer"
-					sx={{
-						position: "fixed",
-						left: 0,
-						bottom: 0,
-						width: "100%",
-						py: 2,
-						px: 3,
-						backgroundColor: "#141414",
-						borderTop: `1px solid #E50914`,
-						textAlign: "center",
-						zIndex: 1000
-					}}
-				>
-					<Typography variant="body2" sx={{ color: "#FFFFFF", opacity: 0.7 }}>
-						Isn&apos;t it soo cool 🌟
-						<Typography component="span" sx={{ color: "#E50914" }}>
-							{" "}
-							|{" "}
-						</Typography>
-						<Typography variant="body2" component="a" href="tel:+1 607 279 4794" sx={{ textDecoration: "none" }}>
-							Call me!
-							<Typography component="span" sx={{ color: "#E50914" }}>
-								{" "}
-								|{" "}
-							</Typography>
-						</Typography>
-						<Typography variant="body2" component={Button} onClick={handleSignOut} sx={{ textDecoration: "none" }}>
-							Logout
-						</Typography>
-					</Typography>
-				</Box>
+				<Footer darkMode={true} />
 			</Container>
 		</ThemeProvider>
 	);
