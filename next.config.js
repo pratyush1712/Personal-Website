@@ -28,7 +28,9 @@ const nextConfig = {
 			},
 			{
 				protocol: "https",
-				hostname: "privatewebsitecontent.s3.amazonaws.com"
+				hostname: "s3.amazonaws.com",
+				port: "",
+				pathname: "/privatewebsitecontent/**"
 			}
 		]
 	},

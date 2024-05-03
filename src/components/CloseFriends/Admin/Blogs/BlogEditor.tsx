@@ -9,7 +9,7 @@ import Image from "next/image";
 const CREATE_BLOG_MUTATION = gql`
 	mutation CreateBlog($input: NewBlogInput!) {
 		createBlog(input: $input) {
-  			id
+			id
 			title
 			details
 			image
@@ -125,7 +125,6 @@ export default function BlogEditor({ blog }: { blog: any }) {
 								blogUpdate?.image && (
 									<Box sx={{ width: 400, height: 287, position: "relative" }}>
 										<Image
-											unoptimized={true}
 											src={blogUpdate?.image}
 											alt={blogUpdate?.title}
 											layout="fill"
