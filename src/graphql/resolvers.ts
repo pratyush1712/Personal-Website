@@ -63,7 +63,7 @@ const resolvers = {
 	Mutation: {
 		createBlog: async (_: any, { input }: any, context: any) => {
 			try {
-				return await Promise.all([context.dataSources.blogs.createBlog(input), context.dataSources.blogs.getAllBlogs()]);
+				return await context.dataSources.blogs.createBlog(input);
 			} catch (error) {
 				console.error("Failed to create blog:", error);
 				throw new Error("Error creating blog.");
