@@ -34,8 +34,6 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 		adminURL = `close-friends`;
 	}
 
-	if (!user) return null;
-
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline enableColorScheme />
@@ -57,31 +55,35 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						}}
 					>
 						Hi{" "}
-						<Typography component="span" variant="inherit" sx={{ color: "#E50914" }}>
-							{user?.name}
-						</Typography>
+						{user && (
+							<Typography component="span" variant="inherit" sx={{ color: "#E50914" }}>
+								{user.name}
+							</Typography>
+						)}
 						! 👋
 					</Typography>
-					<Typography
-						variant="subtitle1"
-						sx={{
-							px: 6,
-							pb: 2,
-							width: "100vw",
-							marginBottom: 4,
-							borderBottom: `2px solid #E50914`,
-							backgroundColor: "rgba(0, 0, 0, 0.9)",
-							zIndex: 1
-						}}
-					>
-						Welcome to my Close Friends page! This is a private page for my close friends only. If you&apos;re seeing this,
-						you&apos;re one of them! 🎉
-					</Typography>
+					{user && (
+						<Typography
+							variant="subtitle1"
+							sx={{
+								px: 6,
+								pb: 2,
+								width: "100vw",
+								marginBottom: 4,
+								borderBottom: `2px solid #E50914`,
+								backgroundColor: "rgba(0, 0, 0, 0.9)",
+								zIndex: 1
+							}}
+						>
+							Welcome to my Close Friends page! This is a private page for my close friends only. If you&apos;re seeing this,
+							you&apos;re one of them! 🎉
+						</Typography>
+					)}
 				</Container>
 				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 10 }}>
 					{children}
 				</Container>
-				{user.email === "pratyushsudhakar03@gmail.com" && (
+				{user?.email === "pratyushsudhakar03@gmail.com" && (
 					<Box sx={{ position: "fixed", bottom: 12, right: 20, zIndex: 1500 }}>
 						<Button
 							variant="contained"
