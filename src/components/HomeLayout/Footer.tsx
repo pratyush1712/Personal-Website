@@ -109,7 +109,12 @@ export default function Footer() {
 						</Stack>
 					</Stack>
 				</Grid>
-				<Grid item sx={{ backgroundColor: "#3279CB", minWidth: `calc(100% - 235px)` }} display="flex" justifyContent="flex-end">
+				<Grid
+					item
+					sx={{ backgroundColor: "#3279CB", minWidth: `calc(100% - 235px)` }}
+					display="flex"
+					justifyContent="flex-end"
+				>
 					<Box display="flex" justifyContent="flex-end">
 						<Stack
 							// display="flex"

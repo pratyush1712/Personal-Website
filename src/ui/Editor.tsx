@@ -19,7 +19,17 @@ const MyComponent = (props: any) => {
 		["removeFormat"],
 		["outdent", "indent"],
 		["align", "horizontalRule", "list", "lineHeight"],
-		["-right", ":i-More Misc-default.more_vertical", "fullScreen", "showBlocks", "codeView", "preview", "print", "save", "template"],
+		[
+			"-right",
+			":i-More Misc-default.more_vertical",
+			"fullScreen",
+			"showBlocks",
+			"codeView",
+			"preview",
+			"print",
+			"save",
+			"template"
+		],
 		["-right", ":r-More Rich-default.more_plus", "table", "math", "imageGallery"],
 		["-right", "image", "video", "audio", "link"],
 		// (min-width: 992)

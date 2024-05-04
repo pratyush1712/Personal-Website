@@ -43,7 +43,8 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 		if (searchTermState !== "" && searchTermState !== null) URL.set("searchTerm", searchTermState);
 		if (sortKeyState !== "createdAt" && sortKeyState !== null) URL.set("sortKey", sortKeyState);
 		if (filterKeyState !== "all" && filterKeyState !== null) URL.set("filterKey", filterKeyState);
-		if (tagFilterKeysState.length !== 0 && tagFilterKeysState !== null) URL.set("tagFilterKeys", tagFilterKeysState?.join(","));
+		if (tagFilterKeysState.length !== 0 && tagFilterKeysState !== null)
+			URL.set("tagFilterKeys", tagFilterKeysState?.join(","));
 		startTransition(() => {
 			router.replace(`${url}?${URL.toString()}`);
 		});

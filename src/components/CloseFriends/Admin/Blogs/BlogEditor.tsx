@@ -106,7 +106,10 @@ export default function BlogEditor({ blog }: { blog: any }) {
 
 	return (
 		<Paper elevation={3} sx={{ p: 3, maxWidth: "100%" }}>
-			<Backdrop sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }} open={imageLoading || creating || updating}>
+			<Backdrop
+				sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }}
+				open={imageLoading || creating || updating}
+			>
 				<CircularProgress color="inherit" />
 			</Backdrop>
 			<Typography variant="h4" gutterBottom>
@@ -196,7 +199,9 @@ export default function BlogEditor({ blog }: { blog: any }) {
 											/>
 										))
 									}
-									renderInput={params => <TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />}
+									renderInput={params => (
+										<TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />
+									)}
 									onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, tags: newValue })}
 								/>
 								<Autocomplete
