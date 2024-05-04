@@ -14,6 +14,12 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	};
 
 	const theme = createTheme(true, {
+		palette: {
+			type: "dark",
+			primary: { main: "#E50914" },
+			secondary: { main: "#E50914", dark: "#E50914" },
+			info: { main: "#E50914" }
+		},
 		components: {
 			MuiContainer: {
 				styleOverrides: { root: (ownerState: { disableGutters: any }) => ({ minWidth: "100%" }) }
