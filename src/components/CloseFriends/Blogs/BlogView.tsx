@@ -1,6 +1,6 @@
 import { Content } from "@/types";
 import { Box, Button, Container, Typography } from "@mui/material";
-import Image from "next/image";
+import Image from "@/ui/Image";
 import Link from "next/link";
 import Footer from "../Layout/Footer";
 
@@ -43,7 +43,6 @@ export default function BlogView({ blog }: { blog: Content }) {
 				>
 					<Box sx={{ position: "relative", width: "100%", height: "400px" }}>
 						<Image
-							unoptimized={true}
 							src={blog.image}
 							alt={blog.title}
 							fill

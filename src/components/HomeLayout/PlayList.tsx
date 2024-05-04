@@ -16,25 +16,24 @@ const shuffle = (array: any[]) => {
 };
 
 const randomSongs = shuffle(songs);
+const options = {
+	size: 180,
+	minSize: 50,
+	gutter: 20,
+	provideProps: false,
+	numCols: 7,
+	fringeWidth: 160,
+	yRadius: 130,
+	xRadius: 220,
+	cornerRadius: 50,
+	showGuides: false,
+	compact: true,
+	gravitation: 5
+};
 
 export default function PlayList() {
 	const [hoverIndex, setHoverIndex] = useState<Number>(-1);
 	const [hoverTimeoutId, setHoverTimeoutId] = useState<NodeJS.Timeout | undefined>();
-
-	const options = {
-		size: 180,
-		minSize: 50,
-		gutter: 20,
-		provideProps: false,
-		numCols: 7,
-		fringeWidth: 160,
-		yRadius: 130,
-		xRadius: 220,
-		cornerRadius: 50,
-		showGuides: false,
-		compact: true,
-		gravitation: 5
-	};
 
 	const handleBubbleClick = (url: string | URL | undefined) => {
 		window.open(url, "_blank");
