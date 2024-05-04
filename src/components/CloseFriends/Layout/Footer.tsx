@@ -2,9 +2,9 @@
 import { Box, Typography, Button } from "@mui/material";
 import { signOut } from "next-auth/react";
 
-export default function Footer({ darkMode = true }: { darkMode: boolean }) {
+export default function Footer({ darkMode = true, loggedIn = true }: { darkMode: boolean; loggedIn: boolean }) {
 	const handleSignOut = async () => {
-		await signOut({ callbackUrl: "/" });
+		await signOut({ callbackUrl: "/login" });
 	};
 
 	return (
@@ -36,7 +36,7 @@ export default function Footer({ darkMode = true }: { darkMode: boolean }) {
 						|{" "}
 					</Typography>
 				</Typography>
-				{darkMode && (
+				{loggedIn && (
 					<Typography variant="body2" component={Button} onClick={handleSignOut} sx={{ textDecoration: "none" }}>
 						Logout
 					</Typography>

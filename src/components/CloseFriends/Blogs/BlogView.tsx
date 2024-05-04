@@ -46,10 +46,10 @@ export default function BlogView({ blog }: { blog: Content }) {
 							unoptimized={true}
 							src={blog.image}
 							alt={blog.title}
-							objectFit="contain"
-							layout="fill"
+							fill
 							quality={100}
 							style={{
+								objectFit: "contain",
 								borderRadius: 2,
 								padding: 0,
 								margin: "auto"
@@ -64,7 +64,7 @@ export default function BlogView({ blog }: { blog: Content }) {
 					<Typography variant="body1" dangerouslySetInnerHTML={{ __html: blog.htmlContent! }}></Typography>
 				</Container>
 			</Container>
-			<Footer darkMode={false} />
+			<Footer darkMode={false} loggedIn={false} />
 		</Container>
 	);
 }

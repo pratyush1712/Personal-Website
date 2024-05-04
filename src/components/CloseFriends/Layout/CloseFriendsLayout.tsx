@@ -100,7 +100,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						</Button>
 					</Box>
 				)}
-				<Footer darkMode={true} />
+				<Footer darkMode={true} loggedIn={!!user} />
 			</Container>
 		</ThemeProvider>
 	);
