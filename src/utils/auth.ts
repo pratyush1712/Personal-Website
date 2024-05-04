@@ -7,7 +7,8 @@ export const closeFriendsEmails = new Set([
 	"ps2245@cornell.edu",
 	"pratyushsudhakar03@gmail.com",
 	"atl82@cornell.edu",
-	"ara227@cornell.edu"
+	"ara227@cornell.edu",
+	"mm2567@cornell.edu"
 ]);
 
 export const config = {
