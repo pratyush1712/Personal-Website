@@ -6,7 +6,10 @@ import songs from "@/utils/songs.json";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-const BubbleUI: ComponentType<any> = dynamic(() => import("react-bubble-ui").then(mod => mod.default as ComponentType<any>), {});
+const BubbleUI: ComponentType<any> = dynamic(
+	() => import("react-bubble-ui").then(mod => mod.default as ComponentType<any>),
+	{}
+);
 const shuffle = (array: any[]) => {
 	for (let i = array.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));

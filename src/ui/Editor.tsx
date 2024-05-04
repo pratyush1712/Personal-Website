@@ -37,7 +37,14 @@ const MyComponent = (props: any) => {
 			"%992",
 			[
 				["undo", "redo"],
-				[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
+				[
+					":p-More Paragraph-default.more_paragraph",
+					"font",
+					"fontSize",
+					"formatBlock",
+					"paragraphStyle",
+					"blockquote"
+				],
 				["bold", "underline", "italic", "strike"],
 				[":t-More Text-default.more_text", "subscript", "superscript", "fontColor", "hiliteColor", "textStyle"],
 				["removeFormat"],
@@ -54,7 +61,17 @@ const MyComponent = (props: any) => {
 					"save",
 					"template"
 				],
-				["-right", ":r-More Rich-default.more_plus", "table", "link", "image", "video", "audio", "math", "imageGallery"]
+				[
+					"-right",
+					":r-More Rich-default.more_plus",
+					"table",
+					"link",
+					"image",
+					"video",
+					"audio",
+					"math",
+					"imageGallery"
+				]
 			]
 		],
 		// (min-width: 767)
@@ -62,7 +79,14 @@ const MyComponent = (props: any) => {
 			"%767",
 			[
 				["undo", "redo"],
-				[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
+				[
+					":p-More Paragraph-default.more_paragraph",
+					"font",
+					"fontSize",
+					"formatBlock",
+					"paragraphStyle",
+					"blockquote"
+				],
 				[
 					":t-More Text-default.more_text",
 					"bold",
@@ -97,7 +121,14 @@ const MyComponent = (props: any) => {
 			"%480",
 			[
 				["undo", "redo"],
-				[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
+				[
+					":p-More Paragraph-default.more_paragraph",
+					"font",
+					"fontSize",
+					"formatBlock",
+					"paragraphStyle",
+					"blockquote"
+				],
 				[
 					":t-More Text-default.more_text",
 					"bold",
@@ -111,7 +142,15 @@ const MyComponent = (props: any) => {
 					"textStyle",
 					"removeFormat"
 				],
-				[":e-More Line-default.more_horizontal", "outdent", "indent", "align", "horizontalRule", "list", "lineHeight"],
+				[
+					":e-More Line-default.more_horizontal",
+					"outdent",
+					"indent",
+					"align",
+					"horizontalRule",
+					"list",
+					"lineHeight"
+				],
 				[":r-More Rich-default.more_plus", "table", "link", "image", "video", "audio", "math", "imageGallery"],
 				[
 					"-right",

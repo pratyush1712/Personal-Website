@@ -40,7 +40,13 @@ export default function ContentDisplay({
 
 	return (
 		<Container disableGutters>
-			<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={url} />
+			<Filters
+				searchTerm={searchTerm}
+				sortKey={sortKey}
+				filterKey={filterKey}
+				tagFilterKeys={tagFilterKeys}
+				url={url}
+			/>
 			<Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 2 }}>
 				{data.map((feature: Content) => (
 					<Card

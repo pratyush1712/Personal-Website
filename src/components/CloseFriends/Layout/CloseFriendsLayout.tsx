@@ -52,7 +52,15 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			<Container disableGutters sx={{ width: "100vw", color: "#fff", minWidth: "100%" }}>
 				<Container
 					disableGutters
-					sx={{ position: "relative", overflow: "hidden", zIndex: 1, minHeight: 350, mb: 4, minWidth: "100%", p: 0 }}
+					sx={{
+						position: "relative",
+						overflow: "hidden",
+						zIndex: 1,
+						minHeight: 350,
+						mb: 4,
+						minWidth: "100%",
+						p: 0
+					}}
 				>
 					<Video src={"/videos/background.mp4"} autoPlay={true} loop={true} muted={true} />
 					<Typography
@@ -97,7 +105,13 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						<Link
 							href={`${adminURL}/admin`}
 							passHref
-							style={{ borderColor: "#E50914", padding: 10, borderWidth: 2, borderStyle: "solid", borderRadius: 5 }}
+							style={{
+								borderColor: "#E50914",
+								padding: 10,
+								borderWidth: 2,
+								borderStyle: "solid",
+								borderRadius: 5
+							}}
 						>
 							Admin
 						</Link>

@@ -37,7 +37,12 @@ export default function Footer({ darkMode = true, loggedIn = true }: { darkMode:
 					</Typography>
 				</Typography>
 				{loggedIn && (
-					<Typography variant="body2" component={Button} onClick={handleSignOut} sx={{ textDecoration: "none" }}>
+					<Typography
+						variant="body2"
+						component={Button}
+						onClick={handleSignOut}
+						sx={{ textDecoration: "none" }}
+					>
 						Logout
 					</Typography>
 				)}

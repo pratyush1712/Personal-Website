@@ -12,7 +12,10 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 
 	const baseComponents = {
 		MuiCssBaseline: {
-			styleOverrides: { body: darkMode ? darkScrollbar() : null, textDecorationColor: !darkMode ? "#000000" : "#FFFFFF" }
+			styleOverrides: {
+				body: darkMode ? darkScrollbar() : null,
+				textDecorationColor: !darkMode ? "#000000" : "#FFFFFF"
+			}
 		},
 		MuiPaper: { styleOverrides: { root: { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" } } },
 		MuiContainer: {

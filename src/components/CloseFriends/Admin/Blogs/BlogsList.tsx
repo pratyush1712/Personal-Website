@@ -11,7 +11,9 @@ import { GET_BLOGS, DELETE_BLOG_MUTATION, GET_CONTENTS } from "@/graphql/client/
 
 export default function BlogList() {
 	const { data, loading, error } = useQuery(GET_BLOGS);
-	const [deleteBlog] = useMutation(DELETE_BLOG_MUTATION, { refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }] });
+	const [deleteBlog] = useMutation(DELETE_BLOG_MUTATION, {
+		refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }]
+	});
 	const [open, setOpen] = useState<boolean>(false);
 	const [currentBlogId, setCurrentBlogId] = useState<number | null>(null);
 	const [searchResults, setSearchResults] = useState<Content[]>([]);

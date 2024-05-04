@@ -60,8 +60,12 @@ export default function VideoEditor({ video }: { video: any }) {
 	const videoInputRef = useRef(null);
 	const posterInputRef = useRef(null);
 
-	const [createVideo] = useMutation(CREATE_VIDEO, { refetchQueries: [{ query: GET_VIDEOS }, { query: GET_CONTENTS }] });
-	const [updateVideo] = useMutation(UPDATE_VIDEO, { refetchQueries: [{ query: GET_VIDEOS }, { query: GET_CONTENTS }] });
+	const [createVideo] = useMutation(CREATE_VIDEO, {
+		refetchQueries: [{ query: GET_VIDEOS }, { query: GET_CONTENTS }]
+	});
+	const [updateVideo] = useMutation(UPDATE_VIDEO, {
+		refetchQueries: [{ query: GET_VIDEOS }, { query: GET_CONTENTS }]
+	});
 
 	const handleSave = async () => {
 		if (!title || !details || !(videoFile || videoUrl) || !(posterFile || posterURL)) {
@@ -148,7 +152,16 @@ export default function VideoEditor({ video }: { video: any }) {
 			<Box p={3}>
 				<Typography variant="h5">{video ? "Edit Video" : "New Video"}</Typography>
 				<Divider style={{ margin: "20px 0" }} />
-				<Box sx={{ display: "flex", flexDirection: "row", alignItems: "flex-start", minWidth: "100%", gap: 3, mb: 3 }}>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "row",
+						alignItems: "flex-start",
+						minWidth: "100%",
+						gap: 3,
+						mb: 3
+					}}
+				>
 					<VideoEditorTools status={status} src={videoUrl} />
 					<Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column", mt: -1.5 }}>
 						<TextField
@@ -188,7 +201,12 @@ export default function VideoEditor({ video }: { video: any }) {
 								freeSolo
 								renderTags={(value, getTagProps) =>
 									value.map((option, index) => (
-										<Chip variant="outlined" label={option} {...getTagProps({ index })} key={index} />
+										<Chip
+											variant="outlined"
+											label={option}
+											{...getTagProps({ index })}
+											key={index}
+										/>
 									))
 								}
 								renderInput={params => <TextField {...params} label="Tags" variant="outlined" />}
@@ -205,7 +223,12 @@ export default function VideoEditor({ video }: { video: any }) {
 								freeSolo
 								renderTags={(value, getTagProps) =>
 									value.map((option, index) => (
-										<Chip variant="outlined" label={option} {...getTagProps({ index })} key={index} />
+										<Chip
+											variant="outlined"
+											label={option}
+											{...getTagProps({ index })}
+											key={index}
+										/>
 									))
 								}
 								renderInput={params => <TextField {...params} label="Keywords" variant="outlined" />}

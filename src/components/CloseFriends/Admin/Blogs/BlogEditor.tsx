@@ -1,6 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import { Button, TextField, Typography, Paper, CircularProgress, Alert, Select, MenuItem, Menu, Backdrop } from "@mui/material";
+import {
+	Button,
+	TextField,
+	Typography,
+	Paper,
+	CircularProgress,
+	Alert,
+	Select,
+	MenuItem,
+	Menu,
+	Backdrop
+} from "@mui/material";
 import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails, Divider } from "@mui/material";
 import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
@@ -117,7 +128,14 @@ export default function BlogEditor({ blog }: { blog: any }) {
 			</Typography>
 			<Accordion sx={{ my: 2 }}>
 				<AccordionSummary>
-					<Box sx={{ display: "flex", alignItems: "center", minWidth: "100%", justifyContent: "space-between" }}>
+					<Box
+						sx={{
+							display: "flex",
+							alignItems: "center",
+							minWidth: "100%",
+							justifyContent: "space-between"
+						}}
+					>
 						<Typography>Blog&apos;s General Information</Typography>
 						<Typography color="textSecondary" sx={{ pr: 2 }}>
 							Click to expand
@@ -222,7 +240,12 @@ export default function BlogEditor({ blog }: { blog: any }) {
 										))
 									}
 									renderInput={params => (
-										<TextField {...params} variant="outlined" label="Keywords" placeholder="Add keywords" />
+										<TextField
+											{...params}
+											variant="outlined"
+											label="Keywords"
+											placeholder="Add keywords"
+										/>
 									)}
 									onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, keywords: newValue })}
 								/>
