@@ -17,3 +17,4 @@ export { default as BlogView } from "./Blogs/BlogView";
 
 // Videos
 export { default as VideoDisplay } from "./Videos/VideoDisplay";
+export { default as VideoLayout } from "./Videos/VideoLayout";

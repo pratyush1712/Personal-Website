@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Button, TextField, Typography, Paper, CircularProgress, Alert, Select, MenuItem, Menu } from "@mui/material";
+import { Button, TextField, Typography, Paper, CircularProgress, Alert, Select, MenuItem, Menu, Backdrop } from "@mui/material";
 import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails, Divider } from "@mui/material";
 import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
@@ -97,7 +97,6 @@ export default function BlogEditor({ blog }: { blog: any }) {
 		}
 	};
 
-	if (creating || updating) return <CircularProgress color="inherit" />;
 	if (createError || updateError)
 		return <Alert severity="error">Error saving blog: {createError?.message || updateError?.message}</Alert>;
 
@@ -106,6 +105,9 @@ export default function BlogEditor({ blog }: { blog: any }) {
 
 	return (
 		<Paper elevation={3} sx={{ p: 3, maxWidth: "100%" }}>
+			<Backdrop sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }} open={imageLoading || creating || updating}>
+				<CircularProgress color="inherit" />
+			</Backdrop>
 			<Typography variant="h4" gutterBottom>
 				{blog?.title ?? "New Blog"}
 			</Typography>

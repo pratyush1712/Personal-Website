@@ -2,6 +2,7 @@
 import { useQuery, gql } from "@apollo/client";
 import { VideoEditor } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
+import Loading from "@/ui/Loading";
 
 const GET_VIDEO = gql`
 	query GetVideo($id: ID!) {
@@ -22,7 +23,7 @@ const GET_VIDEO = gql`
 
 export default function VideoDetails({ params }: { params: { id: string } }) {
 	const { data, loading, error } = useQuery(GET_VIDEO, { variables: { id: params.id } });
-	if (loading) return <Container maxWidth="md">Loading...</Container>;
+	if (loading) return <Loading />;
 	if (error && params.id !== "new") return <Container maxWidth="md">Error: {error.message}</Container>;
 	if (params.id === "new") {
 		return (

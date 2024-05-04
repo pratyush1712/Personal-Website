@@ -106,6 +106,24 @@ const resolvers = {
 				console.error("Failed to delete blog:", error);
 				throw new Error("Error deleting blog.");
 			}
+		},
+
+		updateVideo: async (_: any, { id, input }: any, context: any) => {
+			try {
+				return await context.dataSources.videos.updateVideo(id, input);
+			} catch (error) {
+				console.error("Failed to update video:", error);
+				throw new Error("Error updating video.");
+			}
+		},
+
+		deleteVideo: async (_: any, { id }: any, context: any) => {
+			try {
+				return await context.dataSources.videos.deleteVideo(id);
+			} catch (error) {
+				console.error("Failed to delete video:", error);
+				throw new Error("Error deleting video.");
+			}
 		}
 	}
 };

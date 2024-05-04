@@ -6,6 +6,7 @@ import { Dialog, DialogActions, DialogTitle, Divider, Typography } from "@mui/ma
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Fuse from "fuse.js";
+import Loading from "@/ui/Loading";
 
 const GET_VIDEOS = gql`
 	query GetVideos {
@@ -65,7 +66,7 @@ export default function VideoList() {
 		handleClose();
 	};
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <Loading />;
 	if (error) return <p>Error loading videos: {error.message}</p>;
 
 	return (

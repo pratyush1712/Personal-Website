@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 const VideoEditorTools = ({ status, src }: { status: string; src: string }) => {
 	return (
@@ -8,10 +8,11 @@ const VideoEditorTools = ({ status, src }: { status: string; src: string }) => {
 				display: "flex",
 				flexDirection: "column",
 				alignItems: "center",
-				justifyContent: "center"
+				justifyContent: "center",
+				height: "100%"
 			}}
 		>
-			<video src={src} style={{ width: "45vw" }} autoPlay controls>
+			<video src={src} style={{ width: "48.2vw" }} autoPlay controls>
 				<source src={src} type="video/mp4" />
 			</video>
 		</Box>

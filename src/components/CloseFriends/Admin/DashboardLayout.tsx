@@ -47,7 +47,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 						}}
 					/>
 					<Box component="main" sx={{ flexGrow: 1, margin: "auto" }}>
-						<Toolbar sx={{ p: 0, margin: "auto" }}>
+						<Toolbar sx={{ p: 0, margin: "auto", mt: 2 }}>
 							<Tabs
 								value={value}
 								onChange={handleChange}
@@ -55,19 +55,18 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 								variant="fullWidth"
 								textColor="inherit"
 								TabIndicatorProps={{ style: { backgroundColor: "#E50914" } }}
-								sx={{ minWidth: "100%" }}
+								sx={{ minWidth: "100%", borderTopLeftRadius: "180px", borderBottomLeftRadius: "180px" }}
 							>
 								<Tab
-									label={
-										(
-											<Icon>
-												<RiDashboardFill />
-											</Icon>
-										) as any
+									icon={
+										<Icon>
+											<RiDashboardFill />
+										</Icon>
 									}
+									iconPosition="start"
 									component={Link}
 									href={`${currentUrl.replace("/admin", "/")}`}
-									sx={{ maxWidth: "1px", background: "#E50914", borderRadius: "2px" }}
+									sx={{ maxWidth: "1px", background: "#E50914", borderRadius: "180px" }}
 								/>
 								<Tab label="General Settings" component={Link} href={`${currentUrl}/`} />
 								<Tab label="Blogs Page" component={Link} href={`${currentUrl}/blogs`} />

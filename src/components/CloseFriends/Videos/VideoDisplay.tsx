@@ -1,24 +1,26 @@
+import Video from "@/ui/Video";
 import { Button, Container, Typography } from "@mui/material";
+import Footer from "../Layout/Footer";
 
-export default function VideoDisplay() {
+export default function VideoDisplay({ video }: { video: any }) {
 	return (
 		<Container sx={{ minWidth: "100%" }}>
 			<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
 				Back to Home
 			</Button>
 			<Typography variant="h4" sx={{ px: 3, pb: 3, pt: 1 }}>
-				Video Title
+				{video.title}
 				<Typography variant="subtitle2" component="p">
-					<strong>Tags</strong>: Tag1, Tag2
+					<strong>Tags</strong>: {video.tags.join(", ")}
 				</Typography>
 				<Typography variant="caption" component="p" fontStyle="italic">
-					Posted on 2021-10-10
+					Posted on {new Date(video.createdAt).toDateString()}
 				</Typography>
 				<Typography variant="caption" component="p" fontStyle="italic">
-					Video Description
+					{video.details}
 				</Typography>
 			</Typography>
-			<Container sx={{ minWidth: "100%" }}>
+			<Container sx={{ minWidth: "100%", minHeight: "100%" }}>
 				<Container
 					sx={{
 						width: "100%",
@@ -29,20 +31,18 @@ export default function VideoDisplay() {
 						justifyContent: "center"
 					}}
 				>
-					<video
-						src="https://www.w3schools.com/html/mov_bbb.mp4"
-						controls
-						width={800}
-						height={500}
+					<Video
+						src={video.videoUrl}
+						controls={true}
+						width="70%"
+						height="100%"
 						style={{
 							borderRadius: 2,
 							padding: 0,
-							margin: "auto"
+							marginBottom: 100
 						}}
 					/>
-					<Typography variant="caption" component="p" fontStyle="italic" align="center">
-						Video Title
-					</Typography>
+					<Footer darkMode={false} loggedIn={false} />
 				</Container>
 			</Container>
 		</Container>
