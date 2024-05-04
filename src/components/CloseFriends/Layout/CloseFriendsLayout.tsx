@@ -7,9 +7,11 @@ import { User } from "@/types";
 import Video from "@/ui/Video";
 import Link from "next/link";
 import Footer from "./Footer";
+import Loading from "@/ui/Loading";
 
 export default function CloseFriendsLayout({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<User | null>(null);
+	const [loading, setLoading] = useState(true);
 
 	const theme = createTheme(true, {
 		components: {
@@ -20,11 +22,13 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 	});
 
 	useEffect(() => {
-		getSession().then(session => {
-			if (session?.user) {
-				setUser(session.user);
-			}
-		});
+		getSession()
+			.then(session => {
+				if (session?.user) {
+					setUser(session.user);
+				}
+			})
+			.finally(() => setLoading(false));
 	}, []);
 
 	let adminURL: string;
@@ -33,6 +37,8 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 	} else {
 		adminURL = `close-friends`;
 	}
+
+	if (loading) return <Loading />;
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -55,30 +61,27 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						}}
 					>
 						Hi{" "}
-						{user && (
-							<Typography component="span" variant="inherit" sx={{ color: "#E50914" }}>
-								{user.name}
-							</Typography>
-						)}
+						<Typography component="span" variant="inherit" sx={{ color: "#E50914" }}>
+							{user?.name ?? "there"}
+						</Typography>
 						! 👋
 					</Typography>
-					{user && (
-						<Typography
-							variant="subtitle1"
-							sx={{
-								px: 6,
-								pb: 2,
-								width: "100vw",
-								marginBottom: 4,
-								borderBottom: `2px solid #E50914`,
-								backgroundColor: "rgba(0, 0, 0, 0.9)",
-								zIndex: 1
-							}}
-						>
-							Welcome to my Close Friends page! This is a private page for my close friends only. If you&apos;re seeing this,
-							you&apos;re one of them! 🎉
-						</Typography>
-					)}
+					<Typography
+						variant="subtitle1"
+						sx={{
+							px: 6,
+							pb: 2,
+							width: "100vw",
+							marginBottom: 4,
+							borderBottom: `2px solid #E50914`,
+							backgroundColor: "rgba(0, 0, 0, 0.9)",
+							zIndex: 1
+						}}
+					>
+						{user?.email
+							? "Welcome to my Close Friends page! This is a private page for my close friends only. If you're seeing this, you're one of them! 🎉"
+							: "Welcome to my blog and video sharing platform! 🎉"}
+					</Typography>
 				</Container>
 				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 10 }}>
 					{children}

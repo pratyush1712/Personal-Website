@@ -1,12 +1,5 @@
-import { CircularProgress, Typography } from "@mui/material";
+import LoadingComponent from "@/ui/Loading";
 
 export default function Loading() {
-	return (
-		<div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-			<div>
-				<CircularProgress />
-				<Typography variant="h6">Loading...</Typography>
-			</div>
-		</div>
-	);
+	return <LoadingComponent />;
 }
