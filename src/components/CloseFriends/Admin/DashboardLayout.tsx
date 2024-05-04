@@ -1,14 +1,14 @@
 "use client";
-import { Box, Drawer, Toolbar, AppBar, Tab, Tabs, useTheme, ThemeProvider, CssBaseline } from "@mui/material";
+import { Box, Drawer, Toolbar, Tab, Tabs, ThemeProvider, CssBaseline, Icon } from "@mui/material";
 import Link from "next/link";
 import createTheme from "@/ui/Theme";
 import ApolloProvider from "@/graphql/client/apolloProvider";
-
 import { useEffect, useState } from "react";
+import { RiDashboardFill } from "react-icons/ri";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	const drawerWidth = 0;
-	const [value, setValue] = useState<number | null>(0);
+	const [value, setValue] = useState<number | null>(1);
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
 	};
@@ -24,9 +24,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
 		const path = window.location.pathname;
 		if (path.includes("/blogs")) {
-			setValue(1);
-		} else if (path.includes("/videos")) {
 			setValue(2);
+		} else if (path.includes("/videos")) {
+			setValue(3);
 		}
 	}, []);
 
@@ -57,12 +57,17 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 								TabIndicatorProps={{ style: { backgroundColor: "#E50914" } }}
 								sx={{ minWidth: "100%" }}
 							>
+								<Tab
+									label={(<Icon children={<RiDashboardFill />} />) as any}
+									component={Link}
+									href={`${currentUrl.replace("/admin", "/")}`}
+									sx={{ maxWidth: "1px", background: "#E50914", borderRadius: "2px" }}
+								/>
 								<Tab label="General Settings" component={Link} href={`${currentUrl}/`} />
 								<Tab label="Blogs Page" component={Link} href={`${currentUrl}/blogs`} />
 								<Tab label="Videos Page" component={Link} href={`${currentUrl}/videos`} />
 							</Tabs>
 						</Toolbar>
-
 						{children}
 					</Box>
 				</Box>
