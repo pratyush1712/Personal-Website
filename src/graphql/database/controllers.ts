@@ -39,7 +39,6 @@ export class Blogs extends MongoDataSource<BlogDocument> {
 
 	async createBlog(input: BlogDocument) {
 		try {
-			console.log("controller input:", input);
 			return await BlogModel.create(input);
 		} catch (error) {
 			console.error("Failed to create blog:", error);
@@ -57,7 +56,6 @@ export class Blogs extends MongoDataSource<BlogDocument> {
 
 	async updateBlog(id: string, input: BlogDocument) {
 		try {
-			console.log("controller input:", input);
 			return await BlogModel.findByIdAndUpdate(id, input, { new: true });
 		} catch (error) {
 			throw new Error("Failed to update blog");

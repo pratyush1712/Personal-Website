@@ -26,17 +26,14 @@ const shimmer = (w: number, h: number) => `
 
 const toBase64 = (str: string) => (typeof window === "undefined" ? Buffer.from(str).toString("base64") : window.btoa(str));
 
-const Shimmer = ({ src, alt, width, height, ...props }: ShimmerProps) => {
-	console.log("ShimmerProps", src, alt, width, height, props);
-	return (
-		<Image
-			src={src}
-			alt={alt}
-			placeholder="blur"
-			blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(width!, height!))}`}
-			{...props}
-		/>
-	);
-};
+const Shimmer = ({ src, alt, width, height, ...props }: ShimmerProps) => (
+	<Image
+		src={src}
+		alt={alt}
+		placeholder="blur"
+		blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(width!, height!))}`}
+		{...props}
+	/>
+);
 
 export default Shimmer;
