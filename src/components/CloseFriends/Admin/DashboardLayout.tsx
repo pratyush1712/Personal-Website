@@ -58,7 +58,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 								sx={{ minWidth: "100%" }}
 							>
 								<Tab
-									label={(<Icon children={<RiDashboardFill />} />) as any}
+									label={
+										(
+											<Icon>
+												<RiDashboardFill />
+											</Icon>
+										) as any
+									}
 									component={Link}
 									href={`${currentUrl.replace("/admin", "/")}`}
 									sx={{ maxWidth: "1px", background: "#E50914", borderRadius: "2px" }}
