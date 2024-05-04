@@ -93,17 +93,14 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 					{children}
 				</Container>
 				{user?.email === "pratyushsudhakar03@gmail.com" && (
-					<Box sx={{ position: "fixed", bottom: 12, right: 20, zIndex: 1500 }}>
-						<Button
-							variant="contained"
-							color="primary"
-							sx={{ borderColor: "#E50914", borderWidth: 2, borderStyle: "solid" }}
-							onClick={e => e.stopPropagation()}
+					<Box sx={{ position: "fixed", bottom: 20, right: 30, zIndex: 1500 }}>
+						<Link
+							href={`${adminURL}/admin`}
+							passHref
+							style={{ borderColor: "#E50914", padding: 10, borderWidth: 2, borderStyle: "solid", borderRadius: 5 }}
 						>
-							<Link href={`${adminURL}/admin`} passHref>
-								Admin
-							</Link>
-						</Button>
+							Admin
+						</Link>
 					</Box>
 				)}
 				<Footer darkMode={true} loggedIn={!!user} />
