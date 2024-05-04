@@ -5,6 +5,7 @@ import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails,
 import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
 import Image from "@/ui/Image";
+import { GET_BLOGS, GET_CONTENTS } from "@/graphql/client/queries";
 
 const CREATE_BLOG_MUTATION = gql`
 	mutation CreateBlog($input: NewBlogInput!) {
@@ -44,10 +45,10 @@ export default function BlogEditor({ blog }: { blog: any }) {
 	const [content, setContent] = useState(blog?.htmlContent || "");
 	const [blogUpdate, setBlogUpdate] = useState(blog);
 	const [createBlog, { loading: creating, error: createError }] = useMutation(CREATE_BLOG_MUTATION, {
-		refetchQueries: ["GetBlogs"]
+		refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }]
 	});
 	const [updateBlog, { loading: updating, error: updateError }] = useMutation(UPDATE_BLOG_MUTATION, {
-		refetchQueries: ["GetBlogs"]
+		refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }]
 	});
 	const [imageLoading, setImageLoading] = useState(false);
 	const [imageError, setImageError] = useState("");

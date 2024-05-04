@@ -7,34 +7,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Fuse from "fuse.js";
 import Loading from "@/ui/Loading";
-
-const GET_VIDEOS = gql`
-	query GetVideos {
-		videos {
-			id
-			title
-			details
-			image
-			access
-			createdAt
-			updatedAt
-			keywords
-			tags
-		}
-	}
-`;
-
-const DELETE_VIDEO_MUTATION = gql`
-	mutation DeleteVideo($id: ID!) {
-		deleteVideo(id: $id) {
-			id
-		}
-	}
-`;
+import { DELETE_VIDEO_MUTATION, GET_CONTENTS, GET_VIDEOS } from "@/graphql/client/queries";
 
 export default function VideoList() {
 	const { data, loading, error } = useQuery(GET_VIDEOS);
-	const [deleteVideo] = useMutation(DELETE_VIDEO_MUTATION, { refetchQueries: [{ query: GET_VIDEOS }] });
+	const [deleteVideo] = useMutation(DELETE_VIDEO_MUTATION, {
+		refetchQueries: [{ query: GET_VIDEOS }, { query: GET_CONTENTS }]
+	});
 	const [open, setOpen] = useState<boolean>(false);
 	const [currentVideoId, setCurrentVideoId] = useState<number | null>(null);
 	const [searchResults, setSearchResults] = useState<Content[]>([]);

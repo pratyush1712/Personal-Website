@@ -3,23 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 import { VideoEditor } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
 import Loading from "@/ui/Loading";
-
-const GET_VIDEO = gql`
-	query GetVideo($id: ID!) {
-		video(id: $id) {
-			id
-			title
-			details
-			image
-			access
-			createdAt
-			updatedAt
-			keywords
-			tags
-			videoUrl
-		}
-	}
-`;
+import { GET_VIDEO } from "@/graphql/client/queries";
 
 export default function VideoDetails({ params }: { params: { id: string } }) {
 	const { data, loading, error } = useQuery(GET_VIDEO, { variables: { id: params.id } });

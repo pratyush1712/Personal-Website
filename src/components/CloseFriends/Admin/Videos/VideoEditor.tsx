@@ -7,6 +7,7 @@ import VideoEditorTools from "./VideoEditorTools";
 import VideoJS from "./VideoJS";
 import VideoPlayer from "./VideoJS";
 import Image from "@/ui/Image";
+import { GET_CONTENTS, GET_VIDEOS } from "@/graphql/client/queries";
 
 const CREATE_VIDEO = gql`
 	mutation CreateVideo($input: NewVideoInput!) {
@@ -59,8 +60,8 @@ export default function VideoEditor({ video }: { video: any }) {
 	const videoInputRef = useRef(null);
 	const posterInputRef = useRef(null);
 
-	const [createVideo] = useMutation(CREATE_VIDEO, { refetchQueries: ["GetVideos"] });
-	const [updateVideo] = useMutation(UPDATE_VIDEO, { refetchQueries: ["GetVideos"] });
+	const [createVideo] = useMutation(CREATE_VIDEO, { refetchQueries: [{ query: GET_VIDEOS }, { query: GET_CONTENTS }] });
+	const [updateVideo] = useMutation(UPDATE_VIDEO, { refetchQueries: [{ query: GET_VIDEOS }, { query: GET_CONTENTS }] });
 
 	const handleSave = async () => {
 		if (!title || !details || !(videoFile || videoUrl) || !(posterFile || posterURL)) {

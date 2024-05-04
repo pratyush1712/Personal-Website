@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 import { getClient } from "@/graphql/client/apolloClient";
 import { Metadata, ResolvingMetadata } from "next/types";
 import { getServerSession } from "next-auth";
+import { GET_BLOG } from "@/graphql/client/queries";
 
 type Props = { params: { id: string } };
 
@@ -15,23 +16,6 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 		keywords: data.blog.keywords
 	};
 }
-
-const GET_BLOG = gql`
-	query GetBlog($id: ID!) {
-		blog(id: $id) {
-			id
-			title
-			details
-			access
-			image
-			createdAt
-			updatedAt
-			keywords
-			tags
-			htmlContent
-		}
-	}
-`;
 
 const getData = async (params: { id: string }) => {
 	const session = await getServerSession();

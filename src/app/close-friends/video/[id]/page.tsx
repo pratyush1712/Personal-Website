@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 import { getClient } from "@/graphql/client/apolloClient";
 import { Metadata, ResolvingMetadata } from "next/types";
 import { getServerSession } from "next-auth";
+import { GET_VIDEO } from "@/graphql/client/queries";
 
 type Props = { params: { id: string } };
 
@@ -16,35 +17,13 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 	};
 }
 
-const GET_VIDEO = gql`
-	query GetVideo($id: ID!) {
-		video(id: $id) {
-			id
-			title
-			details
-			access
-			image
-			createdAt
-			updatedAt
-			keywords
-			tags
-			videoUrl
-		}
-	}
-`;
-
 const getData = async (params: { id: string }) => {
 	const session = await getServerSession();
 	const client = getClient();
-	const { data } = await client
-		.query({
-			query: GET_VIDEO,
-			variables: { id: params.id }
-		})
-		.catch(err => {
-			console.log(`Failed to fetch video: ${err}`);
-			throw new Error(err);
-		});
+	const { data } = await client.query({ query: GET_VIDEO, variables: { id: params.id } }).catch(err => {
+		console.log(`Failed to fetch video: ${err}`);
+		throw new Error(err);
+	});
 	let access: string;
 	if (!data.video.access) access = "private";
 	else access = data.video.access;

@@ -3,23 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 import { BlogEditor } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
 import Loading from "@/ui/Loading";
-
-const GET_BLOG = gql`
-	query GetBlog($id: ID!) {
-		blog(id: $id) {
-			id
-			title
-			details
-			access
-			image
-			createdAt
-			updatedAt
-			keywords
-			tags
-			htmlContent
-		}
-	}
-`;
+import { GET_BLOG } from "@/graphql/client/queries";
 
 export default function BlogDetails({ params }: { params: { id: string } }) {
 	const { data, loading, error } = useQuery(GET_BLOG, { variables: { id: params.id } });

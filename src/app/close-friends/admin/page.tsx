@@ -2,23 +2,8 @@ import { Container, Typography } from "@mui/material";
 import { ContentDisplay } from "@/components/CloseFriends";
 import Fuse from "fuse.js";
 import { Content } from "@/types";
-import { gql } from "@apollo/client";
 import { getClient } from "@/graphql/client/apolloClient";
-
-const GET_CONTENTS = gql`
-	query GetContents {
-		contents {
-			id
-			title
-			details
-			access
-			image
-			createdAt
-			keywords
-			tags
-		}
-	}
-`;
+import { GET_CONTENTS } from "@/graphql/client/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -35,9 +20,8 @@ const getData = async (
 		includeScore: true,
 		threshold: 0.3
 	};
-
-	const fuse = new Fuse(data.contents, fuseOptions);
-	let searchResults = searchTerm ? fuse.search(searchTerm) : data.contents;
+	const fuse = new Fuse(data.accessContents, fuseOptions);
+	let searchResults = searchTerm ? fuse.search(searchTerm) : data.accessContents;
 	if (searchResults[0]?.item) {
 		searchResults = searchResults.map((result: { item: Content }) => result.item);
 	}

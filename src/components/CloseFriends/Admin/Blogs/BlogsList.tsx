@@ -7,35 +7,11 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Fuse from "fuse.js";
 import Loading from "@/ui/Loading";
-
-const GET_BLOGS = gql`
-	query GetBlogs {
-		blogs {
-			id
-			title
-			details
-			access
-			image
-			createdAt
-			updatedAt
-			keywords
-			tags
-			htmlContent
-		}
-	}
-`;
-
-const DELETE_BLOG_MUTATION = gql`
-	mutation DeleteBlog($id: ID!) {
-		deleteBlog(id: $id) {
-			id
-		}
-	}
-`;
+import { GET_BLOGS, DELETE_BLOG_MUTATION, GET_CONTENTS } from "@/graphql/client/queries";
 
 export default function BlogList() {
 	const { data, loading, error } = useQuery(GET_BLOGS);
-	const [deleteBlog] = useMutation(DELETE_BLOG_MUTATION, { refetchQueries: [{ query: GET_BLOGS }] });
+	const [deleteBlog] = useMutation(DELETE_BLOG_MUTATION, { refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }] });
 	const [open, setOpen] = useState<boolean>(false);
 	const [currentBlogId, setCurrentBlogId] = useState<number | null>(null);
 	const [searchResults, setSearchResults] = useState<Content[]>([]);

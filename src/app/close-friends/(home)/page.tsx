@@ -2,24 +2,9 @@ import { Container } from "@mui/material";
 import { ContentDisplay } from "@/components/CloseFriends";
 import Fuse from "fuse.js";
 import { Content } from "@/types";
-import { gql } from "@apollo/client";
 import { getClient } from "@/graphql/client/apolloClient";
 import { getServerSession } from "next-auth";
-
-const GET_CONTENTS = gql`
-	query GetContents($access: String!) {
-		accessContents(access: $access) {
-			id
-			title
-			details
-			access
-			image
-			createdAt
-			keywords
-			tags
-		}
-	}
-`;
+import { GET_CONTENTS } from "@/graphql/client/queries";
 
 export const dynamic = "force-dynamic";
 
