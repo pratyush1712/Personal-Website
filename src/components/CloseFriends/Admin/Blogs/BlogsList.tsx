@@ -46,6 +46,8 @@ export default function BlogList() {
 		handleClose();
 	};
 
+	const truncate = (input: string) => input.length > 50 ? `${input.substring(0, 50)}...` : input;
+
 	if (loading) return <Loading />;
 	if (error) return <p>Error loading blogs: {error.message}</p>;
 
@@ -72,7 +74,7 @@ export default function BlogList() {
 									</Typography>
 								)}
 							</Typography>
-							<Typography variant="body2">{blog.details}</Typography>
+							<Typography variant="body2">{truncate(blog.details)}</Typography>
 							<Typography variant="caption" color="textSecondary">
 								Created: {new Date(blog.createdAt).toLocaleDateString()}
 								{" | "}
