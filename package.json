@@ -32,6 +32,7 @@
 		"aws-sdk": "^2.1609.0",
 		"fuse.js": "^7.0.0",
 		"graphql": "^16.8.1",
+		"html-react-parser": "^5.1.10",
 		"katex": "^0.16.10",
 		"mongodb": "^6.5.0",
 		"mongoose": "^8.3.3",

@@ -3,6 +3,8 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import Image from "@/ui/Image";
 import Link from "next/link";
 import Footer from "../Layout/Footer";
+import parser from "html-react-parser";
+import "suneditor/dist/css/suneditor.min.css";
 
 export default function BlogView({ blog }: { blog: Content }) {
 	if (!blog) return null;
@@ -60,7 +62,9 @@ export default function BlogView({ blog }: { blog: Content }) {
 					</Typography>
 				</Container>
 				<Container disableGutters sx={{ mt: 2, px: 3, pb: 10 }}>
-					<Typography variant="body1" dangerouslySetInnerHTML={{ __html: blog.htmlContent! }}></Typography>
+					<div className="sun-editor">
+						<div className="sun-editor-editable">{parser(blog.htmlContent!)}</div>
+					</div>
 				</Container>
 			</Container>
 			<Footer darkMode={false} loggedIn={false} />
