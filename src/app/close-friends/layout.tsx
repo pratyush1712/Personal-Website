@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "../globals.css";
 import "@/styles/scrollbar.css";
 import "@/styles/editor.css";
@@ -12,6 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
+			<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_PRIVATE_GOOGLE_ID!} />
 			<body>{children}</body>
 		</html>
 	);

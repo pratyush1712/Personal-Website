@@ -12,9 +12,7 @@ export const closeFriendsEmails = new Set([
 ]);
 
 export const config = {
-	pages: {
-		signIn: "/login"
-	},
+	pages: { signIn: "/login" },
 	providers: [
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID as string,
