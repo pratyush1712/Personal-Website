@@ -38,6 +38,8 @@ export default function ContentDisplay({
 		data = data.map((feature: { item: Content }) => feature.item);
 	}
 
+	const truncate = (input: string) => input.length > 100 ? `${input.substring(0, 50)}...` : input;
+
 	return (
 		<Container disableGutters>
 			<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={url} />
@@ -55,7 +57,7 @@ export default function ContentDisplay({
 								{feature.title}
 							</Typography>
 							<Typography variant="body2" color="text.secondary">
-								{feature.details}
+								{truncate(feature.details)}
 							</Typography>
 							<Box sx={{ mt: 1, display: "flex", flexWrap: "wrap", gap: 0.5 }}>
 								{feature.tags.map((tag: string) => (
