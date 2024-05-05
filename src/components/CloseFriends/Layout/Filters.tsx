@@ -43,8 +43,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 		if (searchTermState !== "" && searchTermState !== null) URL.set("searchTerm", searchTermState);
 		if (sortKeyState !== "createdAt" && sortKeyState !== null) URL.set("sortKey", sortKeyState);
 		if (filterKeyState !== "all" && filterKeyState !== null) URL.set("filterKey", filterKeyState);
-		if (tagFilterKeysState.length !== 0 && tagFilterKeysState !== null)
-			URL.set("tagFilterKeys", tagFilterKeysState?.join(","));
+		if (tagFilterKeysState.length !== 0 && tagFilterKeysState !== null) URL.set("tagFilterKeys", tagFilterKeysState?.join(","));
 		startTransition(() => {
 			router.replace(`${url}?${URL.toString()}`);
 		});
@@ -69,12 +68,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 			</FormControl>
 			<FormControl fullWidth sx={{ flex: "1 1 auto", mr: 1 }}>
 				<InputLabel id="category-label">Filter By Category</InputLabel>
-				<Select
-					labelId="category-label"
-					value={filterKeyState}
-					label="Filter By Category"
-					onChange={onFilterChange}
-				>
+				<Select labelId="category-label" value={filterKeyState} label="Filter By Category" onChange={onFilterChange}>
 					<MenuItem value="all">All</MenuItem>
 					<MenuItem value="blog">Blog</MenuItem>
 					<MenuItem value="video">Video</MenuItem>
@@ -87,9 +81,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 					value={tagFilterKeysState}
 					label="Filter By Tags"
 					onChange={(event: SelectChangeEvent<string | string[]>) =>
-						setTagFilterKeysState(
-							Array.isArray(event.target.value) ? event.target.value : [event.target.value]
-						)
+						setTagFilterKeysState(Array.isArray(event.target.value) ? event.target.value : [event.target.value])
 					}
 					input={<OutlinedInput label="Filter By Tags" />}
 					renderValue={selected => (

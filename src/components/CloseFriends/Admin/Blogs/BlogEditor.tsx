@@ -1,17 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-	Button,
-	TextField,
-	Typography,
-	Paper,
-	CircularProgress,
-	Alert,
-	Select,
-	MenuItem,
-	Menu,
-	Backdrop
-} from "@mui/material";
+import { Button, TextField, Typography, Paper, CircularProgress, Alert, Select, MenuItem, Menu, Backdrop } from "@mui/material";
 import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails, Divider } from "@mui/material";
 import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
@@ -109,18 +98,14 @@ export default function BlogEditor({ blog }: { blog: any }) {
 		}
 	};
 
-	if (createError || updateError)
-		return <Alert severity="error">Error saving blog: {createError?.message || updateError?.message}</Alert>;
+	if (createError || updateError) return <Alert severity="error">Error saving blog: {createError?.message || updateError?.message}</Alert>;
 
 	if (imageLoading) return <CircularProgress />;
 	if (imageError) return <Alert severity="error">{imageError}</Alert>;
 
 	return (
 		<Paper elevation={3} sx={{ p: 3, maxWidth: "100%" }}>
-			<Backdrop
-				sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }}
-				open={imageLoading || creating || updating}
-			>
+			<Backdrop sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }} open={imageLoading || creating || updating}>
 				<CircularProgress color="inherit" />
 			</Backdrop>
 			<Typography variant="h4" gutterBottom>
@@ -217,9 +202,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 											/>
 										))
 									}
-									renderInput={params => (
-										<TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />
-									)}
+									renderInput={params => <TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />}
 									onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, tags: newValue })}
 								/>
 								<Autocomplete
@@ -239,14 +222,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 											/>
 										))
 									}
-									renderInput={params => (
-										<TextField
-											{...params}
-											variant="outlined"
-											label="Keywords"
-											placeholder="Add keywords"
-										/>
-									)}
+									renderInput={params => <TextField {...params} variant="outlined" label="Keywords" placeholder="Add keywords" />}
 									onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, keywords: newValue })}
 								/>
 							</Box>

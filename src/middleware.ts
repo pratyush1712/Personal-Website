@@ -57,12 +57,7 @@ export default async function middleware(request: NextRequest) {
 
 	// Handling requests intended for private.pratyushsudhakar.com
 	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`) {
-		if (
-			!session &&
-			url.pathname !== "/login" &&
-			url.pathname.includes("/blog/") &&
-			url.pathname.includes("/video/")
-		) {
+		if (!session && url.pathname !== "/login" && url.pathname.includes("/blog/") && url.pathname.includes("/video/")) {
 			return NextResponse.redirect(new URL("/login", url));
 		} else if (url.pathname.includes("/home")) {
 			return NextResponse.rewrite(new URL(`/close-friends${url.search}`, url));

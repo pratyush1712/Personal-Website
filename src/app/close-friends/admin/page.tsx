@@ -27,15 +27,9 @@ const getData = async (
 	}
 
 	const filteredFeatures = searchResults
-		.filter(
-			(content: Content) => filterKey === "all" || content?.__typename?.toLocaleLowerCase().includes(filterKey!)
-		)
-		.filter(
-			(content: Content) => tagFilterKeys?.length === 0 || content.tags.some(tag => tagFilterKeys?.includes(tag))
-		)
-		.sort((a: Content, b: Content) =>
-			sortKey === "createdAt" ? new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime() : 0
-		);
+		.filter((content: Content) => filterKey === "all" || content?.__typename?.toLocaleLowerCase().includes(filterKey!))
+		.filter((content: Content) => tagFilterKeys?.length === 0 || content.tags.some(tag => tagFilterKeys?.includes(tag)))
+		.sort((a: Content, b: Content) => (sortKey === "createdAt" ? new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime() : 0));
 	return filteredFeatures;
 };
 
@@ -49,12 +43,7 @@ export default async function AdminDashboard({
 		tagFilterKeys: string[] | null | undefined;
 	};
 }) {
-	const data = await getData(
-		searchParams.searchTerm,
-		searchParams.sortKey,
-		searchParams.filterKey,
-		searchParams.tagFilterKeys
-	);
+	const data = await getData(searchParams.searchTerm, searchParams.sortKey, searchParams.filterKey, searchParams.tagFilterKeys);
 	return (
 		<Container maxWidth="lg">
 			<Typography variant="h4" sx={{ my: 4 }}>

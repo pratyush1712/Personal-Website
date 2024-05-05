@@ -19,17 +19,7 @@ const MyComponent = (props: any) => {
 		["removeFormat"],
 		["outdent", "indent"],
 		["align", "horizontalRule", "list", "lineHeight"],
-		[
-			"-right",
-			":i-More Misc-default.more_vertical",
-			"fullScreen",
-			"showBlocks",
-			"codeView",
-			"preview",
-			"print",
-			"save",
-			"template"
-		],
+		["-right", ":i-More Misc-default.more_vertical", "fullScreen", "showBlocks", "codeView", "preview", "print", "save", "template"],
 		["-right", ":r-More Rich-default.more_plus", "table", "math", "imageGallery"],
 		["-right", "image", "video", "audio", "link"],
 		// (min-width: 992)
@@ -37,41 +27,14 @@ const MyComponent = (props: any) => {
 			"%992",
 			[
 				["undo", "redo"],
-				[
-					":p-More Paragraph-default.more_paragraph",
-					"font",
-					"fontSize",
-					"formatBlock",
-					"paragraphStyle",
-					"blockquote"
-				],
+				[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
 				["bold", "underline", "italic", "strike"],
 				[":t-More Text-default.more_text", "subscript", "superscript", "fontColor", "hiliteColor", "textStyle"],
 				["removeFormat"],
 				["outdent", "indent"],
 				["align", "horizontalRule", "list", "lineHeight"],
-				[
-					"-right",
-					":i-More Misc-default.more_vertical",
-					"fullScreen",
-					"showBlocks",
-					"codeView",
-					"preview",
-					"print",
-					"save",
-					"template"
-				],
-				[
-					"-right",
-					":r-More Rich-default.more_plus",
-					"table",
-					"link",
-					"image",
-					"video",
-					"audio",
-					"math",
-					"imageGallery"
-				]
+				["-right", ":i-More Misc-default.more_vertical", "fullScreen", "showBlocks", "codeView", "preview", "print", "save", "template"],
+				["-right", ":r-More Rich-default.more_plus", "table", "link", "image", "video", "audio", "math", "imageGallery"]
 			]
 		],
 		// (min-width: 767)
@@ -79,14 +42,7 @@ const MyComponent = (props: any) => {
 			"%767",
 			[
 				["undo", "redo"],
-				[
-					":p-More Paragraph-default.more_paragraph",
-					"font",
-					"fontSize",
-					"formatBlock",
-					"paragraphStyle",
-					"blockquote"
-				],
+				[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
 				[
 					":t-More Text-default.more_text",
 					"bold",
@@ -103,17 +59,7 @@ const MyComponent = (props: any) => {
 				["outdent", "indent"],
 				[":e-More Line-default.more_horizontal", "align", "horizontalRule", "list", "lineHeight"],
 				[":r-More Rich-default.more_plus", "table", "link", "image", "video", "audio", "math", "imageGallery"],
-				[
-					"-right",
-					":i-More Misc-default.more_vertical",
-					"fullScreen",
-					"showBlocks",
-					"codeView",
-					"preview",
-					"print",
-					"save",
-					"template"
-				]
+				["-right", ":i-More Misc-default.more_vertical", "fullScreen", "showBlocks", "codeView", "preview", "print", "save", "template"]
 			]
 		],
 		// (min-width: 480)
@@ -121,14 +67,7 @@ const MyComponent = (props: any) => {
 			"%480",
 			[
 				["undo", "redo"],
-				[
-					":p-More Paragraph-default.more_paragraph",
-					"font",
-					"fontSize",
-					"formatBlock",
-					"paragraphStyle",
-					"blockquote"
-				],
+				[":p-More Paragraph-default.more_paragraph", "font", "fontSize", "formatBlock", "paragraphStyle", "blockquote"],
 				[
 					":t-More Text-default.more_text",
 					"bold",
@@ -142,27 +81,9 @@ const MyComponent = (props: any) => {
 					"textStyle",
 					"removeFormat"
 				],
-				[
-					":e-More Line-default.more_horizontal",
-					"outdent",
-					"indent",
-					"align",
-					"horizontalRule",
-					"list",
-					"lineHeight"
-				],
+				[":e-More Line-default.more_horizontal", "outdent", "indent", "align", "horizontalRule", "list", "lineHeight"],
 				[":r-More Rich-default.more_plus", "table", "link", "image", "video", "audio", "math", "imageGallery"],
-				[
-					"-right",
-					":i-More Misc-default.more_vertical",
-					"fullScreen",
-					"showBlocks",
-					"codeView",
-					"preview",
-					"print",
-					"save",
-					"template"
-				]
+				["-right", ":i-More Misc-default.more_vertical", "fullScreen", "showBlocks", "codeView", "preview", "print", "save", "template"]
 			]
 		]
 	];

@@ -152,8 +152,7 @@ export default function AppButtons({
 				overflowY: "hidden",
 				whiteSpace: "nowrap",
 				minHeight: "32px",
-				backgroundColor:
-					pages.length !== 0 ? (theme.palette.mode === "dark" ? "#252527" : "#f3f3f3") : "transparent",
+				backgroundColor: pages.length !== 0 ? (theme.palette.mode === "dark" ? "#252527" : "#f3f3f3") : "transparent",
 				"&::-webkit-scrollbar": {
 					height: "3px"
 					// backgroundColor: 'red',

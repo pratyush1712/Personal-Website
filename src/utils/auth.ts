@@ -30,11 +30,6 @@ export const config = {
 	secret: process.env.NEXTAUTH_SECRET
 } satisfies NextAuthOptions;
 
-export function auth(
-	...args:
-		| [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]]
-		| [NextApiRequest, NextApiResponse]
-		| []
-) {
+export function auth(...args: [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]] | [NextApiRequest, NextApiResponse] | []) {
 	return getServerSession(...args, config);
 }

@@ -39,9 +39,7 @@ export default function Footer() {
 							}}
 						>
 							<IoIosGitBranch fontSize="0.9rem" />
-							<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem", color: "white" }}>
-								master
-							</Typography>
+							<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem", color: "white" }}>master</Typography>
 						</Box>
 
 						<Stack
@@ -111,12 +109,7 @@ export default function Footer() {
 						</Stack>
 					</Stack>
 				</Grid>
-				<Grid
-					item
-					sx={{ backgroundColor: "#3279CB", minWidth: `calc(100% - 235px)` }}
-					display="flex"
-					justifyContent="flex-end"
-				>
+				<Grid item sx={{ backgroundColor: "#3279CB", minWidth: `calc(100% - 235px)` }} display="flex" justifyContent="flex-end">
 					<Box display="flex" justifyContent="flex-end">
 						<Stack
 							// display="flex"
@@ -136,9 +129,7 @@ export default function Footer() {
 								}}
 							>
 								<VscCheck fontSize="0.9rem" />
-								<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem", color: "white" }}>
-									Prettier
-								</Typography>
+								<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem", color: "white" }}>Prettier</Typography>
 							</Box>
 
 							<Box
