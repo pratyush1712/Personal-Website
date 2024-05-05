@@ -38,7 +38,7 @@ export default function ContentDisplay({
 		data = data.map((feature: { item: Content }) => feature.item);
 	}
 
-	const truncate = (input: string) => (input.length > 200 ? `${input.substring(0, 50)}...` : input);
+	const truncate = (input: string) => (input.length > 100 ? `${input.substring(0, 50)}...` : input);
 
 	return (
 		<Container disableGutters>
