@@ -46,7 +46,7 @@ export default function BlogList() {
 		handleClose();
 	};
 
-	const truncate = (input: string) => input.length > 50 ? `${input.substring(0, 50)}...` : input;
+	const truncate = (input: string) => input.length > 100 ? `${input.substring(0, 50)}...` : input;
 
 	if (loading) return <Loading />;
 	if (error) return <p>Error loading blogs: {error.message}</p>;
