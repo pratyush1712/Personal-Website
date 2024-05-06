@@ -1,11 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, TextField, Typography, Paper, CircularProgress, Alert, Select, MenuItem, Menu, Backdrop } from "@mui/material";
 import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails, Divider } from "@mui/material";
 import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
 import Image from "@/ui/Image";
+import SunEditorCore from "suneditor/src/lib/core";
 import { GET_BLOGS, GET_CONTENTS } from "@/graphql/client/queries";
+import { uploadPDF } from "@/utils/upload";
 
 const CREATE_BLOG_MUTATION = gql`
 	mutation CreateBlog($input: NewBlogInput!) {
@@ -42,6 +44,7 @@ const UPDATE_BLOG_MUTATION = gql`
 `;
 
 export default function BlogEditor({ blog }: { blog: any }) {
+	const editor = useRef<SunEditorCore>();
 	const [content, setContent] = useState(blog?.htmlContent || "");
 	const [blogUpdate, setBlogUpdate] = useState(blog);
 	const [createBlog, { loading: creating, error: createError }] = useMutation(CREATE_BLOG_MUTATION, {
@@ -58,14 +61,14 @@ export default function BlogEditor({ blog }: { blog: any }) {
 		if (!file) return;
 
 		const formData = new FormData();
-		formData.append("image", file);
+		formData.append("file", file);
 		formData.append("type", "blog");
 
 		setImageLoading(true);
 		setImageError("");
 
 		try {
-			const response = await fetch("/api/images", {
+			const response = await fetch("/api/upload", {
 				method: "POST",
 				body: formData
 			});
@@ -86,7 +89,8 @@ export default function BlogEditor({ blog }: { blog: any }) {
 		const input = { ...blogUpdate, htmlContent: content };
 		delete input.id;
 		delete input.__typename;
-
+		// upload the pdf as well
+		uploadPDF({ editor: editor.current!, blog: blogUpdate });
 		if (blog?.id) {
 			input.updatedAt = new Date().toISOString();
 			await updateBlog({ variables: { input, id: blog.id } });
@@ -234,7 +238,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 			<Typography variant="h6" gutterBottom>
 				Edit Blog Content
 			</Typography>
-			<Editor defaultValue={blog?.htmlContent} onChange={setContent} />
+			<Editor defaultValue={blog?.htmlContent} onChange={setContent} editor={editor} />
 			<Button onClick={handleSubmit} variant="contained" color="primary" sx={{ mt: 2 }}>
 				Save Blog
 			</Button>

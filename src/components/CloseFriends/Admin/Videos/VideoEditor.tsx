@@ -103,10 +103,10 @@ export default function VideoEditor({ video }: { video: any }) {
 		setLoading(true);
 
 		const formData = new FormData();
-		formData.append("image", file);
+		formData.append("file", file);
 		formData.append("type", "poster");
 
-		fetch("/api/images", {
+		fetch("/api/upload", {
 			method: "POST",
 			body: formData
 		})
@@ -121,10 +121,10 @@ export default function VideoEditor({ video }: { video: any }) {
 		setLoading(true);
 
 		const formData = new FormData();
-		formData.append("image", file);
+		formData.append("file", file);
 		formData.append("type", "video");
 
-		fetch("/api/images", {
+		fetch("/api/upload", {
 			method: "POST",
 			body: formData
 		})

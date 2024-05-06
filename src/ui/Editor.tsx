@@ -9,7 +9,6 @@ import katex from "katex";
 import "katex/dist/katex.min.css";
 
 const MyComponent = (props: any) => {
-	const editor = useRef<SunEditorCore>();
 	const options = [
 		// default
 		["undo", "redo"],
@@ -89,14 +88,14 @@ const MyComponent = (props: any) => {
 	];
 
 	const getSunEditorInstance = (sunEditor: SunEditorCore) => {
-		editor.current = sunEditor;
+		props.editor.current = sunEditor;
 	};
 
 	const handleImageUploadBefore = (files: File[], info: object, uploadHandler: UploadBeforeHandler) => {
 		const formData = new FormData();
-		formData.append("image", files[0]);
+		formData.append("file", files[0]);
 		formData.append("type", "editor");
-		fetch("/api/images", { method: "POST", body: formData })
+		fetch("/api/upload", { method: "POST", body: formData })
 			.then(response => response.json())
 			.then(data => {
 				const url = data[0];
@@ -117,7 +116,7 @@ const MyComponent = (props: any) => {
 			defaultValue={props.defaultValue}
 			autoFocus={true}
 			setOptions={{
-				imageGalleryUrl: "/api/images?type=images",
+				imageGalleryUrl: "/api/upload?type=images",
 				katex: katex,
 				buttonList: options
 			}}

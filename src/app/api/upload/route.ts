@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: Request) {
 	const formData = await request.formData();
-	const files = formData.getAll("image") as File[];
+	const files = formData.getAll("file") as File[];
 	const type = formData.get("type") as string;
 
 	const response = await Promise.all(
