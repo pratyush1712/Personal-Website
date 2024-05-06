@@ -45,7 +45,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 		adminURL = `close-friends`;
 	}
 	const [showText, setShowText] = useState(false);
-	const [widthState, setWidthState] = useState("0%");
+	const [widthState, setWidthState] = useState("80%");
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -156,7 +156,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 									textAlign: "center",
 									backgroundColor: `rgba(229, 9, 20, 1)`,
 									border: "2px solid #E50914",
-									maxWidth: "5px",
+									minWidth: "4px",
 									paddingTop: "35px",
 									paddingBottom: "35px",
 									left: 0,
@@ -191,10 +191,11 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 									textAlign: "center",
 									backgroundColor: `rgba(229, 9, 20, 1)`,
 									border: "2px solid #E50914",
-									maxWidth: "3px",
+									maxWidth: "1px",
 									paddingTop: "24px",
 									paddingBottom: "22px",
 									right: -4,
+									left: showText ? "auto" : 0,
 									position: "relative",
 									animation: "pulse 2s infinite"
 								}}
