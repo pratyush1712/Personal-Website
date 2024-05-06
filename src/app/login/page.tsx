@@ -1,6 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { Container, Button, Typography, AppBar, Icon } from "@mui/material";
+import { Container, Button, Typography, AppBar } from "@mui/material";
 import Image from "next/image";
 import { Box } from "@mui/system";
 import { BiLogIn } from "react-icons/bi";
