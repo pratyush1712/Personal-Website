@@ -5,6 +5,7 @@ import Link from "next/link";
 import Footer from "../Layout/Footer";
 import parser from "html-react-parser";
 import "suneditor/dist/css/suneditor.min.css";
+import DownloadBlogButton from "./Download";
 
 export default function BlogView({ blog }: { blog: Content }) {
 	if (!blog) return null;
@@ -17,9 +18,12 @@ export default function BlogView({ blog }: { blog: Content }) {
 
 	return (
 		<Container sx={{ minWidth: "100%" }}>
-			<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
-				<Link href="/">Back to Home</Link>
-			</Button>
+			<Link href={process.env.NODE_ENV === "production" ? "/home" : "/close-friends"} passHref>
+				<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
+					Back to Home
+				</Button>
+			</Link>
+			<DownloadBlogButton blog={blog} />
 			<Typography variant="h4" sx={{ px: 3, pb: 3, pt: 1 }}>
 				{blog.title}
 				<Typography variant="subtitle2" component="p">
@@ -61,10 +65,8 @@ export default function BlogView({ blog }: { blog: Content }) {
 						{blog.title}
 					</Typography>
 				</Container>
-				<Container disableGutters sx={{ mt: 2, px: 3, pb: 10 }}>
-					<div className="sun-editor">
-						<div className="sun-editor-editable">{parser(blog.htmlContent!)}</div>
-					</div>
+				<Container disableGutters sx={{ mt: 2, pb: 10 }}>
+					<div className="sun-editor-editable">{parser(blog.htmlContent!)}</div>
 				</Container>
 			</Container>
 			<Footer darkMode={false} loggedIn={false} />

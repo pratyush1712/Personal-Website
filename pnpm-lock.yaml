@@ -4409,7 +4409,7 @@ snapshots:
   '@emotion/babel-plugin@11.11.0':
     dependencies:
       '@babel/helper-module-imports': 7.22.15
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.24.5
       '@emotion/hash': 0.9.1
       '@emotion/memoize': 0.8.1
       '@emotion/serialize': 1.1.2
@@ -4676,7 +4676,7 @@ snapshots:
 
   '@mui/base@5.0.0-beta.20(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.24.5
       '@floating-ui/react-dom': 2.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mui/types': 7.2.6(@types/react@18.3.1)
       '@mui/utils': 5.14.14(@types/react@18.3.1)(react@18.3.1)
@@ -4721,7 +4721,7 @@ snapshots:
 
   '@mui/private-theming@5.14.14(@types/react@18.3.1)(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.24.5
       '@mui/utils': 5.14.14(@types/react@18.3.1)(react@18.3.1)
       prop-types: 15.8.1
       react: 18.3.1
@@ -4730,7 +4730,7 @@ snapshots:
 
   '@mui/styled-engine@5.14.14(@emotion/react@11.11.1(@types/react@18.3.1)(react@18.3.1))(@emotion/styled@11.11.0(@emotion/react@11.11.1(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.24.5
       '@emotion/cache': 11.11.0
       csstype: 3.1.2
       prop-types: 15.8.1
@@ -4761,7 +4761,7 @@ snapshots:
 
   '@mui/utils@5.14.14(@types/react@18.3.1)(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.24.5
       '@types/prop-types': 15.7.8
       prop-types: 15.8.1
       react: 18.3.1
@@ -5621,7 +5621,7 @@ snapshots:
 
   babel-plugin-macros@3.1.0:
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.24.5
       cosmiconfig: 7.1.0
       resolve: 1.22.8
 
@@ -7553,7 +7553,7 @@ snapshots:
 
   react-transition-group@4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.24.5
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
