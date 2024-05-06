@@ -1,5 +1,5 @@
 "use client";
-import { Container, Typography, ThemeProvider, CssBaseline, Box, Button } from "@mui/material";
+import { Container, Typography, ThemeProvider, CssBaseline, Box, Icon } from "@mui/material";
 import createTheme from "@/ui/Theme";
 import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
@@ -8,6 +8,7 @@ import Video from "@/ui/Video";
 import Link from "next/link";
 import Footer from "./Footer";
 import Loading from "@/ui/Loading";
+import { RiExternalLinkLine } from "react-icons/ri";
 
 export default function CloseFriendsLayout({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<User | null>(null);
@@ -43,6 +44,27 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 	} else {
 		adminURL = `close-friends`;
 	}
+	const [showText, setShowText] = useState(false);
+	const [widthState, setWidthState] = useState("0%");
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setWidthState(widthState => {
+				if (widthState === "100%") {
+					clearInterval(interval);
+					return "fit-content";
+				}
+				const width = parseInt(widthState.replace("%", "")) + 0.5;
+				return `${width}%`;
+			});
+		}, 150);
+		const timer = setTimeout(() => {
+			setShowText(true);
+			clearTimeout(timer);
+		}, 1000);
+
+		return () => clearTimeout(timer);
+	}, []);
 
 	if (loading) return <Loading />;
 
@@ -56,7 +78,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						position: "relative",
 						overflow: "hidden",
 						zIndex: 1,
-						minHeight: 350,
+						minHeight: 450,
 						mb: 4,
 						minWidth: "100%",
 						p: 0
@@ -96,6 +118,89 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 							? "Welcome to my Close Friends page! This is a private page for my close friends only. If you're seeing this, you're one of them! 🎉"
 							: "Welcome to my blog and video sharing platform! 🎉"}
 					</Typography>
+					<Box
+						sx={{
+							position: "absolute",
+							bottom: 100,
+							left: 100,
+							borderRadius: 2,
+							height: "50px",
+							cursor: "pointer",
+							zIndex: 1,
+							transition: "transform 0.4s ease-in-out",
+							"&:hover": {
+								transform: "scale(1.04)"
+							}
+						}}
+					>
+						<Link
+							href={`${adminURL.replace("admin", "")}/blog/latest`}
+							style={{
+								display: "flex",
+								alignItems: "center",
+								height: "100%",
+								color: "white",
+								width: showText ? "100%" : widthState,
+								backgroundColor: "rgba(0, 0, 0, 0.99)",
+								letterSpacing: 0,
+								paddingTop: 3,
+								paddingBottom: 3,
+								paddingRight: 4,
+								transition: "width 1s ease, opacity 1s ease",
+								textDecoration: "none"
+							}}
+						>
+							<span
+								style={{
+									display: "inline-block",
+									textAlign: "center",
+									backgroundColor: `rgba(229, 9, 20, 1)`,
+									border: "2px solid #E50914",
+									maxWidth: "5px",
+									paddingTop: "35px",
+									paddingBottom: "35px",
+									left: 0,
+									position: "relative",
+									fontSize: "3.5em",
+									animation: "pulse 2s infinite"
+								}}
+							></span>
+							<span
+								style={{
+									position: "relative",
+									display: "flex",
+									width: showText ? "100%" : 0,
+									overflow: "hidden",
+									fontSize: "1.25em",
+									marginRight: 25,
+									left: 15,
+									whiteSpace: "nowrap",
+									verticalAlign: "middle",
+									transition: "width 1s ease, opacity 1s ease",
+									opacity: showText ? 1 : 0
+								}}
+							>
+								Checkout my latest blog post!
+								<Icon sx={{ ml: 0.5, color: "#E50914" }}>
+									<RiExternalLinkLine />
+								</Icon>
+							</span>
+							<span
+								style={{
+									display: "inline-block",
+									textAlign: "center",
+									backgroundColor: `rgba(229, 9, 20, 1)`,
+									border: "2px solid #E50914",
+									maxWidth: "3px",
+									paddingTop: "24px",
+									paddingBottom: "22px",
+									right: -4,
+									position: "relative",
+									animation: "pulse 2s infinite"
+								}}
+							></span>
+						</Link>
+					</Box>
 				</Container>
 				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 10 }}>
 					{children}

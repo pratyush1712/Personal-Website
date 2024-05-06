@@ -1,10 +1,9 @@
-import { gql } from "@apollo/client";
 import { BlogView } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
 import { getClient } from "@/graphql/client/apolloClient";
 import { Metadata, ResolvingMetadata } from "next/types";
 import { getServerSession } from "next-auth";
-import { GET_BLOG } from "@/graphql/client/queries";
+import { GET_BLOG, GET_BLOGS } from "@/graphql/client/queries";
 
 type Props = { params: { id: string } };
 
@@ -20,6 +19,19 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 const getData = async (params: { id: string }) => {
 	const session = await getServerSession();
 	const client = getClient();
+	if (params.id === "latest") {
+		const access = !session ? "public" : session?.user?.email === "pratyushsudhakar03@gmail.com" ? "private" : "close-friends";
+		const { data } = await client.query({
+			query: GET_BLOGS
+		});
+		const blogs = data.blogs.filter((blog: { access: string }) => {
+			if (access === "private") return true;
+			if (access === "close-friends") return blog.access !== "private";
+			return blog.access === "public";
+		});
+		blogs.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+		return { blog: blogs[0] };
+	}
 	const { data } = await client.query({
 		query: GET_BLOG,
 		variables: { id: params.id }
