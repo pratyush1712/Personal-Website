@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardMedia, Chip, Container, SelectChangeEvent, Typography } from "@mui/material";
+import { AppBar, Box, Card, CardContent, CardMedia, Chip, Container, SelectChangeEvent, Typography } from "@mui/material";
 import Filters from "./Filters";
 import { Content } from "@/types";
 import Link from "next/link";
@@ -42,7 +42,28 @@ export default function ContentDisplay({
 
 	return (
 		<Container disableGutters>
-			<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={url} />
+			{!admin ? (
+				<AppBar
+					sx={{
+						minWidth: "100vw",
+						px: 4,
+						py: 1,
+						pb: 3,
+						background: "rgba(30, 30, 30, 0.998)",
+						borderBottom: "2px solid rgba(219, 9, 20, 1)",
+						boxShadow: "none"
+					}}
+				>
+					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={url} />
+				</AppBar>
+			) : (
+				<Box sx={{ mt: 1, mb: 3 }}>
+					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={url} />
+				</Box>
+			)}
+			<Typography variant="h5" sx={{ mb: 1, mt: 0, pt: 0 }}>
+				Recent Posts...
+			</Typography>
 			<Box sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 2 }}>
 				{data.map((feature: Content) => (
 					<Card

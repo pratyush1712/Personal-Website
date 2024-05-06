@@ -1,4 +1,5 @@
-import "../globals.css";
+import "@/app/globals.css";
+import { AuthLayout } from "@/components/CloseFriends";
 
 export const metadata = {
 	title: "Close Friends Login",
@@ -8,7 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body>{children}</body>
+			<body>
+				<AuthLayout>{children}</AuthLayout>
+			</body>
 		</html>
 	);
 }

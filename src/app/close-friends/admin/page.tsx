@@ -46,7 +46,7 @@ export default async function AdminDashboard({
 	const data = await getData(searchParams.searchTerm, searchParams.sortKey, searchParams.filterKey, searchParams.tagFilterKeys);
 	return (
 		<Container maxWidth="lg">
-			<Typography variant="h4" sx={{ my: 4 }}>
+			<Typography variant="h4" sx={{ mt: 4 }}>
 				Admin Dashboard
 			</Typography>
 			<ContentDisplay data={data} params={searchParams} admin={true} />

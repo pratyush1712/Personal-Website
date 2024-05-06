@@ -1,8 +1,9 @@
 "use client";
-import { TextField, FormControl, InputLabel, Select, MenuItem, Box, OutlinedInput, Chip } from "@mui/material";
+import { TextField, FormControl, InputLabel, Select, MenuItem, Box, OutlinedInput, Chip, Icon } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useTransition } from "react";
+import { IoMdSearch } from "react-icons/io";
 
 interface FiltersProps {
 	searchTerm: string | null | undefined;
@@ -50,23 +51,24 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 	}, [searchTermState, sortKeyState, filterKeyState, tagFilterKeysState]);
 
 	return (
-		<Box sx={{ display: "flex", flexDirection: "row", my: 2 }}>
+		<Box sx={{ display: "flex", flexDirection: "row", maxHeight: "30px", gap: 1 }}>
 			<TextField
 				label="Search Features"
 				variant="outlined"
 				fullWidth
 				value={searchTermState}
 				onChange={onSearchChange}
-				sx={{ flex: "1 1 auto", mr: 1 }}
+				size="small"
+				sx={{ flex: "1 1 auto", maxHeight: "30px" }}
 			/>
-			<FormControl fullWidth sx={{ flex: "1 1 auto", mr: 1 }}>
+			<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
 				<InputLabel id="sort-label">Sort By</InputLabel>
 				<Select labelId="sort-label" value={sortKeyState} label="Sort By" onChange={onSortChange}>
 					<MenuItem value="createdAt">Created At</MenuItem>
 					<MenuItem value="title">Title</MenuItem>
 				</Select>
 			</FormControl>
-			<FormControl fullWidth sx={{ flex: "1 1 auto", mr: 1 }}>
+			<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
 				<InputLabel id="category-label">Filter By Category</InputLabel>
 				<Select labelId="category-label" value={filterKeyState} label="Filter By Category" onChange={onFilterChange}>
 					<MenuItem value="all">All</MenuItem>
@@ -74,7 +76,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 					<MenuItem value="video">Video</MenuItem>
 				</Select>
 			</FormControl>
-			<FormControl fullWidth sx={{ flex: "1 1 auto" }}>
+			<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
 				<InputLabel id="tag-label">Filter By Tags</InputLabel>
 				<Select
 					labelId="tag-label"
@@ -87,7 +89,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 					renderValue={selected => (
 						<Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
 							{(selected as string[]).map(value => (
-								<Chip key={value} label={value} />
+								<Chip key={value} label={value} size="small" />
 							))}
 						</Box>
 					)}
@@ -100,6 +102,9 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 					<MenuItem value="all">All</MenuItem>
 				</Select>
 			</FormControl>
+			<Icon sx={{ height: "30px", alignItems: "center", display: "flex" }}>
+				<IoMdSearch size={48} style={{ color: "red", marginTop: "8px" }} />
+			</Icon>
 		</Box>
 	);
 }

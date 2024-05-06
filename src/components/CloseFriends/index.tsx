@@ -11,6 +11,9 @@ export { default as BlogsList } from "./Admin/Blogs/BlogsList";
 export { default as VideosList } from "./Admin/Videos/VideosList";
 export { default as VideoEditor } from "./Admin/Videos/VideoEditor";
 
+// Auth
+export { default as AuthLayout } from "./Auth/AuthLayout";
+
 // Blogs
 export { default as BlogLayout } from "./Blogs/BlogLayout";
 export { default as BlogView } from "./Blogs/BlogView";
