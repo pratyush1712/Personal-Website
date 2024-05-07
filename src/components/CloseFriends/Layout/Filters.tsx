@@ -53,6 +53,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 	return (
 		<Box sx={{ display: "flex", flexDirection: "row", maxHeight: "30px", gap: 1 }}>
 			<TextField
+				id="search-bar"
 				label="Search Features"
 				variant="outlined"
 				fullWidth

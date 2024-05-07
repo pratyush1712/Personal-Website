@@ -35,6 +35,9 @@ importers:
       '@emotion/styled':
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.1(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)
+      '@mantine/hooks':
+        specifier: ^7.9.0
+        version: 7.9.0(react@18.3.1)
       '@mui/icons-material':
         specifier: ^5.14.14
         version: 5.14.14(@mui/material@5.14.14(@emotion/react@11.11.1(@types/react@18.3.1)(react@18.3.1))(@emotion/styled@11.11.0(@emotion/react@11.11.1(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)
@@ -701,6 +704,11 @@ packages:
 
   '@josephg/resolvable@1.0.1':
     resolution: {integrity: sha512-CtzORUwWTTOTqfVtHaKRJ0I1kNQd1bpn3sUh8I3nJDVY+5/M/Oe1DnEWzPQvqq/xPIIkzzzIP7mfCoAjFRvDhg==}
+
+  '@mantine/hooks@7.9.0':
+    resolution: {integrity: sha512-LKgyrlaIK0S/gcn/VDbhqLBZOYjvhXfVcH7rMs4MIBVD+wuRo2LvvAYe3cUfQbBCfmlpRjqvewwvsIYYsjSofQ==}
+    peerDependencies:
+      react: ^18.2.0
 
   '@mongodb-js/saslprep@1.1.5':
     resolution: {integrity: sha512-XLNOMH66KhJzUJNwT/qlMnS4WsNDWD5ASdyaSH3EtK+F4r/CFGa3jT4GNi4mfOitGvWXtdLgQJkQjxSVrio+jA==}
@@ -4687,6 +4695,10 @@ snapshots:
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
   '@josephg/resolvable@1.0.1': {}
+
+  '@mantine/hooks@7.9.0(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
 
   '@mongodb-js/saslprep@1.1.5':
     dependencies:

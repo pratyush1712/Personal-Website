@@ -18,7 +18,6 @@ export const pdfAPI = async (data: any, blog: any) => {
 	const uploadResponse = await fetch("/api/upload", { method: "POST", body: formData });
 
 	const uploadData = await uploadResponse.json();
-	console.log(uploadData);
 	return uploadData;
 };
 

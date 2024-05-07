@@ -1,5 +1,5 @@
 "use client";
-import { Container, Typography, ThemeProvider, CssBaseline, Box, Icon } from "@mui/material";
+import { Container, Typography, ThemeProvider, CssBaseline, Box } from "@mui/material";
 import createTheme from "@/ui/Theme";
 import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
