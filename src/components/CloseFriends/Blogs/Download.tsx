@@ -1,9 +1,10 @@
 "use client";
 import { Button } from "@mui/material";
 import { sendGAEvent } from "@next/third-parties/google";
+import { usePathname } from "next/navigation";
 
 export default function DownloadBlogButton({ blog }: { blog: any }) {
-	const pathname = window.location.pathname.split("/").pop();
+	const pathname = usePathname().split("/").pop();
 	const onBlogDownload = () => {
 		sendGAEvent({ event: "Blog Downloaded", value: blog.title });
 	};
