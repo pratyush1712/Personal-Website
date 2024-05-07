@@ -32,6 +32,7 @@ const Shimmer = ({ src, alt, width, height, ...props }: ShimmerProps) => (
 		alt={alt}
 		width={width}
 		height={height}
+		unoptimized={true}
 		placeholder="blur"
 		blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(width!, height!))}`}
 		{...props}

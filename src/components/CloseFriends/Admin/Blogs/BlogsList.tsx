@@ -63,7 +63,7 @@ export default function BlogList() {
 			/>
 			{searchResults.map(blog => (
 				<Card key={blog.id} sx={{ display: "flex", marginBottom: 2, position: "relative" }}>
-					<CardMedia component="img" sx={{ width: 160, height: 140 }} image={blog.image} alt={blog.title} />
+					<CardMedia component="img" sx={{ width: 160, objectFit: "cover" }} image={blog.image} alt={blog.title} />
 					<Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
 						<CardContent sx={{ flex: "1 0 auto" }}>
 							<Typography variant="h5" gutterBottom>
