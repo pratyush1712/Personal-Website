@@ -8,6 +8,7 @@ import Image from "@/ui/Image";
 import SunEditorCore from "suneditor/src/lib/core";
 import { GET_BLOGS, GET_CONTENTS } from "@/graphql/client/queries";
 import { uploadPDF } from "@/utils/upload";
+import LoadingComponent from "@/ui/Loading";
 
 const CREATE_BLOG_MUTATION = gql`
 	mutation CreateBlog($input: NewBlogInput!) {
@@ -53,7 +54,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 	const [updateBlog, { loading: updating, error: updateError }] = useMutation(UPDATE_BLOG_MUTATION, {
 		refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }]
 	});
-	const [imageLoading, setImageLoading] = useState(false);
+	const [clientLoading, setClientLoading] = useState(false);
 	const [imageError, setImageError] = useState("");
 
 	const handleImageUpload = async (e: any) => {
@@ -64,7 +65,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 		formData.append("file", file);
 		formData.append("type", "blog");
 
-		setImageLoading(true);
+		setClientLoading(true);
 		setImageError("");
 
 		try {
@@ -75,12 +76,12 @@ export default function BlogEditor({ blog }: { blog: any }) {
 			const data = await response.json();
 			if (response.ok) {
 				setBlogUpdate({ ...blogUpdate, image: data[0] });
-				setImageLoading(false);
+				setClientLoading(false);
 			} else {
 				throw new Error(data.message || "Failed to upload image");
 			}
 		} catch (error: Error | any) {
-			setImageLoading(false);
+			setClientLoading(false);
 			setImageError(error.message);
 		}
 	};
@@ -89,7 +90,6 @@ export default function BlogEditor({ blog }: { blog: any }) {
 		const input = { ...blogUpdate, htmlContent: content };
 		delete input.id;
 		delete input.__typename;
-		// upload the pdf as well
 		uploadPDF({ editor: editor.current!, blog: blogUpdate });
 		if (blog?.id) {
 			input.updatedAt = new Date().toISOString();
@@ -105,12 +105,11 @@ export default function BlogEditor({ blog }: { blog: any }) {
 
 	if (createError || updateError) return <Alert severity="error">Error saving blog: {createError?.message || updateError?.message}</Alert>;
 
-	if (imageLoading) return <CircularProgress />;
 	if (imageError) return <Alert severity="error">{imageError}</Alert>;
 
 	return (
 		<Paper elevation={3} sx={{ p: 3, maxWidth: "100%" }}>
-			<Backdrop sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }} open={imageLoading || creating || updating}>
+			<Backdrop sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }} open={clientLoading || creating || updating}>
 				<CircularProgress color="inherit" />
 			</Backdrop>
 			<Typography variant="h4" gutterBottom>
@@ -135,7 +134,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 				<AccordionDetails>
 					<Box sx={{ display: "flex", alignItems: "flex-start", gap: 2, marginTop: 2, marginBottom: 2 }}>
 						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-							{imageLoading ? (
+							{clientLoading ? (
 								<CircularProgress size={24} />
 							) : (
 								<Box sx={{ width: 400, height: 287, position: "relative" }}>

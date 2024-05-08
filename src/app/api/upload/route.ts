@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
 		response = await Promise.all(
 			allowedImagePrefixes.map(async prefix => {
 				const data = await s3.send(new ListObjectsCommand({ Bucket, Prefix: prefix }));
+				if (!data.Contents) return [];
 				return data.Contents;
 			})
 		);
