@@ -68,6 +68,7 @@ export default function PlayList() {
 			>
 				<Image
 					loading="lazy"
+					onError={e => (e.currentTarget.src = "/images/default.jpg")}
 					src={song.image}
 					alt={song.name}
 					width={options.size}

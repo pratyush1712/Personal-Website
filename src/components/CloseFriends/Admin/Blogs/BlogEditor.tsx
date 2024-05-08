@@ -98,6 +98,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 			const date = new Date().toISOString();
 			input.createdAt = date;
 			input.updatedAt = date;
+			if (input?.image === undefined) input["image"] = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/images/default.jpg`;
 			await createBlog({ variables: { input } });
 		}
 	};
@@ -137,18 +138,16 @@ export default function BlogEditor({ blog }: { blog: any }) {
 							{imageLoading ? (
 								<CircularProgress size={24} />
 							) : (
-								blogUpdate?.image && (
-									<Box sx={{ width: 400, height: 287, position: "relative" }}>
-										<Image
-											src={blogUpdate?.image}
-											alt={blogUpdate?.title}
-											fill
-											style={{ objectFit: "contain" }}
-											quality={100}
-											onError={() => setBlogUpdate({ ...blogUpdate, image: blogUpdate?.image })}
-										/>
-									</Box>
-								)
+								<Box sx={{ width: 400, height: 287, position: "relative" }}>
+									<Image
+										src={blogUpdate?.image || "/images/default.jpg"}
+										alt={blogUpdate?.title}
+										fill
+										style={{ objectFit: "contain" }}
+										quality={100}
+										onError={() => setBlogUpdate({ ...blogUpdate, image: blogUpdate?.image })}
+									/>
+								</Box>
 							)}
 							<Button variant="contained" component="label">
 								Upload Image
