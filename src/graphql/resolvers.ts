@@ -11,18 +11,6 @@ const resolvers = {
 	},
 
 	Query: {
-		tags: async (_: any, __: any, context: { dataSources: { blogs: any; videos: any } }) => {
-			try {
-				const blogTags = context.dataSources.blogs.getAllBlogs().then((blogs: any) => blogs.map((blog: any) => blog.tags).flat());
-				const videoTags = context.dataSources.videos.getAllVideos().then((videos: any) => videos.map((video: any) => video.tags).flat());
-				const tags = await Promise.all([blogTags, videoTags]);
-				return new Set(tags.flat());
-			} catch (error) {
-				console.error("Failed to fetch tags:", error);
-				throw new Error("Error fetching tags.");
-			}
-		},
-
 		blogs: async (_: any, __: any, context: { dataSources: { blogs: any } }) => {
 			try {
 				return await context.dataSources.blogs.getAllBlogs();

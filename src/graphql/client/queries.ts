@@ -15,12 +15,6 @@ export const GET_CONTENTS = gql`
 	}
 `;
 
-export const GET_TAGS = gql`
-	query GetTags {
-		tags
-	}
-`;
-
 export const GET_BLOG = gql`
 	query GetBlog($id: ID!) {
 		blog(id: $id) {
