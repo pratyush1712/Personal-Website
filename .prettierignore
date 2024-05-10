@@ -11,3 +11,4 @@ src/utils/songs.json
 *.log
 *.out
 *.synctex.gz
+/.venv/

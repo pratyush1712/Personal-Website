@@ -6,7 +6,7 @@
 |        Python         |             Next.js             |         MediaPipe          |       MongoDB       |         GCP          |
 |         Java          |            Redux.js             |           NumPy            |      DynamoDB       |        Docker        |
 |         OCaml         |             Nuxt.js             |           Pandas           |       SQLite        |      Kubernetes      |
-|          C++          |             Node.js             |          Sklearn           |       Prisma        |        Heroku        |
+|          C++          |             Node.js             |          Convokit          |       Prisma        |        Heroku        |
 |           C           |           Express.js            |        Pomegranate         |       GraphQL       |       Netlify        |
 |         Shell         |             Flutter             |        Scikit-learn        |        Redis        |        Vercel        |
 |        MATLAB         |       React-Native (Expo)       |           OpenCV           |        Realm        |        Okteto        |

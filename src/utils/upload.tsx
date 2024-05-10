@@ -5,7 +5,7 @@ interface UploadPDF {
 	blog: any;
 }
 
-const APIUrl = "https://pdfturtle.gaitzsch.dev/api/pdf/from/html/render";
+const APIUrl = process.env.NEXT_PUBLIC_PDF_URL!;
 export const pdfAPI = async (data: any, blog: any) => {
 	const response = await fetch(APIUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
 	const blob = await response.blob();
