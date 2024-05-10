@@ -12,16 +12,23 @@ import {
 	Menu,
 	Backdrop,
 	FormControl,
-	AlertTitle
+	AlertTitle,
+	createFilterOptions
 } from "@mui/material";
 import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails, Divider } from "@mui/material";
 import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
 import Image from "@/ui/Image";
 import SunEditorCore from "suneditor/src/lib/core";
-import { GET_BLOGS, GET_CONTENTS } from "@/graphql/client/queries";
+import { GET_BLOGS, GET_CONTENTS, GET_TAGS } from "@/graphql/client/queries";
 import { uploadPDF } from "@/utils/upload";
 import LoadingComponent from "@/ui/Loading";
+interface TagOptionType {
+	inputValue?: string;
+	title: string;
+}
+
+const filter = createFilterOptions<TagOptionType>();
 
 const CREATE_BLOG_MUTATION = gql`
 	mutation CreateBlog($input: NewBlogInput!) {
@@ -57,15 +64,15 @@ const UPDATE_BLOG_MUTATION = gql`
 	}
 `;
 
-export default function BlogEditor({ blog }: { blog: any }) {
+export default function BlogEditor({ blog, tagsData }: { blog: any; tagsData: TagOptionType[] }) {
 	const editor = useRef<SunEditorCore>();
 	const [content, setContent] = useState(blog?.htmlContent || "<p>Start typing here...</p>");
 	const [blogUpdate, setBlogUpdate] = useState(blog);
 	const [createBlog, { loading: creating, error: createError }] = useMutation(CREATE_BLOG_MUTATION, {
-		refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }]
+		refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }, { query: GET_TAGS }]
 	});
 	const [updateBlog, { loading: updating, error: updateError }] = useMutation(UPDATE_BLOG_MUTATION, {
-		refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }]
+		refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }, { query: GET_TAGS }]
 	});
 	const [clientLoading, setClientLoading] = useState(false);
 	const [imageError, setImageError] = useState("");
@@ -182,7 +189,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 								) : (
 									<Box sx={{ width: 400, height: 287, position: "relative" }}>
 										<Image
-											src={blogUpdate?.image || "/images/default.jpg"}
+											src={"/images/default.jpg"}
 											alt={blogUpdate?.title}
 											fill
 											style={{ objectFit: "contain" }}
@@ -233,15 +240,29 @@ export default function BlogEditor({ blog }: { blog: any }) {
 								<Box display="flex" gap={2} sx={{ my: 2 }}>
 									<Autocomplete
 										multiple
-										options={[]}
-										defaultValue={blogUpdate?.tags}
+										options={tagsData}
+										getOptionLabel={option => {
+											console.log(option);
+											if (typeof option === "string") return option;
+											if (option.inputValue) return option.inputValue;
+											return option.title;
+										}}
+										filterOptions={(options, params) => {
+											const filtered = filter(options, params);
+											const { inputValue } = params;
+											const isExisting = options.some(tag => tag.title.includes(inputValue));
+											if (!isExisting) filtered.push({ title: inputValue, inputValue: `Add "${inputValue}"` });
+											return filtered;
+										}}
+										value={blogUpdate?.tags.map((tag: string) => ({ inputValue: tag, title: tag }))}
+										defaultValue={blogUpdate?.tags.map((tag: string) => ({ inputValue: tag, title: tag }))}
 										freeSolo
 										sx={{ maxWidth: "48%", minWidth: "48%" }}
 										renderTags={(value, getTagProps) =>
 											value.map((option, index) => (
 												<Chip
 													variant="outlined"
-													label={option}
+													label={option.title}
 													sx={{ borderRadius: 1.5, p: 2 }}
 													{...getTagProps({ index })}
 													key={index}
@@ -249,11 +270,18 @@ export default function BlogEditor({ blog }: { blog: any }) {
 											))
 										}
 										renderInput={params => <TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />}
-										onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, tags: newValue })}
+										onChange={(event, newValue) =>
+											setBlogUpdate((currentBlog: any) => {
+												return {
+													...currentBlog,
+													tags: currentBlog.tags.concat(newValue.map((tag: TagOptionType) => tag.title))
+												};
+											})
+										}
 									/>
 									<Autocomplete
 										multiple
-										options={["hi"]}
+										options={[]}
 										defaultValue={blogUpdate?.keywords}
 										freeSolo
 										sx={{ maxWidth: "50%", minWidth: "50%" }}

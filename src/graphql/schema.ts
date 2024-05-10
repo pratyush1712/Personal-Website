@@ -38,6 +38,7 @@ const typeDefs = `#graphql
   }
 
   type Query {
+    tags: [String]
     blogs: [Blog]
     videos: [Video]
     blog(id: ID!): Blog
