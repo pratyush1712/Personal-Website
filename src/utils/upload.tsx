@@ -37,20 +37,22 @@ export const uploadPDF = async ({ editor, blog }: UploadPDF) => {
 	const iframe = document.createElement("iframe");
 	iframe.style.display = "none";
 	document.body.appendChild(iframe);
-	const contentsHTML = editor?.core?.options.printTemplate
-		? editor?.core.options.printTemplate.replace(/\{\{\s*contents\s*\}\}/i, editor?.getContents ? editor?.getContents(true) : "")
-		: editor?.getContents
-		? editor?.getContents(true)
-		: "";
+
+	let contentsHTML = "";
+	if (editor?.core?.options.printTemplate) {
+		const template = editor?.core?.options.printTemplate;
+		contentsHTML = template.replace(/\{\{\s*contents\s*\}\}/i, editor?.getContents ? editor?.getContents(true) : "");
+	} else if (editor?.getContents) contentsHTML = editor?.getContents(true);
+
 	const printDocument = iframe.contentWindow?.document!;
 	const wDoc = document;
 	if (editor?.core?.options.iframe) {
-		const arrts =
-			editor?.core.options._printClass !== null
-				? 'class="' + editor?.core.options._printClass + '"'
-				: editor?.core.options.fullPage
-				? editor?.util?.getAttributesToString(wDoc.body, ["contenteditable"])
-				: 'class="' + editor?.core.options.className + '"';
+		let arrts = "";
+		if (editor?.core.options._printClass !== null) {
+			arrts = 'class="' + editor?.core.options._printClass + '"';
+		} else if (editor?.core.options.fullPage) {
+			arrts = editor?.util?.getAttributesToString(wDoc.body, ["contenteditable"]);
+		} else arrts = 'class="' + editor?.core.options.className + '"';
 
 		printDocument.write(
 			"" + "<!DOCTYPE html><html>" + "<head>" + wDoc.head.innerHTML + "</head>" + "<body " + arrts + ">" + contentsHTML + "</body>" + "</html>"
@@ -62,18 +64,9 @@ export const uploadPDF = async ({ editor, blog }: UploadPDF) => {
 		for (let i = 0, len = links.length; i < len; i++) linkHTML += links[i].outerHTML;
 		for (let i = 0, len = styles.length; i < len; i++) linkHTML += styles[i].outerHTML;
 
+		const bodyClass = editor?.core?.options._printClass !== null ? editor?.core?.options._printClass : editor?.core.options.className;
 		printDocument.write(
-			"" +
-				"<!DOCTYPE html><html>" +
-				"<head>" +
-				linkHTML +
-				"</head>" +
-				'<body class="' +
-				(editor?.core?.options._printClass !== null ? editor?.core?.options._printClass : editor?.core.options.className) +
-				'">' +
-				contentsHTML +
-				"</body>" +
-				"</html>"
+			"" + "<!DOCTYPE html><html>" + "<head>" + linkHTML + "</head>" + '<body class="' + bodyClass + '">' + contentsHTML + "</body>" + "</html>"
 		);
 	}
 
