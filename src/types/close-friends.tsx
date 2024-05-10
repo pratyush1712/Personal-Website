@@ -1,5 +1,5 @@
 export type Content = {
-	id: number;
+	id?: number;
 	title: string;
 	details: string;
 	access?: string;
