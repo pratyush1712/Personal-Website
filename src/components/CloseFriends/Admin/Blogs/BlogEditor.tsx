@@ -1,19 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import {
-	Button,
-	TextField,
-	Typography,
-	Paper,
-	CircularProgress,
-	Alert,
-	Select,
-	MenuItem,
-	Menu,
-	Backdrop,
-	FormControl,
-	AlertTitle
-} from "@mui/material";
+import { Button, TextField, Typography, Paper, CircularProgress, Alert, Select, MenuItem, Backdrop, FormControl } from "@mui/material";
 import { Autocomplete, Chip, Box, Accordion, AccordionSummary, AccordionDetails, Divider } from "@mui/material";
 import Editor from "@/ui/Editor";
 import { useMutation, gql } from "@apollo/client";
@@ -21,7 +8,6 @@ import Image from "@/ui/Image";
 import SunEditorCore from "suneditor/src/lib/core";
 import { GET_BLOGS, GET_CONTENTS } from "@/graphql/client/queries";
 import { uploadPDF } from "@/utils/upload";
-import LoadingComponent from "@/ui/Loading";
 
 const CREATE_BLOG_MUTATION = gql`
 	mutation CreateBlog($input: NewBlogInput!) {
