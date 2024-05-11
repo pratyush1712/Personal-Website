@@ -96,6 +96,8 @@ export default async function middleware(request: NextRequest) {
 			console.log("URL: ", url);
 			// If authenticated, serve the content from /close-friends. private.pratyushsudhakar.com/* -> pratyushsudhakar.com/close-friends/*
 			return NextResponse.rewrite(new URL(`/close-friends${url.pathname + url.search}`, url));
+		} else {
+			return NextResponse.rewrite(new URL(`/close-friends${url.pathname + url.search}`, url));
 		}
 	}
 
