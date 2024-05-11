@@ -21,7 +21,9 @@ export default async function middleware(request: NextRequest) {
 	const hostname = request.headers.get("host")!;
 	const normalizedHostname = hostname.replace(/:\d+$/, "");
 
-	// secure the api/graphql route
+	/* -----------------Development, Staging, and Production routing handling ------------------------*/
+
+	// secure the api/graphql route. protect in all environments
 	if (url.pathname.includes("/api/graphql")) {
 		if (!session) {
 			return NextResponse.redirect(new URL("/login", request.url));
@@ -40,22 +42,25 @@ export default async function middleware(request: NextRequest) {
 		}
 	}
 
-	if (normalizedHostname === "localhost") {
-		if (url.pathname === "/close-friends") {
-			if (!session) {
-				return NextResponse.redirect(new URL("/login", request.url));
-			}
-			return NextResponse.next();
-		}
-		return NextResponse.next();
-	}
+	// no need to check for authentication because /close-friends is a public route
+	// if (normalizedHostname === "localhost") {
+	// 	if (url.pathname === "/close-friends") {
+	// 		if (!session) {
+	// 			return NextResponse.redirect(new URL("/login", request.url));
+	// 		}
+	// 		return NextResponse.next();
+	// 	}
+	// 	return NextResponse.next();
+	// }
 
-	// Handling requests intended for pratyushsudhakar.com
+	/* -----------------Production routing handling ------------------------*/
+
+	// Handling requests intended for pratyushsudhakar.com. will only be true in production
 	if (normalizedHostname === `${process.env.NEXT_PUBLIC_ROOT_DOMAIN}` && url.pathname === "/close-friends") {
 		return NextResponse.redirect(new URL(`https://private.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, request.url));
 	}
 
-	// Handling requests intended for private.pratyushsudhakar.com
+	// Handling requests intended for private.pratyushsudhakar.com - could only be true in production
 	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`) {
 		if (!session && url.pathname !== "/login" && url.pathname.includes("/blog/") && url.pathname.includes("/video/")) {
 			return NextResponse.redirect(new URL("/login", url));
