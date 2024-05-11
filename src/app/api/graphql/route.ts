@@ -1,6 +1,5 @@
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
-
 import typeDefs from "@/graphql/schema";
 import resolvers from "@/graphql/resolvers";
 import { NextApiRequest } from "next";
@@ -25,7 +24,8 @@ connectDB();
 const apolloServer = new ApolloServer({
 	typeDefs,
 	resolvers,
-	introspection: process.env.NODE_ENV !== "production"
+	introspection: process.env.NODE_ENV !== "production",
+	csrfPrevention: true
 });
 
 const handler = startServerAndCreateNextHandler(apolloServer, {

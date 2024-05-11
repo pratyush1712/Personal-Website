@@ -28,6 +28,9 @@ export const config = {
 		async signIn({ user }) {
 			if (closeFriendsEmails.has(user?.email!)) return true;
 			return false;
+		},
+		async session({ session }) {
+			return session;
 		}
 	},
 	secret: process.env.NEXTAUTH_SECRET
