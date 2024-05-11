@@ -56,7 +56,7 @@ export default async function middleware(request: NextRequest) {
 	/* -----------------Production routing handling ------------------------*/
 
 	// Handling requests intended for pratyushsudhakar.com. will only be true in production
-	if (normalizedHostname === `${process.env.NEXT_PUBLIC_ROOT_DOMAIN}` && url.pathname === "/close-friends") {
+	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRODUCTION_DOMAIN}` && url.pathname === "/close-friends") {
 		return NextResponse.redirect(new URL(`https://private.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, request.url));
 	}
 
