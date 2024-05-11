@@ -1,6 +1,6 @@
-'use client' // Error components must be Client Components
+"use client"; // Error components must be Client Components
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 import { Container, Typography, Button, Box } from "@mui/material";
 import { MdError } from "react-icons/md";
 

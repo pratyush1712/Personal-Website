@@ -95,12 +95,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 			return;
 		}
 		const validationErrors = requiredFields.map(field => {
-			if (
-				blogUpdate[field] === undefined ||
-				blogUpdate[field] === null ||
-				blogUpdate[field] === "" ||
-				blogUpdate[field]?.length === 0
-			) {
+			if (blogUpdate[field] === undefined || blogUpdate[field] === null || blogUpdate[field] === "" || blogUpdate[field]?.length === 0) {
 				setFormError(`Please fill in the '${field}' with valid data.`);
 				setTimeout(() => setFormError(null), 5000);
 				return true;
@@ -245,9 +240,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 												/>
 											))
 										}
-										renderInput={params => (
-											<TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />
-										)}
+										renderInput={params => <TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />}
 										onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, tags: newValue })}
 									/>
 									<Autocomplete
