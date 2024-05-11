@@ -38,6 +38,7 @@ export default function Login() {
 					<BiLogIn size={24} color="white" />
 					<Typography variant="body1" sx={{ color: "white", px: 1 }}>
 						My Blog and Video Sharing Platform
+						{process.env.VERCEL_ENV}
 					</Typography>
 				</Box>
 				<Box sx={{ minWidth: "max-content", height: "100%", display: "flex", flexDirection: "row" }}>
