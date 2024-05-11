@@ -39,7 +39,7 @@ export default function ContentDisplay({
 
 	// In production, url: /{contentType}/id
 	// In preview, staging, and development, url: /close-friends/{contentType}/id
-	const contentURL = process.env.VERCEL_ENV === "production" ? "/" : "close-friends/";
+	const contentURL = process.env.VERCEL_ENV === "production" ? "close-friends/" : "close-friends/";
 
 	// data is an array whose contents is sometimes wrapped in item
 	if (data[0]?.item) {
