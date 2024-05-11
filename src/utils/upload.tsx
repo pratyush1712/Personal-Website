@@ -59,17 +59,7 @@ export const uploadPDF = async ({ editor, blog }: UploadPDF) => {
 		} else arrts = 'class="' + editor?.core.options.className + '"';
 
 		printDocument.write(
-			"" +
-				"<!DOCTYPE html><html>" +
-				"<head>" +
-				wDoc.head.innerHTML +
-				"</head>" +
-				"<body " +
-				arrts +
-				">" +
-				contentsHTML +
-				"</body>" +
-				"</html>"
+			"" + "<!DOCTYPE html><html>" + "<head>" + wDoc.head.innerHTML + "</head>" + "<body " + arrts + ">" + contentsHTML + "</body>" + "</html>"
 		);
 	} else {
 		const links = wDoc.head.getElementsByTagName("link");
@@ -80,17 +70,7 @@ export const uploadPDF = async ({ editor, blog }: UploadPDF) => {
 
 		const bodyClass = editor?.core?.options._printClass !== null ? editor?.core?.options._printClass : editor?.core.options.className;
 		printDocument.write(
-			"" +
-				"<!DOCTYPE html><html>" +
-				"<head>" +
-				linkHTML +
-				"</head>" +
-				'<body class="' +
-				bodyClass +
-				'">' +
-				contentsHTML +
-				"</body>" +
-				"</html>"
+			"" + "<!DOCTYPE html><html>" + "<head>" + linkHTML + "</head>" + '<body class="' + bodyClass + '">' + contentsHTML + "</body>" + "</html>"
 		);
 	}
 

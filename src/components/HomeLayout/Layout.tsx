@@ -127,12 +127,7 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 					<Grid container sx={{ overflow: "auto", overflowY: "hidden" }}>
 						<Grid container sx={{ overflow: "auto" }}>
 							<Grid item sx={{ width: 50 }}>
-								<Sidebar
-									setExpanded={setExpanded}
-									expanded={expanded}
-									darkMode={darkMode}
-									handleThemeChange={handleThemeChange}
-								/>
+								<Sidebar setExpanded={setExpanded} expanded={expanded} darkMode={darkMode} handleThemeChange={handleThemeChange} />
 							</Grid>
 							{expanded && (
 								<Grid item sx={{ backgroundColor: darkMode ? "#252527" : "#f3f3f3", width: 220 }}>
