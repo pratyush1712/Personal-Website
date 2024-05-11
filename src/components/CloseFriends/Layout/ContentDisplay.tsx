@@ -33,18 +33,6 @@ export default function ContentDisplay({
 
 	return (
 		<Container disableGutters>
-			<div className="p-12 m-12 flex">
-				From Content Display (Page.tsx) NODE_ENV = {process.env.NODE_ENV} &#187; <br />
-				<mark>
-					const homeURL = process.env.NODE_ENV! === production ? /search : /close-friends/
-					<br /> const adminURL = process.env.NODE_ENV! === production ? /admin : /close-friends/admin
-				</mark>
-				<br />
-				{process.env.NODE_ENV! === "production" ? "/search" : "/close-friends/"}
-				<br />
-				{process.env.NODE_ENV! === "production" ? "/admin" : "/close-friends/admin"}
-			</div>
-
 			{!admin ? (
 				<AppBar
 					sx={{

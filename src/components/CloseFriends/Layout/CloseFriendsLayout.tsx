@@ -210,11 +210,6 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						}}></Box>
 				</Container>
 				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 10 }}>
-					<div className="p-12 m-12 flex">
-						NODE_ENV = {process.env.NODE_ENV} &#187; <br />
-						<mark>const adminURL = process.env.NODE_ENV === production ? /admin : /close-friends/admin</mark> <br />
-						{process.env.NODE_ENV === "production" ? "/admin" : "/close-friends/admin"}
-					</div>
 					{children}
 				</Container>
 				{user?.email === "pratyushsudhakar03@gmail.com" && (
