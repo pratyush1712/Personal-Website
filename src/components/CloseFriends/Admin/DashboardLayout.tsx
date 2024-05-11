@@ -50,14 +50,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 						}}
 					/>
 					<Box component="main" sx={{ flexGrow: 1, margin: "auto" }}>
-						<div className="p-12 m-12 flex">
-							NEXT_PUBLIC_VERCEL_ENV = {process.env.NEXT_PUBLIC_VERCEL_ENV} &#187; <br />
-							<mark>
-								const currentUrl = process.env.NEXT_PUBLIC_VERCEL_ENV === production ? /admin : /close-friends/admin
-							</mark>{" "}
-							<br />
-							{process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "/admin" : "/close-friends/admin"}
-						</div>
 						<Toolbar sx={{ p: 0, margin: "auto", mt: 2 }}>
 							<Tabs
 								value={value}

@@ -52,12 +52,7 @@ export default function Login() {
 			</Box>
 			<Typography variant="h5">Welcome back</Typography>
 			<Typography variant="h6" sx={{ mb: 2, color: "#95a5a6" }}>
-				Login to your account <br />
-				Callback:
-				<br />
-				NEXT_PUBLIC_VERCEL_ENV = {process.env.NEXT_PUBLIC_VERCEL_ENV} &#187; <br />
-				<mark>process.env.NEXT_PUBLIC_VERCEL_ENV !== production ? /close-friends : /</mark>:{" "}
-				{process.env.NEXT_PUBLIC_VERCEL_ENV !== "production" ? "/close-friends" : "/"}
+				Login to your account
 			</Typography>
 			<Button
 				variant="contained"

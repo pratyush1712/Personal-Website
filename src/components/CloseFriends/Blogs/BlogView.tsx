@@ -23,12 +23,6 @@ export default function BlogView({ blog }: { blog: Content }) {
 					Back to Home
 				</Button>
 			</Link>
-			<div className="p-12 m-12 flex">
-				NEXT_PUBLIC_VERCEL_ENV = {process.env.NEXT_PUBLIC_VERCEL_ENV} &#187; <br />
-				<mark>process.env.NEXT_PUBLIC_VERCEL_ENV === production ? / : /close-friends</mark> <br />
-				{process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "/" : "/close-friends"}
-			</div>
-
 			<DownloadBlogButton blog={blog} />
 			<Typography variant="h4" sx={{ px: 3, pb: 3, pt: 1 }}>
 				{blog.title}

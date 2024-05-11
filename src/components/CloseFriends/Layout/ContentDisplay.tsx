@@ -33,18 +33,6 @@ export default function ContentDisplay({
 
 	return (
 		<Container disableGutters>
-			<div className="p-12 m-12 flex">
-				From Content Display (Page.tsx) NEXT_PUBLIC_VERCEL_ENV = {process.env.NEXT_PUBLIC_VERCEL_ENV} &#187; <br />
-				<mark>
-					const homeURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === production ? /search : /close-friends/
-					<br /> const adminURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === production ? /admin : /close-friends/admin
-				</mark>
-				<br />
-				{process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/search" : "/close-friends/"}
-				<br />
-				{process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/admin" : "/close-friends/admin"}
-			</div>
-
 			{!admin ? (
 				<AppBar
 					sx={{
