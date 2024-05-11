@@ -14,9 +14,9 @@ export const config = {
 const closeFriendsEndpoints = ["/blog/", "/video/", "/admin", "/sitemap.xml"];
 
 const replaceDomain = (url: string, newDomain: string): URL => {
-	const originalUrl = new URL(url);
-	originalUrl.host = newDomain;
-	return originalUrl;
+	const newUrl = new URL(url, newDomain);
+	console.log("New URL", newUrl.href);
+	return newUrl;
 };
 
 import { NextResponse } from "next/server";
@@ -62,6 +62,7 @@ export default async function middleware(request: NextRequest) {
 		// Redirect all /close-friends/* requests to private.pratyushsudhakar.com/*
 		if (url.pathname.startsWith("/close-friends")) {
 			const newPath = url.pathname.replace("/close-friends", "");
+			console.log("Redirecting to private domain", newPath);
 			return NextResponse.redirect(replaceDomain(newPath, prodPrivateURL));
 		}
 	} else if (normalizedHostname === prodPrivateURL.split("://")[1]) {
