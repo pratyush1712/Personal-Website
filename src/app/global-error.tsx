@@ -11,6 +11,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
 					<details>
 						<summary>Stack trace</summary>
 						<pre>{error.stack}</pre>
+						<pre>{error.digest}</pre>
 					</details>
 				</p>
 				<button onClick={() => reset()}>Try again</button>
