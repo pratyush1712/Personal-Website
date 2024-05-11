@@ -46,9 +46,9 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 		if (filterKeyState !== "all" && filterKeyState !== null) URL.set("filterKey", filterKeyState);
 		if (tagFilterKeysState.length !== 0 && tagFilterKeysState !== null)
 			URL.set("tagFilterKeys", tagFilterKeysState?.join(","));
-		startTransition(() => {
-			router.replace(`${url}?${URL.toString()}`);
-		});
+		// startTransition(() => {
+		// 	router.replace(`${url}?${URL.toString()}`);
+		// });
 	}, [searchTermState, sortKeyState, filterKeyState, tagFilterKeysState]);
 
 	return (
