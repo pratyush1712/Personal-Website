@@ -4,21 +4,15 @@ import { useEffect } from 'react'
 import { Container, Typography, Button, Box } from "@mui/material";
 import { MdError } from "react-icons/md";
 
-interface ErrorProps {
-	error: Error & { digest?: string };
-	reset: () => void;
-}
-
-const dummyError = {
-	name: "error",
-	message: "An error occured",
-	digest: "434356"
-};
-const handleReset = () => {
-	console.log("Resetting error...");
-};
-
-export default function Error({ error = dummyError, reset = handleReset }: ErrorProps) {
+export default function Error() {
+	const error = {
+		name: "error",
+		message: "An error occured",
+		digest: "434356"
+	};
+	const reset = () => {
+		console.log("Resetting error...");
+	};
 	useEffect(() => console.error(error), [error]);
 
 	return (
