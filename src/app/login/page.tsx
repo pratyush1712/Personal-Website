@@ -8,7 +8,7 @@ import { FaGlobeAmericas } from "react-icons/fa";
 
 export default function Login() {
 	const handleLogin = async () => {
-		await signIn("google", { callbackUrl: process.env.NODE_ENV !== "production" ? "/close-friends" : "/" });
+		await signIn("google", { callbackUrl: process.env.NEXT_PUBLIC_VERCEL_ENV !== "production" ? "/close-friends" : "/" });
 	};
 
 	return (
@@ -55,9 +55,9 @@ export default function Login() {
 				Login to your account <br />
 				Callback:
 				<br />
-				NODE_ENV = {process.env.NODE_ENV} &#187; <br />
-				<mark>process.env.NODE_ENV !== production ? /close-friends : /</mark>:{" "}
-				{process.env.NODE_ENV !== "production" ? "/close-friends" : "/"}
+				NEXT_PUBLIC_VERCEL_ENV = {process.env.NEXT_PUBLIC_VERCEL_ENV} &#187; <br />
+				<mark>process.env.NEXT_PUBLIC_VERCEL_ENV !== production ? /close-friends : /</mark>:{" "}
+				{process.env.NEXT_PUBLIC_VERCEL_ENV !== "production" ? "/close-friends" : "/"}
 			</Typography>
 			<Button
 				variant="contained"

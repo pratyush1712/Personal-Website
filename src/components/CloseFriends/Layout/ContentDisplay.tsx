@@ -20,9 +20,9 @@ export default function ContentDisplay({
 }) {
 	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
 
-	const homeURL = process.env.NODE_ENV! === "production" ? "/search" : "/close-friends/";
-	const adminURL = process.env.NODE_ENV! === "production" ? "/admin" : "/close-friends/admin";
-	const currentURL = process.env.NODE_ENV! === "production" ? "/" : "/close-friends/";
+	const homeURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/search" : "/close-friends/";
+	const adminURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/admin" : "/close-friends/admin";
+	const currentURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/" : "/close-friends/";
 
 	// data is an array whose contents is sometimes wrapped in item
 	if (data[0]?.item) {
@@ -34,15 +34,15 @@ export default function ContentDisplay({
 	return (
 		<Container disableGutters>
 			<div className="p-12 m-12 flex">
-				From Content Display (Page.tsx) NODE_ENV = {process.env.NODE_ENV} &#187; <br />
+				From Content Display (Page.tsx) NEXT_PUBLIC_VERCEL_ENV = {process.env.NEXT_PUBLIC_VERCEL_ENV} &#187; <br />
 				<mark>
-					const homeURL = process.env.NODE_ENV! === production ? /search : /close-friends/
-					<br /> const adminURL = process.env.NODE_ENV! === production ? /admin : /close-friends/admin
+					const homeURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === production ? /search : /close-friends/
+					<br /> const adminURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === production ? /admin : /close-friends/admin
 				</mark>
 				<br />
-				{process.env.NODE_ENV! === "production" ? "/search" : "/close-friends/"}
+				{process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/search" : "/close-friends/"}
 				<br />
-				{process.env.NODE_ENV! === "production" ? "/admin" : "/close-friends/admin"}
+				{process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/admin" : "/close-friends/admin"}
 			</div>
 
 			{!admin ? (
