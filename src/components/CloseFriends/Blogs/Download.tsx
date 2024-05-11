@@ -10,7 +10,7 @@ export default function DownloadBlogButton({ blog }: { blog: any }) {
 	};
 
 	const handleDownload = async () => {
-		window.open(`https://privatewebsitecontent.s3.amazonaws.com/pdf/${blog.title}.pdf`);
+		window.open(`https://${process.env.NEXT_PUBLIC_BUCKET}.s3.amazonaws.com/pdf/${blog.title}.pdf`);
 		onBlogDownload();
 	};
 	return (
@@ -27,10 +27,7 @@ export default function DownloadBlogButton({ blog }: { blog: any }) {
 				borderBottomLeftRadius: "30px",
 				cursor: "pointer",
 				zIndex: 1000,
-				"&:hover": {
-					backgroundColor: "#E50914",
-					color: "white"
-				}
+				"&:hover": { backgroundColor: "#E50914", color: "white" }
 			}}>
 			Download PDF
 		</Button>

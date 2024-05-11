@@ -1,4 +1,14 @@
-import { AppBar, Box, Card, CardContent, CardMedia, Chip, Container, SelectChangeEvent, Typography } from "@mui/material";
+import {
+	AppBar,
+	Box,
+	Card,
+	CardContent,
+	CardMedia,
+	Chip,
+	Container,
+	SelectChangeEvent,
+	Typography
+} from "@mui/material";
 import Filters from "./Filters";
 import { Content } from "@/types";
 import Link from "next/link";
@@ -51,7 +61,13 @@ export default function ContentDisplay({
 						borderBottom: "2px solid rgba(219, 9, 20, 1)",
 						boxShadow: "none"
 					}}>
-					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={url} />
+					<Filters
+						searchTerm={searchTerm}
+						sortKey={sortKey}
+						filterKey={filterKey}
+						tagFilterKeys={tagFilterKeys}
+						url={url}
+					/>
 				</AppBar>
 			) : (
 				<Box sx={{ mt: 1, mb: 3 }}>
@@ -73,7 +89,7 @@ export default function ContentDisplay({
 						key={feature.id}
 						sx={{ maxWidth: "100%", bgcolor: "background.paper" }}
 						component={Link}
-						href={`${contentURL}${feature?.__typename?.toLowerCase()}/${feature.id}`}>
+						href={`/${contentURL}${feature?.__typename?.toLowerCase()}/${feature.id}`}>
 						<CardMedia component="img" height="140" image={feature.image} alt={feature.title} />
 						<CardContent>
 							<Typography variant="h5" component="div">

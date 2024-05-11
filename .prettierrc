@@ -6,8 +6,9 @@
 	"bracketSpacing": true,
 	"useTabs": true,
 	"arrowParens": "avoid",
-	"printWidth": 150,
+	"printWidth": 120,
 	"proseWrap": "never",
+	"rangeStart": 120,
 	"endOfLine": "lf",
 	"bracketSameLine": true
 }

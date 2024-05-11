@@ -7,7 +7,11 @@ interface UploadPDF {
 
 const APIUrl = process.env.NEXT_PUBLIC_PDF_URL!;
 export const pdfAPI = async (data: any, blog: any) => {
-	const response = await fetch(APIUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+	const response = await fetch(APIUrl, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(data)
+	});
 	const blob = await response.blob();
 	download(blob, blog.title + ".pdf");
 
@@ -41,7 +45,10 @@ export const uploadPDF = async ({ editor, blog }: UploadPDF) => {
 	let contentsHTML = "";
 	if (editor?.core?.options.printTemplate) {
 		const template = editor?.core?.options.printTemplate;
-		contentsHTML = template.replace(/\{\{\s*contents\s*\}\}/i, editor?.getContents ? editor?.getContents(true) : "");
+		contentsHTML = template.replace(
+			/\{\{\s*contents\s*\}\}/i,
+			editor?.getContents ? editor?.getContents(true) : ""
+		);
 	} else if (editor?.getContents) contentsHTML = editor?.getContents(true);
 
 	const printDocument = iframe.contentWindow?.document!;
@@ -55,7 +62,17 @@ export const uploadPDF = async ({ editor, blog }: UploadPDF) => {
 		} else arrts = 'class="' + editor?.core.options.className + '"';
 
 		printDocument.write(
-			"" + "<!DOCTYPE html><html>" + "<head>" + wDoc.head.innerHTML + "</head>" + "<body " + arrts + ">" + contentsHTML + "</body>" + "</html>"
+			"" +
+				"<!DOCTYPE html><html>" +
+				"<head>" +
+				wDoc.head.innerHTML +
+				"</head>" +
+				"<body " +
+				arrts +
+				">" +
+				contentsHTML +
+				"</body>" +
+				"</html>"
 		);
 	} else {
 		const links = wDoc.head.getElementsByTagName("link");
@@ -64,9 +81,22 @@ export const uploadPDF = async ({ editor, blog }: UploadPDF) => {
 		for (let i = 0, len = links.length; i < len; i++) linkHTML += links[i].outerHTML;
 		for (let i = 0, len = styles.length; i < len; i++) linkHTML += styles[i].outerHTML;
 
-		const bodyClass = editor?.core?.options._printClass !== null ? editor?.core?.options._printClass : editor?.core.options.className;
+		const bodyClass =
+			editor?.core?.options._printClass !== null
+				? editor?.core?.options._printClass
+				: editor?.core.options.className;
 		printDocument.write(
-			"" + "<!DOCTYPE html><html>" + "<head>" + linkHTML + "</head>" + '<body class="' + bodyClass + '">' + contentsHTML + "</body>" + "</html>"
+			"" +
+				"<!DOCTYPE html><html>" +
+				"<head>" +
+				linkHTML +
+				"</head>" +
+				'<body class="' +
+				bodyClass +
+				'">' +
+				contentsHTML +
+				"</body>" +
+				"</html>"
 		);
 	}
 

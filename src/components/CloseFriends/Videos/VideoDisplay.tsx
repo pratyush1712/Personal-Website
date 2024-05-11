@@ -1,13 +1,16 @@
 import Video from "@/ui/Video";
 import { Button, Container, Typography } from "@mui/material";
 import Footer from "../Layout/Footer";
+import Link from "next/link";
 
 export default function VideoDisplay({ video }: { video: any }) {
 	return (
 		<Container sx={{ minWidth: "100%" }}>
-			<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
-				Back to Home
-			</Button>
+			<Link href={process.env.VERCEL_ENV === "production" ? "/home" : "/close-friends"} passHref>
+				<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
+					Back to Home
+				</Button>
+			</Link>
 			<Typography variant="h4" sx={{ px: 3, pb: 3, pt: 1 }}>
 				{video.title}
 				<Typography variant="subtitle2" component="p">

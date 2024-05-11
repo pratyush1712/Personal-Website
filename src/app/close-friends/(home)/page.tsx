@@ -15,7 +15,11 @@ const getData = async (
 	tagFilterKeys: string[] | null = []
 ) => {
 	const session = await getServerSession();
-	const access = !session ? "public" : session?.user?.email === "pratyushsudhakar03@gmail.com" ? "private" : "close-friends";
+	const access = !session
+		? "public"
+		: session?.user?.email === "pratyushsudhakar03@gmail.com"
+		? "private"
+		: "close-friends";
 	const client = getClient();
 	const { data } = await client.query({ query: GET_CONTENTS, variables: { access } });
 	const fuseOptions = {
@@ -31,9 +35,15 @@ const getData = async (
 	}
 
 	const filteredFeatures = searchResults
-		.filter((content: Content) => filterKey === "all" || content?.__typename?.toLocaleLowerCase().includes(filterKey!))
-		.filter((content: Content) => tagFilterKeys?.length === 0 || content.tags.some(tag => tagFilterKeys?.includes(tag)))
-		.sort((a: Content, b: Content) => (sortKey === "createdAt" ? new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime() : 0));
+		.filter(
+			(content: Content) => filterKey === "all" || content?.__typename?.toLocaleLowerCase().includes(filterKey!)
+		)
+		.filter(
+			(content: Content) => tagFilterKeys?.length === 0 || content.tags.some(tag => tagFilterKeys?.includes(tag))
+		)
+		.sort((a: Content, b: Content) =>
+			sortKey === "createdAt" ? new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime() : 0
+		);
 	return filteredFeatures;
 };
 
@@ -47,7 +57,12 @@ export default async function CloseFriends({
 		tagFilterKeys: string[] | null | undefined;
 	};
 }) {
-	const data = await getData(searchParams.searchTerm, searchParams.sortKey, searchParams.filterKey, searchParams.tagFilterKeys);
+	const data = await getData(
+		searchParams.searchTerm,
+		searchParams.sortKey,
+		searchParams.filterKey,
+		searchParams.tagFilterKeys
+	);
 	return (
 		<Container maxWidth="md" sx={{ minWidth: "100%", margin: "auto" }}>
 			<ContentDisplay params={searchParams} data={data} admin={false} />

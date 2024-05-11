@@ -199,7 +199,14 @@ export default function VideoEditor({ video }: { video: any }) {
 								}}
 								freeSolo
 								renderTags={(value, getTagProps) =>
-									value.map((option, index) => <Chip variant="outlined" label={option} {...getTagProps({ index })} key={index} />)
+									value.map((option, index) => (
+										<Chip
+											variant="outlined"
+											label={option}
+											{...getTagProps({ index })}
+											key={index}
+										/>
+									))
 								}
 								renderInput={params => <TextField {...params} label="Tags" variant="outlined" />}
 							/>
@@ -214,7 +221,14 @@ export default function VideoEditor({ video }: { video: any }) {
 								}}
 								freeSolo
 								renderTags={(value, getTagProps) =>
-									value.map((option, index) => <Chip variant="outlined" label={option} {...getTagProps({ index })} key={index} />)
+									value.map((option, index) => (
+										<Chip
+											variant="outlined"
+											label={option}
+											{...getTagProps({ index })}
+											key={index}
+										/>
+									))
 								}
 								renderInput={params => <TextField {...params} label="Keywords" variant="outlined" />}
 							/>

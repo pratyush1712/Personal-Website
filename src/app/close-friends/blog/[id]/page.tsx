@@ -20,7 +20,11 @@ const getData = async (params: { id: string }) => {
 	const session = await getServerSession();
 	const client = getClient();
 	if (params.id === "latest") {
-		const access = !session ? "public" : session?.user?.email === "pratyushsudhakar03@gmail.com" ? "private" : "close-friends";
+		const access = !session
+			? "public"
+			: session?.user?.email === "pratyushsudhakar03@gmail.com"
+			? "private"
+			: "close-friends";
 		const { data } = await client.query({
 			query: GET_BLOGS
 		});
