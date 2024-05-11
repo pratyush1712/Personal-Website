@@ -58,13 +58,13 @@ export default async function middleware(request: NextRequest) {
 	const prodBaseURL = "https://pratyushsudhakar.com";
 	const prodPrivateURL = "https://private.pratyushsudhakar.com";
 
-	if (normalizedHostname === prodBaseURL) {
+	if (normalizedHostname === prodBaseURL.split("://")[1]) {
 		// Redirect all /close-friends/* requests to private.pratyushsudhakar.com/*
 		if (url.pathname.startsWith("/close-friends")) {
 			const newPath = url.pathname.replace("/close-friends", "");
 			return NextResponse.redirect(replaceDomain(newPath, prodPrivateURL));
 		}
-	} else if (normalizedHostname === prodPrivateURL) {
+	} else if (normalizedHostname === prodPrivateURL.split("://")[1]) {
 		// Rewrite all /* requests from /close-friends/*
 		if (closeFriendsEndpoints.some(endpoint => url.pathname.includes(endpoint))) {
 			const newPath = `/close-friends${url.pathname}${url.search}`;
