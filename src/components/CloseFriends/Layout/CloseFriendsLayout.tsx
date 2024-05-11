@@ -220,7 +220,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 				{user?.email === "pratyushsudhakar03@gmail.com" && (
 					<Box sx={{ position: "fixed", bottom: 20, right: 30, zIndex: 1500 }}>
 						<Link
-							href={`${adminURL}/admin`}
+							href={`/${adminURL}/admin`}
 							passHref
 							style={{
 								borderColor: "#E50914",
