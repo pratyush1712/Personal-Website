@@ -25,6 +25,7 @@ export default async function middleware(request: NextRequest) {
 
 	// secure the api/graphql route. protect in all environments
 	if (url.pathname.includes("/api/graphql")) {
+		console.log("Securing the /api/graphql route...");
 		if (!session) {
 			return NextResponse.redirect(new URL("/login", request.url));
 		}
@@ -37,7 +38,9 @@ export default async function middleware(request: NextRequest) {
 
 	// if path contains /admin, then check if the user is pratyushsudhakar03@gmail.com
 	if (url.pathname.includes("/admin")) {
+		console.log("Securing the /admin route...");
 		if (!session || session.email !== "pratyushsudhakar03@gmail.com") {
+			console.log("Redirecting to /login...");
 			return NextResponse.redirect(new URL("/close-friends", request.url));
 		}
 	}
@@ -55,11 +58,16 @@ export default async function middleware(request: NextRequest) {
 
 	/* -----------------Production routing handling ------------------------*/
 
+	console.log("Normalized hostname: ", normalizedHostname);
+	console.log("URL pathname: ", url.pathname);
+	console.log("Domain: ", process.env.NEXT_PUBLIC_PRODUCTION_DOMAIN);
 	// Handling requests intended for pratyushsudhakar.com. will only be true in production
 	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRODUCTION_DOMAIN}` && url.pathname === "/close-friends") {
+		console.log("Redirecting to /login...");
 		return NextResponse.redirect(new URL(`https://private.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, request.url));
 	}
 
+	console.log("Handling requests intended for private.pratyushsudhakar.com...");
 	// Handling requests intended for private.pratyushsudhakar.com - could only be true in production
 	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`) {
 		if (
@@ -68,10 +76,13 @@ export default async function middleware(request: NextRequest) {
 			url.pathname.includes("/blog/") &&
 			url.pathname.includes("/video/")
 		) {
+			console.log("Redirecting to /login...", url.pathname);
 			return NextResponse.redirect(new URL("/login", url));
 		} else if (url.pathname.includes("/home")) {
+			console.log("Rewriting from /close-friends to ", url.pathname + url.search);
 			return NextResponse.rewrite(new URL(`/close-friends${url.search}`, url));
 		} else if (url.pathname === "/") {
+			console.log("Redirecting to /home...");
 			return NextResponse.redirect(new URL("/home", url));
 		} else if (
 			url.pathname !== "/login" &&
@@ -103,6 +114,8 @@ export default async function middleware(request: NextRequest) {
 			!url.pathname.startsWith("/mp4/") &&
 			!url.pathname.startsWith("/public/")
 		) {
+			console.log("Rewriting from /close-friends to ", url.pathname + url.search);
+			console.log("URL: ", url);
 			// If authenticated, serve the content from /close-friends. private.pratyushsudhakar.com/* -> pratyushsudhakar.com/close-friends/*
 			return NextResponse.rewrite(new URL(`/close-friends${url.pathname + url.search}`, url));
 		}
