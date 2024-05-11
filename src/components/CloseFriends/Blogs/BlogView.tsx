@@ -25,7 +25,7 @@ export default function BlogView({ blog }: { blog: Content }) {
 			</Link>
 			<div className="p-12 m-12 flex">
 				NODE_ENV = {process.env.NODE_ENV} &#187; <br />
-				<mark>process.env.NODE_ENV === "production" ? "/" : "/close-friends"</mark> <br />
+				<mark>process.env.NODE_ENV === production ? / : /close-friends</mark> <br />
 				{process.env.NODE_ENV === "production" ? "/" : "/close-friends"}
 			</div>
 

@@ -35,8 +35,8 @@ export default function ContentDisplay({
 			<div className="p-12 m-12 flex">
 				From Content Display (Page.tsx) NODE_ENV = {process.env.NODE_ENV} &#187; <br />
 				<mark>
-					const currentURL = process.env.NODE_ENV! === "production" ? "/" : "/close-friends/";
-					<br /> const adminURL = currentURL + "admin";
+					const currentURL = process.env.NODE_ENV! === production ? / : /close-friends/
+					<br /> const adminURL = currentURL + admin
 				</mark>
 				<br />
 				{process.env.NODE_ENV! === "production" ? "/" : "/close-friends/"}

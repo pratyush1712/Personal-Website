@@ -56,7 +56,7 @@ export default function Login() {
 				Callback:
 				<br />
 				NODE_ENV = {process.env.NODE_ENV} &#187; <br />
-				<mark>process.env.NODE_ENV !== "production" ? "/close-friends" : "/"</mark>:{" "}
+				<mark>process.env.NODE_ENV !== production ? /close-friends : /</mark>:{" "}
 				{process.env.NODE_ENV !== "production" ? "/close-friends" : "/"}
 			</Typography>
 			<Button

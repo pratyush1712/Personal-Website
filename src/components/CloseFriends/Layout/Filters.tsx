@@ -36,7 +36,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 	};
 
 	useEffect(() => {
-		const URL = new URLSearchParams(window.location.search);
+		const URL = new URLSearchParams(url.split("?")[1]);
 		URL.delete("searchTerm");
 		URL.delete("sortKey");
 		URL.delete("filterKey");
@@ -62,6 +62,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 				size="small"
 				sx={{ flex: "1 1 auto", maxHeight: "30px" }}
 			/>
+
 			<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
 				<InputLabel id="sort-label">Sort By</InputLabel>
 				<Select labelId="sort-label" value={sortKeyState} label="Sort By" onChange={onSortChange}>
