@@ -8,34 +8,44 @@ import { GET_CONTENTS } from "@/graphql/client/queries";
 export const dynamic = "force-dynamic";
 
 const getData = async (
-	searchTerm: string | null = "",
-	sortKey: string | null = "createdAt",
-	filterKey: string | null = "all",
-	tagFilterKeys: string[] | null = []
+	searchTerm: string = "",
+	sortKey: string = "createdAt",
+	filterKey: string = "all",
+	tagFilterKeys: string[] = []
 ) => {
 	const client = getClient();
-	const { data } = await client.query({ query: GET_CONTENTS });
+	const { data } = await client.query({ query: GET_CONTENTS, variables: { access: "private" } });
 	const fuseOptions = {
 		keys: ["title", "details", "keywords"],
 		includeScore: true,
 		threshold: 0.3
 	};
+
 	const fuse = new Fuse(data.accessContents, fuseOptions);
 	let searchResults = searchTerm ? fuse.search(searchTerm) : data.accessContents;
 	if (searchResults[0]?.item) {
 		searchResults = searchResults.map((result: { item: Content }) => result.item);
 	}
 
+	const sortFunctionMap: { [key: string]: (a: Content, b: Content) => number } = {
+		createdAt: (a: Content, b: Content) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+		updatedAt: (a: Content, b: Content) => new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime(),
+		title: (a: Content, b: Content) => a.title.localeCompare(b.title)
+	};
+
+	const categoryFilter = (content: Content, filterKey: string) => {
+		console.log(filterKey, content.__typename);
+		return filterKey === "all" || content.__typename?.toLowerCase() === filterKey;
+	};
+
+	const tagFilter = (content: Content, tagFilterKeys: string[]) => {
+		return tagFilterKeys.length === 0 || content.tags.some(tag => tagFilterKeys.includes(tag));
+	};
+
 	const filteredFeatures = searchResults
-		.filter(
-			(content: Content) => filterKey === "all" || content?.__typename?.toLocaleLowerCase().includes(filterKey!)
-		)
-		.filter(
-			(content: Content) => tagFilterKeys?.length === 0 || content.tags.some(tag => tagFilterKeys?.includes(tag))
-		)
-		.sort((a: Content, b: Content) =>
-			sortKey === "createdAt" ? new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime() : 0
-		);
+		.filter((content: Content) => categoryFilter(content, filterKey!))
+		.filter((content: Content) => tagFilter(content, tagFilterKeys!))
+		.sort((a: Content, b: Content) => sortFunctionMap[sortKey!](a, b));
 	return filteredFeatures;
 };
 
@@ -50,10 +60,10 @@ export default async function AdminDashboard({
 	};
 }) {
 	const data = await getData(
-		searchParams.searchTerm,
-		searchParams.sortKey,
-		searchParams.filterKey,
-		searchParams.tagFilterKeys
+		searchParams.searchTerm || "",
+		searchParams.sortKey || "createdAt",
+		searchParams.filterKey || "all",
+		searchParams.tagFilterKeys || []
 	);
 	return (
 		<Container maxWidth="lg">

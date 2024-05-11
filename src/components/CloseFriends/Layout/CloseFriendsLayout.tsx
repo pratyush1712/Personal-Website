@@ -38,12 +38,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			.finally(() => setLoading(false));
 	}, []);
 
-	let adminURL: string;
-	if (process.env.VERCEL_ENV === "production") {
-		adminURL = ``;
-	} else {
-		adminURL = `close-friends`;
-	}
+	const adminURL = process.env.VERCEL_ENV === "production" ? "/admin" : "/close-friends/admin";
 	const [showText, setShowText] = useState(false);
 	const [widthState, setWidthState] = useState("80%");
 
@@ -136,7 +131,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 								}
 							}}>
 							<Link
-								href={`${adminURL.replace("admin", "")}/blog/latest`}
+								href="/blog/latest" // regardless of the href, the link will always redirect to the /blog/latest page because on production it links to domain/blog/latest and on development it links to close-friends/blog/latest: both of which are the same page
 								style={{
 									display: "flex",
 									alignItems: "center",
@@ -220,7 +215,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 				{user?.email === "pratyushsudhakar03@gmail.com" && (
 					<Box sx={{ position: "fixed", bottom: 20, right: 30, zIndex: 1500 }}>
 						<Link
-							href={`/${adminURL}/admin`}
+							href={`${adminURL}`}
 							passHref
 							style={{
 								borderColor: "#E50914",

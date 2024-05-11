@@ -11,126 +11,65 @@ export const config = {
 	]
 };
 
+const closeFriendsEndpoints = ["/blog/", "/video/", "/admin", "/sitemap.xml"];
+
+const replaceDomain = (url: string, newDomain: string): URL => {
+	const originalUrl = new URL(url);
+	originalUrl.host = newDomain;
+	return originalUrl;
+};
+
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
+/* -----------------Development, Staging, and Production routing handling ------------------------*/
+/*
+	Development, Staging, and Preview routing handling:
+		1. Protect the /admin route in all environments: only pratyush can access it.
+		2. Redirect all /admin requests  to /login if the user is not authenticated.
+		3. All the other routes are public.
+	
+	Production routing handling:
+		1. Check the domain: pratyushsudhakar.com vs private.pratyushsudhakar.com.
+		2. [private.pratyushsudhakar.com]: all /* routes are rewritten from /close-friends/*, except for /login, /_next, /_vercel, /_static, /api, and public files.
+		3. [pratyushsudhakar.com]: all /close-friends/* routes are redirected to [private.pratyushsudhakar.com]/* where the content is rewritten. from /close-friends/* as defined in the previous point.
+*/
 export default async function middleware(request: NextRequest) {
 	const url = request.nextUrl;
 	const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
 	const hostname = request.headers.get("host")!;
 	const normalizedHostname = hostname.replace(/:\d+$/, "");
 
-	/* -----------------Development, Staging, and Production routing handling ------------------------*/
-
-	// secure the api/graphql route. protect in all environments
-	if (url.pathname.includes("/api/graphql")) {
-		console.log("Securing the /api/graphql route...");
-		if (!session) {
+	/* Development, Staging, and Preview routing handling */
+	// Protect the /admin route in all environments
+	if (url.pathname.includes("/admin")) {
+		if (!session || session.email !== "pratyushsudhakar03@gmail.com") {
+			// Redirect to /login if the user is not authenticated
 			return NextResponse.redirect(new URL("/login", request.url));
 		}
-		const method = request.method;
-		if (method === "POST" && session.email !== "pratyushsudhakar03@gmail.com") {
-			return NextResponse.error();
+	}
+
+	/* Production routing handling */
+	const isProduction = process.env.VERCEL_ENV === "production";
+	if (!isProduction) return NextResponse.next();
+
+	const prodBaseURL = "https://pratyushsudhakar.com";
+	const prodPrivateURL = "https://private.pratyushsudhakar.com";
+
+	if (normalizedHostname === prodBaseURL) {
+		// Redirect all /close-friends/* requests to private.pratyushsudhakar.com/*
+		if (url.pathname.startsWith("/close-friends")) {
+			const newPath = url.pathname.replace("/close-friends", "");
+			return NextResponse.redirect(replaceDomain(newPath, prodPrivateURL));
 		}
-		return NextResponse.next();
-	}
-
-	// if path contains /admin, then check if the user is pratyushsudhakar03@gmail.com
-	if (url.pathname.includes("/admin")) {
-		console.log("Securing the /admin route...");
-		if (!session || session.email !== "pratyushsudhakar03@gmail.com") {
-			console.log("Redirecting to /login...");
-			return NextResponse.redirect(new URL("/close-friends", request.url));
-		}
-	}
-
-	// no need to check for authentication because /close-friends is a public route
-	// if (normalizedHostname === "localhost") {
-	// 	if (url.pathname === "/close-friends") {
-	// 		if (!session) {
-	// 			return NextResponse.redirect(new URL("/login", request.url));
-	// 		}
-	// 		return NextResponse.next();
-	// 	}
-	// 	return NextResponse.next();
-	// }
-
-	/* -----------------Production routing handling ------------------------*/
-
-	console.log("Normalized hostname: ", normalizedHostname);
-	console.log("URL pathname: ", url.pathname);
-	console.log("Domain: ", process.env.NEXT_PUBLIC_PRODUCTION_DOMAIN);
-	// Handling requests intended for pratyushsudhakar.com. will only be true in production
-	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRODUCTION_DOMAIN}` && url.pathname === "/close-friends") {
-		console.log("Redirecting to /login...");
-
-		// return NextResponse.redirect(new URL(`https://private.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, request.url));
-	}
-
-	console.log("Handling requests intended for private.pratyushsudhakar.com...");
-	// Handling requests intended for private.pratyushsudhakar.com - could only be true in production
-	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`) {
-		if (url.pathname.includes("/sitemap.xml"))
-			return NextResponse.rewrite(
-				new URL(
-					`https://${process.env.NEXT_PUBLIC_PRODUCTION_DOMAIN}/close-friends${url.pathname + url.search}`,
-					url
-				)
-			);
-		if (
-			!session &&
-			url.pathname !== "/login" &&
-			url.pathname.includes("/blog/") &&
-			url.pathname.includes("/video/")
-		) {
-			console.log("Redirecting to /login...", url.pathname);
-			return NextResponse.redirect(new URL("/login", url));
-		} else if (url.pathname.includes("/home")) {
-			console.log("Rewriting from /close-friends to ", url.pathname + url.search);
-			return NextResponse.rewrite(new URL(`/close-friends${url.search}`, url));
-		} else if (url.pathname === "/") {
-			console.log("Redirecting to /home...");
-			return NextResponse.redirect(new URL("/home", url));
-		} else if (
-			url.pathname !== "/login" &&
-			!url.pathname.startsWith("/_next/") &&
-			!url.pathname.startsWith("/_vercel/") &&
-			!url.pathname.startsWith("/_static/") &&
-			!url.pathname.startsWith("/api/") &&
-			// public files
-			url.pathname !== "/favicon.ico" &&
-			url.pathname !== "/favicon.png" &&
-			url.pathname !== "/robots.txt" &&
-			url.pathname !== "/manifest.json" &&
-			!url.pathname.startsWith("/icons/") &&
-			!url.pathname.startsWith("/readmes/") &&
-			!url.pathname.startsWith("/videos/") &&
-			!url.pathname.startsWith("/images/") &&
-			!url.pathname.startsWith("/fonts/") &&
-			!url.pathname.startsWith("/css/") &&
-			!url.pathname.startsWith("/js/") &&
-			!url.pathname.startsWith("/json/") &&
-			!url.pathname.startsWith("/pdf/") &&
-			!url.pathname.startsWith("/txt/") &&
-			!url.pathname.startsWith("/xml/") &&
-			!url.pathname.startsWith("/webfonts/") &&
-			!url.pathname.startsWith("/webp/") &&
-			!url.pathname.startsWith("/svg/") &&
-			!url.pathname.startsWith("/audio/") &&
-			!url.pathname.startsWith("/webm/") &&
-			!url.pathname.startsWith("/mp4/") &&
-			!url.pathname.startsWith("/public/")
-		) {
-			console.log("Rewriting from /close-friends to ", url.pathname + url.search);
-			console.log("URL: ", url);
-			// If authenticated, serve the content from /close-friends. private.pratyushsudhakar.com/* -> pratyushsudhakar.com/close-friends/*
-			return NextResponse.rewrite(new URL(`/close-friends${url.pathname + url.search}`, url));
-		} else {
-			// return NextResponse.rewrite(new URL(`/close-friends${url.pathname + url.search}`, url));
+	} else if (normalizedHostname === prodPrivateURL) {
+		// Rewrite all /* requests from /close-friends/*
+		if (closeFriendsEndpoints.some(endpoint => url.pathname.includes(endpoint))) {
+			const newPath = `/close-friends${url.pathname}${url.search}`;
+			return NextResponse.rewrite(new URL(newPath, url.href));
 		}
 	}
 
-	// Proceed with other requests normally
 	return NextResponse.next();
 }
