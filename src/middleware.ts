@@ -1,4 +1,8 @@
+import { getToken } from "next-auth/jwt";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import pages from "./utils/pages";
+
 export const config = {
 	matcher: [
 		/*
@@ -12,19 +16,8 @@ export const config = {
 	]
 };
 
-const closeFriendsEndpoints = ["/blog/", "/video/", "/admin", "/sitemap.xml"];
-
-const portfolioEndpoints = pages.map(page => `/${page.route}`);
-
-const replaceDomain = (url: string, newDomain: string): URL => {
-	const newUrl = new URL(url, newDomain);
-	console.log("New URL", newUrl.href);
-	return newUrl;
-};
-
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
+const closeFriendsEndpoints = ["/blog/", "/video/", "/admin"]; // all the endpoints that are under /close-friends
+const portfolioEndpoints = pages.map(page => `/${page.route}`); // all the endpoints that are under root
 
 /* -----------------Development, Staging, and Production routing handling ------------------------*/
 /*
@@ -44,7 +37,6 @@ export default async function middleware(request: NextRequest) {
 	const hostname = request.headers.get("host")!;
 	const normalizedHostname = hostname.replace(/:\d+$/, "");
 
-	/* Development, Staging, and Preview routing handling */
 	// Protect the /admin route in all environments
 	if (url.pathname.includes("/admin")) {
 		if (!session || session.email !== "pratyushsudhakar03@gmail.com") {
@@ -56,39 +48,35 @@ export default async function middleware(request: NextRequest) {
 	/* Production routing handling */
 	const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 	if (!isProduction) return NextResponse.next();
-	console.log("Production environment");
 
 	const prodBaseURL = "https://pratyushsudhakar.com";
 	const prodPrivateURL = "https://private.pratyushsudhakar.com";
 
 	if (normalizedHostname === prodBaseURL.split("://")[1]) {
-		// Redirect all /close-friends/* requests to private.pratyushsudhakar.com/*
 		if (url.pathname.startsWith("/close-friends") || url.pathname.startsWith("/login") || url.pathname.includes("/admin")) {
-			const newPath = url.pathname.replace("/close-friends", "");
-			console.log("Redirecting to private domain", newPath);
-			return NextResponse.redirect(replaceDomain(newPath, prodPrivateURL));
+			// Redirect all /close-friends/*, /login, and /admin requests to private domain, except for /sitemap.xml
+			if (url.pathname !== "/close-friends/sitemap.xml") {
+				const newPath = url.pathname.replace("/close-friends", "");
+				return NextResponse.redirect(new URL(newPath, prodPrivateURL));
+			}
 		}
 	} else if (normalizedHostname === prodPrivateURL.split("://")[1]) {
 		// Rewrite all /* requests from /close-friends/*
-		// redirect the / to /dashboard
 		if (url.pathname === "/") {
+			// rewrite / from /close-friends
 			const newPath = `/close-friends${url.search}`;
-			console.log(`Rewriting from ${newPath} to ${url.href}`);
 			return NextResponse.rewrite(new URL(newPath, url.href));
 		} else if (url.pathname === "/search") {
-			console.log("Rewriting /search? from /close-friends?");
+			// rewrite /search from /close-friends
 			const params = url.search;
 			return NextResponse.rewrite(new URL("/close-friends" + params, url.href));
 		} else if (closeFriendsEndpoints.some(endpoint => url.pathname.includes(endpoint)) || url.pathname === "/") {
+			// rewrite all /* requests from /close-friends/*
 			const newPath = `/close-friends${url.pathname}${url.search}`;
-			console.log(`Rewriting from ${newPath} to ${url.href}`);
 			return NextResponse.rewrite(new URL(newPath, url.href));
 		} else if (portfolioEndpoints.some(endpoint => url.pathname.includes(endpoint))) {
-			// redirect to main domain
-			return NextResponse.redirect(replaceDomain(url.pathname, prodBaseURL));
-		} else if (url.pathname === "/dashboard/sitemap.xml") {
-			// redirect to main domain
-			return NextResponse.rewrite(new URL("/close-friends/sitemap.xml", url.href));
+			// redirect all portfolio endpoints to main domain
+			return NextResponse.redirect(new URL(url.pathname, prodBaseURL));
 		}
 	}
 
