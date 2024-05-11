@@ -67,8 +67,15 @@ export default async function middleware(request: NextRequest) {
 		}
 	} else if (normalizedHostname === prodPrivateURL.split("://")[1]) {
 		// Rewrite all /* requests from /close-friends/*
-		console.log(`Rewriting ${url.pathname} from /close-friends${url.pathname}`);
-		if (closeFriendsEndpoints.some(endpoint => url.pathname.includes(endpoint)) || url.pathname === "/") {
+		// redirect the / to /dashboard
+		if (url.pathname === "/") {
+			console.log("Redirecting / to /dashboard");
+			return NextResponse.redirect("/dashboard");
+		} else if (url.pathname === "/dashboard") {
+			console.log("Rewriting /dashboard to /close-friends/dashboard");
+			const params = url.search;
+			return NextResponse.rewrite(new URL("/close-friends" + params, url.href));
+		} else if (closeFriendsEndpoints.some(endpoint => url.pathname.includes(endpoint)) || url.pathname === "/") {
 			const newPath = `/close-friends${url.pathname}${url.search}`;
 			console.log(`Rewriting from ${newPath} to ${url.href}`);
 			return NextResponse.rewrite(new URL(newPath, url.href));
