@@ -29,11 +29,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		const path = window.location.pathname;
-		if (path.includes("/blogs")) {
-			setValue(2);
-		} else if (path.includes("/videos")) {
-			setValue(3);
-		}
+		if (path.includes("/blogs")) setValue(2);
+		else if (path.includes("/videos")) setValue(3);
 	}, []);
 
 	// if in production, baseURL is /admin and in dev, it is /close-friends/admin
