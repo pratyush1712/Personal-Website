@@ -30,16 +30,16 @@ export default function ContentDisplay({
 	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
 
 	let url: string;
-	if (process.env.NODE_ENV === "production") {
+	if (process.env.VERCEL_ENV === "production") {
 		url = `https://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}/home`;
 	} else {
 		// preview, staging, and development url
-		url = `http://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}/close-friends`;
+		url = `https://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}/close-friends`;
 	}
 
 	// In production, url: /{contentType}/id
 	// In preview, staging, and development, url: /close-friends/{contentType}/id
-	const contentURL = process.env.VERCEL_ENV === "production" ? "close-friends/" : "close-friends/";
+	const contentURL = process.env.VERCEL_ENV === "production" ? "/" : "close-friends/";
 
 	// data is an array whose contents is sometimes wrapped in item
 	if (data[0]?.item) {
@@ -76,7 +76,7 @@ export default function ContentDisplay({
 						sortKey={sortKey}
 						filterKey={filterKey}
 						tagFilterKeys={tagFilterKeys}
-						url={url.replace("home", "close-friends") + "/admin"}
+						url={url.replace("home", "") + "/admin"}
 					/>
 				</Box>
 			)}
