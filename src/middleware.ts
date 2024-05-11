@@ -73,7 +73,6 @@ export default async function middleware(request: NextRequest) {
 			url.pathname !== "/favicon.ico" &&
 			url.pathname !== "/favicon.png" &&
 			url.pathname !== "/robots.txt" &&
-			url.pathname !== "/sitemap.xml" &&
 			url.pathname !== "/manifest.json" &&
 			!url.pathname.startsWith("/icons/") &&
 			!url.pathname.startsWith("/readmes/") &&
