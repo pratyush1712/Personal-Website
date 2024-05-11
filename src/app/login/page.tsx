@@ -8,7 +8,7 @@ import { FaGlobeAmericas } from "react-icons/fa";
 
 export default function Login() {
 	const handleLogin = async () => {
-		await signIn("google", { callbackUrl: process.env.NODE_ENV !== "production" ? "/close-friends" : "/" });
+		await signIn("google", { callbackUrl: process.env.VERCEL_ENV !== "production" ? "/close-friends" : "/" });
 	};
 
 	return (

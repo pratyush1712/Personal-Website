@@ -39,7 +39,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 	}, []);
 
 	let adminURL: string;
-	if (process.env.NODE_ENV === "production") {
+	if (process.env.VERCEL_ENV === "production") {
 		adminURL = ``;
 	} else {
 		adminURL = `close-friends`;

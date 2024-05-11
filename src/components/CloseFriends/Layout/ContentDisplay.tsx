@@ -20,9 +20,8 @@ export default function ContentDisplay({
 	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
 
 	let url: string;
-	// production url
 	if (process.env.NODE_ENV === "production") {
-		url = `https://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`;
+		url = `https://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}/home`;
 	} else {
 		// preview, staging, and development url
 		url = `http://${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}/close-friends`;
@@ -30,7 +29,7 @@ export default function ContentDisplay({
 
 	// In production, url: /{contentType}/id
 	// In preview, staging, and development, url: /close-friends/{contentType}/id
-	const contentURL = process.env.NODE_ENV === "production" ? "/" : "close-friends/";
+	const contentURL = process.env.VERCEL_ENV === "production" ? "/" : "close-friends/";
 
 	// data is an array whose contents is sometimes wrapped in item
 	if (data[0]?.item) {
@@ -56,7 +55,13 @@ export default function ContentDisplay({
 				</AppBar>
 			) : (
 				<Box sx={{ mt: 1, mb: 3 }}>
-					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={url + "/admin"} />
+					<Filters
+						searchTerm={searchTerm}
+						sortKey={sortKey}
+						filterKey={filterKey}
+						tagFilterKeys={tagFilterKeys}
+						url={url.replace("home", "") + "/admin"}
+					/>
 				</Box>
 			)}
 			<Typography variant="h5" sx={{ mb: 1, mt: 0, pt: 0 }}>
