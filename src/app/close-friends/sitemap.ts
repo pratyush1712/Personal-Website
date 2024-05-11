@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 const getData = async () => {
 	const client = getClient();
-	const access = "public";
+	const access = "private";
 	const { data } = await client.query({ query: GET_CONTENTS, variables: { access } });
 	return data.accessContents;
 };

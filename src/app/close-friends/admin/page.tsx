@@ -34,7 +34,6 @@ const getData = async (
 	};
 
 	const categoryFilter = (content: Content, filterKey: string) => {
-		console.log(filterKey, content.__typename);
 		return filterKey === "all" || content.__typename?.toLowerCase() === filterKey;
 	};
 
