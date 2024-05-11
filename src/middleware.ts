@@ -70,6 +70,7 @@ export default async function middleware(request: NextRequest) {
 		console.log(`Rewriting ${url.pathname} from /close-friends${url.pathname}`);
 		if (closeFriendsEndpoints.some(endpoint => url.pathname.includes(endpoint)) || url.pathname === "/") {
 			const newPath = `/close-friends${url.pathname}${url.search}`;
+			console.log(`Rewriting from ${newPath} to ${url.href}`);
 			return NextResponse.rewrite(new URL(newPath, url.href));
 		}
 	}
