@@ -76,7 +76,7 @@ export default function ContentDisplay({
 						sortKey={sortKey}
 						filterKey={filterKey}
 						tagFilterKeys={tagFilterKeys}
-						url={url.replace("home", "") + "/admin"}
+						url={url.replace("home", "close-friends") + "/admin"}
 					/>
 				</Box>
 			)}
