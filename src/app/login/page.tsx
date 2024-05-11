@@ -8,7 +8,7 @@ import { FaGlobeAmericas } from "react-icons/fa";
 
 export default function Login() {
 	const handleLogin = async () => {
-		await signIn("google", { callbackUrl: process.env.NEXT_PUBLIC_VERCEL_ENV !== "production" ? "/close-friends" : "/" });
+		await signIn("google", { callbackUrl: process.env.NODE_ENV !== "production" ? "/close-friends" : "/" });
 	};
 
 	return (
@@ -37,7 +37,7 @@ export default function Login() {
 				<Box sx={{ width: "100%", height: "100%", display: "flex", flexDirection: "row" }}>
 					<BiLogIn size={24} color="white" />
 					<Typography variant="body1" sx={{ color: "white", px: 1 }}>
-						My Blog and Video Sharing Platform {process.env.NEXT_PUBLIC_VERCEL_ENV}
+						My Blog and Video Sharing Platform
 					</Typography>
 				</Box>
 				<Box sx={{ minWidth: "max-content", height: "100%", display: "flex", flexDirection: "row" }}>
@@ -52,7 +52,12 @@ export default function Login() {
 			</Box>
 			<Typography variant="h5">Welcome back</Typography>
 			<Typography variant="h6" sx={{ mb: 2, color: "#95a5a6" }}>
-				Login to your account
+				Login to your account <br />
+				Callback:
+				<br />
+				NODE_ENV = {process.env.NODE_ENV} &#187; <br />
+				<mark>process.env.NODE_ENV !== "production" ? "/close-friends" : "/"</mark>:{" "}
+				{process.env.NODE_ENV !== "production" ? "/close-friends" : "/"}
 			</Typography>
 			<Button
 				variant="contained"

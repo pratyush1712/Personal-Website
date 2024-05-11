@@ -51,8 +51,9 @@ export default async function middleware(request: NextRequest) {
 	}
 
 	/* Production routing handling */
-	const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
+	const isProduction = process.env.NODE_ENV === "production";
 	if (!isProduction) return NextResponse.next();
+	console.log("Production environment");
 
 	const prodBaseURL = "https://pratyushsudhakar.com";
 	const prodPrivateURL = "https://private.pratyushsudhakar.com";

@@ -20,7 +20,7 @@ export default function ContentDisplay({
 }) {
 	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
 
-	const currentURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/" : "/close-friends/";
+	const currentURL = process.env.NODE_ENV! === "production" ? "/" : "/close-friends/";
 	const adminURL = currentURL + "admin";
 
 	// data is an array whose contents is sometimes wrapped in item
@@ -32,6 +32,18 @@ export default function ContentDisplay({
 
 	return (
 		<Container disableGutters>
+			<div className="p-12 m-12 flex">
+				From Content Display (Page.tsx) NODE_ENV = {process.env.NODE_ENV} &#187; <br />
+				<mark>
+					const currentURL = process.env.NODE_ENV! === "production" ? "/" : "/close-friends/";
+					<br /> const adminURL = currentURL + "admin";
+				</mark>
+				<br />
+				{process.env.NODE_ENV! === "production" ? "/" : "/close-friends/"}
+				<br />
+				{currentURL + "admin"}
+			</div>
+
 			{!admin ? (
 				<AppBar
 					sx={{

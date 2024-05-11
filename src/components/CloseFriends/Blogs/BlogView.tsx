@@ -18,11 +18,17 @@ export default function BlogView({ blog }: { blog: Content }) {
 
 	return (
 		<Container sx={{ minWidth: "100%" }}>
-			<Link href={process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "/home" : "/close-friends"} passHref>
+			<Link href={process.env.NODE_ENV === "production" ? "/" : "/close-friends"} passHref>
 				<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
 					Back to Home
 				</Button>
 			</Link>
+			<div className="p-12 m-12 flex">
+				NODE_ENV = {process.env.NODE_ENV} &#187; <br />
+				<mark>process.env.NODE_ENV === "production" ? "/" : "/close-friends"</mark> <br />
+				{process.env.NODE_ENV === "production" ? "/" : "/close-friends"}
+			</div>
+
 			<DownloadBlogButton blog={blog} />
 			<Typography variant="h4" sx={{ px: 3, pb: 3, pt: 1 }}>
 				{blog.title}

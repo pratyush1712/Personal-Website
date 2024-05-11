@@ -34,7 +34,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	}, []);
 
 	// if in production, baseURL is /admin and in dev, it is /close-friends/admin
-	const currentUrl = process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "/admin" : "/close-friends/admin";
+	const currentUrl = process.env.NODE_ENV === "production" ? "/admin" : "/close-friends/admin";
 
 	return (
 		<ApolloProvider>
@@ -50,6 +50,12 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 						}}
 					/>
 					<Box component="main" sx={{ flexGrow: 1, margin: "auto" }}>
+						<div className="p-12 m-12 flex">
+							NODE_ENV = {process.env.NODE_ENV} &#187; <br />
+							<mark>const currentUrl = process.env.NODE_ENV === "production" ? "/admin" : "/close-friends/admin";</mark>{" "}
+							<br />
+							{process.env.NODE_ENV === "production" ? "/admin" : "/close-friends/admin"}
+						</div>
 						<Toolbar sx={{ p: 0, margin: "auto", mt: 2 }}>
 							<Tabs
 								value={value}
