@@ -66,7 +66,7 @@ export default async function middleware(request: NextRequest) {
 		}
 	} else if (normalizedHostname === prodPrivateURL.split("://")[1]) {
 		// Rewrite all /* requests from /close-friends/*
-		if (closeFriendsEndpoints.some(endpoint => url.pathname.includes(endpoint))) {
+		if (closeFriendsEndpoints.some(endpoint => url.pathname.includes(endpoint)) || url.pathname === "/") {
 			const newPath = `/close-friends${url.pathname}${url.search}`;
 			return NextResponse.rewrite(new URL(newPath, url.href));
 		}
