@@ -8,7 +8,7 @@ import { FaGlobeAmericas } from "react-icons/fa";
 
 export default function Login() {
 	const handleLogin = async () => {
-		await signIn("google", { callbackUrl: process.env.VERCEL_ENV !== "production" ? "/close-friends" : "/" });
+		await signIn("google", { callbackUrl: process.env.NEXT_PUBLIC_VERCEL_ENV !== "production" ? "/close-friends" : "/" });
 	};
 
 	return (
@@ -37,8 +37,7 @@ export default function Login() {
 				<Box sx={{ width: "100%", height: "100%", display: "flex", flexDirection: "row" }}>
 					<BiLogIn size={24} color="white" />
 					<Typography variant="body1" sx={{ color: "white", px: 1 }}>
-						My Blog and Video Sharing Platform
-						{process.env.VERCEL_ENV}
+						My Blog and Video Sharing Platform {process.env.NEXT_PUBLIC_VERCEL_ENV}
 					</Typography>
 				</Box>
 				<Box sx={{ minWidth: "max-content", height: "100%", display: "flex", flexDirection: "row" }}>

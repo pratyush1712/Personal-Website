@@ -20,7 +20,7 @@ export default function ContentDisplay({
 }) {
 	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
 
-	const currentURL = process.env.VERCEL_ENV! === "production" ? "/" : "/close-friends/";
+	const currentURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/" : "/close-friends/";
 	const adminURL = currentURL + "admin";
 
 	// data is an array whose contents is sometimes wrapped in item
