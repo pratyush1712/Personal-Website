@@ -11,35 +11,35 @@
     <url>
         <loc>http://www.pratyushsudhakar.com/overview</loc>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>1.0</priority>
     </url>
 
     <!-- Skills -->
     <url>
         <loc>http://www.pratyushsudhakar.com/skills</loc>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.3</priority>
     </url>
 
     <!-- Projects -->
     <url>
         <loc>http://www.pratyushsudhakar.com/projects</loc>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.3</priority>
     </url>
 
     <!-- Education -->
     <url>
         <loc>http://www.pratyushsudhakar.com/education</loc>
         <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.5</priority>
     </url>
 
     <!-- Affiliations -->
     <url>
         <loc>http://www.pratyushsudhakar.com/affiliations</loc>
         <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.5</priority>
     </url>
 
     <!-- Experience -->

@@ -9,6 +9,7 @@ export const GET_CONTENTS = gql`
 			access
 			image
 			createdAt
+			updatedAt
 			keywords
 			tags
 		}
