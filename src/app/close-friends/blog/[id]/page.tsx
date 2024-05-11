@@ -16,15 +16,17 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 	};
 }
 
+const accessLevels = (session: any) => {
+	if (!session) return "public";
+	if (session.user?.email === "pratyushsudhakar03@gmail.com") return "private";
+	return "close-friends";
+};
+
 const getData = async (params: { id: string }) => {
 	const session = await getServerSession();
 	const client = getClient();
 	if (params.id === "latest") {
-		const access = !session
-			? "public"
-			: session?.user?.email === "pratyushsudhakar03@gmail.com"
-			? "private"
-			: "close-friends";
+		const access = accessLevels(session);
 		const { data } = await client.query({
 			query: GET_BLOGS
 		});

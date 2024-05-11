@@ -8,18 +8,15 @@ import { GET_CONTENTS } from "@/graphql/client/queries";
 
 export const dynamic = "force-dynamic";
 
-const getData = async (
-	searchTerm: string = "",
-	sortKey: string = "createdAt",
-	filterKey: string = "all",
-	tagFilterKeys: string[] = []
-) => {
+const accessLevels = (session: any) => {
+	if (!session) return "public";
+	if (session.user?.email === "pratyushsudhakar03@gmail.com") return "private";
+	return "close-friends";
+};
+
+const getData = async (searchTerm: string = "", sortKey: string = "createdAt", filterKey: string = "all", tagFilterKeys: string[] = []) => {
 	const session = await getServerSession();
-	const access = !session
-		? "public"
-		: session?.user?.email === "pratyushsudhakar03@gmail.com"
-		? "private"
-		: "close-friends";
+	const access = accessLevels(session);
 	const client = getClient();
 	const { data } = await client.query({ query: GET_CONTENTS, variables: { access } });
 	const fuseOptions = {

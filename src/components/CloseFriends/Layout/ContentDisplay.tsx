@@ -53,13 +53,7 @@ export default function ContentDisplay({
 				</AppBar>
 			) : (
 				<Box sx={{ mt: 1, mb: 3 }}>
-					<Filters
-						searchTerm={searchTerm}
-						sortKey={sortKey}
-						filterKey={filterKey}
-						tagFilterKeys={tagFilterKeys}
-						url={adminURL}
-					/>
+					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={adminURL} />
 				</Box>
 			)}
 			<Typography variant="h5" sx={{ mb: 1, mt: 0, pt: 0 }}>

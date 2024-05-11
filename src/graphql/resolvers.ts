@@ -59,11 +59,7 @@ const resolvers = {
 			}
 		},
 
-		accessContents: async (
-			_: any,
-			{ access }: { access: string },
-			context: { dataSources: { blogs: any; videos: any } }
-		) => {
+		accessContents: async (_: any, { access }: { access: string }, context: { dataSources: { blogs: any; videos: any } }) => {
 			try {
 				const blogs = context.dataSources.blogs.getBlogsByAccess(access);
 				const videos = context.dataSources.videos.getVideosByAccess(access);

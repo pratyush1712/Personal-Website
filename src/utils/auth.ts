@@ -34,10 +34,7 @@ export const config = {
 } satisfies NextAuthOptions;
 
 export function auth(
-	...args:
-		| [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]]
-		| [NextApiRequest, NextApiResponse]
-		| []
+	...args: [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]] | [NextApiRequest, NextApiResponse] | []
 ) {
 	return getServerSession(...args, config);
 }
