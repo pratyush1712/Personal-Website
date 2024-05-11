@@ -86,36 +86,7 @@ export default async function middleware(request: NextRequest) {
 		} else if (url.pathname === "/") {
 			console.log("Redirecting to /home...");
 			return NextResponse.redirect(new URL("/home", url));
-		} else if (
-			url.pathname !== "/login" &&
-			!url.pathname.startsWith("/_next/") &&
-			!url.pathname.startsWith("/_vercel/") &&
-			!url.pathname.startsWith("/_static/") &&
-			!url.pathname.startsWith("/api/") &&
-			// public files
-			url.pathname !== "/favicon.ico" &&
-			url.pathname !== "/favicon.png" &&
-			url.pathname !== "/robots.txt" &&
-			url.pathname !== "/manifest.json" &&
-			!url.pathname.startsWith("/icons/") &&
-			!url.pathname.startsWith("/readmes/") &&
-			!url.pathname.startsWith("/videos/") &&
-			!url.pathname.startsWith("/images/") &&
-			!url.pathname.startsWith("/fonts/") &&
-			!url.pathname.startsWith("/css/") &&
-			!url.pathname.startsWith("/js/") &&
-			!url.pathname.startsWith("/json/") &&
-			!url.pathname.startsWith("/pdf/") &&
-			!url.pathname.startsWith("/txt/") &&
-			!url.pathname.startsWith("/xml/") &&
-			!url.pathname.startsWith("/webfonts/") &&
-			!url.pathname.startsWith("/webp/") &&
-			!url.pathname.startsWith("/svg/") &&
-			!url.pathname.startsWith("/audio/") &&
-			!url.pathname.startsWith("/webm/") &&
-			!url.pathname.startsWith("/mp4/") &&
-			!url.pathname.startsWith("/public/")
-		) {
+		} else if (url.pathname.includes("/close-friends")) {
 			console.log("Rewriting from /close-friends to ", url.pathname + url.search);
 			console.log("URL: ", url);
 			// If authenticated, serve the content from /close-friends. private.pratyushsudhakar.com/* -> pratyushsudhakar.com/close-friends/*
