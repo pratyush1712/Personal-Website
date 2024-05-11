@@ -9,9 +9,14 @@ import {
 } from "@apollo/experimental-nextjs-app-support/ssr";
 
 function makeClient() {
-	const httpLink = new HttpLink({ uri: process.env.NEXT_PUBLIC_URL_SERVER_GRAPHQL });
+	const httpLink = new HttpLink({
+		uri: process.env.NEXT_PUBLIC_URL_SERVER_GRAPHQL,
+		fetchOptions: { cache: "no-store" },
+		credentials: "same-origin"
+	});
 
 	return new NextSSRApolloClient({
+		ssrMode: typeof window === "undefined",
 		cache: new NextSSRInMemoryCache(),
 		link:
 			typeof window === "undefined"
