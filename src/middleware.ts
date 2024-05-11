@@ -70,6 +70,8 @@ export default async function middleware(request: NextRequest) {
 	console.log("Handling requests intended for private.pratyushsudhakar.com...");
 	// Handling requests intended for private.pratyushsudhakar.com - could only be true in production
 	if (normalizedHostname === `${process.env.NEXT_PUBLIC_PRIVATE_DOMAIN}`) {
+		if (url.pathname.includes("/sitemap.xml"))
+			return NextResponse.rewrite(new URL(`/close-friends${url.pathname + url.search}`, url));
 		if (
 			!session &&
 			url.pathname !== "/login" &&
