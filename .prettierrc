@@ -8,5 +8,6 @@
 	"arrowParens": "avoid",
 	"printWidth": 150,
 	"proseWrap": "never",
-	"endOfLine": "lf"
+	"endOfLine": "lf",
+	"bracketSameLine": true
 }

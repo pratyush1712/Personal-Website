@@ -21,8 +21,7 @@ export default function Footer({ darkMode = true, loggedIn = true }: { darkMode:
 				borderTop: `1px solid #E50914`,
 				textAlign: "center",
 				zIndex: 1000
-			}}
-		>
+			}}>
 			<Typography variant="body2" sx={{ color: darkMode ? "#FFFFFF" : "#000000", opacity: 1 }}>
 				Isn&apos;t it soo cool 🌟
 				<Typography component="span" sx={{ color: "#E50914" }}>

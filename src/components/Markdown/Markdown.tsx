@@ -60,8 +60,7 @@ export function MarkdownH1(props: any) {
 					marginBlockEnd: "0.3em",
 					fontWeight: "bold",
 					lineHeight: 1.25
-				}}
-			>
+				}}>
 				{props.children}
 			</Typography>
 			<Divider sx={{ mb: 1.5 }} />
@@ -81,8 +80,7 @@ export function MarkdownH2(props: any) {
 					marginBlockEnd: "0.3em",
 					fontWeight: "bold",
 					lineHeight: 1.25
-				}}
-			>
+				}}>
 				{props.children}
 			</Typography>
 			<Divider sx={{ mb: 1 }} />
@@ -102,8 +100,7 @@ export function MarkdownH3(props: any) {
 					marginBlockEnd: "0.3em",
 					fontWeight: "bold",
 					lineHeight: 1.25
-				}}
-			>
+				}}>
 				{props.children}
 			</Typography>
 		</>

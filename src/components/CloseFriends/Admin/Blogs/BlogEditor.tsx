@@ -128,8 +128,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 					alignItems: "center",
 					width: "100%",
 					height: "100%"
-				}}
-			>
+				}}>
 				<Alert sx={{ position: "fixed", zIndex: 100, minWidth: "50%", justifyContent: "center", alignItems: "center" }} severity="error">
 					{formError ||
 						(createError && createError.message) ||
@@ -152,8 +151,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 								alignItems: "center",
 								minWidth: "100%",
 								justifyContent: "space-between"
-							}}
-						>
+							}}>
 							<Typography>Blog&apos;s General Information</Typography>
 							<Typography color="textSecondary" sx={{ pr: 2 }}>
 								Click to expand
@@ -210,8 +208,7 @@ export default function BlogEditor({ blog }: { blog: any }) {
 									variant="outlined"
 									label="Access"
 									defaultValue={blogUpdate?.access}
-									onChange={e => setBlogUpdate({ ...blogUpdate, access: e.target.value })}
-								>
+									onChange={e => setBlogUpdate({ ...blogUpdate, access: e.target.value })}>
 									<MenuItem value="public">Public</MenuItem>
 									<MenuItem value="private">Private</MenuItem>
 									<MenuItem value="close-friends">Close Friends</MenuItem>

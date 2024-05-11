@@ -51,8 +51,7 @@ export default function ContentDisplay({
 						background: "rgba(30, 30, 30, 0.998)",
 						borderBottom: "2px solid rgba(219, 9, 20, 1)",
 						boxShadow: "none"
-					}}
-				>
+					}}>
 					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={url} />
 				</AppBar>
 			) : (
@@ -69,8 +68,7 @@ export default function ContentDisplay({
 						key={feature.id}
 						sx={{ maxWidth: "100%", bgcolor: "background.paper" }}
 						component={Link}
-						href={`${contentURL}${feature?.__typename?.toLowerCase()}/${feature.id}`}
-					>
+						href={`${contentURL}${feature?.__typename?.toLowerCase()}/${feature.id}`}>
 						<CardMedia component="img" height="140" image={feature.image} alt={feature.title} />
 						<CardContent>
 							<Typography variant="h5" component="div">

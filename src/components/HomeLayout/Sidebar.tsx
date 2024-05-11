@@ -28,8 +28,7 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 							cursor: "pointer"
 						}}
 						display="flex"
-						justifyContent="center"
-					>
+						justifyContent="center">
 						<Box mt={0.7}>{link.icon}</Box>
 					</Box>
 				</Link>
@@ -47,8 +46,7 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 			flexDirection="column"
 			component={Paper}
 			square
-			elevation={0}
-		>
+			elevation={0}>
 			<Box sx={{ flexGrow: 0 }} display="flex" justifyContent="center" flexDirection="column">
 				<Box
 					sx={{
@@ -56,8 +54,7 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 						cursor: "pointer",
 						WebkitTapHighlightColor: "rgba(0,0,0,0)"
 					}}
-					onClick={() => setExpanded(!expanded)}
-				>
+					onClick={() => setExpanded(!expanded)}>
 					<Box
 						sx={{
 							flexGrow: 0,
@@ -68,8 +65,7 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 							"&:hover": { color: "white" }
 						}}
 						display="flex"
-						justifyContent="center"
-					>
+						justifyContent="center">
 						<VscFiles />
 					</Box>
 				</Box>
@@ -79,8 +75,7 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 						href={"https://github.com/pratyush1712/Personal-Website"}
 						underline="none"
 						color="inherit"
-						sx={{ WebkitTapHighlightColor: "rgba(0,0,0,0)" }}
-					>
+						sx={{ WebkitTapHighlightColor: "rgba(0,0,0,0)" }}>
 						<Box
 							sx={{
 								flexGrow: 0,
@@ -90,8 +85,7 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 								"&:hover": { color: "white" }
 							}}
 							display="flex"
-							justifyContent="center"
-						>
+							justifyContent="center">
 							<Box mt={0.7}>
 								<VscSourceControl />
 							</Box>
@@ -119,8 +113,7 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 						}}
 						display="flex"
 						justifyContent="center"
-						onClick={handleThemeChange}
-					>
+						onClick={handleThemeChange}>
 						{!darkMode ? (
 							<Box>
 								<DarkModeOutlinedIcon />
@@ -142,8 +135,7 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 						WebkitTapHighlightColor: "rgba(0,0,0,0)"
 					}}
 					display="flex"
-					justifyContent="center"
-				>
+					justifyContent="center">
 					<Box mt={0.7}>
 						<VscSettingsGear />
 					</Box>

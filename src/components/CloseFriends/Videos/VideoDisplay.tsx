@@ -29,8 +29,7 @@ export default function VideoDisplay({ video }: { video: any }) {
 						flexDirection: "column",
 						alignItems: "center",
 						justifyContent: "center"
-					}}
-				>
+					}}>
 					<Video
 						src={video.videoUrl}
 						controls={true}

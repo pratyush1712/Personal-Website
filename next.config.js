@@ -34,15 +34,6 @@ const nextConfig = {
 		]
 	},
 
-	// images: {
-	// 	domains: [
-	// 		"i.scdn.co",
-	// 		"images.unsplash.com",
-	// 		"upload.wikimedia.org",
-	// 		"source.unsplash.com",
-	// 		"privatewebsitecontent.s3.amazonaws.com"
-	// 	]
-	// },
 	async headers() {
 		return [
 			{

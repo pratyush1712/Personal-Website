@@ -45,8 +45,7 @@ export default function BlogView({ blog }: { blog: Content }) {
 						flexDirection: "column",
 						alignItems: "center",
 						justifyContent: "center"
-					}}
-				>
+					}}>
 					<Box sx={{ position: "relative", width: "100%", height: "400px" }}>
 						<Image
 							src={blog.image}

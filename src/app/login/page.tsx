@@ -20,8 +20,7 @@ export default function Login() {
 				height: "100vh",
 				minWidth: "100vw",
 				background: "linear-gradient(135deg, rgba(209, 10, 10, 0.4) 0%, rgba(189, 9, 20, 0.1) 100%)"
-			}}
-		>
+			}}>
 			<AppBar
 				position="static"
 				sx={{
@@ -34,8 +33,7 @@ export default function Login() {
 					background: "none",
 					borderBottom: "1px solid rgba(255, 255, 255, 0.3)",
 					boxShadow: "none"
-				}}
-			>
+				}}>
 				<Box sx={{ width: "100%", height: "100%", display: "flex", flexDirection: "row" }}>
 					<BiLogIn size={24} color="white" />
 					<Typography variant="body1" sx={{ color: "white", px: 1 }}>
@@ -65,8 +63,7 @@ export default function Login() {
 					minWidth: "40%",
 					background: "rgba(229, 9, 20, 1)",
 					"&:hover": { background: "rgba(229, 9, 20, 0.6)" }
-				}}
-			>
+				}}>
 				Sign in with Google
 			</Button>
 		</Container>

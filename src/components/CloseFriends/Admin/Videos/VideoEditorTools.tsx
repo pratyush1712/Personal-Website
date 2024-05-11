@@ -10,8 +10,7 @@ const VideoEditorTools = ({ status, src }: { status: string; src: string }) => {
 				alignItems: "center",
 				justifyContent: "center",
 				height: "100%"
-			}}
-		>
+			}}>
 			<video src={src} style={{ width: "48.2vw" }} autoPlay controls>
 				<source src={src} type="video/mp4" />
 			</video>

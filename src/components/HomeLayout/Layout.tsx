@@ -166,16 +166,14 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 										overflowY: "auto",
 										maxHeight: "calc(100vh - 53px)",
 										background: !darkMode ? "#FFFFFF" : "#1e1e1e"
-									}}
-								>
+									}}>
 									<Container
 										sx={{
 											minHeight: "calc(100vh - 53px)",
 											maxHeight: "calc(100vh - 53px)",
 											overflowY: "auto",
 											overflowX: "hidden"
-										}}
-									>
+										}}>
 										{children}
 									</Container>
 								</Grid>

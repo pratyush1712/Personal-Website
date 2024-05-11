@@ -82,8 +82,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						mb: 2,
 						minWidth: "100%",
 						p: 0
-					}}
-				>
+					}}>
 					<Video src={"/videos/background.mp4"} autoPlay={true} loop={true} muted={true} />
 					<Typography
 						variant="h4"
@@ -99,8 +98,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 							borderBottom: `2px solid #E50914`,
 							color: "black",
 							zIndex: 1
-						}}
-					>
+						}}>
 						<strong>
 							Hi{" "}
 							<Typography component="span" variant="inherit" sx={{ color: "#E50914" }}>
@@ -116,8 +114,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 								fontStyle: "italic",
 								zIndex: 1,
 								color: "black"
-							}}
-						>
+							}}>
 							<strong>
 								{user?.email
 									? "Welcome to my Close Friends page! This is a private page for my close friends only. If you're seeing this, you're one of them! 🎉"
@@ -137,8 +134,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 								"&:hover": {
 									transform: "scale(1.04)"
 								}
-							}}
-						>
+							}}>
 							<Link
 								href={`${adminURL.replace("admin", "")}/blog/latest`}
 								style={{
@@ -155,8 +151,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 									paddingRight: 4,
 									transition: "width 1s ease, opacity 1s ease",
 									textDecoration: "none"
-								}}
-							>
+								}}>
 								<span
 									style={{
 										display: "inline-block",
@@ -169,8 +164,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 										left: 0,
 										position: "relative",
 										animation: "pulse 2s infinite"
-									}}
-								></span>
+									}}></span>
 								<span
 									style={{
 										position: "relative",
@@ -184,8 +178,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 										verticalAlign: "middle",
 										transition: "width 1s ease, opacity 1s ease",
 										opacity: showText ? 1 : 0
-									}}
-								>
+									}}>
 									Checkout my latest blog post!
 									<RiExternalLinkLine size={17} style={{ marginLeft: 2, color: "#E50914" }} />
 								</span>
@@ -202,8 +195,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 										left: showText ? "auto" : 0,
 										position: "relative",
 										animation: "pulse 2s infinite"
-									}}
-								></span>
+									}}></span>
 							</Link>
 						</Box>
 					</Typography>
@@ -220,8 +212,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 							"&:hover": {
 								transform: "scale(1.04)"
 							}
-						}}
-					></Box>
+						}}></Box>
 				</Container>
 				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 10 }}>
 					{children}
@@ -237,8 +228,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 								borderWidth: 2,
 								borderStyle: "solid",
 								borderRadius: 5
-							}}
-						>
+							}}>
 							Admin
 						</Link>
 					</Box>

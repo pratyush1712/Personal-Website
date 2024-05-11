@@ -70,8 +70,7 @@ export default async function MDContainer({ params }: Props) {
 					li: MarkdownListItem
 				}}
 				remarkPlugins={[remarkGfm, remarkBreaks]}
-				rehypePlugins={[rehypeRaw]}
-			>
+				rehypePlugins={[rehypeRaw]}>
 				{content}
 			</ReactMarkdown>
 		</Container>

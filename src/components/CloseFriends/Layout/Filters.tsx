@@ -93,8 +93,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 								<Chip key={value} label={value} size="small" />
 							))}
 						</Box>
-					)}
-				>
+					)}>
 					{tags.map(tag => (
 						<MenuItem key={tag} value={tag}>
 							{tag}

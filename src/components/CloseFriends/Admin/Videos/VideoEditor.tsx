@@ -160,8 +160,7 @@ export default function VideoEditor({ video }: { video: any }) {
 						minWidth: "100%",
 						gap: 3,
 						mb: 3
-					}}
-				>
+					}}>
 					<VideoEditorTools status={status} src={videoUrl} />
 					<Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column", mt: -1.5 }}>
 						<TextField
@@ -229,8 +228,7 @@ export default function VideoEditor({ video }: { video: any }) {
 							onClick={() => (videoInputRef.current as any)?.click()}
 							variant="outlined"
 							color="inherit"
-							sx={{ minWidth: "25%", maxWidth: "25%", mr: 1 }}
-						>
+							sx={{ minWidth: "25%", maxWidth: "25%", mr: 1 }}>
 							{videoFile ? "Change Video" : "Upload Video"}
 						</Button>
 						<input ref={videoInputRef} type="file" accept="video/*" onChange={handleVideoChange} hidden />
@@ -238,8 +236,7 @@ export default function VideoEditor({ video }: { video: any }) {
 							onClick={() => (posterInputRef.current as any)?.click()}
 							variant="outlined"
 							color="inherit"
-							sx={{ minWidth: "25%", maxWidth: "25%", ml: 1 }}
-						>
+							sx={{ minWidth: "25%", maxWidth: "25%", ml: 1 }}>
 							{posterFile ? "Change Poster" : "Upload Poster"}
 						</Button>
 						<input ref={posterInputRef} type="file" accept="image/*" onChange={handlePosterChange} hidden />

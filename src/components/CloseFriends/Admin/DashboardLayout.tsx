@@ -61,8 +61,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 								variant="fullWidth"
 								textColor="inherit"
 								TabIndicatorProps={{ style: { backgroundColor: "#E50914" } }}
-								sx={{ minWidth: "100%", borderTopLeftRadius: "180px", borderBottomLeftRadius: "180px" }}
-							>
+								sx={{ minWidth: "100%", borderTopLeftRadius: "180px", borderBottomLeftRadius: "180px" }}>
 								<Tab
 									icon={
 										<Icon>

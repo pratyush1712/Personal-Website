@@ -31,8 +31,7 @@ export default function DownloadBlogButton({ blog }: { blog: any }) {
 					backgroundColor: "#E50914",
 					color: "white"
 				}
-			}}
-		>
+			}}>
 			Download PDF
 		</Button>
 	);

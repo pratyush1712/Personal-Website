@@ -36,8 +36,7 @@ export default function Video({
 			loop={loop}
 			width={width}
 			height={height}
-			muted={muted}
-		>
+			muted={muted}>
 			<source src={src} type="video/mp4" />
 			<track kind="captions" srcLang="en" src="/" default />
 			Your browser does not support the video tag.

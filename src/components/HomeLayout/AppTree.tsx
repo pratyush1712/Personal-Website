@@ -70,8 +70,7 @@ export default function AppTree({
 			}
 			defaultExpandIcon={<ChevronRightIcon />}
 			sx={{ minWidth: 220 }}
-			defaultExpanded={["-1"]}
-		>
+			defaultExpanded={["-1"]}>
 			<TreeItem
 				nodeId="-1"
 				label={
@@ -85,8 +84,7 @@ export default function AppTree({
 				}}
 				onClick={() => {
 					setSelectedIndex(-1);
-				}}
-			>
+				}}>
 				{pages.map(({ index, name, route }) => (
 					<TreeItem
 						key={index}

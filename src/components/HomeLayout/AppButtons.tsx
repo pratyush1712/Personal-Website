@@ -86,8 +86,7 @@ export default function AppButtons({
 						display: "inline-block",
 						borderRight: 1,
 						borderColor: theme.palette.mode === "dark" ? "#252525" : "#f3f3f3"
-					}}
-				>
+					}}>
 					<Button
 						key={index}
 						disableRipple
@@ -106,8 +105,7 @@ export default function AppButtons({
 							"&.MuiButtonBase-root:hover": { bgcolor: renderButtonBgColor(index) },
 							transition: "none",
 							pb: 0.2
-						}}
-					>
+						}}>
 						<Box sx={{ color: "#6997d5", width: 20, height: 20, mr: 0.4, ml: -1 }}>
 							<VscMarkdown />
 						</Box>
@@ -132,8 +130,7 @@ export default function AppButtons({
 								e.preventDefault();
 								e.stopPropagation();
 								setVisiblePageIndexs(visiblePageIndexs.filter(x => x !== index));
-							}}
-						>
+							}}>
 							<VscChromeClose />
 						</Box>
 					</Button>
@@ -163,8 +160,7 @@ export default function AppButtons({
 				"&::-webkit-darkScrollbar-thumb": {
 					backgroundColor: theme.palette.mode === "dark" ? "#ffffff" : "#8c8c8c"
 				}
-			}}
-		>
+			}}>
 			{pages.map(({ index, name, route }) => renderPageButton(index, name, route))}
 		</Container>
 	);

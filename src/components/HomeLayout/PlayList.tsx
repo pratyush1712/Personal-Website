@@ -64,8 +64,7 @@ export default function PlayList() {
 					clearTimeout(hoverTimeoutId);
 					setHoverIndex(-1);
 				}}
-				onClick={() => handleBubbleClick(`https://open.spotify.com/track/${song.id}`)}
-			>
+				onClick={() => handleBubbleClick(`https://open.spotify.com/track/${song.id}`)}>
 				<Image
 					loading="lazy"
 					onError={e => (e.currentTarget.src = "/images/default.jpg")}
