@@ -68,11 +68,8 @@ export default async function middleware(request: NextRequest) {
 	} else if (normalizedHostname === prodPrivateURL.split("://")[1]) {
 		// Rewrite all /* requests from /close-friends/*
 		// redirect the / to /dashboard
-		if (url.pathname === "/") {
-			console.log("Redirecting / to /dashboard");
-			return NextResponse.redirect("/dashboard");
-		} else if (url.pathname === "/dashboard") {
-			console.log("Rewriting /dashboard to /close-friends/dashboard");
+		if (url.pathname === "/search") {
+			console.log("Rewriting /search? from /close-friends?");
 			const params = url.search;
 			return NextResponse.rewrite(new URL("/close-friends" + params, url.href));
 		} else if (closeFriendsEndpoints.some(endpoint => url.pathname.includes(endpoint)) || url.pathname === "/") {

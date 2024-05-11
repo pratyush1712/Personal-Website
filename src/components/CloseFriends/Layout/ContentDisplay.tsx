@@ -20,8 +20,9 @@ export default function ContentDisplay({
 }) {
 	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
 
+	const homeURL = process.env.NODE_ENV! === "production" ? "/search" : "/close-friends/";
+	const adminURL = process.env.NODE_ENV! === "production" ? "/admin" : "/close-friends/admin";
 	const currentURL = process.env.NODE_ENV! === "production" ? "/" : "/close-friends/";
-	const adminURL = currentURL + "admin";
 
 	// data is an array whose contents is sometimes wrapped in item
 	if (data[0]?.item) {
@@ -35,13 +36,13 @@ export default function ContentDisplay({
 			<div className="p-12 m-12 flex">
 				From Content Display (Page.tsx) NODE_ENV = {process.env.NODE_ENV} &#187; <br />
 				<mark>
-					const currentURL = process.env.NODE_ENV! === production ? / : /close-friends/
-					<br /> const adminURL = currentURL + admin
+					const homeURL = process.env.NODE_ENV! === production ? /search : /close-friends/
+					<br /> const adminURL = process.env.NODE_ENV! === production ? /admin : /close-friends/admin
 				</mark>
 				<br />
-				{process.env.NODE_ENV! === "production" ? "/" : "/close-friends/"}
+				{process.env.NODE_ENV! === "production" ? "/search" : "/close-friends/"}
 				<br />
-				{currentURL + "admin"}
+				{process.env.NODE_ENV! === "production" ? "/admin" : "/close-friends/admin"}
 			</div>
 
 			{!admin ? (
@@ -55,13 +56,7 @@ export default function ContentDisplay({
 						borderBottom: "2px solid rgba(219, 9, 20, 1)",
 						boxShadow: "none"
 					}}>
-					<Filters
-						searchTerm={searchTerm}
-						sortKey={sortKey}
-						filterKey={filterKey}
-						tagFilterKeys={tagFilterKeys}
-						url={currentURL}
-					/>
+					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={homeURL} />
 				</AppBar>
 			) : (
 				<Box sx={{ mt: 1, mb: 3 }}>
