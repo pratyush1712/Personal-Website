@@ -1,3 +1,4 @@
+import pages from "./utils/pages";
 export const config = {
 	matcher: [
 		/*
@@ -12,6 +13,8 @@ export const config = {
 };
 
 const closeFriendsEndpoints = ["/blog/", "/video/", "/admin", "/sitemap.xml"];
+
+const portfolioEndpoints = pages.map(page => `/${page.route}`);
 
 const replaceDomain = (url: string, newDomain: string): URL => {
 	const newUrl = new URL(url, newDomain);
@@ -60,7 +63,7 @@ export default async function middleware(request: NextRequest) {
 
 	if (normalizedHostname === prodBaseURL.split("://")[1]) {
 		// Redirect all /close-friends/* requests to private.pratyushsudhakar.com/*
-		if (url.pathname.startsWith("/close-friends")) {
+		if (url.pathname.startsWith("/close-friends") || url.pathname.startsWith("/login") || url.pathname.includes("/admin")) {
 			const newPath = url.pathname.replace("/close-friends", "");
 			console.log("Redirecting to private domain", newPath);
 			return NextResponse.redirect(replaceDomain(newPath, prodPrivateURL));
@@ -80,6 +83,12 @@ export default async function middleware(request: NextRequest) {
 			const newPath = `/close-friends${url.pathname}${url.search}`;
 			console.log(`Rewriting from ${newPath} to ${url.href}`);
 			return NextResponse.rewrite(new URL(newPath, url.href));
+		} else if (portfolioEndpoints.some(endpoint => url.pathname.includes(endpoint))) {
+			// redirect to main domain
+			return NextResponse.redirect(replaceDomain(url.pathname, prodBaseURL));
+		} else if (url.pathname === "/dashboard/sitemap.xml") {
+			// redirect to main domain
+			return NextResponse.rewrite(new URL("/close-friends/sitemap.xml", url.href));
 		}
 	}
 
