@@ -2,6 +2,7 @@ name: Update Utils Folder
 
 on:
     push:
+        branches: master
         paths:
             - "spotify/data.py"
 
