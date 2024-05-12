@@ -3,10 +3,11 @@ import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { ApolloServerErrorCode } from "@apollo/server/errors";
 import typeDefs from "@/graphql/schema";
 import resolvers from "@/graphql/resolvers";
-import { NextApiRequest } from "next";
 import { Blogs, Videos } from "@/graphql/database/controllers";
 import { BlogModel, VideoModel } from "@/graphql/database/models";
 import mongoose from "mongoose";
+import { cookies, headers } from "next/headers";
+import { decode } from "next-auth/jwt";
 
 const uri = process.env.MONGODB_URI;
 
@@ -34,7 +35,18 @@ const apolloServer = new ApolloServer({
 });
 
 const handler = startServerAndCreateNextHandler(apolloServer, {
-	context: async (req: NextApiRequest) => {
+	context: async (req: Request) => {
+		if (req.method === "POST") {
+			const reqCookies = cookies().getAll();
+			const token = reqCookies.find(cookie => cookie.name === "next-auth.session-token")?.value;
+			const mutation = headers().get("mutation") === "true";
+			if (mutation) {
+				const decoded = await decode({ token, secret: process.env.NEXTAUTH_SECRET! });
+				if (decoded?.email! !== "pratyushsudhakar03@gmail.com") {
+					throw new Error("You are not authorized to perform this action");
+				}
+			}
+		}
 		return {
 			dataSources: {
 				blogs: new Blogs({ modelOrCollection: BlogModel }),
