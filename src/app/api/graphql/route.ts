@@ -1,8 +1,8 @@
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
+import { ApolloServerErrorCode } from "@apollo/server/errors";
 import typeDefs from "@/graphql/schema";
 import resolvers from "@/graphql/resolvers";
-import { NextApiRequest } from "next";
 import { Blogs, Videos } from "@/graphql/database/controllers";
 import { BlogModel, VideoModel } from "@/graphql/database/models";
 import mongoose from "mongoose";
@@ -27,7 +27,13 @@ const apolloServer = new ApolloServer({
 	typeDefs,
 	resolvers,
 	introspection: process.env.NEXT_PUBLIC_VERCEL_ENV !== "production",
-	csrfPrevention: true
+	csrfPrevention: true,
+	formatError: (formattedError, error) => {
+		if (formattedError.extensions?.code === ApolloServerErrorCode.INTERNAL_SERVER_ERROR) {
+			console.error("🔥", error);
+		}
+		return formattedError;
+	}
 });
 
 const handler = startServerAndCreateNextHandler(apolloServer, {
@@ -43,7 +49,6 @@ const handler = startServerAndCreateNextHandler(apolloServer, {
 				}
 			}
 		}
-
 		return {
 			dataSources: {
 				blogs: new Blogs({ modelOrCollection: BlogModel }),
