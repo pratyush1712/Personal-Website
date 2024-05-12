@@ -26,6 +26,8 @@ connectDB();
 const apolloServer = new ApolloServer({
 	typeDefs,
 	resolvers,
+	introspection: process.env.NEXT_PUBLIC_VERCEL_ENV !== "production",
+	csrfPrevention: true,
 	formatError: (formattedError, error) => {
 		if (formattedError.extensions?.code === ApolloServerErrorCode.INTERNAL_SERVER_ERROR) {
 			console.error("🔥", error);
