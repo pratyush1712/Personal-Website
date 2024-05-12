@@ -26,7 +26,7 @@ connectDB();
 const apolloServer = new ApolloServer({
 	typeDefs,
 	resolvers,
-	introspection: process.env.NODE_ENV !== "production",
+	introspection: process.env.NEXT_PUBLIC_VERCEL_ENNV !== "production",
 	csrfPrevention: true
 });
 

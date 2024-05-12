@@ -34,7 +34,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	}, []);
 
 	// if in production, baseURL is /admin and in dev, it is /close-friends/admin
-	const currentUrl = process.env.NODE_ENV === "production" ? "/admin" : "/close-friends/admin";
+	const currentUrl = process.env.NEXT_PUBLIC_VERCEL_ENNV === "production" ? "/admin" : "/close-friends/admin";
 
 	return (
 		<ApolloProvider>

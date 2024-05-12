@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function VideoDisplay({ video }: { video: any }) {
 	return (
 		<Container sx={{ minWidth: "100%" }}>
-			<Link href={process.env.NODE_ENV === "production" ? "/home" : "/close-friends"} passHref>
+			<Link href={process.env.NEXT_PUBLIC_VERCEL_ENNV === "production" ? "/home" : "/close-friends"} passHref>
 				<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
 					Back to Home
 				</Button>

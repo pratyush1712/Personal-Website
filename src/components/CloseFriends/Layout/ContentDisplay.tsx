@@ -20,9 +20,9 @@ export default function ContentDisplay({
 }) {
 	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
 
-	const homeURL = process.env.NODE_ENV! === "production" ? "/search" : "/close-friends/";
-	const adminURL = process.env.NODE_ENV! === "production" ? "/admin" : "/close-friends/admin";
-	const currentURL = process.env.NODE_ENV! === "production" ? "/" : "/close-friends/";
+	const homeURL = process.env.NEXT_PUBLIC_VERCEL_ENNV! === "production" ? "/search" : "/close-friends/";
+	const adminURL = process.env.NEXT_PUBLIC_VERCEL_ENNV! === "production" ? "/admin" : "/close-friends/admin";
+	const currentURL = process.env.NEXT_PUBLIC_VERCEL_ENNV! === "production" ? "/" : "/close-friends/";
 
 	// data is an array whose contents is sometimes wrapped in item
 	if (data[0]?.item) {

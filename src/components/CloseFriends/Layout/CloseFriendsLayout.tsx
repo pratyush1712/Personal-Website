@@ -38,7 +38,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			.finally(() => setLoading(false));
 	}, []);
 
-	const adminURL = process.env.NODE_ENV === "production" ? "/admin" : "/close-friends/admin";
+	const adminURL = process.env.NEXT_PUBLIC_VERCEL_ENNV === "production" ? "/admin" : "/close-friends/admin";
 	const [showText, setShowText] = useState(false);
 	const [widthState, setWidthState] = useState("80%");
 
