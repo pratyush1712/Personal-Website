@@ -18,7 +18,7 @@ export default function BlogView({ blog }: { blog: Content }) {
 
 	return (
 		<Container sx={{ minWidth: "100%" }}>
-			<Link href={process.env.NEXT_PUBLIC_VERCEL_ENNV === "production" ? "/" : "/close-friends"} passHref>
+			<Link href={process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "/" : "/close-friends"} passHref>
 				<Button variant="contained" sx={{ mt: 3, mx: 3 }} size="small">
 					Back to Home
 				</Button>
