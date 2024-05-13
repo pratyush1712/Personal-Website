@@ -42,7 +42,7 @@ const handler = startServerAndCreateNextHandler(apolloServer, {
 			const reqCookies = cookies().getAll();
 			console.log(reqCookies);
 			const cookieName = process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "__Secure-next-auth.session-token" : "next-auth.session-token";
-			const token = reqCookies.find(cookie => cookie.name === "next-auth.session-token")?.value;
+			const token = reqCookies.find(cookie => cookie.name === cookieName)?.value;
 			const mutation = headers().get("Mutation") === "true";
 			console.log(mutation);
 			console.log(token);
