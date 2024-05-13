@@ -57,7 +57,7 @@
 % Custom commands
 \newcommand{\resumeItem}[1]{
   \item\small{
-    {#1 \vspace{-2pt}}
+    {#1 \vspace{-2.5pt}}
   }
 }
 
@@ -84,11 +84,11 @@
     \end{tabular*}\vspace{-7pt}
 }
 
-\newcommand{\resumeProjectHeading}[1]{
+\newcommand{\resumeProjectHeading}[3]{
     \item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 \\
-    \end{tabular*}\vspace{-7pt}
+      \textbf{\small #1} $|$ \emph{\small #2} &\textit{\small#3}
+    \end{tabular*}\vspace{-6pt}
 }
 
 \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
@@ -160,7 +160,7 @@
 \resumeItemListEnd
 
 \resumeSubheading
-{Technical Product Manager}{March 2022 - December 2023}
+{Technical Product Manager}{March 2023 - December 2023}
 {\href{https://www.cornelldti.org/}{Cornell Digital Tech \& Innovation}}{Ithaca, New York}
 \resumeItemListStart
 \resumeItem{\textbf{Project Leadership}: Led a team of 7 developers in building a cross-platform campus-wide ride scheduling application. Utilized Agile methodologies and introduced Test-Driven Development (TDD), achieving 94\% test coverage.}
@@ -168,11 +168,13 @@
 \resumeItemListEnd
 
 \resumeSubheading
-{Data Engineer}{June 2023 - Present}{\href{https://www.engineering.cornell.edu/}{Cornell College of Engineering}}{Ithaca, New York}
+{Data Engineer}{June 2023 - September 2023}{\href{https://www.engineering.cornell.edu/}{Cornell College of Engineering}}{Ithaca, New York}
 \resumeItemListStart
 
 \resumeItem{\textbf{ETL Pipeline Development}: Engineered an ETL pipeline using Selenium and NLP to process financial data of 3000+ companies, achieving an 83\% processing time reduction through multithreading.}
 \resumeItem{\textbf{Full-Stack Development}: Developed a full-stack app with Next.js and Flask, featuring Server-Sent-Events for real-time data display and experiencing a 66\% data latency reduction.}
+
+
 
 \resumeItemListEnd
 
@@ -188,20 +190,20 @@
 \section{Personal Projects}
 \resumeSubHeadingListStart
 \resumeProjectHeading
-{\href{https://github.com/pratyush1712/harmonious-sounds}{\textbf{Harmonious Sounds}} $|$ \emph{Scikit Learn, React, Flask, Express, Docker, Nginx} $|$ April 2023}
-\resumeItem{Microservices-based web app incorporating a Logistic Regression model for playlist happiness prediction with 88\% accuracy. Employed Nginx for seamless proxying between 4 microservices.}
-
-\resumeProjectHeading
-{\href{https://cleverhugs.life/}{\textbf{CleverHug Email Scheduler}} $|$ \emph{React, Flask, QStash, Tailwind} $|$ April 2024}
+{\href{https://cleverhugs.life/}{CleverHug Email Scheduler}}{React, Flask, QStash, Tailwind}{April 2024}
 \resumeItem{Full-stack web app enabling users to schedule uplifting emails to their future selves. Leveraged AI to generate optimized schedule rules (RRULE) for personalized reminders. Integrated QStash for robust queue management and reliable delivery of emails.}
 
 \resumeProjectHeading
-{\href{https://github.com/cornell-dti/mlmn-findoc}{\textbf{DTI GPT}} $|$ \emph{Supabase, Zillus, Next.js, Flask, LangChain} $|$ March 2024}
+{\href{https://github.com/cornell-dti/mlmn-findoc}{DTI GPT}}{Supabase, Zillus, Next.js, Flask, LangChain}{March 2024}
 \resumeItem{Full-stack web based AI tool to summarize syllabi and enable student interaction through natural language queries. Optimized response times with Supabase, Zillus, and vector database searches.}
 
 \resumeProjectHeading
-{\href{https://private.pratyushsudhakar.com/}{\textbf{Live Blog and Video Sharing Platform}} $|$ \emph{Next.js 14, Apollo, GraphQL, MongoDB, Mux} $|$ April 2024}
+{\href{https://private.pratyushsudhakar.com/}{Live Blog and Video Sharing Platform}}{Next.js 14, Apollo, GraphQL, MongoDB, Mux}{April 2024}
 \resumeItem{Full-stack platform for creating, sharing blog posts, and streaming live video content using Mux for seamless delivery.}
+
+\resumeProjectHeading
+{\href{https://github.com/pratyush1712/harmonious-sounds}{Harmonious Sounds}}{Scikit Learn, React, Flask, Express, Docker, Nginx}{April 2023}
+\resumeItem{Microservices-based web app incorporating a Logistic Regression model for playlist happiness prediction with 88\% accuracy. Employed Nginx for seamless proxying between 4 microservices.}
 
 \resumeSubHeadingListEnd
 
