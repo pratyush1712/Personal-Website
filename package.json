@@ -11,6 +11,9 @@
 		"format-check": "prettier --check .",
 		"prepare": "husky"
 	},
+	"lint-staged": {
+		"**/*": "prettier --write --ignore-unknown"
+	},
 	"dependencies": {
 		"@apollo/client": "^3.10.1",
 		"@apollo/experimental-nextjs-app-support": "^0.10.0",
