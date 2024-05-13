@@ -7,7 +7,8 @@ import { setContext } from "@apollo/client/link/context";
 function makeClient() {
 	const httpLink = new HttpLink({
 		uri: process.env.NEXT_PUBLIC_URL_SERVER_GRAPHQL,
-		fetchOptions: { cache: "no-store" }
+		fetchOptions: { cache: "no-store" },
+		credentials: "same-origin"
 	});
 
 	const authLink = setContext(async (request, { headers }) => {
