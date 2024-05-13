@@ -54,6 +54,7 @@ export default function BlogList() {
 	return (
 		<Box sx={{ width: "100%" }}>
 			<TextField
+				id="search-bar"
 				fullWidth
 				label="Search Blogs"
 				variant="outlined"

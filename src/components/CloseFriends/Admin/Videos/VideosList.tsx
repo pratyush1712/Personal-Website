@@ -51,6 +51,7 @@ export default function VideoList() {
 	return (
 		<Box sx={{ width: "100%" }}>
 			<TextField
+				id="search-bar"
 				fullWidth
 				label="Search Videos"
 				variant="outlined"
