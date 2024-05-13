@@ -11,8 +11,11 @@ const resolvers = {
 	},
 
 	Query: {
-		blogs: async (_: any, __: any, context: { dataSources: { blogs: any } }) => {
+		blogs: async (_: any, { offset, limit }: any, context: { dataSources: { blogs: any } }) => {
 			try {
+				if (offset && limit) {
+					return await context.dataSources.blogs.getBlogsByOffsetAndLimit(offset, limit);
+				}
 				return await context.dataSources.blogs.getAllBlogs();
 			} catch (error) {
 				console.error("Failed to fetch blogs:", error);
@@ -29,7 +32,7 @@ const resolvers = {
 			}
 		},
 
-		videos: async (_: any, __: any, context: { dataSources: { videos: any } }) => {
+		videos: async (_: any, { offset, limit }: any, context: { dataSources: { videos: any } }) => {
 			try {
 				return await context.dataSources.videos.getAllVideos();
 			} catch (error) {

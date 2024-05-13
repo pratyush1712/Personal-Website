@@ -38,12 +38,12 @@ const typeDefs = `#graphql
   }
 
   type Query {
-    blogs: [Blog]
-    videos: [Video]
+    blogs(offset:Int, limit:Int): [Blog]
+    videos(offset:Int, limit:Int): [Video]
     blog(id: ID!): Blog
     video(id: ID!): Video
-    contents: [Content]
-    accessContents(access: String!): [Content]
+    contents(offset:Int, limit:Int): [Content]
+    accessContents(access: String!, offset:Int, limit:Int): [Content]
   }
 
   input NewBlogInput {
