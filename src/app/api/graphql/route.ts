@@ -44,8 +44,9 @@ const handler = startServerAndCreateNextHandler(apolloServer, {
 			const mutation = headers().get("mutation") === "true";
 			if (mutation) {
 				const decoded = await decode({ token, secret: process.env.NEXTAUTH_SECRET! });
+				console.log(decoded);
 				if (decoded?.email! !== "pratyushsudhakar03@gmail.com") {
-					throw new Error("You are not authorized to perform this action");
+					throw new Error("You are not authorized to perform this action" + decoded?.email!);
 				}
 			}
 		}
