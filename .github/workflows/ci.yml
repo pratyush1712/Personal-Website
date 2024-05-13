@@ -1,0 +1,49 @@
+# run pnpm lint and pnpm format-check in parallel on every pull request and push to master branch
+# also check for pnpm build after installing dependencies
+
+name: Continuous Integration
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        environment:
+            name: My Environment
+        env:
+            VARS_CONTEXT: ${{ toJson(vars) }}
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v3
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+            - name: Set up pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 6.0.2
+            - uses: actions/cache@v3
+              with:
+                  path: |
+                      ~/.pnpm
+                      ${{ github.workspace }}/node_modules
+                      ${{ github.workspace }}/.next/cache
+                  key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+                  restore-keys: |
+                      ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+            - uses: oNaiPs/secrets-to-env-action@v1
+              with:
+                  secrets: ${{ toJSON(secrets) }}
+            - name: Install dependencies
+              run: pnpm install
+            - name: Lint
+              run: pnpm lint
+            - name: Format check
+              run: pnpm format-check
+            - name: Build
+              run: pnpm build

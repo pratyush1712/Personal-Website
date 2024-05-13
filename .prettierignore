@@ -1,0 +1,14 @@
+build/
+public/**.html
+public/**.json
+node_modules
+venv
+*.yaml
+src/utils/songs.json
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+/.venv/
