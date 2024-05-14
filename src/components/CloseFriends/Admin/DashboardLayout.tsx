@@ -1,10 +1,11 @@
 "use client";
-import { Box, Drawer, Toolbar, Tab, Tabs, ThemeProvider, CssBaseline, Icon } from "@mui/material";
+import { Box, Drawer, Toolbar, Tab, Tabs, ThemeProvider, CssBaseline, Icon, Button } from "@mui/material";
 import Link from "next/link";
 import createTheme from "@/ui/Theme";
 import ApolloProvider from "@/graphql/client/apolloProvider";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { RiDashboardFill } from "react-icons/ri";
+import { useRouter } from "next/navigation";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	const drawerWidth = 0;
@@ -12,6 +13,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
 	};
+	const router = useRouter();
 
 	const theme = createTheme(true, {
 		palette: {
@@ -35,6 +37,21 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
 	// if in production, baseURL is /admin and in dev, it is /close-friends/admin
 	const currentUrl = process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "/admin" : "/close-friends/admin";
+
+	const handleClickMore = (e: any) => {
+		e.preventDefault();
+		const url = window.location.href;
+		const offset = new URLSearchParams(url.split("?")[1]).get("offset");
+		const limit = new URLSearchParams(url.split("?")[1]).get("limit");
+		const URL = new URLSearchParams(url.split("?")[1]);
+		URL.set("limit", parseInt(limit ?? "5").toString());
+		const newLimit = parseInt(limit && limit !== "0" ? limit : "5").toString();
+		URL.set("offset", (parseInt(offset ?? "0") + parseInt(newLimit)).toString());
+		console.log(URL.toString());
+		startTransition(() => {
+			router.replace(`${url.split("?")[0]}?${URL.toString()}`, { scroll: false });
+		});
+	};
 
 	return (
 		<ApolloProvider>
@@ -80,6 +97,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 							</Tabs>
 						</Toolbar>
 						{children}
+						<Button sx={{ display: value === 1 ? "block" : "none", align: "center", my: 3, mx: "45%" }} onClick={handleClickMore}>
+							Load More
+						</Button>
 					</Box>
 				</Box>
 			</ThemeProvider>

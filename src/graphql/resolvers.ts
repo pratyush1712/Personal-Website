@@ -13,10 +13,7 @@ const resolvers = {
 	Query: {
 		blogs: async (_: any, { offset, limit }: any, context: { dataSources: { blogs: any } }) => {
 			try {
-				if (offset && limit) {
-					return await context.dataSources.blogs.getBlogsByOffsetAndLimit(offset, limit);
-				}
-				return await context.dataSources.blogs.getAllBlogs();
+				return await context.dataSources.blogs.getAllBlogs(offset, limit);
 			} catch (error) {
 				console.error("Failed to fetch blogs:", error);
 				throw new Error("Error fetching blogs.");
@@ -34,7 +31,7 @@ const resolvers = {
 
 		videos: async (_: any, { offset, limit }: any, context: { dataSources: { videos: any } }) => {
 			try {
-				return await context.dataSources.videos.getAllVideos();
+				return await context.dataSources.videos.getAllVideos(offset, limit);
 			} catch (error) {
 				console.error("Failed to fetch videos:", error);
 				throw new Error("Error fetching videos.");
@@ -62,10 +59,10 @@ const resolvers = {
 			}
 		},
 
-		accessContents: async (_: any, { access }: { access: string }, context: { dataSources: { blogs: any; videos: any } }) => {
+		accessContents: async (_: any, { access, offset, limit }: any, context: { dataSources: { blogs: any; videos: any } }) => {
 			try {
-				const blogs = context.dataSources.blogs.getBlogsByAccess(access);
-				const videos = context.dataSources.videos.getVideosByAccess(access);
+				const blogs = context.dataSources.blogs.getBlogsByAccess(access, offset, limit);
+				const videos = context.dataSources.videos.getVideosByAccess(access, offset, limit);
 				const contents = await Promise.all([blogs, videos]);
 				return contents.flat();
 			} catch (error) {

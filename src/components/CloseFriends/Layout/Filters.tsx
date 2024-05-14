@@ -10,10 +10,12 @@ interface FiltersProps {
 	sortKey: string | null | undefined;
 	filterKey: string | null | undefined;
 	tagFilterKeys: string[] | null | undefined;
+	offset: string | undefined;
+	limit: string | undefined;
 	url: string;
 }
 
-export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys, url }: FiltersProps) {
+export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys, offset, limit, url }: FiltersProps) {
 	const router = useRouter();
 	const [searchTermState, setSearchTermState] = useState<string>(searchTerm! || "");
 	const [sortKeyState, setSortKeyState] = useState<string>(sortKey! || "");
@@ -36,7 +38,10 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 	};
 
 	useEffect(() => {
+		// keep the limit and offset params
 		const URL = new URLSearchParams(url.split("?")[1]);
+		if (offset !== undefined) URL.set("offset", offset);
+		if (limit !== undefined) URL.set("limit", limit);
 		URL.delete("searchTerm");
 		URL.delete("sortKey");
 		URL.delete("filterKey");

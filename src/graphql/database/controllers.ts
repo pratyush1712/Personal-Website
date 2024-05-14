@@ -29,9 +29,24 @@ export interface VideoDocument {
 }
 
 export class Blogs extends MongoDataSource<BlogDocument> {
-	async getAllBlogs() {
+	async fetchBlogs(params: any, offset?: number, limit?: number) {
 		try {
-			return await BlogModel.find();
+			if (offset !== undefined || limit !== undefined) {
+				const data = await BlogModel.find(params)
+					.skip(offset)
+					.limit(limit === 0 ? 1 : limit);
+				if (limit === 0) return [];
+				return data;
+			}
+			return await BlogModel.find(params);
+		} catch (error) {
+			throw new Error("Failed to fetch videos");
+		}
+	}
+
+	async getAllBlogs(offset?: number, limit?: number) {
+		try {
+			return await this.fetchBlogs({}, offset, limit);
 		} catch (error) {
 			throw new Error("Failed to fetch blogs");
 		}
@@ -70,14 +85,14 @@ export class Blogs extends MongoDataSource<BlogDocument> {
 		}
 	}
 
-	async getBlogsByAccess(access: string) {
+	async getBlogsByAccess(access: string, offset?: number, limit?: number) {
 		try {
 			if (access === "private") {
-				return await BlogModel.find();
+				return await this.fetchBlogs({}, offset, limit);
 			} else if (access === "close-friends") {
-				return await BlogModel.find({ access: { $ne: "private" } });
+				return await this.fetchBlogs({ access: { $ne: "private" } }, offset, limit);
 			} else {
-				return await BlogModel.find({ access });
+				return await this.fetchBlogs({ access }, offset, limit);
 			}
 		} catch (error) {
 			throw new Error("Failed to fetch blogs");
@@ -86,9 +101,24 @@ export class Blogs extends MongoDataSource<BlogDocument> {
 }
 
 export class Videos extends MongoDataSource<VideoDocument> {
-	async getAllVideos() {
+	async fetchVideos(params: any, offset?: number, limit?: number) {
 		try {
-			return await VideoModel.find();
+			if (offset !== undefined || limit !== undefined) {
+				const data = await VideoModel.find(params)
+					.skip(offset)
+					.limit(limit === 0 ? 1 : limit);
+				if (limit === 0) return [];
+				return data;
+			}
+			return await VideoModel.find(params);
+		} catch (error) {
+			throw new Error("Failed to fetch videos");
+		}
+	}
+
+	async getAllVideos(offset?: number, limit?: number) {
+		try {
+			return await this.fetchVideos({}, offset, limit);
 		} catch (error) {
 			throw new Error("Failed to fetch videos");
 		}
@@ -126,14 +156,14 @@ export class Videos extends MongoDataSource<VideoDocument> {
 		}
 	}
 
-	async getVideosByAccess(access: string) {
+	async getVideosByAccess(access: string, offset?: number, limit?: number) {
 		try {
 			if (access === "private") {
-				return await VideoModel.find();
+				return await this.fetchVideos({}, offset, limit);
 			} else if (access === "close-friends") {
-				return await VideoModel.find({ access: { $ne: "private" } });
+				return await this.fetchVideos({ access: { $ne: "private" } }, offset, limit);
 			} else {
-				return await VideoModel.find({ access });
+				return await this.fetchVideos({ access }, offset, limit);
 			}
 		} catch (error) {
 			throw new Error("Failed to fetch videos");

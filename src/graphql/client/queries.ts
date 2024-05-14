@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_CONTENTS = gql`
-	query GetContents($access: String! = "private") {
-		accessContents(access: $access) {
+	query GetContents($access: String! = "private", $offset: Int = 0, $limit: Int) {
+		accessContents(access: $access, offset: $offset, limit: $limit) {
 			id
 			title
 			details
@@ -51,8 +51,8 @@ export const GET_VIDEO = gql`
 `;
 
 export const GET_BLOGS = gql`
-	query GetBlogs {
-		blogs {
+	query GetBlogs($offset: Int = 0, $limit: Int) {
+		blogs(offset: $offset, limit: $limit) {
 			id
 			title
 			details
@@ -76,8 +76,8 @@ export const DELETE_BLOG_MUTATION = gql`
 `;
 
 export const GET_VIDEOS = gql`
-	query GetVideos {
-		videos {
+	query GetVideos($offset: Int = 0, $limit: Int) {
+		videos(offset: $offset, limit: $limit) {
 			id
 			title
 			details

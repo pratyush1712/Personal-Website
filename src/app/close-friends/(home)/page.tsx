@@ -14,11 +14,22 @@ const accessLevels = (session: any) => {
 	return "close-friends";
 };
 
-const getData = async (searchTerm: string = "", sortKey: string = "createdAt", filterKey: string = "all", tagFilterKeys: string[] = []) => {
+const getData = async (
+	searchTerm: string = "",
+	sortKey: string = "createdAt",
+	filterKey: string = "all",
+	tagFilterKeys: string[] = [],
+	offset: string = "0",
+	limit: string = "5"
+) => {
 	const session = await getServerSession();
 	const access = accessLevels(session);
 	const client = getClient();
-	const { data } = await client.query({ query: GET_CONTENTS, variables: { access } });
+	let limitInt;
+	let offsetInt;
+	if (limit !== undefined) limitInt = parseInt(limit);
+	if (offset !== undefined) offsetInt = parseInt(offset);
+	const { data } = await client.query({ query: GET_CONTENTS, variables: { access, offset: offsetInt, limit: limitInt } });
 	const fuseOptions = {
 		keys: ["title", "details", "keywords"],
 		includeScore: true,
@@ -60,14 +71,19 @@ export default async function CloseFriends({
 		sortKey: string | null | undefined;
 		filterKey: string | null | undefined;
 		tagFilterKeys: string[] | null | undefined;
+		offset: string | undefined;
+		limit: string | undefined;
 	};
 }) {
 	const data = await getData(
 		searchParams.searchTerm! || "",
 		searchParams.sortKey || "createdAt",
 		searchParams.filterKey || "all",
-		searchParams.tagFilterKeys as string[]
+		searchParams.tagFilterKeys as string[],
+		searchParams.offset,
+		searchParams.limit || "5"
 	);
+	searchParams["limit"] = searchParams.limit || "5";
 	return (
 		<Container maxWidth="md" sx={{ minWidth: "100%", margin: "auto" }}>
 			<ContentDisplay params={searchParams} data={data} admin={false} />

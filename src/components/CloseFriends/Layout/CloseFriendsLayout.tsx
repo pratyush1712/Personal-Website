@@ -2,13 +2,14 @@
 import { Container, Typography, ThemeProvider, CssBaseline, Box } from "@mui/material";
 import createTheme from "@/ui/Theme";
 import { getSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import { User } from "@/types";
 import Video from "@/ui/Video";
 import Link from "next/link";
 import Footer from "./Footer";
 import Loading from "@/ui/Loading";
 import { RiExternalLinkLine } from "react-icons/ri";
+import { useRouter } from "next/navigation";
 
 export default function CloseFriendsLayout({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<User | null>(null);
@@ -27,6 +28,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			}
 		}
 	});
+	const router = useRouter();
 
 	useEffect(() => {
 		getSession()
@@ -60,6 +62,19 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 
 		return () => clearTimeout(timer);
 	}, []);
+
+	const handleClickMore = (e: any) => {
+		e.preventDefault();
+		const url = window.location.href;
+		const offset = new URLSearchParams(url.split("?")[1]).get("offset");
+		const limit = new URLSearchParams(url.split("?")[1]).get("limit");
+		const URL = new URLSearchParams(url.split("?")[1]);
+		URL.set("offset", parseInt(offset ?? "0").toString());
+		URL.set("limit", (parseInt(limit ?? "5") + 5).toString());
+		startTransition(() => {
+			router.replace(`${url.split("?")[0]}?${URL.toString()}`, { scroll: false });
+		});
+	};
 
 	if (loading) return <Loading />;
 
@@ -211,6 +226,9 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 				</Container>
 				<Container disableGutters sx={{ height: "100%", minWidth: "100%", mb: 10 }}>
 					{children}
+					<Typography variant="body1" sx={{ textAlign: "center", cursor: "pointer", mt: 5, mb: 2 }} onClick={handleClickMore}>
+						Click here to view more...
+					</Typography>
 				</Container>
 				{user?.email === "pratyushsudhakar03@gmail.com" && (
 					<Box sx={{ position: "fixed", bottom: 20, right: 30, zIndex: 1500 }}>

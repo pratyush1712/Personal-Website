@@ -14,11 +14,13 @@ export default function ContentDisplay({
 		sortKey: string | null | undefined;
 		filterKey: string | null | undefined;
 		tagFilterKeys: string[] | null | undefined;
+		offset: string | undefined;
+		limit: string | undefined;
 	};
 	data: any;
 	admin?: boolean;
 }) {
-	const { searchTerm, sortKey, filterKey, tagFilterKeys } = params;
+	const { searchTerm, sortKey, filterKey, tagFilterKeys, offset, limit } = params;
 
 	const homeURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/search" : "/close-friends/";
 	const adminURL = process.env.NEXT_PUBLIC_VERCEL_ENV! === "production" ? "/admin" : "/close-friends/admin";
@@ -44,11 +46,27 @@ export default function ContentDisplay({
 						borderBottom: "2px solid rgba(219, 9, 20, 1)",
 						boxShadow: "none"
 					}}>
-					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={homeURL} />
+					<Filters
+						searchTerm={searchTerm}
+						sortKey={sortKey}
+						filterKey={filterKey}
+						tagFilterKeys={tagFilterKeys}
+						url={homeURL}
+						offset={offset}
+						limit={limit}
+					/>
 				</AppBar>
 			) : (
 				<Box sx={{ mt: 1, mb: 3 }}>
-					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={adminURL} />
+					<Filters
+						searchTerm={searchTerm}
+						sortKey={sortKey}
+						filterKey={filterKey}
+						tagFilterKeys={tagFilterKeys}
+						url={adminURL}
+						offset={offset}
+						limit={limit}
+					/>
 				</Box>
 			)}
 			<Typography variant="h5" sx={{ mb: 1, mt: 0, pt: 0 }}>

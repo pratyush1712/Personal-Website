@@ -7,9 +7,26 @@ import { GET_CONTENTS } from "@/graphql/client/queries";
 
 export const dynamic = "force-dynamic";
 
-const getData = async (searchTerm: string = "", sortKey: string = "createdAt", filterKey: string = "all", tagFilterKeys: string[] = []) => {
+const getData = async (
+	existingData: Content[] = [],
+	searchTerm: string = "",
+	sortKey: string = "createdAt",
+	filterKey: string = "all",
+	tagFilterKeys: string[] = [],
+	offset: string = "0",
+	limit: string = "5"
+) => {
+	console.log("getData called", existingData);
 	const client = getClient();
-	const { data } = await client.query({ query: GET_CONTENTS, variables: { access: "private" } });
+	let limitInt;
+	let offsetInt;
+	if (limit !== undefined) limitInt = parseInt(limit);
+	if (offset !== undefined) offsetInt = parseInt(offset);
+	const { data } = await client.query({
+		query: GET_CONTENTS,
+		variables: { access: "private", offset: offsetInt, limit: limitInt }
+	});
+	console.log("getData data", data);
 	const fuseOptions = {
 		keys: ["title", "details", "keywords"],
 		includeScore: true,
@@ -36,11 +53,15 @@ const getData = async (searchTerm: string = "", sortKey: string = "createdAt", f
 		return tagFilterKeys.length === 0 || content.tags.some(tag => tagFilterKeys.includes(tag));
 	};
 
-	const filteredFeatures = searchResults
+	const filteredNewData = searchResults
 		.filter((content: Content) => categoryFilter(content, filterKey!))
 		.filter((content: Content) => tagFilter(content, tagFilterKeys!))
 		.sort((a: Content, b: Content) => sortFunctionMap[sortKey!](a, b));
-	return filteredFeatures;
+
+	// Merge new data with existing data
+	const mergedData = [...existingData, ...filteredNewData];
+
+	return mergedData;
 };
 
 export default async function AdminDashboard({
@@ -51,14 +72,26 @@ export default async function AdminDashboard({
 		sortKey: string | null | undefined;
 		filterKey: string | null | undefined;
 		tagFilterKeys: string[] | null | undefined;
+		offset: string | undefined;
+		limit: string | undefined;
 	};
 }) {
+	// Placeholder for previously fetched data
+	let existingData: Content[] = [];
+
 	const data = await getData(
-		searchParams.searchTerm || "",
+		existingData,
+		searchParams.searchTerm! || "",
 		searchParams.sortKey || "createdAt",
 		searchParams.filterKey || "all",
-		searchParams.tagFilterKeys || []
+		searchParams.tagFilterKeys as string[],
+		searchParams.offset,
+		searchParams.limit
 	);
+
+	// Update existing data with new data
+	existingData = data;
+
 	return (
 		<Container maxWidth="lg">
 			<Typography variant="h4" sx={{ mt: 4 }}>

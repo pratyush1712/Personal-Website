@@ -10,7 +10,13 @@ import Loading from "@/ui/Loading";
 import { GET_BLOGS, DELETE_BLOG_MUTATION, GET_CONTENTS } from "@/graphql/client/queries";
 
 export default function BlogList() {
-	const { data, loading, error } = useQuery(GET_BLOGS);
+	const { data, loading, error, fetchMore } = useQuery(GET_BLOGS, {
+		variables: {
+			limit: 0,
+			offset: 0
+		},
+		notifyOnNetworkStatusChange: true
+	});
 	const [deleteBlog] = useMutation(DELETE_BLOG_MUTATION, {
 		refetchQueries: [{ query: GET_BLOGS }, { query: GET_CONTENTS }]
 	});
@@ -18,6 +24,10 @@ export default function BlogList() {
 	const [currentBlogId, setCurrentBlogId] = useState<number | null>(null);
 	const [searchResults, setSearchResults] = useState<Content[]>([]);
 	const [query, setQuery] = useState<string>("");
+
+	const merge = (existing = [], incoming: any) => {
+		return [...existing, ...incoming];
+	};
 
 	useEffect(() => {
 		if (data && data.blogs) {
@@ -61,6 +71,8 @@ export default function BlogList() {
 				onChange={(e: any) => setQuery(e.target.value)}
 				margin="normal"
 			/>
+			<Button onClick={() => fetchMore({ variables: { limit: data.blogs.length + 5 } })}>Load More</Button>
+
 			{searchResults.map(blog => (
 				<Card key={blog.id} sx={{ display: "flex", marginBottom: 2, position: "relative" }}>
 					<CardMedia
