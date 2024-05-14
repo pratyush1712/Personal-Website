@@ -44,7 +44,8 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 }
 
 function getContent(page: string) {
-	const filePath = join(process.cwd(), "public/readmes", `${page}.md`);
+	const folder = process.env.NODE_ENV === "development" ? "public/readmes" : "readmes";
+	const filePath = join(process.cwd(), folder, `${page}.md`);
 	const readmeContent = readFileSync(`${filePath}`, "utf8");
 	return readmeContent;
 }
