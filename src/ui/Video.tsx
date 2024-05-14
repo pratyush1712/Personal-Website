@@ -1,7 +1,5 @@
 export default function Video({
-	ref,
 	src,
-	play = false,
 	autoPlay = false,
 	loop = false,
 	muted = false,
@@ -10,9 +8,7 @@ export default function Video({
 	width = "100vw",
 	height = "100%"
 }: {
-	ref?: React.RefObject<HTMLVideoElement>;
 	src: string;
-	play?: boolean;
 	autoPlay?: boolean;
 	loop?: boolean;
 	muted?: boolean;
@@ -23,7 +19,6 @@ export default function Video({
 }) {
 	return (
 		<video
-			ref={ref}
 			style={
 				style || {
 					position: "absolute",
@@ -38,7 +33,7 @@ export default function Video({
 			poster="/videos/background.png"
 			preload="metadata"
 			controls={controls}
-			autoPlay={play}
+			autoPlay={autoPlay}
 			loop={loop}
 			width={width}
 			height={height}
