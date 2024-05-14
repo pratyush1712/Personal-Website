@@ -22,6 +22,7 @@ import { MarkdownParagraph, MarkdownTable, MarkdownTableCell } from "@/component
 // Static Page Imports
 import pages, { routeToPage } from "@/utils/pages";
 import { Metadata, ResolvingMetadata } from "next/types";
+import { join } from "path";
 
 type Props = { params: { slug: string } };
 
@@ -43,7 +44,8 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 }
 
 function getContent(page: string) {
-	const readmeContent = readFileSync(`/readmes/${page}.md`, "utf8");
+	const filePath = join(process.cwd(), "public/readmes", `${page}.md`);
+	const readmeContent = readFileSync(`${filePath}`, "utf8");
 	return readmeContent;
 }
 
