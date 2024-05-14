@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    <url>
+        <loc>https://private.pratyushsudhakar.com/videos/background.mp4</loc>
+        <video:video>
+            <video:thumbnail_loc>https://private.pratyushsudhakar.com/videos/background.png</video:thumbnail_loc>
+            <video:title>Background Video</video:title>
+            <video:description>A background video hosted on Pratyush Sudhakar's website.</video:description>
+            <video:content_loc>https://private.pratyushsudhakar.com/videos/background.mp4</video:content_loc>
+            <video:duration>10</video:duration>
+            <video:publication_date>2024-05-14T00:00:00Z</video:publication_date>
+        </video:video>
+    </url>
+</urlset>
