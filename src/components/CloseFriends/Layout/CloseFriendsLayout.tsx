@@ -2,7 +2,7 @@
 import { Container, Typography, ThemeProvider, CssBaseline, Box } from "@mui/material";
 import createTheme from "@/ui/Theme";
 import { getSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { User } from "@/types";
 import Video from "@/ui/Video";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import { RiExternalLinkLine } from "react-icons/ri";
 export default function CloseFriendsLayout({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<User | null>(null);
 	const [loading, setLoading] = useState(true);
+	const videoRef = useRef<HTMLVideoElement>(null);
 
 	const theme = createTheme(true, {
 		palette: {
@@ -43,6 +44,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 	const [widthState, setWidthState] = useState("80%");
 
 	useEffect(() => {
+		videoRef.current?.pause();
 		const interval = setInterval(() => {
 			setWidthState(widthState => {
 				if (widthState === "100%") {
@@ -54,6 +56,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 			});
 		}, 150);
 		const timer = setTimeout(() => {
+			videoRef.current?.play();
 			setShowText(true);
 			clearTimeout(timer);
 		}, 1000);
@@ -78,7 +81,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 						minWidth: "100%",
 						p: 0
 					}}>
-					<Video src={"/videos/background.mp4"} autoPlay={true} loop={true} muted={true} />
+					<Video src={"/videos/background.mp4"} ref={videoRef} play={showText} autoPlay={true} loop={true} muted={true} />
 					<Typography
 						variant="h4"
 						sx={{
