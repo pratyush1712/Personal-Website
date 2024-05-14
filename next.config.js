@@ -56,15 +56,6 @@ const nextConfig = {
 						value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
 					}
 				]
-			},
-			{
-				source: "/sitemap.xml",
-				headers: [
-					{
-						key: "Cache-Control",
-						value: "max-age=3600, stale-while-revalidate=86400"
-					}
-				]
 			}
 		];
 	},
