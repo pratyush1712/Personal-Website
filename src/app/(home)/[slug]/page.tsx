@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 }
 
 function getContent(page: string) {
-	const readmeContent = readFileSync(`public/readmes/${page}.md`, "utf8");
+	const readmeContent = readFileSync(`/readmes/${page}.md`, "utf8");
 	return readmeContent;
 }
 
