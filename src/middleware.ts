@@ -53,7 +53,11 @@ export default async function middleware(request: NextRequest) {
 	const prodPrivateURL = "https://private.pratyushsudhakar.com";
 
 	if (normalizedHostname === prodBaseURL.split("://")[1]) {
-		if (url.pathname.startsWith("/close-friends") || url.pathname.startsWith("/login") || url.pathname.includes("/admin")) {
+		if (
+			url.pathname.startsWith("/close-friends") ||
+			url.pathname.startsWith("/login") ||
+			url.pathname.includes("/admin")
+		) {
 			// Redirect all /close-friends/*, /login, and /admin requests to private domain, except for /sitemap.xml
 			if (url.pathname !== "/close-friends/sitemap.xml") {
 				const newPath = url.pathname.replace("/close-friends", "");

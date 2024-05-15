@@ -7,7 +7,12 @@ import { GET_CONTENTS } from "@/graphql/client/queries";
 
 export const dynamic = "force-dynamic";
 
-const getData = async (searchTerm: string = "", sortKey: string = "createdAt", filterKey: string = "all", tagFilterKeys: string[] = []) => {
+const getData = async (
+	searchTerm: string = "",
+	sortKey: string = "createdAt",
+	filterKey: string = "all",
+	tagFilterKeys: string[] = []
+) => {
 	const client = getClient();
 	const { data } = await client.query({ query: GET_CONTENTS, variables: { access: "private" } });
 	const fuseOptions = {

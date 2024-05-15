@@ -40,7 +40,9 @@ function calculatePriority(createdAt: string, updatedAt: string, currentTime: Da
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	console.log("Generating sitemap...");
 	const data: Content[] = await getData();
-	const sorted = [...data].sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+	const sorted = [...data].sort(
+		(a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+	);
 	const currentDate = new Date();
 	const sitemap: MetadataRoute.Sitemap = sorted.map((item: any) => ({
 		url: `${BASE_URL}/${item.__typename.toLowerCase()}/${item.id}`,

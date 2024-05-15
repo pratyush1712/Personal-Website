@@ -88,14 +88,20 @@ export default function BlogEditor({ blog }: { blog: any }) {
 	};
 
 	const handleSubmit = async () => {
-		if (blogUpdate?.image === undefined) blogUpdate["image"] = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/images/default.jpg`;
+		if (blogUpdate?.image === undefined)
+			blogUpdate["image"] = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/images/default.jpg`;
 		const requiredFields = ["title", "details", "access", "image", "tags", "keywords"];
 		if (!blogUpdate) {
 			setFormError("Please fill in the form with valid data.");
 			return;
 		}
 		const validationErrors = requiredFields.map(field => {
-			if (blogUpdate[field] === undefined || blogUpdate[field] === null || blogUpdate[field] === "" || blogUpdate[field]?.length === 0) {
+			if (
+				blogUpdate[field] === undefined ||
+				blogUpdate[field] === null ||
+				blogUpdate[field] === "" ||
+				blogUpdate[field]?.length === 0
+			) {
 				setFormError(`Please fill in the '${field}' with valid data.`);
 				setTimeout(() => setFormError(null), 5000);
 				return true;
@@ -146,7 +152,9 @@ export default function BlogEditor({ blog }: { blog: any }) {
 				</Alert>
 			</Box>
 			<FormControl fullWidth sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-				<Backdrop sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }} open={clientLoading || creating || updating}>
+				<Backdrop
+					sx={{ color: "#fff", zIndex: theme => theme.zIndex.drawer + 1 }}
+					open={clientLoading || creating || updating}>
 					<CircularProgress color="inherit" />
 				</Backdrop>
 				<Typography variant="h4" gutterBottom>
@@ -240,7 +248,14 @@ export default function BlogEditor({ blog }: { blog: any }) {
 												/>
 											))
 										}
-										renderInput={params => <TextField {...params} variant="outlined" label="Tags" placeholder="Add tags" />}
+										renderInput={params => (
+											<TextField
+												{...params}
+												variant="outlined"
+												label="Tags"
+												placeholder="Add tags"
+											/>
+										)}
 										onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, tags: newValue })}
 									/>
 									<Autocomplete
@@ -261,9 +276,16 @@ export default function BlogEditor({ blog }: { blog: any }) {
 											))
 										}
 										renderInput={params => (
-											<TextField {...params} variant="outlined" label="Keywords" placeholder="Add keywords" />
+											<TextField
+												{...params}
+												variant="outlined"
+												label="Keywords"
+												placeholder="Add keywords"
+											/>
 										)}
-										onChange={(event, newValue) => setBlogUpdate({ ...blogUpdate, keywords: newValue })}
+										onChange={(event, newValue) =>
+											setBlogUpdate({ ...blogUpdate, keywords: newValue })
+										}
 									/>
 								</Box>
 							</Box>
@@ -274,7 +296,11 @@ export default function BlogEditor({ blog }: { blog: any }) {
 				<Typography variant="h6" gutterBottom>
 					Edit Blog Content
 				</Typography>
-				<Editor defaultValue={blog?.htmlContent || "Start typing here..."} onChange={setContent} editor={editor} />
+				<Editor
+					defaultValue={blog?.htmlContent || "Start typing here..."}
+					onChange={setContent}
+					editor={editor}
+				/>
 				<Button onClick={handleSubmit} variant="contained" color="primary" sx={{ mt: 2 }}>
 					Save Blog
 				</Button>

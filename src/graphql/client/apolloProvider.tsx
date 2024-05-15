@@ -1,7 +1,12 @@
 "use client";
 
 import { ApolloLink, HttpLink } from "@apollo/client";
-import { NextSSRApolloClient, ApolloNextAppProvider, NextSSRInMemoryCache, SSRMultipartLink } from "@apollo/experimental-nextjs-app-support/ssr";
+import {
+	NextSSRApolloClient,
+	ApolloNextAppProvider,
+	NextSSRInMemoryCache,
+	SSRMultipartLink
+} from "@apollo/experimental-nextjs-app-support/ssr";
 import { setContext } from "@apollo/client/link/context";
 
 function makeClient() {
@@ -19,7 +24,10 @@ function makeClient() {
 	return new NextSSRApolloClient({
 		ssrMode: typeof window === "undefined",
 		cache: new NextSSRInMemoryCache(),
-		link: typeof window === "undefined" ? ApolloLink.from([new SSRMultipartLink({ stripDefer: true }), httpLink]) : authLink.concat(httpLink)
+		link:
+			typeof window === "undefined"
+				? ApolloLink.from([new SSRMultipartLink({ stripDefer: true }), httpLink])
+				: authLink.concat(httpLink)
 	});
 }
 

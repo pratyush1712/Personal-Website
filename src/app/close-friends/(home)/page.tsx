@@ -14,7 +14,12 @@ const accessLevels = (session: any) => {
 	return "close-friends";
 };
 
-const getData = async (searchTerm: string = "", sortKey: string = "createdAt", filterKey: string = "all", tagFilterKeys: string[] = []) => {
+const getData = async (
+	searchTerm: string = "",
+	sortKey: string = "createdAt",
+	filterKey: string = "all",
+	tagFilterKeys: string[] = []
+) => {
 	const session = await getServerSession();
 	const access = accessLevels(session);
 	const client = getClient();

@@ -44,11 +44,23 @@ export default function ContentDisplay({
 						borderBottom: "2px solid rgba(219, 9, 20, 1)",
 						boxShadow: "none"
 					}}>
-					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={homeURL} />
+					<Filters
+						searchTerm={searchTerm}
+						sortKey={sortKey}
+						filterKey={filterKey}
+						tagFilterKeys={tagFilterKeys}
+						url={homeURL}
+					/>
 				</AppBar>
 			) : (
 				<Box sx={{ mt: 1, mb: 3 }}>
-					<Filters searchTerm={searchTerm} sortKey={sortKey} filterKey={filterKey} tagFilterKeys={tagFilterKeys} url={adminURL} />
+					<Filters
+						searchTerm={searchTerm}
+						sortKey={sortKey}
+						filterKey={filterKey}
+						tagFilterKeys={tagFilterKeys}
+						url={adminURL}
+					/>
 				</Box>
 			)}
 			<Typography variant="h5" sx={{ mb: 1, mt: 0, pt: 0 }}>

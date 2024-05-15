@@ -13,7 +13,12 @@ const pages: Page[] = [
 		name: "education.md",
 		route: "education",
 		description: "Academic qualifications of Pratyush",
-		keywords: ["Pratyush Sudhakar Cornell", "Pratyush Sudhakar Mathematics", "Pratyush Sudhakar Computer Science", "Pratyush Education"]
+		keywords: [
+			"Pratyush Sudhakar Cornell",
+			"Pratyush Sudhakar Mathematics",
+			"Pratyush Sudhakar Computer Science",
+			"Pratyush Education"
+		]
 	},
 	{
 		index: 2,
@@ -65,7 +70,12 @@ const pages: Page[] = [
 		name: "skills.md",
 		route: "skills",
 		description: "Technical skills possessed by Pratyush",
-		keywords: ["Pratyush Sudhakar Skills", "Pratyush Backend", "Pratyush Frontend", "Pratyush Sudhakar Software Engineering Skills"]
+		keywords: [
+			"Pratyush Sudhakar Skills",
+			"Pratyush Backend",
+			"Pratyush Frontend",
+			"Pratyush Sudhakar Software Engineering Skills"
+		]
 	}
 ];
 

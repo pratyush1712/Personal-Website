@@ -1,10 +1,13 @@
 name: Update Utils Folder
 
 on:
+    schedule:
+        - cron: "0 0 1/10 * *"
     push:
         branches: master
         paths:
             - "spotify/data.py"
+    workflow_dispatch:
 
 jobs:
     update-and-commit:
@@ -28,7 +31,7 @@ jobs:
             - name: Run index.py to update utils folder
               env:
                   SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
-                  SPOTIFY_SECRET: ${{ secrets.SPOTIFY_SECRET }}
+                  SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_SECRET }}
               run: python spotify/index.py
 
             - name: Commit model

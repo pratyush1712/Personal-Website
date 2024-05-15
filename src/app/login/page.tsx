@@ -8,7 +8,9 @@ import { FaGlobeAmericas } from "react-icons/fa";
 
 export default function Login() {
 	const handleLogin = async () => {
-		await signIn("google", { callbackUrl: process.env.NEXT_PUBLIC_VERCEL_ENV !== "production" ? "/close-friends" : "/" });
+		await signIn("google", {
+			callbackUrl: process.env.NEXT_PUBLIC_VERCEL_ENV !== "production" ? "/close-friends" : "/"
+		});
 	};
 
 	return (
@@ -48,7 +50,12 @@ export default function Login() {
 				</Box>
 			</AppBar>
 			<Box sx={{ mb: 4, mt: 4, overflow: "hidden", width: 400, height: 248, position: "relative" }}>
-				<Image src="/images/login-background.png" fill alt="logo" style={{ borderRadius: 2, border: "1px solid white" }} />
+				<Image
+					src="/images/login-background.png"
+					fill
+					alt="logo"
+					style={{ borderRadius: 2, border: "1px solid white" }}
+				/>
 			</Box>
 			<Typography variant="h5">Welcome back</Typography>
 			<Typography variant="h6" sx={{ mb: 2, color: "#95a5a6" }}>
