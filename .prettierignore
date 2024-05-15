@@ -12,3 +12,4 @@ src/utils/songs.json
 *.out
 *.synctex.gz
 /.venv/
+*.md
