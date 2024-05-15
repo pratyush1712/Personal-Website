@@ -57,6 +57,8 @@ def main():
                     "id": liked_song["track"]["id"],
                     "artist": liked_song["track"]["artists"][0]["name"],
                 }
+                if liked_song["track"]["id"] in song_ids:
+                    continue
                 song_ids.add(liked_song["track"]["id"])
                 resp.append(track_info)
             except:
@@ -69,7 +71,7 @@ def main():
         track_info["url"] = song
         song_ids.add(song.split("/")[-1].split("?")[0])
         resp.append(track_info)
-
+    print(len(resp))
     with open(WEBSITE_PUBLIC_SONGS_PATH + "songs.json", "w+") as f:
         json.dump(resp, f)
 

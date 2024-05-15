@@ -70,7 +70,7 @@ export default function PlayList() {
 
 	useEffect(() => {
 		// check if the displayed songs are unique
-		const ids = displayedSongs.map(song => song.id);
+		const ids = displayedSongs.map(song => song?.id);
 		const uniqueIds = [...new Set(ids)];
 		if (ids.length !== uniqueIds.length) {
 			console.log(ids);
@@ -82,6 +82,10 @@ export default function PlayList() {
 	const songBubbles = useMemo(
 		() =>
 			displayedSongs.map((song, index) => {
+				if (!song || !song.image) {
+					console.log("Invalid song", song);
+					return null;
+				}
 				return (
 					<div
 						key={index}
@@ -108,7 +112,7 @@ export default function PlayList() {
 							setHoverIndex(-1);
 							hoverRef.current = -1;
 						}}
-						onClick={() => handleBubbleClick(`https://open.spotify.com/track/${song.id}`)}>
+						onClick={() => handleBubbleClick(`https://open.spotify.com/track/${song?.id}`)}>
 						<Image
 							loading="lazy"
 							onError={e => (e.currentTarget.src = "/images/default.jpg")}
