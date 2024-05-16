@@ -48,7 +48,6 @@ function BubbleElement(props: { children: string | any[]; options: any; classNam
 	// 	return null;
 	// }
 	const [childrenState, setChildrenState] = React.useState(props.children);
-
 	var options: any = {};
 	Object.assign(options, defaultOptions);
 	Object.assign(options, props.options);
@@ -92,6 +91,14 @@ function BubbleElement(props: { children: string | any[]; options: any; classNam
 		if (e.target.className) {
 			setScrollTop(e.target.scrollTop);
 			setScrollLeft(e.target.scrollLeft);
+			if (
+				scrollable.current.scrollTop >=
+				scrollable.current.scrollHeight - scrollable.current.clientHeight - 50
+			) {
+				setChildrenState((prevChildren: any) => {
+					return [...props.loadMore(prevChildren)];
+				});
+			}
 		}
 	};
 
@@ -104,22 +111,6 @@ function BubbleElement(props: { children: string | any[]; options: any; classNam
 		return function () {
 			return window.removeEventListener("scroll", handleScroll);
 		};
-	}, []);
-
-	React.useEffect(() => {
-		console.log(`scrollable.current.clientWidth: ${scrollable.current.clientWidth}`);
-		const interval = setInterval(() => {
-			if (scrollable.current.scrollLeft >= scrollable.current.clientWidth - 200) {
-				setChildrenState((prevChildren: any) => {
-					return [...prevChildren, ...props.loadMore()];
-				});
-			} else {
-				scrollable.current.scrollTo({
-					left: scrollable.current.scrollLeft + 3,
-					behavior: "smooth"
-				});
-			}
-		}, 100);
 	}, []);
 
 	var interpolate = function interpolate(

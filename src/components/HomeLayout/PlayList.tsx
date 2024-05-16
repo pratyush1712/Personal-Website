@@ -7,9 +7,7 @@ import Image from "next/image";
 import { Container, Typography } from "@mui/material";
 import { FaSpotify } from "react-icons/fa";
 import BubbleUI from "./Play";
-// const BubbleUI: ComponentType<any> = dynamic(() =>
-// 	import("react-bubble-ui").then(mod => mod.default as ComponentType<any>)
-// );
+import { display } from "@mui/system";
 
 const shuffle = (array: any[]) => {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -41,24 +39,24 @@ function PlaylistLabel() {
 				textAlign: "center",
 				position: "absolute",
 				zIndex: 2,
-				top: "30%",
-				left: "28%",
+				bottom: "0%",
+				left: "5%",
 				width: "max-content",
 				py: 2,
 				px: 0,
+				backgroundColor: "#333",
 				alignItems: "center",
-				borderRadius: "10px",
-				border: "2px solid black",
-				backgroundColor: "rgba(29, 185,84, 0.8)"
+				borderLeft: "1px solid #1db954",
+				borderBottom: "1px solid #1db954"
 			}}>
 			<Typography
-				variant="h4"
+				variant="body2"
 				sx={{
 					color: "white",
 					px: 0,
 					mx: 0
 				}}>
-				My Spotify Playlist
+				My Spotify Playlist. Scroll to see more songs...
 				<FaSpotify
 					style={{
 						color: "white",
@@ -97,63 +95,81 @@ export default function PlayList() {
 		setDisplayedSongs(randomSongs.slice(0, ITEMS_PER_LOAD));
 	}, []);
 
-	const loadMore = useCallback(() => {
-		console.log("Loading more songs");
-		randomSongsOffset.current += ITEMS_PER_LOAD;
-		const newSongs = randomSongs.slice(randomSongsOffset.current, randomSongsOffset.current + ITEMS_PER_LOAD);
-		console.log("New songs", newSongs);
-		return newSongs.map((song, index) => {
-			if (!song || !song.image) {
-				console.log("Invalid song", song);
-				return null;
+	const loadMore = useCallback(
+		(prev: any) => {
+			randomSongsOffset.current += ITEMS_PER_LOAD;
+			if (randomSongsOffset.current >= randomSongs.length) {
+				randomSongsOffset.current = 0;
+				return [...prev.slice(ITEMS_PER_LOAD, prev.length), ...shuffle(prev.slice(0, ITEMS_PER_LOAD))];
 			}
-			return (
-				<div
-					key={index}
-					className={`bubble ${hoverIndex === index ? "bubble-hover" : ""}`}
-					style={{
-						width: options.size,
-						height: options.size,
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-						transition: "all 0.5s ease",
-						cursor: "pointer",
-						position: "relative"
-					}}
-					onMouseEnter={() => {
-						const timeoutId = setTimeout(() => {
-							setHoverIndex(index);
-							hoverRef.current = index;
-						}, 600);
-						setHoverTimeoutId(timeoutId);
-					}}
-					onMouseLeave={() => {
-						if (hoverTimeoutId) clearTimeout(hoverTimeoutId);
-						setHoverIndex(-1);
-						hoverRef.current = -1;
-					}}
-					onClick={() => handleBubbleClick(`https://open.spotify.com/track/${song?.id}`)}>
-					<Image
-						loading="lazy"
-						onError={e => (e.currentTarget.src = "/images/default.jpg")}
-						src={song?.image}
-						alt={song?.name}
-						width={options.size}
-						height={options.size}
-						style={{
-							borderRadius: "50%",
-							transition: "transform 0.3s ease",
-							border: "3px solid rgba(29, 185,84, 0.8)"
-						}}
-					/>
-					<div className="tooltip">
-						{song?.name} By: {song?.artist}
-					</div>
-				</div>
-			);
-		});
-	}, [randomSongs]);
+			const newSongs = randomSongs.slice(randomSongsOffset.current, randomSongsOffset.current + ITEMS_PER_LOAD);
+			return [
+				...prev,
+				...newSongs.map((song, index) => {
+					if (!song || !song.image) {
+						console.log("Invalid song", song);
+						return null;
+					}
+					return (
+						<div
+							key={index}
+							className={`bubble ${hoverIndex === index ? "bubble-hover" : ""}`}
+							style={{
+								width: options.size,
+								height: options.size,
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+								transition: "all 0.5s ease",
+								cursor: "pointer",
+								position: "relative"
+							}}
+							onMouseEnter={() => {
+								const timeoutId = setTimeout(() => {
+									setHoverIndex(index);
+									hoverRef.current = index;
+								}, 600);
+								setHoverTimeoutId(timeoutId);
+							}}
+							onMouseLeave={() => {
+								if (hoverTimeoutId) clearTimeout(hoverTimeoutId);
+								setHoverIndex(-1);
+								hoverRef.current = -1;
+							}}
+							onClick={() => handleBubbleClick(`https://open.spotify.com/track/${song?.id}`)}>
+							<Image
+								loading="lazy"
+								onError={e => (e.currentTarget.src = "/images/default.jpg")}
+								src={song?.image}
+								alt={song?.name}
+								width={options.size}
+								height={options.size}
+								style={{
+									borderRadius: "50%",
+									transition: "transform 0.3s ease",
+									border: "3px solid rgba(29, 185,84, 0.8)"
+								}}
+							/>
+							<Typography
+								variant="subtitle2"
+								sx={{
+									position: "absolute",
+									paddingLeft: "auto",
+									paddingRight: "auto",
+									height: "auto",
+									backgroundColor: "rgba(30, 30, 30, 0.9)",
+									textAlign: "center",
+									left: 0
+								}}>
+								{song?.name} By: {song?.artist}
+							</Typography>
+						</div>
+					);
+				})
+			];
+		},
+		[randomSongs]
+	);
 
 	const loadMoreSongs = useCallback(() => {
 		setDisplayedSongs(prevSongs => {
@@ -179,11 +195,11 @@ export default function PlayList() {
 							width: options.size,
 							height: options.size,
 							display: "flex",
+							position: "relative",
 							alignItems: "center",
 							justifyContent: "center",
 							transition: "all 0.5s ease",
-							cursor: "pointer",
-							position: "relative"
+							cursor: "pointer"
 						}}
 						onMouseEnter={() => {
 							const timeoutId = setTimeout(() => {
@@ -211,7 +227,21 @@ export default function PlayList() {
 								border: "3px solid rgba(29, 185,84, 0.8)"
 							}}
 						/>
-						<div className="tooltip">
+						<Typography
+							variant="subtitle2"
+							sx={{
+								position: "absolute",
+								paddingLeft: "auto",
+								paddingRight: "auto",
+								height: "auto",
+								backgroundColor: "rgba(30, 30, 30, 0.9)",
+								textAlign: "center",
+								left: 0
+							}}>
+							{song?.name} By: {song?.artist}
+						</Typography>
+
+						<div className="tooltip" style={{ zIndex: 15 }}>
 							{song?.name} By: {song?.artist}
 						</div>
 					</div>
@@ -222,8 +252,8 @@ export default function PlayList() {
 
 	return (
 		<Container sx={{ position: "relative", height: "100%" }}>
-			{/* <PlaylistLabel /> */}
-			<BubbleUI options={options} className="myBubbleUI" style={{}} loadMore={loadMore}>
+			<PlaylistLabel />
+			<BubbleUI options={options} className="myBubbleUI" style={{ zIndex: -1 }} loadMore={loadMore}>
 				{songBubbles}
 			</BubbleUI>
 		</Container>
