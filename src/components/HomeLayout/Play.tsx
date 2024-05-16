@@ -44,9 +44,9 @@ var defaultOptions = {
 	gravitation: 0
 };
 function BubbleElement(props: { children: string | any[]; options: any; className: any; style: any; loadMore: any }) {
-	if (!props.children) {
-		return null;
-	}
+	// if (!props.children) {
+	// 	return null;
+	// }
 	const [childrenState, setChildrenState] = React.useState(props.children);
 
 	var options: any = {};
