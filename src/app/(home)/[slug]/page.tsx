@@ -6,22 +6,14 @@ import rehypeRaw from "rehype-raw";
 import { readFileSync } from "fs";
 
 // Markdown Format Imports
-import { Container, TableBody, TableFooter, TableHead, TableRow, Typography } from "@mui/material";
-import {
-	MarkdownH1,
-	MarkdownH2,
-	MarkdownCode,
-	MarkdownImage,
-	MarkdownLink,
-	MarkdownList,
-	MarkdownListItem,
-	MarkdownH3
-} from "@/components/Markdown/Markdown";
+import { Container, TableBody, TableFooter, TableHead, TableRow } from "@mui/material";
+import { MarkdownH1, MarkdownH2, MarkdownCode, MarkdownImage } from "@/components/Markdown/Markdown";
+import { MarkdownLink, MarkdownListItem, MarkdownH3 } from "@/components/Markdown/Markdown";
 import { MarkdownParagraph, MarkdownTable, MarkdownTableCell } from "@/components/Markdown/Markdown";
 
 // Static Page Imports
 import pages, { routeToPage } from "@/utils/pages";
-import { Metadata, ResolvingMetadata } from "next/types";
+import { Metadata } from "next/types";
 import { join } from "path";
 
 type Props = { params: { slug: string } };
@@ -34,7 +26,7 @@ export function generateStaticParams() {
 	});
 }
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const slug = params.slug.charAt(0).toUpperCase() + params.slug.slice(1);
 	return {
 		title: `Pratyush | ${slug}`,

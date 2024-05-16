@@ -23,6 +23,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 		},
 		components: {
 			MuiContainer: {
+				/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 				styleOverrides: { root: (ownerState: { disableGutters: any }) => ({ minWidth: "100%" }) }
 			}
 		}

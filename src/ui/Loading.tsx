@@ -1,5 +1,5 @@
 "use client";
-import { Backdrop, CircularProgress, Typography } from "@mui/material";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 export default function Loading() {
 	return (

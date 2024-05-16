@@ -1,6 +1,6 @@
 "use client";
 import { Content } from "@/types";
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { Box, Button, Card, CardActions, CardContent, CardMedia, TextField } from "@mui/material";
 import { Dialog, DialogActions, DialogTitle, Divider, Typography } from "@mui/material";
 import Link from "next/link";
@@ -71,7 +71,7 @@ export default function VideoList() {
 							<Typography variant="caption" color="textSecondary">
 								Created: {new Date(video.createdAt).toLocaleDateString()}
 								{" | "}
-								Last Updated: {new Date(video?.updatedAt!).toLocaleDateString()}
+								Last Updated: {new Date(video?.updatedAt ?? "").toLocaleDateString()}
 							</Typography>
 							<Typography variant="caption" display="block">
 								Tags: {video.tags.join(", ")}

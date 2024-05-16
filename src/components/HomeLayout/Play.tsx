@@ -1,3 +1,4 @@
+/* eslint-disable */
 function _interopDefault(ex: { [x: string]: any }) {
 	return ex && typeof ex === "object" && "default" in ex ? ex["default"] : ex;
 }

@@ -1,13 +1,9 @@
 import Mux from "@mux/mux-node";
-
-import type { NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
-type ResponseData = {
-	message: string;
-};
-
 async function handler(req: Request) {
+	const body = await req.json();
+
 	const mux = new Mux({
 		tokenId: process.env.NEXT_PUBLIC_MUX_ID,
 		tokenSecret: process.env.NEXT_PUBLIC_MUX_SECRET
@@ -18,7 +14,7 @@ async function handler(req: Request) {
 		new_asset_settings: { playback_policy: ["public"] }
 	});
 
-	return NextResponse.json(resp);
+	return NextResponse.json({ resp, body });
 }
 
 export { handler as GET };

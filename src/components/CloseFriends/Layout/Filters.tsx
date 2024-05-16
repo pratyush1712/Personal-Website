@@ -19,6 +19,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 	const [sortKeyState, setSortKeyState] = useState<string>(sortKey! || "");
 	const [filterKeyState, setFilterKeyState] = useState<string>(filterKey! || "");
 	const [tagFilterKeysState, setTagFilterKeysState] = useState<string[]>(tagFilterKeys! || []);
+	/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 	const [isPending, startTransition] = useTransition();
 	const defaultTags = ["exclusive", "featured", "new", "popular"];
 	const tags = [...Array.from(tagFilterKeysState), ...defaultTags];
@@ -49,7 +50,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 		startTransition(() => {
 			router.replace(`${url}?${URL.toString()}`);
 		});
-	}, [searchTermState, sortKeyState, filterKeyState, tagFilterKeysState]);
+	}, [searchTermState, sortKeyState, filterKeyState, tagFilterKeysState, router, url]);
 
 	return (
 		<Box sx={{ display: "flex", flexDirection: "row", maxHeight: "30px", gap: 1 }}>

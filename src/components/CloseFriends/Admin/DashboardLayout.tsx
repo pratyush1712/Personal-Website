@@ -22,6 +22,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 		},
 		components: {
 			MuiContainer: {
+				/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 				styleOverrides: { root: (ownerState: { disableGutters: any }) => ({ minWidth: "100%" }) }
 			}
 		}

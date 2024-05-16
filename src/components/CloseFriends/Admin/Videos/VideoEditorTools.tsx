@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 
-const VideoEditorTools = ({ status, src }: { status: string; src: string }) => {
+const VideoEditorTools = ({ src }: { src: string }) => {
 	return (
 		<Box
 			sx={{

@@ -4,8 +4,8 @@ import { Button, TextField, Typography, Paper, CircularProgress, Alert, Snackbar
 import { Divider, Grid, Tab, Tabs, Autocomplete, Chip, MenuItem, Select, Backdrop } from "@mui/material";
 import { useMutation, gql } from "@apollo/client";
 import VideoEditorTools from "./VideoEditorTools";
-import VideoJS from "./VideoJS";
-import VideoPlayer from "./VideoJS";
+// import VideoJS from "./VideoJS";
+// import VideoPlayer from "./VideoJS";
 import Image from "@/ui/Image";
 import { GET_CONTENTS, GET_VIDEOS } from "@/graphql/client/queries";
 
@@ -161,7 +161,7 @@ export default function VideoEditor({ video }: { video: any }) {
 						gap: 3,
 						mb: 3
 					}}>
-					<VideoEditorTools status={status} src={videoUrl} />
+					<VideoEditorTools src={videoUrl} />
 					<Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column", mt: -1.5 }}>
 						<TextField
 							fullWidth
