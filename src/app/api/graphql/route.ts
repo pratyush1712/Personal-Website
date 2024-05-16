@@ -47,9 +47,10 @@ const handler = startServerAndCreateNextHandler(apolloServer, {
 			const token = reqCookies.find(cookie => cookie.name === cookieName)?.value;
 			const mutation = headers().get("Mutation") === "true";
 			if (mutation) {
-				const decoded = await decode({ token, secret: process.env.NEXTAUTH_SECRET! });
-				if (decoded?.email! !== "pratyushsudhakar03@gmail.com") {
-					throw new Error("You are not authorized to perform this action" + decoded?.email!);
+				const decoded = await decode({ token, secret: process.env.NEXTAUTH_SECRET as string });
+				const userEmail = decoded?.email || "invalid";
+				if (userEmail !== "pratyushsudhakar03@gmail.com") {
+					throw new Error("You are not authorized to perform this action" + userEmail);
 				}
 			}
 		}

@@ -14,7 +14,7 @@ interface Props {
 	}[];
 	selectedIndex: number;
 	setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
-	currentComponent: string;
+	// currentComponent: string;
 	setCurrentComponent: React.Dispatch<React.SetStateAction<string>>;
 	visiblePageIndexs: number[];
 	setVisiblePageIndexs: React.Dispatch<React.SetStateAction<number[]>>;
@@ -24,7 +24,7 @@ export default function AppButtons({
 	pages,
 	selectedIndex,
 	setSelectedIndex,
-	currentComponent,
+	// currentComponent,
 	setCurrentComponent,
 	visiblePageIndexs,
 	setVisiblePageIndexs

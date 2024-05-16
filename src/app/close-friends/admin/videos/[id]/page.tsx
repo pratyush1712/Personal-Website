@@ -1,5 +1,5 @@
 "use client";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { VideoEditor } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
 import Loading from "@/ui/Loading";

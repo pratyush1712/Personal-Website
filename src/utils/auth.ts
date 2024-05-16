@@ -26,7 +26,8 @@ export const config = {
 	],
 	callbacks: {
 		async signIn({ user }) {
-			if (closeFriendsEmails.has(user?.email!)) return true;
+			if (!user?.email) return false;
+			if (closeFriendsEmails.has(user?.email)) return true;
 			return false;
 		},
 		async session({ session }) {

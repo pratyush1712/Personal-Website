@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Container, Typography } from "@mui/material";
 import { FaSpotify } from "react-icons/fa";
 import BubbleUI from "./Play";
-import { display } from "@mui/system";
 
 const shuffle = (array: any[]) => {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -74,18 +73,10 @@ export default function PlayList() {
 	const hoverRef = useRef<number>(-1);
 	const [hoverIndex, setHoverIndex] = useState<number>(-1);
 	const [hoverTimeoutId, setHoverTimeoutId] = useState<NodeJS.Timeout | undefined>();
-	const switchRef = useRef<number>(0);
+	// const switchRef = useRef<number>(0);
 	const randomSongsOffset = useRef<number>(0);
 	const randomSongs = useMemo(() => shuffle(songs), []);
 	const [displayedSongs, setDisplayedSongs] = useState<any[]>(randomSongs.slice(0, ITEMS_PER_LOAD));
-
-	useEffect(() => {
-		const intervalId = setInterval(() => {
-			if (hoverRef.current === -1) loadMoreSongs();
-		}, 7000);
-
-		return () => clearInterval(intervalId);
-	}, []);
 
 	const handleBubbleClick = useCallback((url: string | URL | undefined) => {
 		window.open(url, "_blank");
@@ -93,7 +84,7 @@ export default function PlayList() {
 
 	useEffect(() => {
 		setDisplayedSongs(randomSongs.slice(0, ITEMS_PER_LOAD));
-	}, []);
+	}, [randomSongs]);
 
 	const loadMore = useCallback(
 		(prev: any) => {
@@ -168,17 +159,25 @@ export default function PlayList() {
 				})
 			];
 		},
-		[randomSongs]
+		[randomSongs, handleBubbleClick, hoverIndex, hoverTimeoutId]
 	);
 
-	const loadMoreSongs = useCallback(() => {
-		setDisplayedSongs(prevSongs => {
-			const newSongs = randomSongs.slice(randomSongsOffset.current, randomSongsOffset.current + ITEMS_PER_LOAD);
-			randomSongsOffset.current += ITEMS_PER_LOAD;
-			return prevSongs.map((song, index) => (index % 2 === switchRef.current ? newSongs[index] : song));
-		});
-		switchRef.current = switchRef.current === 0 ? 1 : 0;
-	}, [randomSongs]);
+	// const loadMoreSongs = useCallback(() => {
+	// 	setDisplayedSongs(prevSongs => {
+	// 		const newSongs = randomSongs.slice(randomSongsOffset.current, randomSongsOffset.current + ITEMS_PER_LOAD);
+	// 		randomSongsOffset.current += ITEMS_PER_LOAD;
+	// 		return prevSongs.map((song, index) => (index % 2 === switchRef.current ? newSongs[index] : song));
+	// 	});
+	// 	switchRef.current = switchRef.current === 0 ? 1 : 0;
+	// }, [randomSongs]);
+
+	// useEffect(() => {
+	// 	const intervalId = setInterval(() => {
+	// 		if (hoverRef.current === -1) loadMoreSongs();
+	// 	}, 7000);
+
+	// 	return () => clearInterval(intervalId);
+	// }, [loadMoreSongs]);
 
 	const songBubbles = useMemo(
 		() =>
@@ -247,7 +246,7 @@ export default function PlayList() {
 					</div>
 				);
 			}),
-		[displayedSongs, hoverIndex, handleBubbleClick, options.size, hoverTimeoutId]
+		[displayedSongs, hoverIndex, handleBubbleClick, hoverTimeoutId]
 	);
 
 	return (

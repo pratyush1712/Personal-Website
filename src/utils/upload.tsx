@@ -37,6 +37,7 @@ export const download = (blob: Blob | MediaSource, filename: string) => {
 	window.URL.revokeObjectURL(url);
 };
 
+/* eslint-disable */
 export const uploadPDF = async ({ editor, blog }: UploadPDF) => {
 	const iframe = document.createElement("iframe");
 	iframe.style.display = "none";

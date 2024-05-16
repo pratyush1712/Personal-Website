@@ -120,17 +120,17 @@ export function MarkdownParagraph(props: any) {
 	if (!props.children) return <Typography>{props.children}</Typography>;
 
 	const element: any = props.children;
-	let result = [];
+	const result = [];
 
 	let anyInlineElement = false;
-	for (let e of element) {
+	for (const e of element) {
 		if (e.type) {
 			anyInlineElement = true;
 		}
 	}
 
 	if (anyInlineElement) {
-		for (let e of element) {
+		for (const e of element) {
 			if (e.type) {
 				const uniqueID = `${e.key} ${Math.random()}`;
 				if (e.type === "strong") {
@@ -158,7 +158,7 @@ export function MarkdownParagraph(props: any) {
 			}
 		}
 	} else {
-		for (let e of element) {
+		for (const e of element) {
 			const uniqueID = `${e.key} ${Math.random()}`;
 			if (e.type) {
 				result.push({ ...e });

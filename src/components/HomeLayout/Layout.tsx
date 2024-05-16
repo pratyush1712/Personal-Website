@@ -159,7 +159,7 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 										pages={visiblePages}
 										selectedIndex={selectedIndex}
 										setSelectedIndex={setSelectedIndex}
-										currentComponent={currentComponent}
+										// currentComponent={currentComponent}
 										setCurrentComponent={setCurrentComponent}
 										visiblePageIndexs={visiblePageIndexs}
 										setVisiblePageIndexs={setVisiblePageIndexs}

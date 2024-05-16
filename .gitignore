@@ -51,3 +51,4 @@ next-env.d.ts
 !public/videos/*.ts
 public/_next-video
 .env*.local
+index.html

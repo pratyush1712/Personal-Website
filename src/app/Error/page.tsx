@@ -1,19 +1,19 @@
-"use client"; // Error components must be Client Components
-
-import { useEffect } from "react";
+"use client";
+import { useMemo } from "react";
 import { Container, Typography, Button, Box } from "@mui/material";
 import { MdError } from "react-icons/md";
 
 export default function Error() {
-	const error = {
-		name: "error",
-		message: "An error occured",
-		digest: "434356"
-	};
+	const error = useMemo(() => {
+		return {
+			name: "error",
+			message: "An error occured",
+			digest: "434356"
+		};
+	}, []);
 	const reset = () => {
 		console.log("Resetting error...");
 	};
-	useEffect(() => console.error(error), [error]);
 
 	return (
 		<Container

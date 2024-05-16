@@ -1,14 +1,13 @@
-import { gql } from "@apollo/client";
 import { VideoDisplay } from "@/components/CloseFriends";
 import { Container } from "@mui/material";
 import { getClient } from "@/graphql/client/apolloClient";
-import { Metadata, ResolvingMetadata } from "next/types";
+import { Metadata } from "next/types";
 import { getServerSession } from "next-auth";
 import { GET_VIDEO } from "@/graphql/client/queries";
 
 type Props = { params: { id: string } };
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const data = await getData(params);
 	return {
 		title: `${data.video.title}`,
