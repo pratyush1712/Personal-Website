@@ -44,7 +44,7 @@ var defaultOptions = {
 	compact: false,
 	gravitation: 0
 };
-function BubbleElement(props: { children: string | any[]; options: any; className: any; style: any; loadMore: any }) {
+function BubbleElement(props: { children: string | any[]; options: any; className: any; style?: any; loadMore: any }) {
 	// if (!props.children) {
 	// 	return null;
 	// }

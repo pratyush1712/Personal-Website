@@ -8,10 +8,11 @@ import AppTree from "./AppTree";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 import pages, { routeToPage } from "@/utils/pages";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { CacheProvider } from "@emotion/react";
+import PlayList from "./PlayList";
 
 interface Page {
 	index: number;
@@ -170,7 +171,7 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 								<Grid
 									sx={{
 										scrollBehavior: "smooth",
-										overflowY: "auto",
+										overflowY: "hidden",
 										maxHeight: "calc(100vh - 53px)",
 										background: !darkMode ? "#FFFFFF" : "#1e1e1e"
 									}}>
@@ -183,6 +184,17 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 										}}>
 										{children}
 									</Container>
+									{usePathname() === "/" && (
+										<Grid
+											item
+											sx={{
+												mt: { xs: -98, sm: -62 },
+												minWidth: "100%",
+												justifyContent: "center"
+											}}>
+											<PlayList isBrowser={isBrowser} />
+										</Grid>
+									)}
 								</Grid>
 							</Grid>
 						</Grid>

@@ -1,13 +1,12 @@
 "use client";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import "react-bubble-ui/dist/index.css";
 import "@/styles/playlist.css";
 import songs from "@/utils/songs.json";
+import { Box, Card, CardContent, CardMedia, Container, IconButton, Typography } from "@mui/material";
 import Image from "next/image";
-import { Container, Typography } from "@mui/material";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import "react-bubble-ui/dist/index.css";
 import { FaSpotify } from "react-icons/fa";
 import BubbleUI from "./Play";
-import { isBrowser } from "react-device-detect";
 
 const shuffle = (array: any[]) => {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -44,7 +43,7 @@ function PlaylistLabel() {
 				width: "max-content",
 				py: 2,
 				px: 0,
-				backgroundColor: "#333",
+				backgroundColor: "rgba(29, 185, 84, 1)",
 				alignItems: "center",
 				borderLeft: "1px solid #1db954",
 				borderBottom: "1px solid #1db954"
@@ -70,11 +69,69 @@ function PlaylistLabel() {
 	);
 }
 
-export default function PlayList() {
+function truncateString(str: string, num: number) {
+	if (str.length <= num) {
+		return str;
+	}
+	return str.slice(0, num) + "...";
+}
+
+function PlayListListView() {
+	const shuffledSongs = useMemo(() => shuffle(songs), []);
+	return (
+		<Container
+			sx={{
+				mt: 2,
+				maxHeight: "60vh",
+				overflowY: "scroll",
+				scrollbarWidth: "thin",
+				scrollbarColor: "#1db954 #333"
+			}}>
+			{shuffledSongs.map((song, index) => (
+				<Card
+					sx={{
+						border: "1px solid #1db954",
+						display: "flex",
+						maxWidth: "100%",
+						minWidth: "100%",
+						my: 2,
+						alignItems: "center",
+						justifySelf: "center",
+						fontSize: "0.3rem",
+						maxHeight: "min-content",
+						cursor: "pointer",
+						justifyContent: "space-between"
+					}}
+					key={index}>
+					<Box sx={{ display: "flex", flexDirection: "column" }}>
+						<CardContent sx={{ flex: "1 0 auto" }}>
+							<Typography component="div" variant="subtitle2">
+								{truncateString(song.name, 30)}
+							</Typography>
+							<Typography variant="caption" color="text.secondary" component="div">
+								{truncateString(song.artist, 20)}
+							</Typography>
+						</CardContent>
+						<Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+							<IconButton aria-label="play/pause">
+								<FaSpotify />
+							</IconButton>
+						</Box>
+					</Box>
+					<CardMedia component="img" sx={{ width: 151 }} image={song.image} alt={song.title} />
+				</Card>
+			))}
+		</Container>
+	);
+}
+
+export default function PlayList({ isBrowser = true }: { isBrowser: boolean }) {
 	const hoverRef = useRef<number>(-1);
 	const [hoverIndex, setHoverIndex] = useState<number>(-1);
 	const [hoverTimeoutId, setHoverTimeoutId] = useState<NodeJS.Timeout | undefined>();
 	// const switchRef = useRef<number>(0);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [isMobile, setIsMobile] = useState<boolean>(isBrowser);
 	const randomSongsOffset = useRef<number>(0);
 	const randomSongs = useMemo(() => shuffle(songs), []);
 	const [displayedSongs, setDisplayedSongs] = useState<any[]>(randomSongs.slice(0, ITEMS_PER_LOAD));
@@ -249,18 +306,18 @@ export default function PlayList() {
 			}),
 		[displayedSongs, hoverIndex, handleBubbleClick, hoverTimeoutId]
 	);
+	console.log("isMobile", isMobile);
 
 	return (
-		<Container
-			sx={{
-				position: "relative",
-				height: "100%",
-				display: isBrowser ? "block" : "none"
-			}}>
+		<Container sx={{ position: "relative", maxHeight: "70%" }}>
 			<PlaylistLabel />
-			<BubbleUI options={options} className="myBubbleUI" style={{ zIndex: -1 }} loadMore={loadMore}>
-				{songBubbles}
-			</BubbleUI>
+			{isMobile ? (
+				<BubbleUI options={options} className="myBubbleUI" loadMore={loadMore}>
+					{songBubbles}
+				</BubbleUI>
+			) : (
+				<PlayListListView />
+			)}
 		</Container>
 	);
 }

@@ -1,6 +1,6 @@
 import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
 import { links } from "@/utils/links";
-import PlayList from "@/components/HomeLayout/PlayList";
+// import PlayList from "@/components/HomeLayout/PlayList";
 
 export default function Home() {
 	const iconLink = (link: any) => {
@@ -14,7 +14,7 @@ export default function Home() {
 	};
 
 	return (
-		<Grid container direction="column" alignItems="center" sx={{ ml: { sm: -8 } }} spacing={0}>
+		<Grid container direction="column" alignItems="center" spacing={0}>
 			<Grid item xs={12} sx={{ mt: -2, mb: 1 }}>
 				<Typography
 					variant="h3"
@@ -49,9 +49,9 @@ export default function Home() {
 			</Grid>
 
 			{/* Playlist occupying most of the screen */}
-			<Grid item xs={12} sx={{ flexGrow: 1, minWidth: "100%", justifyContent: "center", ml: { xs: 0, sm: 8 } }}>
+			{/* <Grid item xs={12} sx={{ flexGrow: 1, minWidth: "100%", justifyContent: "center" }}>
 				<PlayList />
-			</Grid>
+			</Grid> */}
 		</Grid>
 	);
 }
