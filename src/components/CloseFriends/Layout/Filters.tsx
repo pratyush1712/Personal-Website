@@ -3,6 +3,7 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, Box, OutlinedInpu
 import { SelectChangeEvent } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useTransition } from "react";
+import { isBrowser } from "react-device-detect";
 import { IoMdSearch } from "react-icons/io";
 
 interface FiltersProps {
@@ -56,7 +57,7 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 		<Box sx={{ display: "flex", flexDirection: "row", maxHeight: "30px", gap: 1 }}>
 			<TextField
 				id="search-bar"
-				label="Search Features"
+				label="Search Content"
 				variant="outlined"
 				fullWidth
 				value={searchTermState}
@@ -65,52 +66,56 @@ export default function Filters({ searchTerm, sortKey, filterKey, tagFilterKeys,
 				sx={{ flex: "1 1 auto", maxHeight: "30px" }}
 			/>
 
-			<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
-				<InputLabel id="sort-label">Sort By</InputLabel>
-				<Select labelId="sort-label" value={sortKeyState} label="Sort By" onChange={onSortChange}>
-					<MenuItem value="createdAt">Created At</MenuItem>
-					<MenuItem value="title">Title</MenuItem>
-				</Select>
-			</FormControl>
-			<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
-				<InputLabel id="category-label">Filter By Category</InputLabel>
-				<Select
-					labelId="category-label"
-					value={filterKeyState}
-					label="Filter By Category"
-					onChange={onFilterChange}>
-					<MenuItem value="all">All</MenuItem>
-					<MenuItem value="blog">Blog</MenuItem>
-					<MenuItem value="video">Video</MenuItem>
-				</Select>
-			</FormControl>
-			<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
-				<InputLabel id="tag-label">Filter By Tags</InputLabel>
-				<Select
-					labelId="tag-label"
-					value={tagFilterKeysState}
-					label="Filter By Tags"
-					onChange={(event: SelectChangeEvent<string | string[]>) =>
-						setTagFilterKeysState(
-							Array.isArray(event.target.value) ? event.target.value : [event.target.value]
-						)
-					}
-					input={<OutlinedInput label="Filter By Tags" />}
-					renderValue={selected => (
-						<Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-							{(selected as string[]).map(value => (
-								<Chip key={value} label={value} size="small" />
+			{isBrowser && (
+				<Box sx={{ width: "100%", display: "flex", flexDirection: "row", gap: 1 }}>
+					<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
+						<InputLabel id="sort-label">Sort By</InputLabel>
+						<Select labelId="sort-label" value={sortKeyState} label="Sort By" onChange={onSortChange}>
+							<MenuItem value="createdAt">Created At</MenuItem>
+							<MenuItem value="title">Title</MenuItem>
+						</Select>
+					</FormControl>
+					<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
+						<InputLabel id="category-label">Filter By Category</InputLabel>
+						<Select
+							labelId="category-label"
+							value={filterKeyState}
+							label="Filter By Category"
+							onChange={onFilterChange}>
+							<MenuItem value="all">All</MenuItem>
+							<MenuItem value="blog">Blog</MenuItem>
+							<MenuItem value="video">Video</MenuItem>
+						</Select>
+					</FormControl>
+					<FormControl fullWidth size="small" sx={{ flex: "1 1 auto", maxHeight: "30px" }}>
+						<InputLabel id="tag-label">Filter By Tags</InputLabel>
+						<Select
+							labelId="tag-label"
+							value={tagFilterKeysState}
+							label="Filter By Tags"
+							onChange={(event: SelectChangeEvent<string | string[]>) =>
+								setTagFilterKeysState(
+									Array.isArray(event.target.value) ? event.target.value : [event.target.value]
+								)
+							}
+							input={<OutlinedInput label="Filter By Tags" />}
+							renderValue={selected => (
+								<Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+									{(selected as string[]).map(value => (
+										<Chip key={value} label={value} size="small" />
+									))}
+								</Box>
+							)}>
+							{tags.map(tag => (
+								<MenuItem key={tag} value={tag}>
+									{tag}
+								</MenuItem>
 							))}
-						</Box>
-					)}>
-					{tags.map(tag => (
-						<MenuItem key={tag} value={tag}>
-							{tag}
-						</MenuItem>
-					))}
-					<MenuItem value="all">All</MenuItem>
-				</Select>
-			</FormControl>
+							<MenuItem value="all">All</MenuItem>
+						</Select>
+					</FormControl>
+				</Box>
+			)}
 			<Icon sx={{ height: "30px", alignItems: "center", display: "flex" }}>
 				<IoMdSearch size={48} style={{ color: "red", marginTop: "8px" }} />
 			</Icon>

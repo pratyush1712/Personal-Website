@@ -89,7 +89,7 @@ export default function CloseFriendsLayout({ children }: { children: React.React
 							transform: "translate(-10%, -5%)",
 							backgroundColor: "rgba(255, 255, 255, 0.6)",
 							py: 2,
-							px: 6,
+							px: { xs: 2, sm: 6 },
 							width: "100vw",
 							borderBottom: `2px solid #E50914`,
 							color: "black",

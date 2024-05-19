@@ -14,16 +14,33 @@ export default function Home() {
 	};
 
 	return (
-		<Grid container direction="column" alignItems="center" sx={{ ml: -8 }} spacing={0}>
-			<Grid item xs={12} sx={{ mt: -1 }}>
-				<Typography variant="h3" align="center" sx={{ margin: "20px 0" }}>
+		<Grid container direction="column" alignItems="center" sx={{ ml: { sm: -8 } }} spacing={0}>
+			<Grid item xs={12} sx={{ mt: -2, mb: 1 }}>
+				<Typography
+					variant="h3"
+					align="center"
+					sx={{
+						margin: "20px 0 0 0",
+						fontSize: { xs: "1.5rem", sm: "2.5rem" }
+					}}>
 					Pratyush Sudhakar
+				</Typography>
+				<Typography
+					variant="caption"
+					align="center"
+					sx={{
+						backgroundColor: "rgba(0, 0, 0, 0.7)",
+						borderRadius: "2px",
+						padding: "5px",
+						fontSize: { xs: "0.4rem", sm: "0.8rem" }
+					}}>
+					I strive to be known as the most approachable person. Always here for friends, nk &#128524;
 				</Typography>
 			</Grid>
 			{/* Links at the bottom */}
-			<Grid item xs={12}>
-				<Box sx={{ width: "100%", display: "flex", justifyContent: "center", mt: -2 }}>
-					<Stack direction="row" spacing={2.5}>
+			<Grid item xs={12} sx={{ ml: { xs: -2, sm: 0 } }}>
+				<Box sx={{ minWidth: "100%", display: "flex", justifyContent: "center" }}>
+					<Stack direction="row" spacing={{ xs: 2, sm: 2.5 }} sx={{ mx: "auto" }}>
 						{links.filter(link => link.type === "professional").map(iconLink)}
 						<Divider orientation="vertical" flexItem />
 						{links.filter(link => link.type === "social").map(iconLink)}
@@ -32,7 +49,7 @@ export default function Home() {
 			</Grid>
 
 			{/* Playlist occupying most of the screen */}
-			<Grid item xs={12} sx={{ flexGrow: 1, width: "100%", justifyContent: "center", ml: 8 }}>
+			<Grid item xs={12} sx={{ flexGrow: 1, minWidth: "100%", justifyContent: "center", ml: { xs: 0, sm: 8 } }}>
 				<PlayList />
 			</Grid>
 		</Grid>

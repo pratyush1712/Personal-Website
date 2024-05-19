@@ -39,7 +39,7 @@ function PlaylistLabel() {
 				position: "absolute",
 				zIndex: 2,
 				bottom: "0%",
-				left: "5%",
+				left: { xs: "0%", sm: "5%" },
 				width: "max-content",
 				py: 2,
 				px: 0,
@@ -52,7 +52,7 @@ function PlaylistLabel() {
 				variant="body2"
 				sx={{
 					color: "white",
-					px: 0,
+					px: { xs: 1, sm: 0 },
 					mx: 0
 				}}>
 				My Spotify Playlist. Scroll to see more songs...

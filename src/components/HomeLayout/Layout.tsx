@@ -126,14 +126,16 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 				<Container sx={{ m: 0, p: 0, overflowY: "hidden" }} maxWidth={false} disableGutters>
 					<Grid container sx={{ overflow: "auto", overflowY: "hidden" }}>
 						<Grid container sx={{ overflow: "auto" }}>
-							<Grid item sx={{ width: 50 }}>
-								<Sidebar
-									setExpanded={setExpanded}
-									expanded={expanded}
-									darkMode={darkMode}
-									handleThemeChange={handleThemeChange}
-								/>
-							</Grid>
+							{isBrowser && (
+								<Grid item sx={{ width: 50 }}>
+									<Sidebar
+										setExpanded={setExpanded}
+										expanded={expanded}
+										darkMode={darkMode}
+										handleThemeChange={handleThemeChange}
+									/>
+								</Grid>
+							)}
 							{expanded && (
 								<Grid item sx={{ backgroundColor: darkMode ? "#252527" : "#f3f3f3", width: 220 }}>
 									<Stack sx={{ mt: 1 }}>
@@ -154,7 +156,7 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 							)}
 
 							<Grid item xs zeroMinWidth sx={{ width: "100%" }}>
-								<Grid item sx={{ height: "33px", mb: -0.2 }}>
+								<Grid item sx={{ height: "33px" }}>
 									<AppButtons
 										pages={visiblePages}
 										selectedIndex={selectedIndex}
