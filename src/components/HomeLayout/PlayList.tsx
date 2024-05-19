@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Container, Typography } from "@mui/material";
 import { FaSpotify } from "react-icons/fa";
 import BubbleUI from "./Play";
+import { isBrowser } from "react-device-detect";
 
 const shuffle = (array: any[]) => {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -250,7 +251,12 @@ export default function PlayList() {
 	);
 
 	return (
-		<Container sx={{ position: "relative", height: "100%" }}>
+		<Container
+			sx={{
+				position: "relative",
+				height: "100%",
+				display: isBrowser ? "block" : "none"
+			}}>
 			<PlaylistLabel />
 			<BubbleUI options={options} className="myBubbleUI" style={{ zIndex: -1 }} loadMore={loadMore}>
 				{songBubbles}
