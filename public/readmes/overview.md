@@ -1,5 +1,9 @@
 # 📖 Overview <a href="https://www.youtube.com/watch?v=B46EdJApFmI"><img class="overview" src="/icons/teal_ribbon.ico" style="width:15px;" /></a> <a href="https://youtu.be/DlFkfOqtgR8?si=T-OzRtnyO_S0aW0X"><img class="overview" src="/icons/orange_ribbon.ico" style="width:15px;" /></a>
 
+<div align="left" style="font-size: 16px;background-color: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 2px;">
+					I strive to be known as the most approachable person. Always here for friends, nk. call me &#128524;
+</div>
+
 ## 🚀 Summary
 
 Hey there! I’m a junior studying computer science and math. Over the past two years, I've immersed myself in numerous projects, improving my technical and managerial skills, and having a great time exploring new frameworks and software techniques.

@@ -1,6 +1,6 @@
 import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
 import { links } from "@/utils/links";
-// import PlayList from "@/components/HomeLayout/PlayList";
+import PlayList from "@/components/HomeLayout/PlayList";
 
 export default function Home() {
 	const iconLink = (link: any) => {
@@ -34,7 +34,7 @@ export default function Home() {
 						padding: "5px",
 						fontSize: { xs: "0.4rem", sm: "0.8rem" }
 					}}>
-					I strive to be known as the most approachable person. Always here for friends, nk &#128524;
+					I strive to be known as the most approachable person. Always here for friends, nk. call me &#128524;
 				</Typography>
 			</Grid>
 			{/* Links at the bottom */}
@@ -49,9 +49,9 @@ export default function Home() {
 			</Grid>
 
 			{/* Playlist occupying most of the screen */}
-			{/* <Grid item xs={12} sx={{ flexGrow: 1, minWidth: "100%", justifyContent: "center" }}>
+			<Grid item xs={12} sx={{ flexGrow: 1, minWidth: "100%", justifyContent: "center" }}>
 				<PlayList />
-			</Grid> */}
+			</Grid>
 		</Grid>
 	);
 }

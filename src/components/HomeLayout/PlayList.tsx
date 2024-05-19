@@ -125,13 +125,12 @@ function PlayListListView() {
 	);
 }
 
-export default function PlayList({ isBrowser = true }: { isBrowser: boolean }) {
+export default function PlayList() {
 	const hoverRef = useRef<number>(-1);
 	const [hoverIndex, setHoverIndex] = useState<number>(-1);
 	const [hoverTimeoutId, setHoverTimeoutId] = useState<NodeJS.Timeout | undefined>();
 	// const switchRef = useRef<number>(0);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [isMobile, setIsMobile] = useState<boolean>(isBrowser);
 	const randomSongsOffset = useRef<number>(0);
 	const randomSongs = useMemo(() => shuffle(songs), []);
 	const [displayedSongs, setDisplayedSongs] = useState<any[]>(randomSongs.slice(0, ITEMS_PER_LOAD));
@@ -306,18 +305,13 @@ export default function PlayList({ isBrowser = true }: { isBrowser: boolean }) {
 			}),
 		[displayedSongs, hoverIndex, handleBubbleClick, hoverTimeoutId]
 	);
-	console.log("isMobile", isMobile);
 
 	return (
 		<Container sx={{ position: "relative", maxHeight: "70%" }}>
 			<PlaylistLabel />
-			{isMobile ? (
-				<BubbleUI options={options} className="myBubbleUI" loadMore={loadMore}>
-					{songBubbles}
-				</BubbleUI>
-			) : (
-				<PlayListListView />
-			)}
+			<BubbleUI options={options} className="myBubbleUI" loadMore={loadMore}>
+				{songBubbles}
+			</BubbleUI>
 		</Container>
 	);
 }
