@@ -2,9 +2,7 @@
 
 ### [DTI GPT](#) 🔗
 
-[`Code 🔗`](https://github.com/cornell-dti/mlmn-findoc/)
-
-_Technologies Used:_ `Supabase`, `Zillus Clusters`, `Next.js (TypeScript)`, `Flask`, `LangChain`, `Vector DB Search`, `Vercel`, `Microsoft Azure`
+[`Code 🔗`](https://github.com/cornell-dti/mlmn-findoc/)<br>_Technologies Used:_ `Supabase` `Zillus Clusters` `Next.js (TypeScript)` `Flask` `LangChain` `Vector DB Search` `Vercel` `Microsoft Azure`
 
 -   Developed DTI GPT, an innovative tool designed to summarize and parse syllabuses for academic courses, facilitating enhanced student interaction by allowing follow-up questions directly related to course content.
 -   Utilized Supabase for backend management and Zillus clusters for caching, enabling rapid response times through vector database searches that improve the efficiency of querying similar syllabus documents and student inquiries.
