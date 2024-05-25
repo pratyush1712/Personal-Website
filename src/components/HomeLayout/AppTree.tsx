@@ -86,30 +86,26 @@ export default function AppTree({
 					setSelectedIndex(-1);
 				}}>
 				{pages.map(({ index, name, route }) => (
-					<TreeItem
-						key={index}
-						nodeId={index.toString()}
-						label={
-							<Link href={route}>
-								<span style={{ textDecoration: "none", color: "inherit" }}>{name}</span>
-							</Link>
-						}
-						sx={{
-							color: renderTreeItemColor(index),
-							backgroundColor: renderTreeItemBgColor(index),
-							"&& .Mui-selected": { backgroundColor: renderTreeItemBgColor(index) }
-						}}
-						icon={<VscMarkdown color="#6997d5" />}
-						onClick={(e: any) => {
-							e.preventDefault();
-							if (!visiblePageIndexs.includes(index)) {
-								const newIndexs = [...visiblePageIndexs, index];
-								setVisiblePageIndexs(newIndexs);
-							}
-							setSelectedIndex(index);
-							setCurrentComponent("tree");
-						}}
-					/>
+					<Link href={route} key={index}>
+						<TreeItem
+							nodeId={index.toString()}
+							label={<span style={{ textDecoration: "none", color: "inherit" }}>{name}</span>}
+							sx={{
+								color: renderTreeItemColor(index),
+								backgroundColor: renderTreeItemBgColor(index),
+								"&& .Mui-selected": { backgroundColor: renderTreeItemBgColor(index) }
+							}}
+							icon={<VscMarkdown color="#6997d5" />}
+							onClick={(e: any) => {
+								if (!visiblePageIndexs.includes(index)) {
+									const newIndexs = [...visiblePageIndexs, index];
+									setVisiblePageIndexs(newIndexs);
+								}
+								setSelectedIndex(index);
+								setCurrentComponent("tree");
+							}}
+						/>
+					</Link>
 				))}
 			</TreeItem>
 		</TreeView>
