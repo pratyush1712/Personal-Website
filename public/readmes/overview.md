@@ -30,30 +30,31 @@ I am looking for software engineering internships/co-op for Spring 2024 and Summ
 
 -   **Software Engineering Intern** @ rapStudy _(June 2023 - August 2023)_, Los Angeles, California<br>
 
-    _Technologies used:_ `React.js`, `Redux`, `Firebase`, `Firestore`
+    _Technologies used:_ `React.js` `Redux` `Firebase` `Firestore`
 
 -   **Data Engineer** @ Cornell College of Engineering _(June 2023 - Present)_, Ithaca, New York<br>
 
-    _Technologies used:_ `Next.js`, `Flask`, `Selenium`, `NLP`, `Server-Sent Events`
+    _Technologies used:_ `Next.js` `Flask` `Selenium` `NLP` `Server-Sent Events`
 
 -   **Software Developer** @ Cornell Yang-Tan Institute _(July 2022 - December 2022)_, Ithaca, New York<br>
 
-    _Technologies used:_ `PHP`, `Laravel`, `Strapi CMS`
+    _Technologies used:_ `PHP` `Laravel` `Strapi CMS`
 
 -   **Software Engineering Intern** @ Sellpoint _(June 2022 - August 2022)_, Remote<br>
 
-    _Technologies used:_ `React.js`, `Redux`, `RTK Query`, `AWS`, `DynamoDB`, `Lambda functions`, `Pandas`, `NumPy`, `react-apex-charts`
+    _Technologies used:_ `React.js` `Redux` `RTK Query` `AWS` `DynamoDB` `Lambda functions` `Pandas` `NumPy` `react-apex-charts`
 
 ## 📌 On-Campus Affiliations
 
 -   [Cornell Design & Tech Initiative](https://www.cornelldti.org/) (Technical Product Manager)
 -   [Cornell Perfect Match](https://perfectmatch.ai/) (Head of Engineering)
 -   [Cornell Wushu - Chinese Martial Arts Club](https://cornellwushu.github.io/) (Vice-President)
--   [Cornell Association of CS Undergrads](#) (Member)
+-   [Cornell Association of CS Undergrads](https://acsu.cornell.edu/) (Member)
 
 ## 🛠 Skills
 
--   **Programming Languages:** Python, Java, JavaScript/TypeScript, C, PHP, OCaml, C++
--   **Tools/Frameworks:** Git, AWS, Jira, Django, Flask, React.js, Redux.js, Next.js, Node.js, Flutter, Express, React Native, Expo
--   **DevOps/Database:** MySQL, DynamoDB, MongoDB, GraphQL, Prisma, Google Cloud Platform, AWS Amplify, AWS EC2, Docker, Redis
--   **Machine Learning:** TensorFlow, MediaPipe, NumPy, Pandas, Neural Networks, Sklearn, Pomegranate, Scikit-learn, OpenCV
+- **Programming Languages**: Python, Java, JavaScript/TypeScript, C++, C, SQL, PHP, OCaml
+- **Frontend Frameworks (Web & Mobile)**: React.js, Redux.js, Next.js, Angular, Vite, Svelte, React Native, Flutter
+- **Backend Frameworks & Databases**: Node.js, Express.js, Flask, Django, Nest.js, FastAPI , MySQL, MongoDB, Redis, DynamoDB, Apollo GraphQL (Query Language), Prisma (ORM)
+- **Cloud & DevOps**: AWS (ECS, ECR, CloudWatch, S3, Lambda, DynamoDB), GCP (Cloud Functions, Artifact Registry, Firebase), Azure (Functions, Container Registry), Docker, Kubernetes, Shell Scripting, Nginx, Gunicorn
+- **Machine Learning:** TensorFlow, PyTorch, Scikit-learn, OpenCV, NumPy, Pandas
