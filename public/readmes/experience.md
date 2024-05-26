@@ -10,7 +10,7 @@ Los Angeles, California
 
 _Technologies used:_ `React.js`, `Redux`, `Firebase`, `Firestore` <br><br>
 
-<hr /><br>
+<hr />
 
 ### **Data Engineer** @ Cornell College of Engineering _(June 2023 - Present)_
 
@@ -21,7 +21,7 @@ Ithaca, New York
 
 _Technologies used:_ `Next.js`, `Flask`, `Selenium`, `NLP`, `Server-Sent Events`<br><br>
 
-<hr /><br>
+<hr />
 
 ### **Software Developer** @ Cornell Yang-Tan Institute _(July 2022 - December 2022)_
 
@@ -31,7 +31,7 @@ Ithaca, New York
 
 _Technologies used:_ `PHP`, `Laravel`, `Strapi CMS`<br><br>
 
-<hr /><br>
+<hr />
 
 ### **Software Engineering Intern** @ Sellpoint _(June 2022 - August 2022)_
 
@@ -41,4 +41,4 @@ Remote
 -   Developed a real-time market analysis tool, processing data with Pandas and NumPy within Lambda functions.
 -   Leveraged React.js, Redux, RTK Query, and react-apex-charts for seamless data storage, retrieval, and visualization.
 
-_Technologies used:_ `React.js`, `Redux`, `RTK Query`, `AWS`, `DynamoDB`, `Lambda functions`, `Pandas`, `NumPy`, `react-apex-charts`<br><br>
+_Technologies used:_ `React.js`, `Redux`, `RTK Query`, `AWS`, `DynamoDB`, `Lambda functions`, `Pandas`, `NumPy`, `react-apex-charts`
