@@ -13,9 +13,10 @@ export async function POST(req: NextRequest) {
 	const EmailText = `Name: ${fullName}\nEmail: ${email}\nMessage: ${message}`;
 	try {
 		const { data, error } = await resend.emails.send({
-			from: "Web Reach Out <contact@pratyushsudhakar.com>",
+			from: `${fullName} <contact@pratyushsudhakar.com>`,
 			to: ["ps2245@cornell.edu"],
-			subject: "New message from your website",
+			reply_to: email,
+			subject: `${fullName} wants to reach out!`,
 			react: EmailTemplate({ fullName, email, message }) as React.ReactElement,
 			text: EmailText
 		});

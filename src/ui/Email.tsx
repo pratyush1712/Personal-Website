@@ -23,7 +23,7 @@ const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({ fullName, email
 					borderBottom: "2px solid #3279CB",
 					paddingBottom: "0.5rem"
 				}}>
-				New message from your website
+				You have a new message from {fullName} 📬
 			</h2>
 			<div style={{ marginBottom: "1rem" }}>
 				<strong style={{ color: "#3279CB" }}>Name:</strong> <span style={{ color: "#333" }}>{fullName}</span>
