@@ -1,6 +1,6 @@
 # 🧪 Projects
 
-### [DTI GPT](#) 🔗
+### [DTI GPT](https://github.com/cornell-dti/mlmn-findoc/)
 
 [`Code 🔗`](https://github.com/cornell-dti/mlmn-findoc/)<br>_Technologies Used:_ `Supabase` `Zillus Clusters` `Next.js (TypeScript)` `Flask` `LangChain` `Vector DB Search` `Vercel` `Microsoft Azure`
 

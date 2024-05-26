@@ -42,9 +42,6 @@
 
 **Duration:** September 2021 - Present
 
-
-**The club taught me a lot of life lessons**: Mental Illness is very real. Stigma is very real. Stupidity is very real. Fake personalities, personality disorder narcissistic personality disorder, bipolar disorder, hypomania, hallucinations, autism, empaths, dark empaths, maturity, morality, confidence, identity, corruption, selfishness, egoistic personality, childhood trauma response, people pleasing as a trauma response are all very real issues that people face in the world. Sometimes, it is very white and black, but people's stupidity make it look like a lot of gray. People are very incapable of seeing other people's perspective or feel for anyone but themselves. Setting healthy boundaries with your loved ones, loving them unconditionally and being there for them always, even when they don't realize they need you, is the bare minimum one should do in any kind of non-toxic relationship.
-
 ### Secretary _(September 2022 - May 2023)_
 
 -   Elected as the club secretary for the 2022-23 academic year.
@@ -56,4 +53,6 @@
 -   Working alongside the President and Practice Leaders to guide practices, helping newcomers improve their skills.
 -   Assisting with planning practice sessions for competitions and arranging events. <br>
 
-<hr />
+<ins>*The club taught me some of the most important life lesson:*</ins>
+- Life-long neglect -> people-pleasing -> lack of boundaries, self-worth, and self-love.
+- Speaking up for yourself for once -> people start hating -> recovering from rejection sensitivity and people-pleasing behavior.
