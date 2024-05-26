@@ -1,4 +1,4 @@
-import { Chip, Container, Divider, Link, ListItem, Paper, Typography } from "@mui/material";
+import { Button, Chip, Container, Divider, Link, ListItem, Paper, Typography } from "@mui/material";
 import { Table, TableCell, TableContainer } from "@mui/material";
 import { BiSolidHandRight } from "react-icons/bi";
 import Icon from "@/components/Markdown/CustomIcon";
@@ -41,6 +41,14 @@ export function MarkdownListItem(props: any) {
 			<BiSolidHandRight />
 			<Container>{props.children}</Container>
 		</ListItem>
+	);
+}
+
+export function MarkdownButton(props: any) {
+	return (
+		<Button style={props.style} type="submit">
+			{props.children}
+		</Button>
 	);
 }
 

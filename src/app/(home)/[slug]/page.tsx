@@ -7,8 +7,8 @@ import { readFileSync } from "fs";
 
 // Markdown Format Imports
 import { Container, TableBody, TableFooter, TableHead, TableRow } from "@mui/material";
-import { MarkdownH1, MarkdownH2, MarkdownCode, MarkdownImage, MarkdownLabel } from "@/components/Markdown/Markdown";
-import { MarkdownLink, MarkdownListItem, MarkdownH3 } from "@/components/Markdown/Markdown";
+import { MarkdownH1, MarkdownH2, MarkdownImage, MarkdownLabel, MarkdownButton } from "@/components/Markdown/Markdown";
+import { MarkdownLink, MarkdownCode, MarkdownListItem, MarkdownH3 } from "@/components/Markdown/Markdown";
 import { MarkdownParagraph, MarkdownTable, MarkdownTableCell } from "@/components/Markdown/Markdown";
 
 // Static Page Imports
@@ -62,7 +62,8 @@ export default async function MDContainer({ params }: Props) {
 					h1: MarkdownH1,
 					h2: MarkdownH2,
 					h3: MarkdownH3,
-					li: MarkdownListItem
+					li: MarkdownListItem,
+					button: MarkdownButton
 				}}
 				remarkPlugins={[remarkGfm, remarkBreaks]}
 				rehypePlugins={[rehypeRaw]}>

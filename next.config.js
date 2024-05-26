@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { withNextVideo } = require("next-video/process");
 
 /** @type {import('next').NextConfig} */
@@ -17,6 +18,10 @@ const nextConfig = {
 			{
 				protocol: "https",
 				hostname: "images.unsplash.com"
+			},
+			{
+				protocol: "https",
+				hostname: "api.githubtrends.io"
 			},
 			{
 				protocol: "https",

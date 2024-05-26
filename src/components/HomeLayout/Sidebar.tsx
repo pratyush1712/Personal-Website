@@ -134,21 +134,29 @@ export default function Sidebar({ expanded, setExpanded, darkMode, handleThemeCh
 						)}
 					</Box>
 				</Tooltip>
-				<Box
-					sx={{
-						flexGrow: 0,
-						fontSize: 24,
-						color: "#858585",
-						cursor: "pointer",
-						"&:hover": { color: "white" },
-						WebkitTapHighlightColor: "rgba(0,0,0,0)"
-					}}
-					display="flex"
-					justifyContent="center">
-					<Box mt={0.7}>
-						<VscSettingsGear />
-					</Box>
-				</Box>
+				<Tooltip title="GitHub Portfolio" arrow placement="right">
+					<Link
+						href={"/github"}
+						underline="none"
+						color="inherit"
+						sx={{ WebkitTapHighlightColor: "rgba(0,0,0,0)" }}>
+						<Box
+							sx={{
+								flexGrow: 0,
+								fontSize: 24,
+								color: "#858585",
+								cursor: "pointer",
+								"&:hover": { color: "white" },
+								WebkitTapHighlightColor: "rgba(0,0,0,0)"
+							}}
+							display="flex"
+							justifyContent="center">
+							<Box mt={0.7}>
+								<VscSettingsGear />
+							</Box>
+						</Box>
+					</Link>
+				</Tooltip>
 			</Box>
 		</Box>
 	);
