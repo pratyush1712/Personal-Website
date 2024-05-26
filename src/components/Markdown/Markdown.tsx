@@ -116,6 +116,14 @@ export function MarkdownImage(props: any) {
 	return <Image {...props} width={props.style.width} height={props.style.height} alt={props?.alt || ""} />;
 }
 
+export const MarkdownLabel = (props: any) => {
+	return (
+		<Typography variant="body1" display="block" gutterBottom>
+			{props.children}
+		</Typography>
+	);
+};
+
 export function MarkdownParagraph(props: any) {
 	if (!props.children) return <Typography>{props.children}</Typography>;
 

@@ -7,7 +7,7 @@ import { readFileSync } from "fs";
 
 // Markdown Format Imports
 import { Container, TableBody, TableFooter, TableHead, TableRow } from "@mui/material";
-import { MarkdownH1, MarkdownH2, MarkdownCode, MarkdownImage } from "@/components/Markdown/Markdown";
+import { MarkdownH1, MarkdownH2, MarkdownCode, MarkdownImage, MarkdownLabel } from "@/components/Markdown/Markdown";
 import { MarkdownLink, MarkdownListItem, MarkdownH3 } from "@/components/Markdown/Markdown";
 import { MarkdownParagraph, MarkdownTable, MarkdownTableCell } from "@/components/Markdown/Markdown";
 
@@ -53,6 +53,7 @@ export default async function MDContainer({ params }: Props) {
 					table: MarkdownTable,
 					img: MarkdownImage,
 					thead: TableHead,
+					label: MarkdownLabel,
 					tbody: TableBody,
 					th: MarkdownTableCell,
 					tr: TableRow,

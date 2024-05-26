@@ -145,22 +145,15 @@ export default function AppButtons({
 			disableGutters
 			sx={{
 				display: "inline-block",
-				overflowX: "auto",
+				overflowX: "hidden",
+				":hover": { overflowX: "auto" },
 				overflowY: "hidden",
 				whiteSpace: "nowrap",
 				minHeight: "32px",
 				backgroundColor:
 					pages.length !== 0 ? (theme.palette.mode === "dark" ? "#252527" : "#f3f3f3") : "transparent",
-				"&::-webkit-scrollbar": {
-					height: "3px"
-					// backgroundColor: 'red',
-				},
-				"&::-webkit-scrollbar-thumb": {
-					backgroundColor: theme.palette.mode === "dark" ? "#535353" : "#8c8c8c"
-				},
-				"&::-webkit-darkScrollbar-thumb": {
-					backgroundColor: theme.palette.mode === "dark" ? "#ffffff" : "#8c8c8c"
-				}
+				scrollbarWidth: "thin",
+				scrollbarColor: theme.palette.mode === "dark" ? "#333 #252527" : "#333 #f3f3f3"
 			}}>
 			{pages.map(({ index, name, route }) => renderPageButton(index, name, route))}
 		</Container>
