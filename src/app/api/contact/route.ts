@@ -10,6 +10,11 @@ export async function POST(req: NextRequest) {
 	const fullName = body.get("name") as string;
 	const email = body.get("email") as string;
 	const message = body.get("message") as string;
+	const honeypot = body.get("honeypot") as string;
+	if (honeypot !== "") {
+		console.error("Honeypot triggered");
+		return Response.redirect("https://pratyushsudhakar.com/contact");
+	}
 	const EmailText = `Name: ${fullName}\nEmail: ${email}\nMessage: ${message}`;
 	try {
 		const { data, error } = await resend.emails.send({

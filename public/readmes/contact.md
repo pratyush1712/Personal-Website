@@ -29,33 +29,8 @@ If you have any questions or would like to get in touch, please use one of the m
         <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
         <textarea id="message" name="message" required style="width: 100%; border-radius:5px; height: 90px; padding: 8px; box-sizing: border-box;"></textarea>
       </div>
+      <input name="honeypot" class="visually-hidden" tabindex="-1" autocomplete="off" type="hidden">
       <button type="submit" style="padding: 10px 15px; background-color: #3279CB; color: white; border: none; border-radius:5px; cursor: pointer; width: 100%;">Send</button>
     </form>
   </div>
 </div>
-
-<script>
-document.getElementById('contactForm').addEventListener('submit', function(event) {
-  event.preventDefault();
-  
-  const form = event.target;
-  const formData = new FormData(form);
-  
-  fetch(form.action, {
-    method: form.method,
-    body: formData
-  })
-  .then(response => {
-    if (response.ok) {
-      alert('Success! Your message has been sent.');
-      form.reset();
-    } else {
-      alert('Oops! There was a problem with your submission. Please try again.');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Oops! There was a problem with your submission. Please try again.');
-  });
-});
-</script>

@@ -118,7 +118,7 @@ function PlayListListView() {
 							</IconButton>
 						</Box>
 					</Box>
-					<CardMedia component="img" sx={{ width: 151 }} image={song.image} alt={song.title} />
+					<CardMedia component="img" sx={{ width: 151 }} image={song.image} alt={song.name} />
 				</Card>
 			))}
 		</Container>
