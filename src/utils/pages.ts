@@ -76,20 +76,20 @@ const pages: Page[] = [
 			"Pratyush Frontend",
 			"Pratyush Sudhakar Software Engineering Skills"
 		]
-	},
-	{
-		index: 6,
-		name: "contact.md",
-		route: "contact",
-		description: "Contact information for Pratyush",
-		keywords: [
-			"Pratyush Sudhakar Contact",
-			"Pratyush Sudhakar Contact Information",
-			"Pratyush Sudhakar Cornell Contact",
-			"Pratyush Sudhakar Contact Info",
-			"Pratyush Sudhakar Contact Info Cornell"
-		]
 	}
+	// {
+	// 	index: 6,
+	// 	name: "contact.md",
+	// 	route: "contact",
+	// 	description: "Contact information for Pratyush",
+	// 	keywords: [
+	// 		"Pratyush Sudhakar Contact",
+	// 		"Pratyush Sudhakar Contact Information",
+	// 		"Pratyush Sudhakar Cornell Contact",
+	// 		"Pratyush Sudhakar Contact Info",
+	// 		"Pratyush Sudhakar Contact Info Cornell"
+	// 	]
+	// }
 ];
 
 const routeToPage: { [key: string]: Page } = {};
