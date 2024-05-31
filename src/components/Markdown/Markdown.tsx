@@ -115,6 +115,41 @@ export function MarkdownH3(props: any) {
 	);
 }
 
+export function MarkdownH4(props: any) {
+	return (
+		<>
+			<Typography
+				variant="h4"
+				sx={{
+					fontSize: "1em",
+					display: "block",
+					marginBlockStart: "0.67em",
+					marginBlockEnd: "0.3em",
+					fontWeight: "bold",
+					lineHeight: 1.25
+				}}>
+				{props.children}
+			</Typography>
+		</>
+	);
+}
+
+export function MarkdownItalic(props: any) {
+	return (
+		<Typography variant="inherit">
+			<i>{props.children}</i>
+		</Typography>
+	);
+}
+
+export function MarkdownUnderline(props: any) {
+	return (
+		<Typography variant="inherit">
+			<u>{props.children}</u>
+		</Typography>
+	);
+}
+
 export function MarkdownImage(props: any) {
 	props.style.width = props.style.width?.split("px")[0] || "15";
 	props.style.height = props.style.height?.split("px")[0] || "25";

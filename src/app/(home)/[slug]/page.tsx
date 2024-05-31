@@ -7,9 +7,10 @@ import { readFileSync } from "fs";
 
 // Markdown Format Imports
 import { Container, TableBody, TableFooter, TableHead, TableRow } from "@mui/material";
-import { MarkdownH1, MarkdownH2, MarkdownImage, MarkdownLabel, MarkdownButton } from "@/components/Markdown/Markdown";
-import { MarkdownLink, MarkdownCode, MarkdownListItem, MarkdownH3 } from "@/components/Markdown/Markdown";
-import { MarkdownParagraph, MarkdownTable, MarkdownTableCell } from "@/components/Markdown/Markdown";
+import { MarkdownH1, MarkdownH2, MarkdownH3, MarkdownH4 } from "@/components/Markdown/Markdown";
+import { MarkdownLink, MarkdownCode, MarkdownImage, MarkdownListItem } from "@/components/Markdown/Markdown";
+import { MarkdownParagraph, MarkdownButton, MarkdownTable, MarkdownTableCell } from "@/components/Markdown/Markdown";
+import { MarkdownLabel, MarkdownUnderline } from "@/components/Markdown/Markdown";
 
 // Static Page Imports
 import pages, { routeToPage } from "@/utils/pages";
@@ -62,6 +63,8 @@ export default async function MDContainer({ params }: Props) {
 					h1: MarkdownH1,
 					h2: MarkdownH2,
 					h3: MarkdownH3,
+					h4: MarkdownH4,
+					ins: MarkdownUnderline,
 					li: MarkdownListItem,
 					button: MarkdownButton
 				}}

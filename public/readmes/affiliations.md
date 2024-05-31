@@ -53,6 +53,6 @@
 -   Working alongside the President and Practice Leaders to guide practices, helping newcomers improve their skills.
 -   Assisting with planning practice sessions for competitions and arranging events. <br>
 
-<ins>*The club taught me some of the most important life lesson:*</ins>
+<ins>_The club taught me some of the most important life lesson:_</ins>
 - Life-long neglect -> people-pleasing -> lack of boundaries, self-worth, and self-love.
 - Speaking up for yourself for once -> people start hating -> recovering from rejection sensitivity and people-pleasing behavior.
