@@ -45,4 +45,4 @@ Cornell University<br> **Bachelor's** in Computer Science & Mathematics <br>
 -   [Cornell Design & Tech Initiative](https://www.cornelldti.org/) (Technical Product Manager)
 -   [Cornell Perfect Match](https://perfectmatch.ai/) (Head of Engineering)
 -   [Cornell Wushu - Chinese Martial Arts Club](https://cornellwushu.github.io/) (Vice-President)
--   [Cornell Association of CS Undergrads](#) (Member)
+-   [Cornell Association of CS Undergrads](https://acsu.cornell.edu/) (Member)

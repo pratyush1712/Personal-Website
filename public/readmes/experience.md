@@ -8,7 +8,7 @@ Los Angeles, California
 -   Architected a song-sharing feature using React, Firebase, and 10+ custom Firestore rules, enhancing platform security and enabling controlled access for over 100 potential external users.
 -   Engineered a synchronized SongView component with lyrics using Redux, fostering seamless integration of song playback and lyrics display, securing a synchronization accuracy of 95%.
 
-_Technologies used:_ `React.js`, `Redux`, `Firebase`, `Firestore` <br><br>
+_Technologies used:_ `React.js` `Redux` `Firebase` `Firestore` <br><br>
 
 <hr />
 
@@ -19,7 +19,7 @@ Ithaca, New York
 -   Constructed an advanced ETL pipeline using Selenium and NLP, processing financial data of 3000+ companies, resulting in an 83% decrease in processing time through parallel processing.
 -   Architected and deployed a full-stack application leveraging Next.js and Flask, integrating Server-Sent Events (SSE) for fast real-time data retrieval, resulting in a 66% reduction in data latency and a superior front-end user experience.
 
-_Technologies used:_ `Next.js`, `Flask`, `Selenium`, `NLP`, `Server-Sent Events`<br><br>
+_Technologies used:_ `Next.js` `Flask` `Selenium` `NLP` `Server-Sent Events`<br><br>
 
 <hr />
 
@@ -29,7 +29,7 @@ Ithaca, New York
 
 -   Crafted a flexible slug management system on the AskEarn website using PHP, Laravel, and Strapi CMS, allowing for effortless page URL modification, thereby improving the user experience for over 100,000 monthly active users.
 
-_Technologies used:_ `PHP`, `Laravel`, `Strapi CMS`<br><br>
+_Technologies used:_ `PHP` `Laravel` `Strapi CMS`<br><br>
 
 <hr />
 
@@ -41,4 +41,4 @@ Remote
 -   Developed a real-time market analysis tool, processing data with Pandas and NumPy within Lambda functions.
 -   Leveraged React.js, Redux, RTK Query, and react-apex-charts for seamless data storage, retrieval, and visualization.
 
-_Technologies used:_ `React.js`, `Redux`, `RTK Query`, `AWS`, `DynamoDB`, `Lambda functions`, `Pandas`, `NumPy`, `react-apex-charts`
+_Technologies used:_ `React.js` `Redux` `RTK Query` `AWS` `DynamoDB` `Lambda functions` `Pandas` `NumPy` `react-apex-charts`
