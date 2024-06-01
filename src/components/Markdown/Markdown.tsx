@@ -136,7 +136,7 @@ export function MarkdownH4(props: any) {
 
 export function MarkdownItalic(props: any) {
 	return (
-		<Typography variant="inherit">
+		<Typography variant="inherit" display="inline">
 			<i>{props.children}</i>
 		</Typography>
 	);
@@ -144,7 +144,7 @@ export function MarkdownItalic(props: any) {
 
 export function MarkdownUnderline(props: any) {
 	return (
-		<Typography variant="inherit">
+		<Typography variant="inherit" display="inline">
 			<u>{props.children}</u>
 		</Typography>
 	);

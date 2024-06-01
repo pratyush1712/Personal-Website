@@ -204,6 +204,7 @@ export default function PlayList() {
 									position: "absolute",
 									paddingLeft: "auto",
 									paddingRight: "auto",
+									color: "#FFFFFF",
 									height: "auto",
 									backgroundColor: "rgba(30, 30, 30, 0.9)",
 									textAlign: "center",
@@ -292,6 +293,7 @@ export default function PlayList() {
 								height: "auto",
 								backgroundColor: "rgba(30, 30, 30, 0.9)",
 								textAlign: "center",
+								color: "#FFFFFF",
 								left: 0
 							}}>
 							{song?.name} By: {song?.artist}

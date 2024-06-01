@@ -31,6 +31,7 @@ export default function Home() {
 					sx={{
 						backgroundColor: "rgba(0, 0, 0, 0.7)",
 						borderRadius: "2px",
+						color: "#FFFFFF",
 						padding: "5px",
 						fontSize: { xs: "0.4rem", sm: "0.8rem" }
 					}}>

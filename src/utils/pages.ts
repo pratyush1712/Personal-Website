@@ -76,6 +76,18 @@ const pages: Page[] = [
 			"Pratyush Frontend",
 			"Pratyush Sudhakar Software Engineering Skills"
 		]
+	},
+	{
+		index: 6,
+		name: "github.md",
+		route: "github",
+		description: "GitHub repositories of Pratyush",
+		keywords: [
+			"Pratyush Sudhakar GitHub",
+			"Pratyush Sudhakar GitHub Repos",
+			"Pratyush Sudhakar GitHub Repositories",
+			"Pratyush Sudhakar GitHub Projects"
+		]
 	}
 	// {
 	// 	index: 6,
