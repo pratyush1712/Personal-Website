@@ -135,43 +135,58 @@
 \resumeItem{\textbf{Activities}: Cornell Wushu (Vice-President), Object-Oriented Programming (TA), Association of CS Undergrads (Member)}
 \resumeSubHeadingListEnd
 
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+\small{\item{
+    \textbf{Programming Languages:} Python, Java, JavaScript/TypeScript, C++, OCaml \\
+    \vspace{2pt}
+    \textbf{Frontend Frameworks (Web \& Mobile):} React.js, Redux.js, Next.js, Angular, Svelte, React Native, Flutter \\
+    \vspace{2pt}
+    \textbf{Backend Frameworks:} Node.js, Express.js, Flask, Django, Nest.js, FastAPI, Prisma (ORM) \\
+    \vspace{2pt}
+    \textbf{Databases \& Query Languages:} SQL, GraphQL, MySQL, PostgreSQL, MongoDB, DynamoDB, Firebase \\
+    \vspace{2pt}
+    \textbf{Cloud \& DevOps:} Amazon Web Services, Google Cloud Platform, Microsoft Azure, GitHub Actions, Docker, Kubernetes, Nginx
+}}
+\end{itemize}
 
 %-----------EXPERIENCE-----------
 \section{Experience}
 \resumeSubHeadingListStart
 
+\resumeSubheading{Software Engineering Intern}{Jun 2023 - Aug 2023}{\href{https://rapstudy.com/}{rapStudy}}{Los Angeles, California}
+\resumeItemListStart
+\resumeItem{Spearheaded codebase refactoring, introducing Redux for state management and memoization for component optimization, achieving a 160\% improvement in the website’s speed index.}
+\resumeItem{Architected and implemented a secure song-sharing system, using React and 10+ custom Firestore rules for precise access control.}
+\resumeItem{Engineered a global audio playback component using Redux, achieving seamless synchronization with the lyrics display, significantly improving UX.}
+\resumeItemListEnd
+
+
 \resumeSubheading
 {Head of Engineering \& President}{Jan 2023 - May 2024}
 {\href{https://perfectmatch.ai/}{Cornell Perfect Match: Dating Service for Cornellians}}{Ithaca, New York}
-
 \resumeItemListStart
-\resumeItem{Led 4 cross-functional teams, overseeing recruitment, onboarding, and management, to ensure a successful launch.}
-\resumeItem{Revamped the website's frontend for enhanced UI/UX and implemented automated personalized engagement emails (cron jobs), resulting in a significant boost in user engagement and a 600+ increase in active users.}
-\resumeItem{Initiated offline-to-online matching algorithm transition, deployed via a Flask microservice, resulting in 50,000+ real-time matches and enhanced system responsiveness.}
-\resumeItem{Engineered a Flask microservice to deliver a real-time user analytics dashboard, leveraging MongoDB Map-Reduce for optimized data aggregation and server response caching for reduced latency, resulting in a seamless UX for 5,000+ users.}
-\resumeItemListEnd
-
-\resumeSubheading{Software Engineering Intern}{Jun 2023 - Aug 2023}{\href{https://rapstudy.com/}{rapStudy}}{Los Angeles, California}
-\resumeItemListStart
-\resumeItem{Spearheaded codebase refactoring, introducing Redux for state management and memoization for component optimization. Achieved a 160\% improvement in the website's speed index, significantly enhancing user experience.}
-\resumeItem{Architected and implemented a secure song-sharing system, using React and 10+ custom Firestore rules for precise access control, allowing authorized users to share platform's content externally.}
-\resumeItem{Engineered a audio playback module using Redux, ensuring globally accessible, synchronized lyrics display with a minimal 500ms delay.}
+\resumeItem{Led 4 cross-functional teams, managing recruitment and onboarding, ensuring successful launch.}
+\resumeItem{Revamped frontend UI/UX and set up automated engagement emails (cron jobs), resulting in increased engagement and 600+ new users.}
+\resumeItem{Transitioned to online matching algorithm, deployed via Flask microservice, achieving 50,000+ real-time matches and improved responsiveness.}
+\resumeItem{Engineered real-time user analytics dashboard with MongoDB Map-Reduce for data aggregation, server response caching for reduced latency and seamless UX for 5,000+ users.}
 \resumeItemListEnd
 
 \resumeSubheading
 {Technical Product Manager}{Jan 2023 - Dec 2023}
 {\href{https://www.cornelldti.org/}{Cornell Digital Tech \& Innovation}}{Ithaca, New York}
 \resumeItemListStart
-\resumeItem{Led a team of 7 developers in the successful agile development of a cross-platform campus-wide ride scheduling application.}
-\resumeItem{Led the implementation of a comprehensive test automation framework (Cypress/Mocha/Chai/Supertest) for both frontend and backend, achieving 94\% test coverage and ensuring high software quality.}
-\resumeItem{Containerized the application platform with Docker, and orchestrated automated deployment and testing through a Kubernetes cluster and GitHub Actions, facilitating CI/CD.}
+\resumeItem{Led team of 7 developers in agile development of a cross-platform campus-wide ride scheduling app.}
+\resumeItem{Established an automated test infrastructure using Cypress, Mocha, Chai, and Supertest, achieving 94\% coverage and enhancing software quality with test-driven development.}
+\resumeItem{Containerized the application platform with Docker, and orchestrated automated deployment and testing with Kubernetes cluster and GitHub Actions, facilitating CI/CD.}
 \resumeItemListEnd
 
 \resumeSubheading
 {Data Engineering Intern}{Jun 2023 - Sep 2023}{\href{https://www.engineering.cornell.edu/}{Cornell College of Engineering}}{Ithaca, New York}
 \resumeItemListStart
-\resumeItem{Engineered a scalable ETL pipeline using Selenium for web scraping, NLP for data extraction, and multithreading for parallel processing, resulting in an 83\% reduction in processing time for financial data from 3,000+ companies.}
-\resumeItem{Developed a data preview application with Next.js and Flask, using Server-Sent-Events for real-time updates and parallel processing to reduce data latency by 66\%.}
+\resumeItem{Engineered scalable ETL pipeline with Selenium (web scraping), NLP (data extraction), and multithreading, reducing processing time by 83\% for financial data from 3,000+ companies.}
+\resumeItem{Developed real-time data preview application with Next.js and Flask, using Server-Sent-Events and parallel processing, reducing data latency by 66\%.}
 
 \resumeItemListEnd
 
@@ -192,7 +207,7 @@
 
 \resumeProjectHeading
 {\href{https://github.com/cornell-dti/mlmn-findoc}{AI Syllabus Summarizer \& Q\&A Tool}}{Supabase, Zilliz, Next.js, Flask, LangChain}{Feb 2024 - Mar 2024}
-\resumeItem{Web app enabling students to query syllabus content using natural language. Used Supabase for data storage and a Zilliz cluster for fast vector search of cached responses, ensuring low latency and optimized performance.}
+\resumeItem{Web app enabling students to query syllabus content using natural language. Developed REST APIs and used Supabase for data storage and a Zilliz cluster for fast vector search of cached responses, ensuring low latency and optimized performance.}
 
 \resumeProjectHeading
 {\href{https://private.pratyushsudhakar.com/}{Live Blog and Video Sharing Platform}}{Next.js 14, Apollo, GraphQL, MongoDB, Mux}{Apr 2024}
@@ -203,24 +218,6 @@
 \resumeItem{Microservices-based web application incorporating a Logistic Regression model to predict users' Spotify playlists' happiness levels with 88\% accuracy. Leveraged Nginx for seamless load balancing and proxying between four microservices.}
 
 \resumeSubHeadingListEnd
-
-%-----------PROGRAMMING SKILLS-----------
-\section{Technical Skills}
-\begin{itemize}[leftmargin=0.15in, label={}]
-\small{\item{
-    \textbf{Programming Languages:} Python, Java, JavaScript/TypeScript, C++, OCaml \\
-    \vspace{2pt}
-    \textbf{Frontend Frameworks (Web \& Mobile):} React.js, Redux.js, Next.js, Angular, Svelte, React Native, Flutter \\
-    \vspace{2pt}
-    \textbf{Backend Frameworks:} Node.js, Express.js, Flask, Django, Nest.js, FastAPI, Prisma (ORM) \\
-    \vspace{2pt}
-    \textbf{Databases \& Query Languages:} SQL, GraphQL, MySQL, PostgreSQL, MongoDB, DynamoDB, Firebase \\
-    \vspace{2pt}
-    \textbf{Cloud \& DevOps:} Amazon Web Services, Google Cloud Platform, Microsoft Azure, GitHub Actions, Docker, Kubernetes, Nginx
-}}
-\end{itemize}
-
-
 
 %-------------------------------------------
 \end{document}
