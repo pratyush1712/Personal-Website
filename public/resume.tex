@@ -7,6 +7,7 @@
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{verbatim}
 \usepackage{enumitem}
+\usepackage{soul}
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
@@ -58,12 +59,12 @@
 % Custom commands
 \newcommand{\resumeItem}[1]{
   \item\small{
-    {#1 \vspace{-2.5pt}}
+    {#1 \vspace{-1pt}}
   }
 }
 
 \newcommand{\education}[4]{
-  \vspace{-3pt}\item
+  \vspace{-2pt}\item
     \begin{tabular*}{0.97\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
       \textbf{#1} & #2 \\
       \small#3 & \small #4 \\
@@ -71,7 +72,7 @@
 }
 
 \newcommand{\resumeSubheading}[4]{
-  \vspace{-3pt}\item
+  \vspace{-2pt}\item
     \begin{tabular*}{0.97\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
@@ -82,11 +83,11 @@
     \item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
+    \end{tabular*}\vspace{-6pt}
 }
 
 \newcommand{\resumeProjectHeading}[3]{
-    \vspace{-3pt}\item
+    \vspace{-2pt}\item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \textbf{\small #1} $|$ \emph{\small #2} &\textit{\small#3}
     \end{tabular*}\vspace{-6pt}
@@ -99,7 +100,7 @@
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-3.5pt}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4.5pt}}
 
 %-------------------------------------------
 %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -126,6 +127,7 @@
 
 
 %-----------EDUCATION-----------
+\vspace{-6.414pt}
 \section{Education}
 \resumeSubHeadingListStart
 \education
@@ -133,10 +135,10 @@
 {Bachelor's of Science in Computer Science $|$ Overall GPA: 3.865 $|$ Major GPA: 3.97}{May 2025}
 \resumeItem{\textbf{Relevant Coursework}: Adv. ML Systems, Systems Prog. (C++), Algo Analysis, Func. Prog. (OCaml), OOP (Java)}
 \vspace{-14.7pt}
-\resumeItem{\textbf{Activities}: Cornell Wushu (Vice-President), Object-Oriented Programming (TA), Assoc. of CS Undergrads (Member)}
 \resumeSubHeadingListEnd
 
 %-----------PROGRAMMING SKILLS-----------
+\vspace{-9.5pt}
 \section{Technical Skills}
 \begin{itemize}[leftmargin=0.15in, label={}]
 \small{\item{
@@ -151,12 +153,13 @@
 \end{itemize}
 
 %-----------EXPERIENCE-----------
+\vspace{-9.5pt}
 \section{Experience}
 \resumeSubHeadingListStart
 
 \resumeSubheading{Software Engineering Intern}{Jun 2023 - Aug 2023}{rapStudy}{Los Angeles, California}
 \resumeItemListStart
-\resumeItem{Spearheaded codebase refactoring, introducing Redux for state management and memoization for component optimization, achieving a 160\% improvement in the website’s speed index.}
+\resumeItem{Spearheaded codebase refactoring, introducing Redux for state management and memoization for component optimization, \ul{achieving a 160\% improvement in the website’s speed index}.}
 \resumeItem{Architected a secure song-sharing system, using React and 10+ custom Firestore rules for precise access control.}
 \resumeItem{Developed Redux-powered global audio-playback component, perfectly syncing with lyrics display for enhanced UX.}
 \resumeItemListEnd
@@ -164,8 +167,8 @@
 \resumeSubheading
 {Data Engineering Intern}{Jun 2023 - Sep 2023}{Cornell College of Engineering}{Ithaca, New York}
 \resumeItemListStart
-\resumeItem{Engineered a scalable ETL pipeline to process financial data from 3,000+ companies, utilizing Selenium (web scraping), NLP (data extraction), and multithreading, reducing processing time by 83\%.}
-\resumeItem{Built a live dashboard using Next.js, Flask, and Server-Sent-Events, cutting latency by 66\% with parallelization.}
+\resumeItem{Engineered a scalable ETL pipeline to \ul{process financial data from 3,000+ companies}, utilizing Selenium (web scraping), NLP (data extraction), and multithreading, \ul{reducing processing time by 83\%}.}
+\resumeItem{Built a live dashboard using Next.js, Flask, and Server-Sent-Events, \ul{cutting latency by 66\% with parallelization}.}
 \resumeItemListEnd
 
 \resumeSubheading
@@ -178,6 +181,7 @@
 \resumeSubHeadingListEnd
 
 %-----------Activities-----------
+\vspace{-9.5pt}
 \section{Activities}
 \resumeSubHeadingListStart
 
@@ -186,9 +190,9 @@
 {Cornell Perfect Match: Dating Service for Cornellians}{Ithaca, New York}
 \resumeItemListStart
 \resumeItem{Led 4 cross-functional teams through product launch, managing recruitment and onboarding.}
-\resumeItem{Enhanced UI/UX and set up automated personalized emails (cron jobs), resulting in 600+ new active users.}
-\resumeItem{Transitioned to online matching algorithm, deployed via Flask microservice, achieving 50,000+ real-time matches.}
-\resumeItem{Engineered data analytics system using Map-Reduce framework and server-side caching, delivering live instant insights to 5,000+ users.}
+\resumeItem{Enhanced UI/UX and set up automated personalized emails (cron jobs), \ul{resulting in 600+ new active users}.}
+\resumeItem{Transitioned to online matching algorithm, deployed via Flask microservice, \ul{achieving 50,000+ real-time matches}.}
+\resumeItem{Engineered data analytics system using Map-Reduce framework and server-side caching, \ul{delivering live instant insights to 5,000+ users}.}
 \resumeItemListEnd
 
 \resumeSubheading
@@ -196,13 +200,15 @@
 {Cornell Digital Tech \& Innovation}{Ithaca, New York}
 \resumeItemListStart
 \resumeItem{Spearheaded agile development of cross-platform ride scheduling app with 7-developers team.}
-\resumeItem{Architected test-driven development pipeline using Cypress, Mocha, and Supertest, attaining 94\% code coverage.}
+\resumeItem{Architected \ul{test-driven development}
+\fontseries{}\selectfont{pipeline using Cypress, Mocha, and Supertest}, \ul{attaining 94\% code coverage}.}
 \resumeItem{Orchestrated CI/CD workflow with GitHub Actions and Kubernetes for streamlined deployment and testing.}
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
 
 %-----------PROJECTS-----------
+\vspace{-9.5pt}
 \section{Personal Projects}
 \resumeSubHeadingListStart
 % \resumeProjectHeading
@@ -211,11 +217,11 @@
 
 \resumeProjectHeading
 {Harmonious Sounds}{Scikit-Learn, React, Flask, Express, Docker, Nginx}{Feb 2023 - Apr 2023}
-\resumeItem{Web application incorporating a Logistic Regression model to predict users' Spotify playlists' happiness levels with 88\% accuracy. Leveraged Nginx for seamless load balancing and proxying between 4 microservices.}
+\resumeItem{Web application incorporating a Logistic Regression model to \ul{predict users' Spotify playlists' happiness levels with 88\% accuracy}. Leveraged Nginx for seamless load balancing and proxying between 4 microservices.}
 
 \resumeProjectHeading
 {AI Syllabus Summarizer \& Q\&A Tool}{Supabase, Zilliz, Next.js, Flask, LangChain}{Feb 2024 - Apr 2024}
-\resumeItem{Course syllabus query system with REST API backend, integrating Langchain for NLP and Zilliz cluster for vector similarity search, enabling efficient retrieval and context-aware responses to student queries.}
+\resumeItem{Course syllabus query system with REST API backend, integrating Langchain for NLP and Zilliz cluster for \ul{vector similarity search}, enabling efficient retrieval and context-aware responses to student queries.}
 
 \resumeProjectHeading
 {Live Blog and Video Sharing Platform}{Next.js 14, Apollo, GraphQL, MongoDB, Mux}{Apr 2024 - May 2024}
