@@ -34,5 +34,3 @@ export type User = {
 	email?: string | null | undefined;
 	image?: string | null | undefined;
 };
-
-export * from "./close-friends";
