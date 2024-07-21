@@ -1,7 +1,6 @@
-# My VSCode-Themed Personal Website and Netflix-Themed Blogs and Videos Sharing Platform
+# My VSCode-Themed Personal Website
 
--   Personal Portfolio Built Using Next.js 14 and Material UI: [Live Demo](https://pratyushsudhakar.com/)
--   Extended the Website to a Personal Blogs and Videos Sharing Platform Using Apollo GraphQL: [Live Demo](https://private.pratyushsudhakar.com/)
+Personal Portfolio Built Using Next.js 14 and Material UI: [Live Demo](https://pratyushsudhakar.com/)
 
 <p align="left">
 		<em>Developed with the software and tools below.</em>
@@ -36,34 +35,21 @@
 
 ## 📍 Overview
 
-This repository contains the source code for my personal website and blogs and videos sharing platform. The website is built using Next.js 14 and Material UI, and the blogs and videos sharing platform uses Apollo GraphQL for the backend.
+This repository contains the source code for my personal website. The website is built using Next.js 14 and Material UI.
 
 ---
 
 ## 🎉 Features
-
--   **Personal Portfolio**: VSCode-themed personal website.
-    -   **Pages**: Home, Overview, Experience, Education, Projects, Skills, and Resume.
-        -   **Home Page**: Apple Watch-themed landing page with bubbles showing my spotify playlist.
-        -   **Overview.md**: A markdown file that contains an overview of my personal information.
-        -   **Experience.md**: A markdown file that contains my work experience.
-        -   **Education.md**: A markdown file that contains my educational background.
-        -   **Projects.md**: A markdown file that contains my projects.
-        -   **Skills.md**: A markdown file that contains my skills.
-        -   **Resume**: A downloadable resume.
-    -   **Dark Mode**: Toggle between light and dark themes.
--   **Blogs and Videos Sharing Platform**: Netflix-themed platform for sharing blogs and videos.
-    -   **Home Page**: Netflix-themed landing page with a list of blogs and videos.
-    -   **Admin**: A page to manage blogs and videos.
-        -   **Blogs**: A list of blogs shared by users.
-        -   **Videos**: A list of videos shared by users.
-        -   **Create Blog**: A form to create a new blog.
-        -   **Create Video**: A form to create a new video.
-        -   **Edit Blog**: A form to edit an existing blog.
-        -   **Edit Video**: A form to edit an existing video.
-        -   **Delete Blog**: A button to delete an existing blog.
-        -   **Delete Video**: A button to delete an existing video.
-    -   **Login**: A page to log in to the platform.
+VSCode-themed personal website.
+-   **Pages**: Home, Overview, Experience, Education, Projects, Skills, and Resume.
+	-   **Home Page**: Apple Watch-themed landing page with bubbles showing my spotify playlist.
+	-   **Overview.md**: A markdown file that contains an overview of my personal information.
+	-   **Experience.md**: A markdown file that contains my work experience.
+	-   **Education.md**: A markdown file that contains my educational background.
+	-   **Projects.md**: A markdown file that contains my projects.
+	-   **Skills.md**: A markdown file that contains my skills.
+-   **Resume**: A downloadable resume.
+-   **Dark Mode**: Toggle between light and dark themes.
 
 ---
 
