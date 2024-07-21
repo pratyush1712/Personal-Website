@@ -23,7 +23,7 @@ type Props = { params: { slug: string } };
 export const dynamicParams = false;
 export function generateStaticParams() {
 	return pages.map(page => {
-		return { slug: page.route };
+		if (page.route !== "github") return { slug: page.route };
 	});
 }
 
