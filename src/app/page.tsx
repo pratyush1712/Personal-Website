@@ -25,7 +25,7 @@ export default function Home() {
 					}}>
 					Pratyush Sudhakar
 				</Typography>
-				<Typography
+				{/* <Typography
 					variant="caption"
 					align="center"
 					sx={{
@@ -36,7 +36,7 @@ export default function Home() {
 						fontSize: { xs: "0.4rem", sm: "0.8rem" }
 					}}>
 					I strive to be known as the most approachable person. Always here for friends, nk. call me &#128524;
-				</Typography>
+				</Typography> */}
 			</Grid>
 			{/* Links at the bottom */}
 			<Grid item xs={12} sx={{ ml: { xs: -2, sm: 0 } }}>
