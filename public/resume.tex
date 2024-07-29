@@ -65,7 +65,7 @@
 
 \newcommand{\education}[4]{
   \vspace{-2pt}\item
-    \begin{tabular*}{0.985\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+    \begin{tabular*}{\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
       \textbf{#1} & #2 \\
       #3 & #4 \\
     \end{tabular*}\vspace{-6pt}
@@ -73,7 +73,7 @@
 
 \newcommand{\resumeSubheading}[3]{
   \vspace{-2pt}\item
-    \begin{tabular*}{0.985\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
+    \begin{tabular*}{\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
       \textbf{#1}, \textit{#2} & #3
     \end{tabular*}\vspace{-4pt}
 }
@@ -87,7 +87,7 @@
 
 \newcommand{\resumeProjectHeading}[3]{
     \vspace{-2pt}\item
-    \begin{tabular*}{0.985\textwidth}[t]
+    \begin{tabular*}{\textwidth}[t]
     {@{}l@{\extracolsep{\fill}}r@{}}
     \normalsize{\textbf{#1} $|$ \emph{#2}} & \normalsize{#3}
     \end{tabular*}\vspace{-4pt}
@@ -97,7 +97,7 @@
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.04in, label={}]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-4pt}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4.5pt}}
@@ -127,7 +127,7 @@
 \education
 {Cornell University}{Ithaca, NY}
 {Bachelor's of Science in Computer Science $|$ Overall GPA: 3.865 $|$ Major GPA: 3.97}{May 2025}
-
+\vspace{-4pt}
 \resumeItem{\textbf{Relevant Coursework}: Advanced Machine Learning Systems, Systems Programming (C++), Analysis of Algorithms, Functional Programming (OCaml), Data Structures \& Obj.-Oriented Programming (Java)}
 \resumeSubHeadingListEnd
 
@@ -135,15 +135,15 @@
 \vspace{-10.5pt}
 \section{Technical Skills}
 \resumeSubHeadingListStart
-\small{\item{
-    \textbf{Programming Languages:} Python, Java, JavaScript/TypeScript, C++, OCaml \\
-    \vspace{2pt}
-    \textbf{Frontend Frameworks (Web \& Mobile):} React.js, Redux.js, Next.js, Angular, Svelte, React Native, Flutter \\
-    \vspace{2pt}
-    \textbf{Backend Frameworks \& Databases:} Node.js, Express.js, Flask, Django, Prisma (ORM), SQL, PostgreSQL, GraphQL \\
-    \vspace{2pt}
-    \textbf{Cloud \& DevOps:} Amazon Web Services, Google Cloud Platform, Azure, GitHub Actions, Docker, Kubernetes, Nginx
-}}
+\small{
+\resumeItem{\textbf{Programming Languages:} Python, Java, JavaScript/TypeScript, C++, OCaml}
+\vspace{-5pt}
+\resumeItem{\textbf{Frontend Frameworks (Web \& Mobile):} React.js, Redux.js, Next.js, Angular, Svelte, React Native, Flutter}
+\vspace{-5pt}
+\resumeItem{\textbf{Backend Frameworks \& Databases:} Node.js, Express.js, Flask, Django, Prisma (ORM), SQL, PostgreSQL, GraphQL}
+\vspace{-5pt}
+\resumeItem{\textbf{Cloud \& DevOps:} Amazon Web Services, Google Cloud Platform, Azure, GitHub Actions, Docker, Kubernetes, Nginx}
+}
 \resumeSubHeadingListEnd
 
 %-----------EXPERIENCE-----------
