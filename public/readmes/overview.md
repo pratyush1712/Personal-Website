@@ -8,6 +8,9 @@ Curious about my life beyond coding? Well, I am a student, so a lot of my time g
 
 I am looking for software engineering internships/co-op for Spring 2024 and Summer 2024.
 
+_Beyond the professional and social life_: I am unapologetically Autistic, and have lived my entire life performing high masking rituals to blend in with neurotypicals. Will I stop now? I want to but unfortunately the world is full of ableists and, to thrive, a certain level of masking is necessary. I am just trying to minimize it 100%.
+
+
 ## 🎓 Education
 
 **Cornell University** - Pursuing a Bachelor’s in Computer Science & Mathematics
