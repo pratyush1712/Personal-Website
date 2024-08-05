@@ -4,12 +4,11 @@
 
 Hey there! I’m a senior studying computer science and math. Over the past three years, I've immersed myself in numerous projects, improving my technical and managerial skills, and having a great time exploring new frameworks and software techniques.
 
-Curious about my life beyond coding? Well, I am a student, so a lot of my time goes on trying to pass classes. But there’s more! I do martial arts (specifically wushu), dance - breakdancing is where I channel my energy and passion, and biking - catch me riding to Cayuga on a whimsical Wednesday. Recently, I have started doing some gardening. _Update: I stopped because I realized that I really hate the creepy crawling feeling 😅_
+Curious about my life beyond coding? Well, I am a student, so a lot of my time goes on trying to pass classes. But there’s more! I do martial arts (Kick Boxing, Silat, Kali, Jeet Kun Do, Wushu), dance - breakdancing is where I channel my energy and passion, and biking - catch me riding to Cayuga on a whimsical Wednesday. Recently, I have started doing some gardening. _Update: I stopped because I realized that I really hate the creepy crawling feeling 😅_
 
 I am looking for software engineering internships/co-op for Spring 2024 and Summer 2024.
 
-_Beyond the professional and social life_: I am unapologetically Autistic, and have lived my entire life performing high masking rituals to blend in with neurotypicals. Will I stop now? I want to but unfortunately the world is full of ableists and, to thrive, a certain level of masking is necessary. I am just trying to minimize it 100%.
-
+<!-- Beyond the professional and social life: I’m unapologetically Autistic, and I’ve spent my life engaging in high masking rituals to blend in with neurotypicals. While I want to minimize this masking, navigating a world full of ableism often requires it. I’m just trying to find a balance and be as authentic as possible. -->
 
 ## 🎓 Education
 
