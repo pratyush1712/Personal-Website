@@ -18,7 +18,7 @@ const shuffle = (array: any[]) => {
 
 const options = {
 	size: 180,
-	minSize: 50,
+	minSize: 70,
 	gutter: 20,
 	provideProps: false,
 	fringeWidth: 160,
@@ -29,7 +29,7 @@ const options = {
 	compact: true,
 	gravitation: 5
 };
-const ITEMS_PER_LOAD = 20;
+const ITEMS_PER_LOAD = 500;
 
 function PlaylistLabel() {
 	return (

@@ -35,7 +35,7 @@ var defaultOptions = {
 	minSize: 20,
 	gutter: 16,
 	provideProps: false,
-	numCols: 6,
+	numCols: 400,
 	fringeWidth: 100,
 	yRadius: 200,
 	xRadius: 200,
@@ -92,14 +92,14 @@ function BubbleElement(props: { children: string | any[]; options: any; classNam
 		if (e.target.className) {
 			setScrollTop(e.target.scrollTop);
 			setScrollLeft(e.target.scrollLeft);
-			if (
-				scrollable.current.scrollTop >=
-				scrollable.current.scrollHeight - scrollable.current.clientHeight - 50
-			) {
-				setChildrenState((prevChildren: any) => {
-					return [...props.loadMore(prevChildren)];
-				});
-			}
+			// if (
+			// 	scrollable.current.scrollTop >=
+			// 	scrollable.current.scrollHeight - scrollable.current.clientHeight - 50
+			// ) {
+			// 	setChildrenState((prevChildren: any) => {
+			// 		return [...props.loadMore(prevChildren)];
+			// 	});
+			// }
 		}
 	};
 
