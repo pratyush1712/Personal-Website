@@ -1,8 +1,8 @@
 # 👨‍🎓 Education
 
-Cornell University College of Engineering<br>
-Major: Computer Science<br>
-Minors: Math (A&S), Applied Math (Eng), Psychology (A&S)
+-   Cornell University College of Engineering
+-   Major: Computer Science
+-   Minors: Math (A&S), Applied Math (Eng), Psychology (A&S)
 
 `2021-2025` `CS Major GPA: 3.97/4.0`
 
