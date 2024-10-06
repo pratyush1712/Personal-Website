@@ -16,6 +16,7 @@ import { MarkdownLabel, MarkdownUnderline } from "@/components/Markdown/Markdown
 import pages, { routeToPage } from "@/utils/pages";
 import { Metadata } from "next/types";
 import { join } from "path";
+import Script from "next/script";
 
 type Props = { params: { slug: string } };
 
@@ -72,6 +73,16 @@ export default async function MDContainer({ params }: Props) {
 				rehypePlugins={[rehypeRaw]}>
 				{content}
 			</ReactMarkdown>
+			<Script
+				id="mermaid"
+				type="module"
+				strategy="afterInteractive"
+				dangerouslySetInnerHTML={{
+					__html: `import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({startOnLoad: true});
+        mermaid.contentLoaded();`
+				}}
+			/>
 		</Container>
 	);
 }

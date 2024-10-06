@@ -79,16 +79,28 @@ const pages: Page[] = [
 	},
 	{
 		index: 6,
-		name: "github.md",
-		route: "github",
-		description: "GitHub repositories of Pratyush",
+		name: "brain.md",
+		route: "brain",
+		description: "Thoughts and ideas of Pratyush",
 		keywords: [
-			"Pratyush Sudhakar GitHub",
-			"Pratyush Sudhakar GitHub Repos",
-			"Pratyush Sudhakar GitHub Repositories",
-			"Pratyush Sudhakar GitHub Projects"
+			"Pratyush Sudhakar Thoughts",
+			"Pratyush Sudhakar Ideas",
+			"Pratyush Sudhakar Brain",
+			"Pratyush Sudhakar Brain Dump"
 		]
 	}
+	// {
+	// 	index: 6,
+	// 	name: "github.md",
+	// 	route: "github",
+	// 	description: "GitHub repositories of Pratyush",
+	// 	keywords: [
+	// 		"Pratyush Sudhakar GitHub",
+	// 		"Pratyush Sudhakar GitHub Repos",
+	// 		"Pratyush Sudhakar GitHub Repositories",
+	// 		"Pratyush Sudhakar GitHub Projects"
+	// 	]
+	// }
 	// {
 	// 	index: 6,
 	// 	name: "contact.md",
