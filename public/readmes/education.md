@@ -1,8 +1,10 @@
 # 👨‍🎓 Education
 
-Cornell University<br> **Bachelor's** in Computer Science & Mathematics <br>
+-   Cornell University College of Engineering
+-   Major: Computer Science
+-   Minors: Math (A&S), Applied Math (Eng), Psychology (A&S)
 
-`2021-2024` `CS Major GPA: 4.0/4.0` `Math Major GPA: 4.0/4.0`
+`2021-2025` `CS Major GPA: 3.97/4.0`
 
 ## 📑 Relevant Coursework
 
@@ -23,6 +25,7 @@ Cornell University<br> **Bachelor's** in Computer Science & Mathematics <br>
 
 -   Numerical Analysis (Math 4260)
 -   Basic Probability (Math 4710)
+-   Advanced Linear Algebra (Math 4310)
 -   Applicable Algebra (Math 3360)
 -   Discrete Structures (CS 2800)
 -   Multivariable Calculus (Math 2220)
@@ -33,10 +36,16 @@ Cornell University<br> **Bachelor's** in Computer Science & Mathematics <br>
 -   Engineering Applications of Operations Research (ENGRI 1101)
 -   Developing an Entrepreneurial Mindset (HADM 4144)
 
+### Cognitive Science/Neuroscience/Psychology
+
+-   Intro to Psych (PSYCH 1101)
+-   Behavioral Neuroscience (COGST 2230)
+-   Developmental Cognitive Neuroscience (HD 3210)
+-   Pursuing Happiness (Psych 2450)
+
 ### For fun and curiosity:
 
 -   Introduction to Oceanography
--   Introduction to Psychology
 -   Beginning and Intermediate Taekwondo
 -   Introduction to Music Theory
 
