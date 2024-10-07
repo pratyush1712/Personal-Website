@@ -41,6 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			url: "https://pratyushsudhakar.com/resume.pdf",
 			changeFrequency: "weekly",
 			priority: 1.0
+		},
+		{
+			url: "https://pratyushsudhakar.com/brain",
+			changeFrequency: "monthly",
+			priority: 0.5
 		}
 	];
 }
