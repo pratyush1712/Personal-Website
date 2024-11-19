@@ -18,22 +18,22 @@ import { Metadata } from "next/types";
 import { join } from "path";
 import Script from "next/script";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 // Static Content Generation
 export const dynamicParams = false;
 export function generateStaticParams() {
-	return pages.map(page => {
-		if (page.route !== "brain") return { slug: page.route };
-	});
+	const params = pages.filter(page => page.route !== "brain").map(page => ({ slug: page.route }));
+	return params;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const slug = params.slug.charAt(0).toUpperCase() + params.slug.slice(1);
+	const { slug } = await params;
+	const title = `Pratyush | ${slug.charAt(0).toUpperCase() + slug.slice(1)}`;
 	return {
-		title: `Pratyush | ${slug}`,
-		description: routeToPage[params.slug].description,
-		keywords: routeToPage[params.slug].keywords
+		title: title,
+		description: routeToPage[slug].description,
+		keywords: routeToPage[slug].keywords
 	};
 }
 
@@ -44,7 +44,8 @@ function getContent(page: string) {
 }
 
 export default async function MDContainer({ params }: Props) {
-	const content = getContent(params.slug);
+	const { slug } = await params;
+	const content = getContent(slug);
 	return (
 		<Container maxWidth="md" sx={{ pb: 1, minWidth: "100%" }}>
 			<ReactMarkdown

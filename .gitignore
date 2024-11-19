@@ -45,10 +45,5 @@ next-env.d.ts
 *.log
 *.out
 *.synctex.gz
-# next-video
-!public/videos/*.json
-!public/videos/*.js
-!public/videos/*.ts
-public/_next-video
 .env*.local
 index.html
