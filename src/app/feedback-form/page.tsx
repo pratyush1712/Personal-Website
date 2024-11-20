@@ -5,19 +5,23 @@ import Loading from "@/ui/Loading";
 import { Container } from "@mui/material";
 
 const fetchLocation = async (router: any) => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_RESTDB_URL!}/location`, {
-		method: "GET",
-		headers: {
-			"cache-control": "no-cache",
-			"Content-Type": "application/json",
-			"x-apikey": process.env.NEXT_PUBLIC_RESTDB_KEY!
+	try {
+		const res = await fetch(`${process.env.NEXT_PUBLIC_RESTDB_URL!}/location`, {
+			method: "GET",
+			headers: {
+				"cache-control": "no-cache",
+				"Content-Type": "application/json",
+				"x-apikey": process.env.NEXT_PUBLIC_RESTDB_KEY!
+			}
+		});
+		const data = await res.json();
+		await getClientLocation();
+		if (data.length <= 2) {
+			router.push("/?feedback=true");
+		} else {
+			window.location.href = process.env.NEXT_PUBLIC_FEEDBACK_FORM_URL!;
 		}
-	});
-	const data = await res.json();
-	await getClientLocation();
-	if (data.length <= 2) {
-		router.push("/?feedback=true");
-	} else {
+	} catch (error) {
 		window.location.href = process.env.NEXT_PUBLIC_FEEDBACK_FORM_URL!;
 	}
 };
