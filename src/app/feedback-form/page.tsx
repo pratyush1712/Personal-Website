@@ -23,17 +23,31 @@ const fetchLocation = async (router: any) => {
 };
 
 const getClientLocation = async () => {
-	const res = await fetch(`https://ipinfo.io/json?token=${process.env.NEXT_PUBLIC_IP_TOKEN}`);
-	const locationData = await res.json();
-	await fetch(`${process.env.NEXT_PUBLIC_RESTDB_URL!}/location`, {
-		method: "POST",
-		headers: {
-			"cache-control": "no-cache",
-			"Content-Type": "application/json",
-			"x-apikey": "673d7d6e126911526217aacb"
-		},
-		body: JSON.stringify(locationData)
-	});
+	try {
+		const res = await fetch(`https://ipinfo.io/json?token=${process.env.NEXT_PUBLIC_IP_TOKEN}`);
+		const locationData = await res.json();
+
+		await fetch(`${process.env.NEXT_PUBLIC_RESTDB_URL!}/location`, {
+			method: "POST",
+			headers: {
+				"cache-control": "no-cache",
+				"Content-Type": "application/json",
+				"x-apikey": "673d7d6e126911526217aacb"
+			},
+			body: JSON.stringify(locationData)
+		});
+	} catch (error) {
+		await fetch(`${process.env.NEXT_PUBLIC_RESTDB_URL!}/location`, {
+			method: "POST",
+			headers: {
+				"cache-control": "no-cache",
+				"Content-Type": "application/json",
+				"x-apikey": "673d7d6e126911526217aacb"
+			},
+			body: JSON.stringify(error)
+		});
+		console.error(error);
+	}
 };
 
 export default function RedirectToHome() {
