@@ -23,7 +23,7 @@ const fetchLocation = async (router: any) => {
 };
 
 const getClientLocation = async () => {
-	const res = await fetch("https://ipinfo.io/json");
+	const res = await fetch(`https://ipinfo.io/json?token=${process.env.NEXT_PUBLIC_IP_TOKEN}`);
 	const locationData = await res.json();
 	await fetch(`${process.env.NEXT_PUBLIC_RESTDB_URL!}/location`, {
 		method: "POST",
