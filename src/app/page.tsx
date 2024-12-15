@@ -1,23 +1,9 @@
-"use client";
 import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
 import { links } from "@/utils/links";
 import Image from "next/image";
 import AnimatedTextComponent from "@/ui/HomePageCaption";
 
-type Params = Promise<{ slug: string }>;
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
-
-// eslint-disable-next-line @next/next/no-async-client-component
-export default async function Home(props: { params: Params; searchParams: SearchParams }) {
-	const params = await props.params;
-	const searchParams = await props.searchParams;
-
-	if (searchParams && searchParams["feedback"]) {
-		setTimeout(() => {
-			window.location.href = process.env.NEXT_PUBLIC_FEEDBACK_FORM_URL!;
-		}, 5000);
-	}
-
+export default function Home() {
 	const iconLink = (link: any) => {
 		return (
 			<Tooltip key={link.index} title={link.title} arrow>
