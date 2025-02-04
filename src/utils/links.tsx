@@ -36,7 +36,7 @@ export const links: Link[] = [
 		index: 4,
 		type: "social",
 		title: "Schedule a coffee chat",
-		href: "https://calendar.app.google/ANDw1PAA9CqYexx48",
+		href: "https://calendar.app.google/Jsr6fB8H8fowZEsLA",
 		icon: <LuCoffee />
 	},
 	{

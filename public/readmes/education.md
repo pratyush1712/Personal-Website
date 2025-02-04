@@ -4,7 +4,7 @@
 -   Major: Computer Science
 -   Minors: Math (A&S), Applied Math (Eng), Psychology (A&S)
 
-`2021-2025` `CS Major GPA: 3.97/4.0`
+`2021-2025` `GPA: 3.65`
 
 ## 📑 Relevant Coursework
 

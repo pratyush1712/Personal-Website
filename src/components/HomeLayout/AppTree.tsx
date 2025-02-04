@@ -71,41 +71,39 @@ export default function AppTree({
 			defaultExpandIcon={<ChevronRightIcon />}
 			sx={{ minWidth: 220 }}
 			defaultExpanded={["-1"]}>
-			<Link href="/">
-				<TreeItem
-					nodeId="-1"
-					label={<span style={{ textDecoration: "none", color: "inherit" }}>Home</span>}
-					sx={{
-						color: renderTreeItemColor(-2),
-						backgroundColor: renderTreeItemBgColor(-2)
-					}}
-					onClick={() => {
-						setSelectedIndex(-1);
-					}}>
-					{pages.map(({ index, name, route }) => (
-						<Link href={route} key={index}>
-							<TreeItem
-								nodeId={index.toString()}
-								label={<span style={{ textDecoration: "none", color: "inherit" }}>{name}</span>}
-								sx={{
-									color: renderTreeItemColor(index),
-									backgroundColor: renderTreeItemBgColor(index),
-									"&& .Mui-selected": { backgroundColor: renderTreeItemBgColor(index) }
-								}}
-								icon={<VscMarkdown color="#6997d5" />}
-								onClick={(e: any) => {
-									if (!visiblePageIndexs.includes(index)) {
-										const newIndexs = [...visiblePageIndexs, index];
-										setVisiblePageIndexs(newIndexs);
-									}
-									setSelectedIndex(index);
-									setCurrentComponent("tree");
-								}}
-							/>
-						</Link>
-					))}
-				</TreeItem>
-			</Link>
+			<TreeItem
+				nodeId="-1"
+				label={<span style={{ textDecoration: "none", color: "inherit" }}>Home</span>}
+				sx={{
+					color: renderTreeItemColor(-2),
+					backgroundColor: renderTreeItemBgColor(-2)
+				}}
+				onClick={() => {
+					setSelectedIndex(-1);
+				}}>
+				{pages.map(({ index, name, route }) => (
+					<Link href={route} key={index}>
+						<TreeItem
+							nodeId={index.toString()}
+							label={<span style={{ textDecoration: "none", color: "inherit" }}>{name}</span>}
+							sx={{
+								color: renderTreeItemColor(index),
+								backgroundColor: renderTreeItemBgColor(index),
+								"&& .Mui-selected": { backgroundColor: renderTreeItemBgColor(index) }
+							}}
+							icon={<VscMarkdown color="#6997d5" />}
+							onClick={(e: any) => {
+								if (!visiblePageIndexs.includes(index)) {
+									const newIndexs = [...visiblePageIndexs, index];
+									setVisiblePageIndexs(newIndexs);
+								}
+								setSelectedIndex(index);
+								setCurrentComponent("tree");
+							}}
+						/>
+					</Link>
+				))}
+			</TreeItem>
 		</TreeView>
 	);
 }

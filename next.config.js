@@ -1,13 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { withNextVideo } = require("next-video/process");
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	compiler: {
 		styledComponents: true
 	},
 	experimental: {
-		esmExternals: true
+		esmExternals: true,
+		staleTimes: {
+			dynamic: 30,
+			static: 180
+		}
 	},
 	images: {
 		remotePatterns: [
@@ -82,6 +83,4 @@ const nextConfig = {
 	}
 };
 
-module.exports = withNextVideo(nextConfig, {
-	folder: "public/videos"
-});
+module.exports = nextConfig;

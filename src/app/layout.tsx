@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ID!} />
 			<body className={inter.className}>
 				<VSCodeLayout options={{ key: "mui" }}>{children}</VSCodeLayout>
