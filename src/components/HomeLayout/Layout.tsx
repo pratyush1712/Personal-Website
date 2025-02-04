@@ -100,12 +100,6 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 		return { cache, flush };
 	});
 
-	useEffect(() => {
-		if (!isBrowser && pathname === "/") {
-			router.push("/overview");
-		}
-	}, [router, pathname]);
-
 	useServerInsertedHTML(() => {
 		const names = flush();
 		if (names.length === 0) {

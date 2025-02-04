@@ -1,5 +1,5 @@
 "use client";
-import { Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 const ScrollingContainer = styled("div")({
@@ -22,15 +22,13 @@ const ScrollingText = styled(Typography)(({ theme }) => ({
 
 export default function AnimatedTextComponent() {
 	return (
-		<Grid item xs={12} sx={{ ml: { xs: -2, sm: 0.2 }, overflow: "hidden" }}>
-			<ScrollingContainer>
-				<ScrollingText variant="caption">
-					<i>Que Será, Será | Whatever will be, will be</i>
-				</ScrollingText>
-				<ScrollingText variant="caption" aria-hidden="true">
-					<i>Que Será, Será | Whatever will be, will be</i>
-				</ScrollingText>
-			</ScrollingContainer>
-		</Grid>
+		<ScrollingContainer>
+			<ScrollingText variant="caption">
+				<i>Que Será, Será | Whatever will be, will be</i>
+			</ScrollingText>
+			<ScrollingText variant="caption" aria-hidden="true">
+				<i>Que Será, Será | Whatever will be, will be</i>
+			</ScrollingText>
+		</ScrollingContainer>
 	);
 }
