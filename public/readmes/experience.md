@@ -1,8 +1,8 @@
 # 🎯 Professional Experience
 
-### **Computer Systems Developer** @ Rizvi Lab, Cornell University _(July 2023 - Present)_
+### **Computer Systems Developer** @ Rizvi Lab, Cornell University _(July 2024 - September 2024)_
 
--   Develop a PyQt-based touchscreen GUI for BeagleBone, enabling monitoring and control of food processing equipment via secure shell connection with MobaXterm.
+-   Developed a PyQt-based touchscreen GUI for BeagleBone, enabling monitoring and control of food processing equipment via secure shell connection with MobaXterm.
 -   Employed Linux shell scripts and cron jobs to streamline system operations and automate task management.
 
 _Technologies used:_ `Linux` `Shell Scripts` `PyQt4` `Beaglebone` <br><br>
@@ -21,7 +21,7 @@ _Technologies used:_ `React.js` `Redux` `Firebase` `Firestore` <br><br>
 
 <hr />
 
-### **Data Engineer** @ Cornell College of Engineering _(June 2023 - Present)_
+### **Data Engineer** @ Cornell College of Engineering _(June 2023 - September 2023)_
 
 Ithaca, New York
 
