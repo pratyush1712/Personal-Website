@@ -1,5 +1,19 @@
 # <img style="height:35px;width:35px;margin-bottom:-6px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Cornell_University_seal.svg/1200px-Cornell_University_seal.svg.png"> Cornell University On-Campus Affiliations
 
+## Head of Engineering at [Cornell Perfect Match](https://perfectmatch.ai/)
+
+**Duration:** January 2023 - Present
+
+-   Redesigned the website’s frontend for improved UX/UI and integrated microservices, enhancing user engagement and system scalability.
+-   Architected a Flask-based microservice for a live analytics dashboard, analyzing real-time data for 5,000+ users. Utilized MongoDB Map-Reduce for efficient data aggregation and integrated server response caching for optimized latency and data retrieval.
+-   Initiated the transition from offline to online matching algorithms, deploying a Flask microservice to enable real-time matching, resulting in 50,000+ matches and enhanced system responsiveness.
+-   Automated personalized user engagement emails via cron jobs, yielding a 600+ increase in active users and enhancing platform interaction.
+-   Drove innovative marketing strategies, amplifying Instagram engagement by 185%, while nurturing a strong team dynamic. Enhanced new member orientation to solidify community and team cohesion.
+
+**Key Technologies:** `Next.js` `TypeScript` `Flask` `Cron Jobs` `Google OR Tools` `MongoDB` `Google Cloud Project` `Vercel`<br><br>
+
+<hr />
+
 ## Technical Product Manager at [Cornell Digital Tech & Innovation](https://www.cornelldti.org/)
 
 **Duration:** March 2022 - Present
@@ -21,20 +35,6 @@
 -   Successfully reimagined the design of the homepage to improve user engagement.
 
 **Key Technologies:** `React.js` `TypeScript` `AWS DynamoDB` `Docker` `Express` `Google Cloud Project` `Flutter`<br><br>
-
-<hr />
-
-## Head of Engineering at [Cornell Perfect Match](https://perfectmatch.ai/)
-
-**Duration:** January 2023 - Present
-
--   Redesigned the website’s frontend for improved UX/UI and integrated microservices, enhancing user engagement and system scalability.
--   Architected a Flask-based microservice for a live analytics dashboard, analyzing real-time data for 5,000+ users. Utilized MongoDB Map-Reduce for efficient data aggregation and integrated server response caching for optimized latency and data retrieval.
--   Initiated the transition from offline to online matching algorithms, deploying a Flask microservice to enable real-time matching, resulting in 50,000+ matches and enhanced system responsiveness.
--   Automated personalized user engagement emails via cron jobs, yielding a 600+ increase in active users and enhancing platform interaction.
--   Drove innovative marketing strategies, amplifying Instagram engagement by 185%, while nurturing a strong team dynamic. Enhanced new member orientation to solidify community and team cohesion.
-
-**Key Technologies:** `Next.js` `TypeScript` `Flask` `Cron Jobs` `Google OR Tools` `MongoDB` `Google Cloud Project` `Vercel`<br><br>
 
 <hr />
 
