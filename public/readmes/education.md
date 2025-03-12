@@ -13,6 +13,7 @@
 -   Systems Programming (CS 4414)
 -   Object-Oriented Programming & Data Structures (Java) (CS 2110)
 -   Functional Programming (OCaml) (CS 3110)
+-   Computer System Organization and Programming (CS 3410)
 
 ### Algorithms and Machine Learning:
 
@@ -25,7 +26,7 @@
 
 -   Numerical Analysis (Math 4260)
 -   Basic Probability (Math 4710)
--   Advanced Linear Algebra (Math 4310)
+-   *Advanced Linear Algebra (Math 4310)
 -   Applicable Algebra (Math 3360)
 -   Discrete Structures (CS 2800)
 -   Multivariable Calculus (Math 2220)
@@ -39,9 +40,10 @@
 ### Cognitive Science/Neuroscience/Psychology
 
 -   Intro to Psych (PSYCH 1101)
--   Behavioral Neuroscience (COGST 2230)
--   Developmental Cognitive Neuroscience (HD 3210)
--   Pursuing Happiness (Psych 2450)
+-   Human Bonding (HD 3620)
+-   *Behavioral Neuroscience (COGST 2230)
+-   *Developmental Cognitive Neuroscience (HD 3210)
+-   *Pursuing Happiness (Psych 2450)
 
 ### For fun and curiosity:
 
