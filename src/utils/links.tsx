@@ -50,7 +50,7 @@ export const links: Link[] = [
 		index: 6,
 		type: "social",
 		title: "Find me on Facebook",
-		href: "https://www.facebook.com/pratyush.sudhakar/",
+		href: "https://www.facebook.com/pratyush.sudhakar03/",
 		icon: <FaFacebook />
 	},
 	{
