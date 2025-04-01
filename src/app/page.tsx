@@ -49,7 +49,7 @@ export default function Home() {
 					alt="Pratyush Sudhakar"
 					width={120}
 					height={120}
-					style={{ border: 2, borderRadius: "80%" }}
+					style={{ border: 2, borderRadius: "80%", objectFit: "cover" }}
 				/>
 			</Grid>
 		</Grid>
