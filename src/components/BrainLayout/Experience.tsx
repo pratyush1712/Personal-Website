@@ -149,17 +149,33 @@ const NeurodivergentExperienceDiagram = () => {
 				fit: true
 			}
 		},
+
 		interaction: {
 			hover: true,
-			tooltipDelay: 200
+			tooltipDelay: 200,
+			zoomView: true,
+			zoomSpeed: 0.2,
+			dragView: true,
+			dragNodes: true
 		},
+
+		minZoom: 0.2,
+		maxZoom: 2.0,
+
 		height: "600px",
 		width: "100%"
 	};
 
+	const handleNetworkInit = (network: any) => {
+		network.moveTo({
+			scale: 2.0,
+			animation: true
+		});
+	};
+
 	return (
 		<div className="neurodivergent-experience-diagram">
-			<Graph graph={graph} options={options} />
+			<Graph graph={graph} options={options} getNetwork={handleNetworkInit} />
 		</div>
 	);
 };
