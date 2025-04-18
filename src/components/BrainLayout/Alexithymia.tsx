@@ -148,9 +148,6 @@ const AlexithymiaGraph = () => {
 			dragNodes: true
 		},
 
-		minZoom: 0.2,
-		maxZoom: 2.0,
-
 		height: "600px",
 		width: "100%"
 	};
