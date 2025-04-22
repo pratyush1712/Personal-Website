@@ -76,19 +76,19 @@ const pages: Page[] = [
 			"Pratyush Frontend",
 			"Pratyush Sudhakar Software Engineering Skills"
 		]
-	},
-	{
-		index: 6,
-		name: "brain.md",
-		route: "brain",
-		description: "Thoughts and ideas of Pratyush",
-		keywords: [
-			"Pratyush Sudhakar Thoughts",
-			"Pratyush Sudhakar Ideas",
-			"Pratyush Sudhakar Brain",
-			"Pratyush Sudhakar Brain Dump"
-		]
 	}
+	// {
+	// 	index: 6,
+	// 	name: "brain.md",
+	// 	route: "brain",
+	// 	description: "Thoughts and ideas of Pratyush",
+	// 	keywords: [
+	// 		"Pratyush Sudhakar Thoughts",
+	// 		"Pratyush Sudhakar Ideas",
+	// 		"Pratyush Sudhakar Brain",
+	// 		"Pratyush Sudhakar Brain Dump"
+	// 	]
+	// }
 	// {
 	// 	index: 6,
 	// 	name: "github.md",
