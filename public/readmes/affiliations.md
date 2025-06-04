@@ -52,6 +52,3 @@
 -   Promoted to the role of Vice-President for the 2022-23 academic year.
 -   Working alongside the President and Practice Leaders to guide practices, helping newcomers improve their skills.
 -   Assisting with planning practice sessions for competitions and arranging events. <br>
-
-<ins>_The club taught me some of the most important life lesson:_</ins>
-- other's mental illness is neither your fault nor your responsibility. context: my best friend has bipolar disorder. i don't hate her, but i do hate the things she did in a hypomanic episode.
