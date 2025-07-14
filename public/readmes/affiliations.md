@@ -2,7 +2,7 @@
 
 ## Head of Engineering at [Cornell Perfect Match](https://perfectmatch.ai/)
 
-**Duration:** January 2023 - Present
+**Duration:** January 2023 - May 2025
 
 -   Redesigned the website’s frontend for improved UX/UI and integrated microservices, enhancing user engagement and system scalability.
 -   Architected a Flask-based microservice for a live analytics dashboard, analyzing real-time data for 5,000+ users. Utilized MongoDB Map-Reduce for efficient data aggregation and integrated server response caching for optimized latency and data retrieval.
