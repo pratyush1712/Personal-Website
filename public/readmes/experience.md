@@ -1,5 +1,16 @@
 # 🎯 Professional Experience
 
+### **Software Developer _(Contract)_** @ Halo — Wearable AI _(June 2025 - July 2025)_
+
+-   Orchestrated real-time iOS face recognition integrating ESP32 streams with Apple Vision Framework for instant social-profile aggregation and local face data management via REST APIs.
+-   Modularized legacy UI, cutting code redundancy 40%, app size 30%, achieving 25% faster streaming performance.
+-   Redesigned Celery + Redis backend architecture with multi-layered OpenAI prompts, reducing face-search processing
+time from 3 minutes to under 50 seconds.
+
+_Technologies used:_ `Swift` `ESP32` `Celery` `Redis` `FastAPI` `OpenAI` <br><br>
+
+<hr />
+
 ### **Computer Systems Developer** @ Rizvi Lab, Cornell University _(July 2024 - September 2024)_
 
 -   Developed a PyQt-based touchscreen GUI for BeagleBone, enabling monitoring and control of food processing equipment via secure shell connection with MobaXterm.

@@ -2,7 +2,7 @@
 
 -   Cornell University College of Engineering
 -   Major: Computer Science
--   Minors: Math (A&S), Applied Math (Eng), Psychology (A&S)
+-   Minors: Math (A&S), Psychology (A&S)
 
 `2021-2025` `GPA: 3.65`
 

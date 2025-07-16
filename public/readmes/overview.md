@@ -2,11 +2,17 @@
 
 ## 🚀 Summary
 
-Hey there! I’m a senior studying computer science and math. Over the past three years, I've immersed myself in numerous projects, improving my technical and managerial skills, and having a great time exploring new frameworks and software techniques.
+Hey there! I'm Pratyush, a senior at Cornell studying Computer Science and Mathematics. I build systems that make sense of complexity — from scalable backend architectures to algorithms designed for connection and care.
 
-Curious about my life beyond coding? Well, I am a student, so a lot of my time goes on trying to pass classes. But there’s more! I do martial arts (Kick Boxing, Silat, Kali, Jeet Kun Do, Wushu), dance - breakdancing is where I channel my energy and passion, and biking - catch me riding to Cayuga on a whimsical Wednesday. Recently, I have started doing some gardening. _Update: I stopped because I realized that I really hate the creepy crawling feeling 😅_
+Over the past four years, my work has spanned software engineering, data infrastructure, and product design. I've led projects in matching systems, machine learning workflows, and developer tooling — but what really drives me is the human side of tech: How can software better reflect the way people think, feel, and grow?
 
-I am looking for software engineering internships/co-op for Spring 2024 and Summer 2024.
+I'm especially passionate about technology that supports mental health, cognitive diversity, and meaningful interaction. The best systems, to me, aren't just fast or scalable — they're thoughtful, accessible, and built with real people in mind.
+
+Curious about my life beyond coding? You'll find me doing martial arts (Kickboxing, Silat, Kali, Jeet Kune Do, Wushu), breakdancing where I channel my energy and passion, biking around Ithaca on whimsical Wednesdays, or journaling about resilience and growth.
+
+I also write about the intersection of technology and human psychology at <a href="https://blogs.pratyushsudhakar.com/">blogs.pratyushsudhakar.com</a>.
+
+Currently looking for full-time software engineering or product roles starting in 2025 — especially with teams building with empathy, creativity, and intention.
 
 <!-- Beyond the professional and social life: I’m unapologetically Autistic, and I’ve spent my life engaging in high masking rituals to blend in with neurotypicals. While I want to minimize this masking, navigating a world full of ableism often requires it. I’m just trying to find a balance and be as authentic as possible. -->
 
