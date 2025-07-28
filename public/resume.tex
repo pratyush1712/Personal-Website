@@ -10,6 +10,7 @@
 \usepackage{soul}
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
+\usepackage{fontawesome}
 \usepackage[english]{babel}
 \usepackage{tabularx}
 \input{glyphtounicode}
@@ -148,13 +149,6 @@
 \vspace{-13pt}
 \section{Experience}
 \resumeSubHeadingListStart
-\resumeSubheading{Software Engineer (Contract)}{Halo — Wearable AI}{June 2025 - July 2025}
-\resumeItemListStart
-\resumeItem{Orchestrated real-time iOS face recognition integrating ESP32 streams with Apple Vision Framework for instant social-profile aggregation and local face data management via REST APIs.}
-\resumeItem{Modularized legacy UI, cutting code redundancy 40\%, app size 30\%, achieving 25\% faster streaming performance.}
-\resumeItem{Redesigned Celery + Redis backend architecture with multi-layered OpenAI prompts, reducing face-search processing time from 3 minutes to under 50 seconds.}
-\resumeItemListEnd
-
 \resumeSubheading{Computer Systems Developer}{Rizvi Lab, Cornell University}{July 2024 - September 2024}
 \resumeItemListStart
 \resumeItem{Developed PyQt-based touchscreen control interface for BeagleBone systems, enabling real-time monitoring and remote control of food processing equipment through secure SSH connections.}
@@ -208,6 +202,9 @@
 % \resumeProjectHeading
 % {\href{https://cleverhugs.life/}{CleverHug Email Scheduler}}{React, Flask, QStash, Tailwind}{Apr 2024 - May 2024}
 % \resumeItem{Full-stack web application empowering users to schedule personalized, uplifting emails to their future selves, leveraging LangChain models for optimized scheduling rules (RRULE) and QStash for robust queue management and reliable delivery.}
+\resumeProjectHeading
+{Halo - Wearable AI}{iOS, ESP32, Vision Framework, Celery/Redis}{Jun 2025 - Jul 2025}
+\resumeItem{Built a real-time face-recognition app (iOS+ESP32) with Apple Vision + OpenAI; refactored code (-40\%), trimmed app size (-30\%), raised streaming performance (+25\%), and cut backend latency from 3 min to 50 s via a Celery/Redis redesign.}
 
 \resumeProjectHeading
 {AI Assistant (Millennium Sponsored)}{Zilliz, Flask, NLP, Azure}{March 2024 - May 2024}
