@@ -59,7 +59,7 @@
 %-------------------------
 % Custom commands
 \newcommand{\resumeItem}[1]{
-  \item\small{
+  \vspace{-1pt}\item\small{
     {#1}
   }
 }
@@ -72,10 +72,12 @@
     \end{tabular*}\vspace{-6pt}
 }
 
-\newcommand{\resumeSubheading}[3]{
-  \vspace{-2pt}\item
-    \begin{tabular*}{\textwidth}[t]{@{}l@{\extracolsep{\fill}}r@{}}
-      \textbf{#1}, \textit{#2} & #3
+
+\newcommand{\resumeSubheading}[5]{
+  \item
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1}, \textit{#3} & #2 \\
+    \footnotesize \textbf{Tech:} #5 & \textit{#4} \\
     \end{tabular*}\vspace{-4pt}
 }
 
@@ -87,11 +89,11 @@
 }
 
 \newcommand{\resumeProjectHeading}[3]{
-    \vspace{-2pt}\item
+    \item
     \begin{tabular*}{\textwidth}[t]
-    {@{}l@{\extracolsep{\fill}}r@{}}
+    {l@{\extracolsep{\fill}}r@{}}
     \normalsize{\textbf{#1} $|$ \emph{#2}} & \normalsize{#3}
-    \end{tabular*}\vspace{-4pt}
+    \end{tabular*}\vspace{-16pt}
 }
 
 \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
@@ -99,7 +101,7 @@
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-4.5pt}}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-4pt}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
@@ -127,7 +129,7 @@
 \education
 {Cornell University}{Ithaca, NY}
 {Bachelor's of Science in Computer Science \textit{(Minors: Math \& Psychology)}}{May 2026}
-\vspace{-4pt}
+\vspace{-3pt}
 \resumeItem{\textbf{Coursework}: Adv. ML, Systems Prog., Algorithms (Java), Functional Prog. (OCaml), OOP (Java), Computer Vision}
 \resumeSubHeadingListEnd
 
@@ -136,11 +138,11 @@
 \section{Technical Skills}
 \resumeSubHeadingListStart
 \small
-\resumeItem{\textbf{Languages:} Python, Java, TypeScript/JavaScript, C++, OCaml}
-\vspace{-5pt}
-\resumeItem{\textbf{Frameworks \& Databases:} React/Next.js, Express/Node.js, Django/Flask, Prisma, SQL/PostgreSQL, GraphQL}
-\vspace{-5pt}
-\resumeItem{\textbf{Cloud \& DevOps:} AWS, GCP, Docker, Kubernetes, GitHub Actions, Linux Shell, Terraform, Grafana}
+\resumeItem{\textbf{Languages:} Python, Java, TypeScript/JavaScript, C++, SQL, OCaml, HTML/CSS, Bash}
+\vspace{-4pt}
+\resumeItem{\textbf{Frameworks \& Libraries:} React, Next.js, Node.js, Express, Flask, Redux, Pandas, Tailwind CSS, Scikit-Learn}
+\vspace{-4pt}
+\resumeItem{\textbf{Cloud, DevOps \& Tools:} AWS, GCP, Docker, Kubernetes, Git, PostgreSQL, MongoDB, Redis, Linux, Agile}
 
 
 \resumeSubHeadingListEnd
@@ -149,13 +151,13 @@
 \vspace{-13pt}
 \section{Experience}
 \resumeSubHeadingListStart
-\resumeSubheading{Computer Systems Developer}{Rizvi Lab, Cornell University}{July 2024 - September 2024}
+\resumeSubheading{Computer Systems Developer}{July 2024 - September 2024}{Rizvi Lab, Cornell University}{Ithaca, NY}{Python, Linux/Bash, IoT, Embedded Systems, Git}
 \resumeItemListStart
 \resumeItem{Developed PyQt-based touchscreen control interface for BeagleBone systems, enabling real-time monitoring and remote control of food processing equipment through secure SSH connections.}
 \resumeItem{Automated system operations using Linux shell scripts and cron jobs, reducing manual intervention by 60\% and improving equipment uptime monitoring.}
 \resumeItemListEnd
 
-\resumeSubheading{Software Engineering Intern}{rapStudy}{June 2023 - August 2023}
+\resumeSubheading{Software Engineering Intern}{June 2023 - August 2023}{rapStudy}{Los Angeles, CA}{React.js, TypeScript, Redux, Firebase (NoSQL), Material UI, REST APIs}
 \resumeItemListStart
 \resumeItem{Refactored codebase, introduced Redux for state management, and optimized components with memoization.}
 \resumeItem{Created a secure song-sharing system, using React and 10+ custom Firestore rules for precise access control.}
@@ -163,7 +165,7 @@
 \resumeItemListEnd
 
 \resumeSubheading
-{Data Engineering Intern}{Cornell College of Engineering}{June 2023 - September 2023}
+{Data Engineering Intern}{June 2023 - September 2023}{Cornell College of Engineering}{Ithaca, NY}{Python, Pandas/NumPy, Selenium, Next.js, TypeScript, ETL Pipelines}
 \resumeItemListStart
 \resumeItem{Engineered a scalable ETL pipeline to process financial data from 3,000+ companies, utilizing Selenium (scraping), NLP, and multithreading, reducing processing time by 83\%.}
 \resumeItem{Built a live data dashboard using Next.js and Server-Sent-Events, cutting latency by 66\% with parallelization.}
@@ -176,17 +178,17 @@
 \section{Activities}
 \resumeSubHeadingListStart
 \resumeSubheading
-{Head of Engineering \& President}
-{Perfect Match: Online Matchmaking}{January 2023 - May 2025}
+{Head of Engineering \& President}{January 2023 - May 2025}
+{Perfect Match: Online Matchmaking}{Ithaca, NY}{Next.js, TypeScript, Tailwind CSS, MongoDB, Redis, AWS, CI/CD}
 \resumeItemListStart
-\resumeItem{Directed 4 cross-functional teams through product launch, overseeing recruitment, onboarding, and business planning.}
+\resumeItem{Directed 4 cross-functional teams through product launch, recruitment, onboarding, and business planning.}
 \resumeItem{Enhanced UI/UX and set up automated personalized emails (cron jobs), resulting in 600+ new active users.}
 \resumeItem{Built analytics platform delivering real-time survey insights to 5,000+ users via cached Map-Reduce aggregations, reducing latency by 93\%.}
 \resumeItemListEnd
 
 \resumeSubheading
-{Technical Product Manager}
-{Cornell Digital Tech \& Innovation}{January 2023 - December 2023}
+{Technical Product Manager}{January 2023 - December 2023}
+{Cornell Digital Tech \& Innovation}{Ithaca, NY}{React.js, DynamoDB, Cypress, Kubernetes, Docker, Flutter, Agile}
 \resumeItemListStart
 \resumeItem{Spearheaded agile development of cross-platform ride scheduling app with a team of 7 developers.}
 \resumeItem{Architected test-driven development pipeline using Cypress, Mocha, and Supertest, attaining 94\% code coverage.}
@@ -201,18 +203,14 @@
 \resumeSubHeadingListStart
 
 \resumeProjectHeading
-{Halo - Wearable AI}{Swift, OpenAI, ESP32, Vision Framework, Celery/Redis}{June 2025 - July 2025}
+{Halo - Wearable AI}{Swift (iOS), Python, OpenAI (LLMs), Redis, Celery, IoT}{June 2025 - July 2025}
 \resumeItem{Built a real-time face-recognition app (iOS+ESP32) with Apple Vision + OpenAI; refactored code (-40\%), trimmed app size (-30\%), raised streaming performance (+25\%), and cut backend latency from 3 min to 50 s via a Celery/Redis redesign.}
 
 \resumeProjectHeading
-{Depression Prediction ML System}{Python, Scikit-Learn, Pandas, NumPy}{May 2024}
-\resumeItem{Engineered ML pipeline achieving 93\% accuracy in distinguishing bipolar from unipolar depression using sleep activity and circadian rhythm data. Implemented feature engineering for temporal patterns and cross-validated ensemble models.}
-
-\resumeProjectHeading
-{AI Assistant (Millennium Sponsored)}{Zilliz, Flask, NLP, Azure}{March 2024 - May 2024}
+{AI Tool (Millennium Sponsored)}{Flask, Azure, RAG (Vector DB), LangChain}{March 2024 - May 2024}
 \resumeItem{Devised a course syllabus assistant with Azure-hosted REST API, utilizing Langchain Models and Zilliz Cluster for vector similarity search, achieving 50ms average response time for context-aware student queries.}
 
-\resumeProjectHeading{Harmonious Sounds}{React, Flask, Docker, Nginx, Scikit-Learn}{March 2023 - April 2023}
+\resumeProjectHeading{Harmonious Sounds}{React, Python (Flask), Scikit-Learn, Docker, Nginx}{March 2023 - April 2023}
 \resumeItem{Engineered web app with Logistic Regression model predicting Spotify playlist happiness (88\% accuracy). Optimized performance using Nginx load balancing across 4 microservices.}
 
 \resumeSubHeadingListEnd
