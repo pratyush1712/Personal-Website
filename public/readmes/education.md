@@ -26,7 +26,7 @@
 
 -   Numerical Analysis (Math 4260)
 -   Basic Probability (Math 4710)
--   *Advanced Linear Algebra (Math 4310)
+-   Introduction to Combinatorics II (Math 4420)
 -   Applicable Algebra (Math 3360)
 -   Discrete Structures (CS 2800)
 -   Multivariable Calculus (Math 2220)
@@ -36,14 +36,14 @@
 
 -   Engineering Applications of Operations Research (ENGRI 1101)
 -   Developing an Entrepreneurial Mindset (HADM 4144)
+-   Data Science for Engineers (ENGRD 2720)
 
 ### Cognitive Science/Neuroscience/Psychology
 
 -   Intro to Psych (PSYCH 1101)
 -   Human Bonding (HD 3620)
--   *Behavioral Neuroscience (COGST 2230)
--   *Developmental Cognitive Neuroscience (HD 3210)
--   *Pursuing Happiness (Psych 2450)
+-   Cognitive Development (COGST 2300)
+-   Adult Psychopathology (PSYCH 3250)
 
 ### For fun and curiosity:
 
