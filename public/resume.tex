@@ -7,61 +7,40 @@
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{verbatim}
 \usepackage{enumitem}
-\usepackage{soul}
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
-\usepackage{fontawesome}
 \usepackage[english]{babel}
 \usepackage{tabularx}
 \input{glyphtounicode}
 
-
-%----------FONT OPTIONS----------
-% sans-serif
-% \usepackage[sfdefault]{FiraSans}
-% \usepackage[sfdefault]{roboto}
-% \usepackage[sfdefault]{noto-sans}
-% \usepackage[default]{sourcesanspro}
-
-% serif
-% \usepackage{CormorantGaramond}
-% \usepackage{charter}
-
-
 \pagestyle{fancy}
-\fancyhf{} % clear all header and footer fields
+\fancyhf{}
 \fancyfoot{}
 \setlength{\footskip}{4.08003pt}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Adjust margins
+% Tightened margins
 \addtolength{\oddsidemargin}{-0.5in}
 \addtolength{\evensidemargin}{-0.5in}
 \addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-.5in}
-\addtolength{\textheight}{1.0in}
+\addtolength{\topmargin}{-.55in}
+\addtolength{\textheight}{1.1in}
 
 \urlstyle{same}
-
 \raggedbottom
 \raggedright
 \setlength{\tabcolsep}{0in}
 
-% Sections formatting
 \titleformat{\section}{
-  \vspace{0pt}\scshape\raggedright\large
+  \vspace{-2pt}\scshape\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
 
-% Ensure that generate pdf is machine readable/ATS parsable
 \pdfgentounicode=1
 
 %-------------------------
-% Custom commands
 \newcommand{\resumeItem}[1]{
-  \vspace{-1pt}\item\small{
-    {#1}
-  }
+  \vspace{-1pt}\item\small{{#1}}
 }
 
 \newcommand{\education}[4]{
@@ -72,7 +51,6 @@
     \end{tabular*}\vspace{-6pt}
 }
 
-
 \newcommand{\resumeSubheading}[5]{
   \item
     \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
@@ -81,117 +59,103 @@
     \end{tabular*}\vspace{-4pt}
 }
 
-\newcommand{\resumeSubSubheading}[2]{
-    \item
-    \begin{tabular*}{0.985\textwidth}{l@{\extracolsep{\fill}}r}
-      \textit{#1} & \textit{#2} \\
-    \end{tabular*}\vspace{-4pt}
-}
-
 \newcommand{\resumeProjectHeading}[3]{
     \item
-    \begin{tabular*}{\textwidth}[t]
-    {l@{\extracolsep{\fill}}r@{}}
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r@{}}
     \normalsize{\textbf{#1} $|$ \emph{#2}} & \normalsize{#3}
-    \end{tabular*}\vspace{-16pt}
+    \end{tabular*}\vspace{-18pt}
 }
 
 \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
-
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-4pt}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-3pt}}
 
 %-------------------------------------------
-%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \begin{document}
 
 \begin{center}
   \vspace*{-1.25cm}
-  \textbf{\huge  Pratyush Sudhakar} \\ \vspace{4pt}
-   607-279-4794 $|$ \href{mailto:ps2245@cornell.edu}{ps2245@cornell.edu} $|$
+  \textbf{\huge Pratyush Sudhakar} \\ \vspace{4pt}
+  607-279-4794 $|$ \href{mailto:ps2245@cornell.edu}{ps2245@cornell.edu} $|$
   \href{https://linkedin.com/in/pratyushsudhakar}{LinkedIn} $|$
   \href{https://github.com/pratyush1712}{GitHub} $|$
-  \href{https://pratyushsudhakar.com/}{pratyushsudhakar.com}
-  $|$
+  \href{https://pratyushsudhakar.com/}{pratyushsudhakar.com} $|$
   {Ithaca, New York}
 \end{center}
 
 %-----------EDUCATION-----------
-\vspace{-16pt}
+\vspace{-18pt}
 \section{Education}
 \resumeSubHeadingListStart
 \education
 {Cornell University}{Ithaca, NY}
-{Bachelor's of Science in Computer Science \textit{(Minors: Math \& Psychology)}}{May 2026}
-\vspace{-3pt}
+{Bachelor of Science in Computer Science \textit{(Minors: Mathematics \& Psychology)}}{May 2026}
+\vspace{-4pt}
 \resumeItem{\textbf{Coursework}: Adv. ML, Systems Prog., Algorithms (Java), Functional Prog. (OCaml), OOP (Java), Computer Vision}
 \resumeSubHeadingListEnd
 
-%-----------Technical SKILLS-------------
+%-----------SKILLS-----------
 \vspace{-13pt}
 \section{Technical Skills}
 \resumeSubHeadingListStart
 \small
-\resumeItem{\textbf{Languages:} Python, Java, TypeScript/JavaScript, C++, SQL, GraphQL, OCaml, HTML/CSS, Bash, Dart}
+\resumeItem{\textbf{Languages:} Python, TypeScript/JavaScript, Java, C++, SQL, GraphQL, OCaml, HTML/CSS, Bash}
 \vspace{-4pt}
-\resumeItem{\textbf{Frameworks \& Libraries:} React.js, Next.js, Redux, Node.js, Express.js, Flutter, Flask, Django, Prisma, Selenium}
+\resumeItem{\textbf{Frameworks \& Libraries:} React.js, Next.js, React Native, Expo, Node.js, Express.js, FastAPI, Flask}
 \vspace{-4pt}
-\resumeItem{\textbf{Cloud, DevOps \& Tools:} AWS, GCP, Azure, Docker, Kubernetes, Git, Redis, Linux, Grafana, Terraform, Agile}
-
+\resumeItem{\textbf{Data, Cloud \& Tools:} PostgreSQL, SQLAlchemy, Redis, Docker, Kubernetes, AWS, GCP, Azure, Git, Terraform}
 \resumeSubHeadingListEnd
 
 %-----------EXPERIENCE-----------
 \vspace{-13pt}
 \section{Experience}
 \resumeSubHeadingListStart
-\resumeSubheading{Computer Systems Developer}{July 2024 - September 2024}{Rizvi Lab, Cornell University}{Ithaca, NY}{Python, Linux/Bash, IoT, Embedded Systems, Git}
+
+\resumeSubheading{Full-Stack Developer}{January 2025 - Present}{DECA Lab, Cornell University}{Ithaca, NY}{React Native, Expo, Next.js, FastAPI, SQLAlchemy, PostgreSQL, TypeScript}
 \resumeItemListStart
-\resumeItem{Developed PyQt-based touchscreen control interface for BeagleBone systems, enabling real-time monitoring and remote control of food processing equipment through secure SSH connections.}
-\resumeItem{Automated system operations using Linux shell scripts and cron jobs, reducing manual intervention by 60\% and improving equipment uptime monitoring.}
+\resumeItem{Built a full-stack audit platform with typed REST APIs spanning multi-role workflows—access control, draft saves, submission, and reporting—with i18n and accessibility configurations tailored for diverse field workers.}
+\resumeItem{Engineered an offline-first mobile app (Legend State/MMKV, background sync) enabling auditors to start, resume, and submit field audits reliably in low-connectivity environments across localized, accessible interfaces.}
+\resumeItem{Designed normalized scoring pipelines with client-side CSV/XLSX/PDF export; hardened draft-save flows against duplicate-key failures and extended data integrity guarantees across multi-round field testing.}
 \resumeItemListEnd
 
-\resumeSubheading{Software Engineering Intern}{June 2023 - August 2023}{rapStudy}{Los Angeles, CA}{React.js, TypeScript, Redux, Firebase (NoSQL), Material UI, REST APIs}
+\resumeSubheading{Computer Systems Developer}{July 2024 - September 2024}{Rizvi Lab, Cornell University}{Ithaca, NY}{Python, Linux/Bash, IoT, Embedded Systems, Git}
 \resumeItemListStart
-\resumeItem{Refactored codebase, introduced Redux for state management, and optimized components with memoization.}
-\resumeItem{Created a secure song-sharing system, using React and 10+ custom Firestore rules for precise access control.}
+\resumeItem{Built a PyQt touchscreen interface for BeagleBone systems enabling real-time monitoring and remote control of food processing equipment; automated operations with shell scripts and cron jobs, reducing manual intervention by 60\%.}
+\resumeItemListEnd
+
+\resumeSubheading{Software Engineering Intern}{June 2023 - August 2023}{rapStudy}{Los Angeles, CA}{React.js, TypeScript, Redux, Firebase, Material UI, REST APIs}
+\resumeItemListStart
+\resumeItem{Built a secure song-sharing system using React and 10+ custom Firestore rules for precise access control.}
 \resumeItem{Developed Redux-powered global audio-playback component, perfectly syncing with lyrics display for enhanced UX.}
 \resumeItemListEnd
 
-\resumeSubheading
-{Data Engineering Intern}{June 2023 - September 2023}{Cornell College of Engineering}{Ithaca, NY}{Python, Pandas/NumPy, Selenium, Next.js, TypeScript, ETL Pipelines}
+\resumeSubheading{Data Engineering Intern}{June 2023 - September 2023}{Cornell College of Engineering}{Ithaca, NY}{Python, Pandas/NumPy, Selenium, Next.js, TypeScript, ETL Pipelines}
 \resumeItemListStart
-\resumeItem{Engineered a scalable ETL pipeline to process financial data from 3,000+ companies, utilizing Selenium (scraping), NLP, and multithreading, reducing processing time by 83\%.}
-\resumeItem{Built a live data dashboard using Next.js and Server-Sent-Events, cutting latency by 66\% with parallelization.}
+\resumeItem{Engineered a scalable ETL pipeline processing financial data from 3,000+ companies via Selenium, NLP, and multithreading, reducing processing time by 83\%.}
+\resumeItem{Built a live data dashboard using Next.js and Server-Sent Events, cutting latency by 66\% with parallelization.}
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
 
-%-----------Activities-----------
+%-----------ACTIVITIES-----------
 \vspace{-13pt}
 \section{Activities}
 \resumeSubHeadingListStart
-\resumeSubheading
-{Head of Engineering \& President}{January 2023 - May 2025}
-{Perfect Match: Online Matchmaking}{Ithaca, NY}{Next.js, TypeScript, Tailwind CSS, MongoDB, Redis, AWS, CI/CD}
+
+\resumeSubheading{Head of Engineering \& President}{January 2023 - May 2025}{Perfect Match: Online Matchmaking}{Ithaca, NY}{Next.js, TypeScript, Tailwind CSS, MongoDB, Redis, AWS, CI/CD}
 \resumeItemListStart
 \resumeItem{Directed 4 cross-functional teams through product launch, recruitment, onboarding, and business planning.}
-\resumeItem{Enhanced UI/UX and set up automated personalized emails (cron jobs), resulting in 600+ new active users.}
-\resumeItem{Built analytics platform delivering real-time survey insights to 5,000+ users via cached Map-Reduce aggregations, reducing latency by 93\%.}
+\resumeItem{Built analytics platform delivering real-time survey insights to 5,000+ users via cached Map-Reduce aggregations, reducing latency by 93\%; automated personalized emails driving 600+ new active users.}
 \resumeItemListEnd
 
-\resumeSubheading
-{Technical Product Manager}{January 2023 - December 2023}
-{Cornell Digital Tech \& Innovation}{Ithaca, NY}{React.js, DynamoDB, Cypress, Kubernetes, Docker, Flutter, Agile}
+\resumeSubheading{Technical Product Manager}{January 2023 - December 2023}{Cornell Digital Tech \& Innovation}{Ithaca, NY}{React.js, DynamoDB, Cypress, Kubernetes, Docker, Flutter, Agile}
 \resumeItemListStart
 \resumeItem{Spearheaded agile development of cross-platform ride scheduling app with a team of 7 developers.}
-\resumeItem{Architected test-driven development pipeline using Cypress, Mocha, and Supertest, attaining 94\% code coverage.}
-\resumeItem{Orchestrated CI/CD workflow with GitHub Actions and Kubernetes for streamlined deployment and testing.}
+\resumeItem{Architected test-driven development pipeline using Cypress, Mocha, and Supertest (94\% code coverage); orchestrated CI/CD with GitHub Actions and Kubernetes.}
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
@@ -203,16 +167,11 @@
 
 \resumeProjectHeading
 {Halo - Wearable AI}{Swift (iOS), Python, OpenAI (LLMs), Redis, Celery, IoT}{June 2025 - July 2025}
-\resumeItem{Built a real-time face-recognition app (iOS+ESP32) with Apple Vision + OpenAI; refactored code (-40\%), trimmed app size (-30\%), raised streaming performance (+25\%), and cut backend latency from 3 min to 50 s via a Celery/Redis redesign.}
+\resumeItem{Built a real-time face-recognition app (iOS+ESP32) with Apple Vision + OpenAI; refactored code (--40\%), trimmed app size (--30\%), and cut backend latency from 3 min to 50 s via a Celery/Redis redesign.}
 
 \resumeProjectHeading
 {AI Tool (Millennium Sponsored)}{Flask, Azure, RAG (Vector DB), LangChain}{March 2024 - May 2024}
-\resumeItem{Devised a course syllabus assistant with Azure-hosted REST API, utilizing Langchain Models and Zilliz Cluster for vector similarity search, achieving 50ms average response time for context-aware student queries.}
-
-\resumeProjectHeading{Harmonious Sounds}{React, Python (Flask), Scikit-Learn, Docker, Nginx}{March 2023 - April 2023}
-\resumeItem{Engineered web app with Logistic Regression model predicting Spotify playlist happiness (88\% accuracy). Optimized performance using Nginx load balancing across 4 microservices.}
-
+\resumeItem{Devised a course syllabus assistant with Azure-hosted REST API, LangChain, and Zilliz cluster for vector simmilarity search, achieving 50ms average response time for context-aware student queries.}
 \resumeSubHeadingListEnd
 
-%-------------------------------------------
 \end{document}
