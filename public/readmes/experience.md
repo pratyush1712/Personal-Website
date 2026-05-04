@@ -1,84 +1,85 @@
 # 🎯 Professional Experience
 
-### **Full-Stack Developer** @ DECA Lab, Cornell University _(January 2025 - Present)_
+### **Full-Stack Developer** @ DECA Lab, Cornell University _(January 2025 – Present)_
 
-- Built a full-stack audit platform with typed REST APIs spanning multi—role workflows-access control, draft saves, submission, and reporting—with i18n and accessibility configurations tailored for diverse field workers.
-- Engineered an offline-first mobile app (Legend State/MMKV, background sync) enabling auditors to start, resume, and submit field audits reliably in low-connectivity environments across localized, accessible interfaces.
-- Designed normalized scoring pipelines with client-side CSV/XLSX/PDF export; hardened draft-save flows against duplicate-key failures and extended data integrity guarantees across multi-round field testing.
+DECA Lab builds tools for researchers and field workers - people operating in messy, real-world environments where connectivity is unreliable and data loss is unacceptable. My job was to build systems that accommodate that reality.
 
-*Technologies used:* `React Native` `Expo` `Next.js` `FastAPI` `SQLAlchemy` `PostgreSQL` `TypeScript`   
-  
+- Designed and built a full-stack audit platform with typed REST APIs supporting multi-role workflows - access control, draft saves, submission, and reporting - with i18n and accessibility configurations tailored for diverse field worker populations.
+- Engineered an offline-first mobile app (Legend State + MMKV, background sync) that lets auditors start, pause, and resume field audits in low-connectivity environments without losing work. The design assumption: the network will fail. Build around that.
+- Built normalized scoring pipelines with client-side CSV/XLSX/PDF export. Hardened draft-save flows against duplicate-key failures and extended data integrity guarantees across multi-round field testing.
 
-
-### **Software Developer _(Contract)_** @ Halo — Wearable AI _(June 2025 - July 2025)_
-
--   Orchestrated real-time iOS face recognition integrating ESP32 streams with Apple Vision Framework for instant social-profile aggregation and local face data management via REST APIs.
--   Modularized legacy UI, cutting code redundancy 40%, app size 30%, achieving 25% faster streaming performance.
--   Redesigned Celery + Redis backend architecture with multi-layered OpenAI prompts, reducing face-search processing
-time from 3 minutes to under 50 seconds.
-
-*Technologies used:* `Swift` `ESP32` `Celery` `Redis` `FastAPI` `OpenAI`   
-  
-
+*Technologies:* `React Native` `Expo` `Next.js` `FastAPI` `SQLAlchemy` `PostgreSQL` `TypeScript`
 
 ---
 
-### **Computer Systems Developer** @ Rizvi Lab, Cornell University _(July 2024 - September 2024)_
+### **Software Developer _(Contract)_** @ Halo - Wearable AI _(June 2025 – July 2025)_
 
--   Developed a PyQt-based touchscreen GUI for BeagleBone, enabling monitoring and control of food processing equipment via secure shell connection with MobaXterm.
--   Employed Linux shell scripts and cron jobs to streamline system operations and automate task management.
+Halo is building hardware-software systems for real-time social context. The challenge: getting face recognition to run fast enough to be useful, on an iOS device, pulling streams from embedded hardware.
 
-*Technologies used:* `Linux` `Shell Scripts` `PyQt4` `Beaglebone`   
-  
+- Orchestrated real-time iOS face recognition integrating ESP32 streams with Apple Vision Framework for instant social-profile aggregation and local face data management via REST APIs.
+- Modularized a legacy UI codebase: 40% reduction in code redundancy, 30% reduction in app size, 25% faster streaming performance. Legacy code accumulates until someone decides it's worth fixing - I made that decision.
+- Redesigned the Celery + Redis backend architecture with multi-layered OpenAI prompts, cutting face-search processing time from 3 minutes to under 50 seconds. That's the difference between a feature people use and one they abandon.
 
-
----
-
-### **Software Engineering Intern** @ rapStudy _(June 2023 - August 2023)_
-
-Los Angeles, California
-
--   Spearheaded codebase refactoring to Redux and memoization, boosting frontend rendering speed by 93%.
--   Architected a song-sharing feature using React, Firebase, and 10+ custom Firestore rules, enhancing platform security and enabling controlled access for over 100 potential external users.
--   Engineered a synchronized SongView component with lyrics using Redux, fostering seamless integration of song playback and lyrics display, securing a synchronization accuracy of 95%.
-
-*Technologies used:* `React.js` `Redux` `Firebase` `Firestore`   
-  
-
+*Technologies:* `Swift` `ESP32` `Celery` `Redis` `FastAPI` `OpenAI`
 
 ---
 
-### **Data Engineer** @ Cornell College of Engineering _(June 2023 - September 2023)_
+### **Computer Systems Developer** @ Rizvi Lab, Cornell University _(July 2024 – September 2024)_
 
-Ithaca, New York
+Embedded systems work - the kind where the constraints are physical and the users aren't developers.
 
--   Constructed an advanced ETL pipeline using Selenium and NLP, processing financial data of 3000+ companies, resulting in an 83% decrease in processing time through parallel processing.
--   Architected and deployed a full-stack application leveraging Next.js and Flask, integrating Server-Sent Events (SSE) for fast real-time data retrieval, resulting in a 66% reduction in data latency and a superior front-end user experience.
+- Built a PyQt-based touchscreen GUI for BeagleBone hardware, enabling lab researchers to monitor and control food processing equipment without needing to touch a terminal.
+- Wrote Linux shell scripts and cron jobs to automate system operations, removing manual steps from recurring tasks that researchers were doing by hand.
 
-*Technologies used:* `Next.js` `Flask` `Selenium` `NLP` `Server-Sent Events`  
-  
-
+*Technologies:* `Linux` `Shell Scripts` `PyQt4` `BeagleBone`
 
 ---
 
-### **Software Developer** @ Cornell Yang-Tan Institute _(July 2022 - December 2022)_
+### **Software Engineering Intern** @ rapStudy _(June 2023 – August 2023)_
 
-Ithaca, New York
+*Los Angeles, California*
 
--   Crafted a flexible slug management system on the AskEarn website using PHP, Laravel, and Strapi CMS, allowing for effortless page URL modification, thereby improving the user experience for over 100,000 monthly active users.
+rapStudy is an EdTech platform using music to teach literacy and reading comprehension. The technical challenge was performance and synchronization at scale.
 
-*Technologies used:* `PHP` `Laravel` `Strapi CMS`  
-  
+- Refactored the codebase to Redux with memoization, improving frontend rendering speed by 93%. The app was slow in a way that mattered - users were dropping off during interactions. We fixed that.
+- Architected a song-sharing feature using React, Firebase, and 10+ custom Firestore security rules, enabling controlled access for external users while maintaining platform integrity.
+- Built a synchronized SongView component that displays lyrics in sync with playback at 95% accuracy, which is the kind of synchronization problem that sounds simple until you're debugging timing edge cases across variable network conditions.
 
+*Technologies:* `React.js` `Redux` `Firebase` `Firestore`
 
 ---
 
-### **Software Engineering Intern** @ Sellpoint _(June 2022 - August 2022)_
+### **Data Engineer** @ Cornell College of Engineering _(June 2023 – September 2023)_
 
-Remote
+*Ithaca, New York*
 
--   Implemented an inventory management CRUD application leveraging AWS services. Orchestrated requests via API Gateway, established ECR for containerized function deployments, and utilized DynamoDB for robust database management.
--   Developed a real-time market analysis tool, processing data with Pandas and NumPy within Lambda functions.
--   Leveraged React.js, Redux, RTK Query, and react-apex-charts for seamless data storage, retrieval, and visualization.
+- Built an ETL pipeline using Selenium and NLP to process financial data for 3,000+ companies, reducing processing time by 83% through parallel processing. The previous approach was sequential. Most slow pipelines are.
+- Architected and deployed a full-stack application with Next.js and Flask, using Server-Sent Events for real-time data retrieval - 66% reduction in data latency compared to the polling approach it replaced.
 
-*Technologies used:* `React.js` `Redux` `RTK Query` `AWS` `DynamoDB` `Lambda functions` `Pandas` `NumPy` `react-apex-charts`
+*Technologies:* `Next.js` `Flask` `Selenium` `NLP` `Server-Sent Events`
+
+---
+
+### **Software Developer** @ Cornell Yang-Tan Institute _(July 2022 – December 2022)_
+
+*Ithaca, New York*
+
+The Yang-Tan Institute focuses on disability employment research and policy. AskEarn.org is their public-facing resource hub, serving 100,000+ monthly active users.
+
+- Built a flexible slug management system using PHP, Laravel, and Strapi CMS - a deceptively important feature. Clean, modifiable URLs directly affect SEO, content discoverability, and the ability of a non-technical team to manage their own site without developer intervention.
+
+*Technologies:* `PHP` `Laravel` `Strapi CMS`
+
+---
+
+### **Software Engineering Intern** @ Sellpoint _(June 2022 – August 2022)_
+
+*Remote*
+
+Sellpoint provides product content management for e-commerce. My work was full-stack across AWS services.
+
+- Built an inventory management CRUD application on AWS: API Gateway for orchestration, ECR for containerized deployments, DynamoDB for database management.
+- Developed a real-time market analysis tool processing data with Pandas and NumPy inside Lambda functions.
+- Built the frontend in React.js with Redux, RTK Query, and react-apex-charts for data visualization.
+
+*Technologies:* `React.js` `Redux` `RTK Query` `AWS` `DynamoDB` `Lambda` `Pandas` `NumPy`

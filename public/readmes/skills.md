@@ -1,12 +1,23 @@
 # 💻 Skills & Expertise
 
-| Programming Languages | Software Development Frameworks | Machine Learning Libraries | Database Management | Cloud & DevOps Tools |
-| :-------------------: | :-----------------------------: | :------------------------: | :-----------------: | :------------------: |
-| JavaScript/TypeScript |            React.js             |         TensorFlow         |        MySQL        |         AWS          |
-|        Python         |             Next.js             |         MediaPipe          |       MongoDB       |         GCP          |
-|         Java          |            Redux.js             |           NumPy            |      DynamoDB       |        Docker        |
-|         OCaml         |             Nuxt.js             |           Pandas           |       SQLite        |      Kubernetes      |
-|          C++          |             Node.js             |          Convokit          |       Prisma        |        Heroku        |
-|           C           |           Express.js            |        Pomegranate         |       GraphQL       |       Netlify        |
-|         Shell         |             Flutter             |        Scikit-learn        |        Redis        |        Vercel        |
-|        MATLAB         |       React-Native (Expo)       |           OpenCV           |        Realm        |        Okteto        |
+I'm genuinely full-stack, with a lean toward systems and backend architecture. The breadth is real, but so is the depth in the areas that matter most to how I build.
+
+|    Languages    |      Frontend       |      Backend      |   Databases    |  Cloud & DevOps  |    ML & Data    |
+| :-------------: | :-----------------: | :---------------: | :------------: | :--------------: | :-------------: |
+|     Python      |      React.js       |      FastAPI      |   PostgreSQL   |       AWS        |     PyTorch     |
+|   TypeScript    |       Next.js       |       Flask       |    MongoDB     |       GCP        |   TensorFlow    |
+|   JavaScript    | React Native (Expo) |  Node.js/Express  |     Redis      |      Azure       |  Scikit-learn   |
+|      Java       |        Redux        |      NestJS       |    DynamoDB    |      Docker      |     OpenCV      |
+|     OCaml       |      RTK Query      |      Django       |     MySQL      |   Kubernetes     |  NumPy/Pandas   |
+|     C / C++     |       Svelte        | GraphQL / Apollo  |     SQLite     |  GitHub Actions  |    LangChain    |
+|       SQL       |       Flutter       |  Prisma / SQLAlchemy  |          |   Nginx/Gunicorn |    OR-Tools     |
+|      Shell      |                     |                   |                |      Vercel      |                 |
+
+## 🧮 Optimization & Algorithms
+
+|          Algorithm          |              Where I Used It               |
+| :-------------------------: | :----------------------------------------: |
+|  Gale-Shapley Stable Matching  | Cornell Perfect Match - real-time matching engine |
+| Mixed Integer Linear Programming |     TimeBite - schedule optimizer (OR-Tools)    |
+|   Combinatorial Optimization   | Algorithms, applicable algebra, combinatorics coursework |
+|       Graph Algorithms        | Data pipeline design, algorithms coursework |

@@ -1,68 +1,58 @@
 # 📖 Overview <a href="https://www.youtube.com/watch?v=B46EdJApFmI"><img class="overview" src="/icons/teal_ribbon.ico" style="width:15px;" /></a> <a href="https://youtu.be/DlFkfOqtgR8?si=T-OzRtnyO_S0aW0X"><img class="overview" src="/icons/orange_ribbon.ico" style="width:15px;" /></a>
 
-## 🚀 Summary
+## Who I Am
 
-Hey there! I'm Pratyush, a senior at Cornell studying Computer Science and Mathematics. I build systems that make sense of complexity — from scalable backend architectures to algorithms designed for connection and care.
+I'm Pratyush - a systems thinker who graduated from Cornell with a CS + Math degree and a minor in Psychology, which is not as unusual a combination as it sounds. I've spent four years building backend infrastructure and full-stack platforms while also taking courses in behavioral neuroscience, adult psychopathology, and cognitive development. The throughline is the same question: *how do complex systems - technical or human - actually work under pressure?*
 
-Over the past four years, my work has spanned software engineering, data infrastructure, and product design. I've led projects in matching systems, machine learning workflows, and developer tooling — but what really drives me is the human side of tech: How can software better reflect the way people think, feel, and grow?
+I have ADHD. I say this upfront not as a disclaimer, but because it's the most honest explanation for what I build and why. The ADHD Chrome extension with 80+ users came from my own reading struggles. The admin dashboard I built at Perfect Match came from needing to reduce interruptions to my own workflow. The offline-first field audit app came from designing for auditors in low-connectivity environments who can't afford to lose progress. My best work comes from taking real constraints seriously - including my own.
 
-I'm especially passionate about technology that supports mental health, cognitive diversity, and meaningful interaction. The best systems, to me, aren't just fast or scalable — they're thoughtful, accessible, and built with real people in mind.
+I'm currently deciding between full-time engineering roles and early-stage entrepreneurship. Both options feel right for different reasons. Either way, I'm building toward the same thing: tools that reflect how people actually think, not how systems assume they do.
 
-Curious about my life beyond coding? You'll find me doing martial arts (Kickboxing, Silat, Kali, Jeet Kune Do, Wushu), breakdancing where I channel my energy and passion, biking around Ithaca on whimsical Wednesdays, or journaling about resilience and growth.
+## What I Work On
+
+Technically, I lean toward systems and backend - architecture decisions, service boundaries, data pipelines, matching algorithms. But I'm genuinely full-stack: I've shipped iOS apps in Swift, React Native mobile apps with offline sync, Next.js frontends, FastAPI backends, and everything in between.
+
+Some work I'm most proud of:
+
+- **Cornell Perfect Match** - Head of Engineering for a matchmaking platform serving 5,000+ users. Rebuilt the matching system mid-cycle using Gale-Shapley stable matching and Google OR-Tools, delivered 50,000+ matches, and automated personalized engagement that grew active users by 600+.
+- **DECA Lab Audit Platform** - Full-stack offline-first mobile app for field auditors in low-connectivity environments. Built typed REST APIs, multi-role access control, normalized scoring pipelines, and draft-save flows hardened against data loss.
+- **ADHD Text Enhancer** - A Chrome extension that improves reading focus through bionic reading techniques. Built it for myself. 80+ people use it.
+- **TimeBite** - Schedule optimizer using Mixed Integer Linear Programming and Google OR-Tools. The kind of project that reveals how much you care about optimization theory when you build it on a weekend.
+
+## What Drives Me
+
+The through-line across everything: I build tools I wish had existed when I needed them.
+
+I'm drawn to the intersection of cognitive science and software design - specifically the gap between how most interfaces are built (for idealized, always-focused users) and how people actually function (distracted, context-switching, non-linear). I've logged 1,000+ hours of personal biometric data from EEG headsets, HRV sensors, and sleep trackers. I've tested 50+ nootropics and read more neuroscience literature than most engineers will ever encounter. I don't just find the brain interesting - I run experiments on my own.
+
+The larger project I'm working toward: democratizing the kind of brain optimization that currently requires either a lot of money or a lot of time. Most people can't afford to synthesize research and run personal experiments. I want to build the platform that does it for them.
+
+## Beyond the Work
+
+Martial arts: Kickboxing, Silat, Kali, Jeet Kune Do, Wushu (Vice-President of Cornell Wushu for two years). Breakdancing. Biking around Ithaca on what I call whimsical Wednesdays. I journal constantly - not as a wellness practice, but because writing is how I think. It's how I externalize the internal architecture and make it legible to myself.
 
 I also write about the intersection of technology and human psychology at <a href="https://blogs.pratyushsudhakar.com/">blogs.pratyushsudhakar.com</a>.
 
-Currently looking for full-time software engineering or product roles starting in 2025 — especially with teams building with empathy, creativity, and intention.
-
-<!-- Beyond the professional and social life: I’m unapologetically Autistic, and I’ve spent my life engaging in high masking rituals to blend in with neurotypicals. While I want to minimize this masking, navigating a world full of ableism often requires it. I’m just trying to find a balance and be as authentic as possible. -->
-
 ## 🎓 Education
 
-**Cornell University** - Pursuing a Bachelor’s in Computer Science & Mathematics
+**Cornell University** - B.S. Computer Science & Mathematics | Minor: Psychology
 
--   <strong>Expected Graduation</strong>: <ins>May 2025</ins>
--   **Overall GPA**: <ins>3.87</ins> | **Major GPA**: <ins>3.97</ins>
+- **Graduated**: May 2025
+- **Overall GPA**: 3.87 | **Major GPA**: 3.97
 
 **Relevant Coursework:**
 
--   **Computer Science and Programming:** Systems Programming (CS 4414); Object-Oriented Programming & Data Structures (Java) (CS 2110); Functional Programming (OCaml) (CS 3110)
--   **Algorithms and Machine Learning:** Advanced Machine Learning Systems (CS 6787), Intro to Analysis of Algorithms (CS 4820); Intro to Machine Learning (CS 4780); Computer Vision (CS 4670)
--   **Mathematics:** Numerical Analysis (Math 4260), Basic Probability (Math 4710); Applicable Algebra (Math 3360); Discrete Structures (CS 2800); Multivariable Calculus (Math 2220); Linear Algebra (Math 2940)
--   **Applied Mathematics and Engineering:** Engineering Applications of Operations Research (ENGRI 1101)
-
-## 🌟 Experience Highlights
-
-- **Computer Systems Developer** @ Rizvi Lab, Cornell University _(July 2023 - Present)_, Ithaca, New York
-
-    _Technologies used:_ `Linux` `Shell Scripts` `PyQt4` `Beaglebone`
-
--   **Software Engineering Intern** @ rapStudy _(June 2023 - August 2023)_, Los Angeles, California<br>
-
-    _Technologies used:_ `React.js` `Redux` `Firebase` `Firestore`
-
--   **Data Engineer** @ Cornell College of Engineering _(June 2023 - Present)_, Ithaca, New York<br>
-
-    _Technologies used:_ `Next.js` `Flask` `Selenium` `NLP` `Server-Sent Events`
-
--   **Software Developer** @ Cornell Yang-Tan Institute _(July 2022 - December 2022)_, Ithaca, New York<br>
-
-    _Technologies used:_ `PHP` `Laravel` `Strapi CMS`
-
--   **Software Engineering Intern** @ Sellpoint _(June 2022 - August 2022)_, Remote<br>
-
-    _Technologies used:_ `React.js` `Redux` `RTK Query` `AWS` `DynamoDB` `Lambda functions` `Pandas` `NumPy` `react-apex-charts`
-
-## 📌 On-Campus Affiliations
-
--   [Cornell Design & Tech Initiative](https://www.cornelldti.org/) (Technical Product Manager)
--   [Cornell Perfect Match](https://perfectmatch.ai/) (Head of Engineering)
--   [Cornell Wushu - Chinese Martial Arts Club](https://cornellwushu.github.io/) (Vice-President)
--   [Cornell Association of CS Undergrads](https://acsu.cornell.edu/) (Member)
+- **Systems & CS Core:** Systems Programming, Computer System Organization, Functional Programming (OCaml), OOP & Data Structures
+- **Algorithms & ML:** Advanced ML Systems (grad-level), Analysis of Algorithms, Machine Learning, Computer Vision
+- **Mathematics:** Numerical Analysis, Probability, Combinatorics II, Applicable Algebra, Linear Algebra
+- **Cognitive Science & Psych:** Adult Psychopathology, Cognitive Development, Human Bonding, Intro to Psychology
+- **Applied Math:** Engineering Applications of Operations Research, Data Science for Engineers
 
 ## 🛠 Skills
 
-- **Programming Languages**: Python, Java, JavaScript/TypeScript, C++, C, SQL, PHP, OCaml
-- **Frontend Frameworks (Web & Mobile)**: React.js, Redux.js, Next.js, Angular, Vite, Svelte, React Native, Flutter
-- **Backend Frameworks & Databases**: Node.js, Express.js, Flask, Django, Nest.js, FastAPI , MySQL, MongoDB, Redis, DynamoDB, Apollo GraphQL (Query Language), Prisma (ORM)
-- **Cloud & DevOps**: AWS (ECS, ECR, CloudWatch, S3, Lambda, DynamoDB), GCP (Cloud Functions, Artifact Registry, Firebase), Azure (Functions, Container Registry), Docker, Kubernetes, Shell Scripting, Nginx, Gunicorn
-- **Machine Learning:** TensorFlow, PyTorch, Scikit-learn, OpenCV, NumPy, Pandas
+- **Languages**: Python, TypeScript/JavaScript, Java, C/C++, SQL, OCaml, Shell, PHP
+- **Frontend**: React.js, Next.js, React Native (Expo), Redux, Svelte, Flutter
+- **Backend**: FastAPI, Flask, Node.js/Express, Django, NestJS, GraphQL, Prisma, SQLAlchemy
+- **Databases**: PostgreSQL, MongoDB, MySQL, Redis, DynamoDB, SQLite
+- **Cloud & DevOps**: AWS (ECS, ECR, Lambda, S3, CloudWatch), GCP, Azure, Docker, Kubernetes, GitHub Actions, Nginx
+- **ML & Data**: PyTorch, TensorFlow, Scikit-learn, OpenCV, NumPy, Pandas

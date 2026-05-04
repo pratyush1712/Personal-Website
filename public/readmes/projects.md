@@ -1,97 +1,107 @@
 # 🧪 Projects
 
-### [DTI GPT](https://github.com/cornell-dti/mlmn-findoc/)
+---
 
-[`Code 🔗`](https://github.com/cornell-dti/mlmn-findoc/)<br>_Technologies Used:_ `Supabase` `Zillus Clusters` `Next.js (TypeScript)` `Flask` `LangChain` `Vector DB Search` `Vercel` `Microsoft Azure`
+### [ADHD-Friendly Text Enhancer](https://chromewebstore.google.com/detail/adhd-friendly-text-enhancer/mnagpckgpcigjbenomcdpfifellpehnb) 🔗
 
--   Developed DTI GPT, an innovative tool designed to summarize and parse syllabuses for academic courses, facilitating enhanced student interaction by allowing follow-up questions directly related to course content.
--   Utilized Supabase for backend management and Zillus clusters for caching, enabling rapid response times through vector database searches that improve the efficiency of querying similar syllabus documents and student inquiries.
--   Implemented a robust frontend in Next.js with TypeScript and a Flask backend, leveraging the LangChain model to handle natural language queries effectively, all while ensuring smooth deployment on Vercel for the frontend and Azure for the backend.
+[`Code 🔗`](https://github.com/pratyush1712/adhd-friendly-text-enhancer) | *Technologies:* `JavaScript` `HTML` `CSS` `Chrome APIs`
 
-### [Personal Blog and Live Video Sharing Platform](https://private.pratyushsudhakar.com/)
+I have ADHD. Reading long web pages is hard. So I built a Chrome extension that applies bionic reading techniques - bolding the first few letters of each word, highlighting sentences in alternating colors - to reduce the cognitive load of tracking text on a page.
 
-[`Code 🔗`](https://github.com/pratyush1712/personal-website/)<br> _Technologies Used:_ `Next.js 14` `Apollo` `TypeScript` `GraphQL` `MongoDB` `Mux`
+80+ people use it. I built it for myself and found out that other people had the same problem. That's usually how the best tools start.
 
--   Designed and developed a personal blog and video sharing platform using Next.js 14, Apollo, and MongoDB, enabling me to create and share blog posts and live videos with friends.
--   Utilized MUX for live video streaming from my personal camera to the platform, providing a seamless and high-quality video experience for users.
+---
 
-### [Harmonious Sounds](https://nginx-devops-pratyush1712.cloud.okteto.net/)<br>
+### [Cornell Perfect Match - Matching Engine](https://perfectmatch.ai/) 🔗
 
-[`Code 🔗`](https://github.com/pratyush1712/react-express/) _Technologies Used:_ `React.js` `Redux.js` `Express.js` `GitHub Actions` `Okteto` `Docker` `Kubernetes`
+*Technologies:* `Next.js` `TypeScript` `Flask` `Google OR-Tools` `Gale-Shapley` `MongoDB` `GCP` `Cron Jobs`
 
--   Architected and implemented a React-Express web application with <ins>microservices architecture</ins>, deploying a client, server, and machine learning model using <ins>nginx and Docker</ins>.
--   Established DevOps pipelines with automated linting, building, containerizing, and deployment using <ins>GitHub Actions</ins>.
--   Orchestrated <ins>preview environments</ins> to enable effective testing and code review prior to merging changes to the master branch, contributing to <ins>streamlined development workflows</ins>.
--   Demonstrated proficiency in Node.js, Yarn, Docker, and DevOps tools and practices, while maintaining high coding standards with <ins>ESLint, Prettier, and Black formatter</ins>.
+As Head of Engineering, I rebuilt the core matching system for a platform serving 5,000+ Cornell students. The previous approach was offline batch processing. We moved to real-time matching using the Gale-Shapley stable matching algorithm and Google OR-Tools for optimization.
 
-### [This Website](https://pratyushsudhakar.com/)<br>
+The constraint wasn't just technical - it was fairness. Stable matching guarantees that no two people would mutually prefer each other over their assigned matches. That kind of mathematical guarantee matters when the output is a human relationship. We delivered 50,000+ matches. Cron-automated personalized emails grew active users by 600+.
 
-[`Code 🔗`](https://github.com/pratyush1712/personal-website/)<br> _Technologies Used:_ `Next.js 13` `Static Site Generation` `TypeScript` `Vercel` <br> _Gained Experience In:_ `Search Engine Optimization` `Web Accessibility`
+---
 
--   Designed and developed a <ins>modern, responsive, and accessible</ins> personal website using Next.js 13 App Router, TypeScript, and deployed on Vercel.
--   Utilized <ins>Static Site Generation</ins> to generate static HTML pages at build time, improving performance and SEO.
+### [DECA Lab Audit Platform](https://github.com/cornell-dti/)
 
-### [ADHD-Friendly Text Enhancer Extension](https://chromewebstore.google.com/detail/adhd-friendly-text-enhanc/mnagpckgpcigjbenomcdpfifellpehnb) 🔗
+*Technologies:* `React Native` `Expo` `Next.js` `FastAPI` `PostgreSQL` `SQLAlchemy` `TypeScript`
 
-[`Code 🔗`](https://github.com/pratyush1712/adhd-friendly-text-enhancer) _Technologies Used:_ `JavaScript` `HTML` `CSS` `Chrome APIs`
+An offline-first mobile audit tool for field workers in low-connectivity environments. The core assumption I designed around: *the network will fail, and the user cannot lose their work when it does*.
 
--   Developed a Chrome extension to enhance webpage readability for individuals with ADHD by implementing visual aids such as text boldening and sentence highlighting.
--   Features include the first few letters of each word boldened and sentences highlighted in alternating colors to help maintain reading focus and comprehension.
+Built with Legend State and MMKV for local persistence and background sync. Multi-role access control, draft-save flows hardened against duplicate-key failures, normalized scoring pipelines, and client-side export to CSV/XLSX/PDF. i18n and accessibility built in from the start, not retrofitted.
 
-### [Boss Mode... work like a beast!]()
-
-[`Code 🔗`]() _Technologies Used:_ `React-Native` `Expo` `Realm`
-
--   Engineering a cross-platform application using the <ins>React Native framework and Expo</ins>, implementing asynchronous coding techniques to build a flexible focus timer feature, designed to combat ADHD-related issues and enhance user time management.
--   Integrating a sophisticated to-do list manager, leveraging <ins>state management solutions</ins> and data structures to enable efficient task tracking, prioritization, and historical task logging, consequently fortifying the user's sense of time.
--   Incorporating <ins>MongoDB Realm</ins> as the database layer, exploiting its real-time, offline-first capabilities for seamless data synchronization and CRUD operations, thereby ensuring continuous, unhindered access to productivity tools irrespective of network conditions.
-
-### [Cornell Wushu - Club Website](https://cornellwushu.github.io) 🔗
-
-[`Code 🔗`](https://github.com/cornellwushu/cornellwushu.github.io/) _Technologies Used:_ `React.js` `AWS Datastore` `AWS Amplify`
-
--   Spearheaded the redesign of the Cornell Wushu Club's website using React for the frontend and <ins>AWS Amplify</ins> for the backend, delivering a polished, <ins>modern user interface and improved functionality</ins>.
--   Developed a <ins>scalable data model with a many-to-many relationship</ins> between club members and events, leveraging <ins>Amplify's DynamoDB</ins> to efficiently store and manage data.
--   Implemented <ins>Wushu Live</ins>, a cutting-edge live streaming platform that broadcasted all wushu performances at multiple events, utilizing <ins>AWS Interactive Video Services</ins> to deliver high-quality video and audio to users.
--   Streamlined development and deployment workflows with CI/CD, <ins>automating the deployment process</ins> whenever new members or performances were added to the database, contributing to a more efficient software development lifecycle.
-
-### [CaseOwl](https://caseowl.in/) 🔗
-
-_Technologies Used:_ `React` `Redux` `AWS Lambdas` `AWS S3` `AWS Cognito`
-
--   Developed a files and tasks management web app for Indian lawyers using `React, Redux, and AWS`, streamlining workflow and increasing productivity.
--   Implemented secure <ins>AWS S3 storage</ins> and <ins>AWS Cognito authentication</ins> for the app, enhancing accessibility and ensuring seamless and secure access for authorized users.
+---
 
 ### [TimeBite](https://timebite.herokuapp.com/) 🔗
 
-[`Code 🔗`](https://github.com/pratyush1712/Timebite-Backend/) <br> _Technologies Used:_ `Flask` `Google-OR Tools` `HTML/CSS/JavaScript` `Heroku` `Docker` `Google Cloud Platform` <br> _Gained Experience In:_ `Optimization Algorithms` `Linear Programming Models`
+[`Code 🔗`](https://github.com/pratyush1712/Timebite-Backend/) | *Technologies:* `Flask` `Google OR-Tools` `HTML/CSS/JavaScript` `Docker` `GCP`
 
--   Developed a web application for <ins>optimized scheduling</ins> using Flask, HTML, CSS, and JavaScript, allowing users to input their to-do list for AI Optimization Algorithm processing.
--   Integrated <ins>Google OR tools</ins> and an <ins>Integer Linear Program model</ins> to optimize the user's schedule and improve productivity.
--   Added authentication through Flask and <ins>implemented blueprints</ins> to ensure secure and organized operation of the application.
--   Integrated Google Calendar API to export the optimized schedule to users' personal calendars, providing seamless integration with existing tools.
+A schedule optimization web app using Mixed Integer Linear Programming. You enter your to-do list; OR-Tools produces an optimized ordering. Integrates with Google Calendar to export the result.
 
-### Wi-Find 🔗
+This was the project where I realized I genuinely enjoy optimization problems - not just implementing algorithms, but thinking about what it means to optimize for human preference rather than pure efficiency. The algorithm can minimize time. But should it? Or should it account for energy levels, task switching costs, and the fact that humans aren't machines?
 
-[`Frontend 🔗`](https://github.com/Archit404Error/WiFindMobile/) [`Backend 🔗`](https://github.com/Archit404Error/WiFindBackend/) <br>_Technologies Used:_ `React-Native` `Expo` `Node.js` `MongoDB` <br> _Gained Experience In:_ `Clustering Algorithms`
+---
 
--   Developing a cross-platform react-native application that helps <ins>around 20000 students</ins> find locations with high-speed wifi connection on campus.
--   Used react-native bandwidth library to fetch user's data (location, wifi speed.)
--   Implemented a Map View to display the clustes of data points.
--   Implementing a <ins>clustering machine learning algorithm</ins> to use the data and create meaningful classifications of locations on campus based on wifi speed.
+### [DTI GPT](https://github.com/cornell-dti/mlmn-findoc/)
+
+[`Code 🔗`](https://github.com/cornell-dti/mlmn-findoc/) | *Technologies:* `Supabase` `Next.js` `Flask` `LangChain` `Vector DB` `Azure`
+
+An RAG-based tool for Cornell students to query course syllabuses in natural language. Ask a follow-up question about your CS syllabus and get a specific answer, instead of ctrl+F-ing through a PDF.
+
+Built with Supabase for backend management, Zillus clusters for vector caching, LangChain for NLP, and Azure for backend deployment. The interesting problem was retrieval quality - vector search finds semantically similar content, but "semantically similar" and "actually relevant to this question" aren't always the same thing.
+
+---
+
+### [Personal Blog & Private Video Platform](https://private.pratyushsudhakar.com/)
+
+[`Code 🔗`](https://github.com/pratyush1712/personal-website/) | *Technologies:* `Next.js 14` `Apollo` `GraphQL` `MongoDB` `Mux`
+
+A private blog and live video sharing platform I built for sharing writing and video with friends. Uses Mux for live video streaming from my personal camera. GraphQL via Apollo for flexible content querying. Not everything needs to be public.
+
+---
+
+### [Harmonious Sounds](https://nginx-devops-pratyush1712.cloud.okteto.net/)
+
+[`Code 🔗`](https://github.com/pratyush1712/react-express/) | *Technologies:* `React.js` `Express.js` `Docker` `Kubernetes` `GitHub Actions` `Nginx`
+
+A microservices-architecture web app - client, server, and ML model - deployed on Kubernetes with full CI/CD via GitHub Actions. The educational goal was getting comfortable with DevOps infrastructure: containerization, preview environments, automated linting and building before merge. The kind of setup that lets other people contribute without breaking things.
+
+---
+
+### [Cornell Wushu Club Website](https://cornellwushu.github.io) 🔗
+
+[`Code 🔗`](https://github.com/cornellwushu/cornellwushu.github.io/) | *Technologies:* `React.js` `AWS Amplify` `AWS DynamoDB` `AWS IVS`
+
+Rebuilt the club website from scratch as VP. Many-to-many data model between members and events on DynamoDB. "Wushu Live" - a live streaming feature using AWS Interactive Video Services that broadcast performances at club events. CI/CD pipeline that auto-deploys when new members or performances are added to the database.
+
+---
+
+### [CaseOwl](https://caseowl.in/) 🔗
+
+*Technologies:* `React` `Redux` `AWS Lambda` `AWS S3` `AWS Cognito`
+
+A files and task management web app built for Indian lawyers. Secure document storage via S3, authentication via Cognito. The domain specificity mattered - legal workflows have particular requirements around access control and document integrity that a generic task app doesn't address.
+
+---
+
+### [Boss Mode - Focus Timer](https://github.com/pratyush1712/)
+
+*Technologies:* `React Native` `Expo` `MongoDB Realm`
+
+A cross-platform productivity app for managing focus sessions and task tracking, built with ADHD-related constraints in mind. Flexible focus timer, to-do list with historical logging, offline-first via MongoDB Realm. The premise: most productivity apps are built for people who don't struggle with productivity. This one isn't.
+
+---
+
+### [Wi-Find](https://github.com/Archit404Error/WiFindMobile/)
+
+[`Backend 🔗`](https://github.com/Archit404Error/WiFindBackend/) | *Technologies:* `React Native` `Expo` `Node.js` `MongoDB`
+
+A campus app helping ~20,000 Cornell students find high-speed wifi locations. Collects user location and bandwidth data, clusters it with an ML algorithm, and renders the results on a map view. Useful infrastructure problem: the data to solve it already exists in users' devices; the hard part is aggregating and classifying it.
+
+---
 
 ### [Face Detect](https://cornell-detection.herokuapp.com/) 🔗
 
-[`Code 🔗`](https://github.com/pratyush1712/face-detection/) <br>_Technologies Used:_ `Flask` `Open-CV` `Haar-cascades` `React` `Heroku` `Docker` <br> _Gained Experience In:_ `Server-side Rendering` `Computer Vision`
+[`Code 🔗`](https://github.com/pratyush1712/face-detection/) | *Technologies:* `Flask` `OpenCV` `Haar Cascades` `React` `Docker`
 
--   Designed and deployed a full stack face and eyes detection web application using Flask, React, and Heroku.
--   Processed and rendered images received from OpenCV Webcam to a React-based frontend.
--   Utilized Haar Cascades model to detect faces and eyes in images.
--   Utilized flask-cors library to prevent the frontend from receiving any CORS errors.
-
-### [Find My Party](https://github.com/pratyush1712/find_my_party_backend/) 🔗
-
-[`Code 🔗`](https://github.com/pratyush1712/find_my_party_backend/) _Technologies Used:_ `Flask` `SQL-Alchemy` `Docker` `Heroku`
-
--   Developed and maintained the backend of a party-finding iOS app using Flask and SQL-Alchemy, hosted on Heroku.
--   Earned Honorable Mention in the Best Overall App Category at the Cornell AppDev HackChallenge.
+A full-stack face and eye detection app using OpenCV's Haar Cascade classifier. Flask backend processes webcam frames; React frontend renders results. Built when I was first getting into computer vision - useful for learning how server-side image processing pipelines actually work.

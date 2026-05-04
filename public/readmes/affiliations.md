@@ -1,54 +1,66 @@
 # <img style="height:35px;width:35px;margin-bottom:-6px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Cornell_University_seal.svg/1200px-Cornell_University_seal.svg.png"> Cornell University On-Campus Affiliations
 
+---
+
 ## Head of Engineering at [Cornell Perfect Match](https://perfectmatch.ai/)
 
-**Duration:** January 2023 - May 2025
+**January 2023 – May 2025**
 
--   Redesigned the website’s frontend for improved UX/UI and integrated microservices, enhancing user engagement and system scalability.
--   Architected a Flask-based microservice for a live analytics dashboard, analyzing real-time data for 5,000+ users. Utilized MongoDB Map-Reduce for efficient data aggregation and integrated server response caching for optimized latency and data retrieval.
--   Initiated the transition from offline to online matching algorithms, deploying a Flask microservice to enable real-time matching, resulting in 50,000+ matches and enhanced system responsiveness.
--   Automated personalized user engagement emails via cron jobs, yielding a 600+ increase in active users and enhancing platform interaction.
--   Drove innovative marketing strategies, amplifying Instagram engagement by 185%, while nurturing a strong team dynamic. Enhanced new member orientation to solidify community and team cohesion.
+Perfect Match is Cornell's student-run dating platform, serving 5,000+ users each cycle. I joined as an engineer and eventually became Head of Engineering - which meant owning the technical direction of a system where the output is real human connections, and getting it wrong has real consequences.
 
-**Key Technologies:** `Next.js` `TypeScript` `Flask` `Cron Jobs` `Google OR Tools` `MongoDB` `Google Cloud Project` `Vercel`<br><br>
+The most significant work: transitioning from offline batch matching to real-time matching using a Gale-Shapley stable matching algorithm paired with Google OR-Tools for optimization. Stable matching has a mathematical guarantee I care about - no two people would both prefer each other over their assigned partners. That fairness property matters when you're allocating something as personal as a match. The system delivered 50,000+ matches.
 
-<hr />
+Beyond the algorithm work:
+- Architected a Flask microservice for a live analytics dashboard, handling real-time data for 5,000+ active users. Used MongoDB Map-Reduce for aggregation and server-side caching for latency.
+- Overhauled the frontend for improved UX and integrated a microservices backend to improve system modularity and scalability.
+- Automated personalized engagement emails via cron jobs - grew active users by 600+.
+- Ran marketing strategy alongside the technical work: 185% increase in Instagram engagement. Engineering leadership at a student org means you do both.
 
-## Technical Product Manager at [Cornell Digital Tech & Innovation](https://www.cornelldti.org/)
+**Key Technologies:** `Next.js` `TypeScript` `Flask` `Google OR-Tools` `Gale-Shapley` `MongoDB` `GCP` `Cron Jobs` `Vercel`
 
-**Duration:** March 2022 - December 2023
+---
 
-### Carriage - Technical Product Manager _(Spring 2023 - Fall 2023)_
+## Technical Product Manager at [Cornell Design & Tech Initiative](https://www.cornelldti.org/)
 
--   Led and mentored a team of 7 developers in the ongoing development of the Cornell DTI Carriage, leveraging agile development methodologies and a comprehensive project roadmap to effectively mitigate all the stakeholder concerns.
--   Improved overall code quality and reduced time-to-market by establishing a robust testing infrastructure using Cypress for the frontend and Mocha, Chai, and Supertest libraries for the backend resulting in a 94% increase in test coverage across the application.
--   Streamlined the deployment process by Dockerizing the web app, automating deployment by implementing CI/CD pipelines using GitHub actions, and implementing a Kubernetes cluster to improve resource utilization and performance.
+**March 2022 – December 2023**
 
-### Carriage _(August 2022 - Fall 2023)_
+DTI is Cornell's premier engineering-focused product org - structured like a small tech company, building real products used by real people on campus and beyond.
 
--   Extended my role as a developer in a larger team, improving the website's accessibility and overhauling its authentication flow.
--   Reduced backend calls by 90%, decreasing DynamoDB operations and resulting in lower AWS charges.
+### Carriage - Technical PM _(Spring 2023 – Fall 2023)_
 
-### Design @ Cornell _(March 2022 - August 2022)_
+Carriage is Cornell's accessible transportation platform, used by students with disabilities to request on-demand rides. I led a team of 7 developers, which was as much about process and communication as it was about code.
 
--   Developed and maintained a dynamic, responsive website using React and Express, as part of a five-member development team.
--   Successfully reimagined the design of the homepage to improve user engagement.
+- Established a real testing infrastructure - Cypress for frontend E2E, Mocha + Chai + Supertest for backend - achieving 94% test coverage across the application. Before this, coverage was minimal. Technical debt accumulates in student orgs faster than anywhere else.
+- Dockerized the deployment pipeline and implemented Kubernetes for resource management. CI/CD via GitHub Actions.
+- Managed the project roadmap and stakeholder relationships - the "customers" in this case were students with disabilities who depended on the app working reliably. That raised the stakes.
 
-**Key Technologies:** `React.js` `TypeScript` `AWS DynamoDB` `Docker` `Express` `Google Cloud Project` `Flutter`<br><br>
+### Carriage - Developer _(August 2022 – Fall 2023)_
 
-<hr />
+- Improved accessibility across the website and overhauled the authentication flow.
+- Reduced backend API calls by 90%, cutting DynamoDB operations and lowering AWS costs significantly.
+
+### Design @ Cornell _(March 2022 – August 2022)_
+
+- Built and maintained a responsive website using React and Express as part of a five-person dev team.
+- Redesigned the homepage to improve user engagement.
+
+**Key Technologies:** `React.js` `TypeScript` `AWS DynamoDB` `Docker` `Kubernetes` `Express` `GCP` `Flutter`
+
+---
 
 ## Vice-President at [Cornell Wushu - Chinese Martial Arts Club](https://cornellwushu.github.io/)
 
-**Duration:** September 2021 - May 2024
+**September 2021 – May 2024**
 
-### Secretary _(September 2022 - May 2023)_
+Cornell Wushu is a competitive martial arts club focusing on Chinese martial arts forms and performance. I joined as a member freshman year, was elected Secretary sophomore year, and became Vice-President junior year.
 
--   Elected as the club secretary for the 2022-23 academic year.
--   Kept club members up-to-date about practices, socials, performances, and events through bi-weekly emails and website updates.
+### Secretary _(September 2022 – May 2023)_
 
-### Vice-President _(May 2023 - May 2024)_
+- Kept 40+ members updated on practices, socials, performances, and competitions through bi-weekly emails and website updates. Also rebuilt the club website (see Projects).
 
--   Promoted to the role of Vice-President for the 2022-23 academic year.
--   Working alongside the President and Practice Leaders to guide practices, helping newcomers improve their skills.
--   Assisting with planning practice sessions for competitions and arranging events. <br>
+### Vice-President _(May 2023 – May 2024)_
+
+- Worked with the President and Practice Leaders to run practices and help newer members develop their forms.
+- Planned and arranged events, including competition prep sessions and public performances.
+
+The non-technical affiliations matter. Wushu taught me how to work a body, how to perform under pressure, and how to coach - which is just a different kind of systems thinking. You observe someone's form, identify where the pattern breaks down, and figure out how to communicate the fix in a way they can actually receive.
