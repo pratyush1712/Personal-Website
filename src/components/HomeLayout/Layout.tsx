@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { Box, Container, CssBaseline, Drawer, ThemeProvider, useMediaQuery } from "@mui/material";
-import createTheme from "@/ui/Theme";
+import createTheme, { TOKENS } from "@/ui/Theme";
 import { isBrowser } from "react-device-detect";
 import AgentsPanel from "./AgentsPanel";
 import AppButtons from "./AppButtons";
@@ -91,6 +91,10 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 	useEffect(() => {
 		setDarkMode(JSON.parse(localStorage.getItem("darkMode") || "true"));
 	}, []);
+
+	useEffect(() => {
+		document.documentElement.style.colorScheme = darkMode ? "dark" : "light";
+	}, [darkMode]);
 
 	// On first mount, collapse the side panels on a narrow viewport (they open as drawers there).
 	// Keyed to mount only — not to isMobile — so a user-opened drawer is never force-closed.
@@ -210,7 +214,7 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 									scrollBehavior: "smooth",
 									overflowY: "auto",
 									overflowX: "hidden",
-									background: !darkMode ? "#FFFFFF" : "#1e1e1e"
+									backgroundColor: darkMode ? TOKENS.dark.surface : TOKENS.light.surface
 								}}>
 								<Container sx={{ minHeight: "100%", overflowX: "hidden" }}>{children}</Container>
 							</Box>

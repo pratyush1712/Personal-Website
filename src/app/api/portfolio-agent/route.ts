@@ -64,6 +64,11 @@ function json(body: unknown, status: number): Response {
 	return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
 }
 
+/** Lightweight availability probe. */
+export async function GET(): Promise<Response> {
+	return json({ configured: Boolean(process.env.OPENAI_API_KEY) }, 200);
+}
+
 export async function POST(req: NextRequest): Promise<Response> {
 	// 1. Reject oversized bodies early (header, then actual length).
 	const declaredLength = Number(req.headers.get("content-length") || 0);

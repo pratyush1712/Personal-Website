@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import { VscClose } from "react-icons/vsc";
 import { useLocalAgentTabs } from "@/utils/useLocalAgentTabs";
@@ -22,6 +22,17 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 		useLocalAgentTabs();
 	const [pending, setPending] = useState(false);
 
+	// Re-open the panel with a fresh tab after the visitor closed the last one.
+	useEffect(() => {
+		if (hydrated && tabs.length === 0) createTab();
+	}, [hydrated, tabs.length, createTab]);
+
+	function handleCloseTab(id: string) {
+		const isLastTab = tabs.length === 1;
+		closeTab(id);
+		if (isLastTab) onClose();
+	}
+
 	async function send(text: string) {
 		if (!activeTab || pending) return;
 		const id = activeTab.id;
@@ -40,7 +51,7 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				try {
 					const errJson = await res.json();
 					if (errJson?.error) errorMsg = errJson.error;
-				} catch {}
+				} catch { }
 				throw new Error(errorMsg);
 			}
 
@@ -97,7 +108,7 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 					tabs={tabs}
 					activeId={activeId}
 					onSelect={selectTab}
-					onClose={closeTab}
+					onClose={handleCloseTab}
 					onCreate={createTab}
 					canCreate={canCreate}
 				/>

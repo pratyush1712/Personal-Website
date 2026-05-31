@@ -27,9 +27,13 @@ export function useLocalAgentTabs() {
 		if (hydrated) saveTabs(tabs);
 	}, [tabs, hydrated]);
 
-	// Keep activeId pointing at a tab that still exists.
+	// Keep activeId pointing at a tab that still exists (or null when all tabs are closed).
 	useEffect(() => {
-		if (!hydrated || tabs.length === 0) return;
+		if (!hydrated) return;
+		if (tabs.length === 0) {
+			setActiveId(null);
+			return;
+		}
 		if (!tabs.some(t => t.id === activeId)) setActiveId(tabs[tabs.length - 1].id);
 	}, [tabs, activeId, hydrated]);
 
@@ -44,10 +48,7 @@ export function useLocalAgentTabs() {
 	}, [tabs.length]);
 
 	const closeTab = useCallback((id: string) => {
-		setTabs(prev => {
-			const next = prev.filter(t => t.id !== id);
-			return next.length === 0 ? [newTab()] : next;
-		});
+		setTabs(prev => prev.filter(t => t.id !== id));
 	}, []);
 
 	const selectTab = useCallback((id: string) => setActiveId(id), []);

@@ -1,5 +1,5 @@
 "use client";
-import { useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
+import { useId, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
 import { Box, Button, Collapse, IconButton, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -50,12 +50,16 @@ function Section({
 	defaultOpen?: boolean;
 }) {
 	const [open, setOpen] = useState(defaultOpen);
+	const panelId = useId();
+	const contentId = `${panelId.replace(/:/g, "")}-content`;
+
 	return (
 		<Box sx={{ mb: 0.5 }}>
 			<Button
 				onClick={() => setOpen(o => !o)}
 				disableRipple
 				aria-expanded={open}
+				aria-controls={contentId}
 				fullWidth
 				sx={{
 					justifyContent: "flex-start",
@@ -73,9 +77,11 @@ function Section({
 					{title}
 				</Typography>
 			</Button>
-			<Collapse in={open} unmountOnExit>
-				<Box sx={{ pb: 0.5 }}>{children}</Box>
-			</Collapse>
+			<Box id={contentId}>
+				<Collapse in={open} unmountOnExit>
+					<Box sx={{ pb: 0.5 }}>{children}</Box>
+				</Collapse>
+			</Box>
 		</Box>
 	);
 }
@@ -104,7 +110,7 @@ export default function ExplorerPanel({
 				borderColor: "divider",
 				pt: 0.5
 			}}>
-			<Section title="OPEN EDITORS">
+			<Section title="OPEN EDITORS" defaultOpen={false}>
 				{visiblePages.length === 0 ? (
 					<Typography variant="caption" sx={{ display: "block", pl: 3, color: "text.disabled" }}>
 						No open editors

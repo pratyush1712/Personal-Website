@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { AgentTab } from "@/utils/agentStorage";
 import AgentPromptSuggestions from "./AgentPromptSuggestions";
@@ -10,13 +10,65 @@ interface Props {
 	onPromptSelect: (prompt: string) => void;
 }
 
+type AgentStatus = "checking" | "unavailable" | "standby" | "ready";
+
+const FAILURE_SNIPPETS = [
+	"Portfolio Agent is not configured.",
+	"Portfolio Agent isn't connected yet",
+	"temporarily unavailable",
+	"returned an empty response"
+];
+
+function isSuccessfulAssistantMessage(content: string): boolean {
+	const lower = content.toLowerCase();
+	return !FAILURE_SNIPPETS.some(snippet => lower.includes(snippet.toLowerCase()));
+}
+
 export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 	const isEmpty = !tab || tab.messages.length === 0;
 	const bottomRef = useRef<HTMLDivElement>(null);
+	const [configured, setConfigured] = useState<boolean | null>(null);
 
 	useEffect(() => {
 		bottomRef.current?.scrollIntoView({ behavior: "smooth" });
 	}, [tab?.messages, pending]);
+
+	useEffect(() => {
+		let cancelled = false;
+		fetch("/api/portfolio-agent")
+			.then(res => (res.ok ? res.json() : { configured: false }))
+			.then((data: { configured?: unknown }) => {
+				if (!cancelled) setConfigured(Boolean(data.configured));
+			})
+			.catch(() => {
+				if (!cancelled) setConfigured(false);
+			});
+		return () => {
+			cancelled = true;
+		};
+	}, []);
+
+	const hasSuccessfulReply = useMemo(
+		() =>
+			tab?.messages.some(m => m.role === "assistant" && isSuccessfulAssistantMessage(m.content)) ?? false,
+		[tab?.messages]
+	);
+
+	const agentStatus: AgentStatus = useMemo(() => {
+		if (configured === null) return "checking";
+		if (!configured) return "unavailable";
+		if (hasSuccessfulReply) return "ready";
+		return "standby";
+	}, [configured, hasSuccessfulReply]);
+
+	const statusPresentation = {
+		checking: { dotColor: "text.disabled", label: "Checking…" },
+		unavailable: { dotColor: "warning.main", label: "Unavailable" },
+		standby: { dotColor: "text.secondary", label: "Standby" },
+		ready: { dotColor: "success.main", label: "Ready" }
+	} as const;
+
+	const { dotColor, label } = statusPresentation[agentStatus];
 
 	return (
 		<Box sx={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
@@ -25,12 +77,15 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 					{/* Active agent card */}
 					<Box sx={{ border: 1, borderColor: "divider", borderRadius: 1.5, p: 1.5, mb: 1.5 }}>
 						<Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
-							<Box sx={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "success.main" }} />
+							<Box
+								aria-hidden
+								sx={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: dotColor, flexShrink: 0 }}
+							/>
 							<Typography variant="body2" sx={{ fontWeight: 600 }}>
 								Portfolio Agent
 							</Typography>
-							<Typography variant="caption" sx={{ ml: "auto", color: "text.secondary" }}>
-								Ready
+							<Typography variant="caption" sx={{ ml: "auto", color: "text.secondary" }} aria-live="polite">
+								{label}
 							</Typography>
 						</Box>
 						<Typography variant="caption" sx={{ color: "text.secondary" }}>
