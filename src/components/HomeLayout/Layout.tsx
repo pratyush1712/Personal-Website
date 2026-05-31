@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { Box, Container, CssBaseline, ThemeProvider, Typography } from "@mui/material";
+import { Box, Container, CssBaseline, ThemeProvider } from "@mui/material";
 import createTheme from "@/ui/Theme";
 import { isBrowser } from "react-device-detect";
+import AgentsPanel from "./AgentsPanel";
 import AppButtons from "./AppButtons";
 import ExplorerPanel from "./ExplorerPanel";
 import Footer from "./Footer";
@@ -199,39 +200,8 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 							</Box>
 						</Box>
 
-						{/* Right agents panel — minimal placeholder; full panel built in Phase F */}
-						{agentsOpen && (
-							<Box
-								sx={{
-									width: 320,
-									flexShrink: 0,
-									borderLeft: 1,
-									borderColor: "divider",
-									backgroundColor: "background.paper",
-									display: "flex",
-									flexDirection: "column"
-								}}>
-								<Box
-									sx={{
-										height: 44,
-										flexShrink: 0,
-										display: "flex",
-										alignItems: "center",
-										px: 2,
-										borderBottom: 1,
-										borderColor: "divider"
-									}}>
-									<Typography variant="body2" sx={{ fontWeight: 600 }}>
-										Agents
-									</Typography>
-								</Box>
-								<Box sx={{ p: 2 }}>
-									<Typography variant="caption" sx={{ color: "text.secondary" }}>
-										Portfolio Agent — coming soon.
-									</Typography>
-								</Box>
-							</Box>
-						)}
+						{/* Right agents panel */}
+						{agentsOpen && <AgentsPanel onClose={() => setAgentsOpen(false)} currentPage={currentPage} />}
 					</Box>
 
 					{/* Status bar */}
