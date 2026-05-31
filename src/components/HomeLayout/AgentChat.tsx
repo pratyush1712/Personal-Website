@@ -49,8 +49,7 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 	}, []);
 
 	const hasSuccessfulReply = useMemo(
-		() =>
-			tab?.messages.some(m => m.role === "assistant" && isSuccessfulAssistantMessage(m.content)) ?? false,
+		() => tab?.messages.some(m => m.role === "assistant" && isSuccessfulAssistantMessage(m.content)) ?? false,
 		[tab?.messages]
 	);
 
@@ -79,12 +78,21 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 						<Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
 							<Box
 								aria-hidden
-								sx={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: dotColor, flexShrink: 0 }}
+								sx={{
+									width: 8,
+									height: 8,
+									borderRadius: "50%",
+									backgroundColor: dotColor,
+									flexShrink: 0
+								}}
 							/>
 							<Typography variant="body2" sx={{ fontWeight: 600 }}>
 								Portfolio Agent
 							</Typography>
-							<Typography variant="caption" sx={{ ml: "auto", color: "text.secondary" }} aria-live="polite">
+							<Typography
+								variant="caption"
+								sx={{ ml: "auto", color: "text.secondary" }}
+								aria-live="polite">
 								{label}
 							</Typography>
 						</Box>

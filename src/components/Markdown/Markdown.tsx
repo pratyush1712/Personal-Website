@@ -137,7 +137,11 @@ export function MarkdownH4(props: any) {
 
 export function MarkdownItalic(props: any) {
 	return (
-		<Typography component="em" variant="inherit" display="inline" sx={{ fontStyle: "italic", color: "text.primary" }}>
+		<Typography
+			component="em"
+			variant="inherit"
+			display="inline"
+			sx={{ fontStyle: "italic", color: "text.primary" }}>
 			{props.children}
 		</Typography>
 	);

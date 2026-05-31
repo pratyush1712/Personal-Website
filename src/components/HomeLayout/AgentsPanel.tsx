@@ -51,7 +51,7 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				try {
 					const errJson = await res.json();
 					if (errJson?.error) errorMsg = errJson.error;
-				} catch { }
+				} catch {}
 				throw new Error(errorMsg);
 			}
 
