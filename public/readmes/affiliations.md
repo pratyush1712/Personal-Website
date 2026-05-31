@@ -1,4 +1,5 @@
-# <img style="height:35px;width:35px;margin-bottom:-6px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Cornell_University_seal.svg/1200px-Cornell_University_seal.svg.png"> Cornell University On-Campus Affiliations
+# <img style="height:35px;width:35px;margin-bottom:-6px" src="/icons/cornell_seal.png"> Cornell University On-Campus Affiliations
+# <img style="height:35px;width:35px;margin-bottom:-6px" src="/icons/cornell_seal.svg"> Cornell University On-Campus Affiliations
 
 ---
 
@@ -20,7 +21,7 @@ Beyond the algorithm work:
 
 ---
 
-## Technical Product Manager at [Cornell Design & Tech Initiative](https://www.cornelldti.org/)
+## Technical Product Manager at [Cornell Digital Tech & Innovations](https://www.cornelldti.org/)
 
 **March 2022 – December 2023**
 

@@ -4,11 +4,9 @@
 
 **B.S. Computer Science** | Minor: Mathematics (A&S), Psychology (A&S)
 
-`2021 – 2025` | **GPA: 3.87 overall / 3.97 major**
+## `2021 – 2026`
 
----
-
-The CS + Math + Psychology combination isn't an accident. I came into college knowing I wanted to build systems, but the psych and cog sci courses changed what I thought systems were *for*. By my junior year I was taking Advanced ML Systems alongside Adult Psychopathology and Cognitive Development - which sounds strange until you realize those courses are all asking the same underlying question: how do complex systems process information under constraints?
+The CS + Math + Psychology combination isn't an accident. I came into college knowing I wanted to build systems, but the psych and cog sci courses changed what I thought systems were _for_. By my junior year I was taking Advanced ML Systems alongside Adult Psychopathology and Cognitive Development - which sounds strange until you realize those courses are all asking the same underlying question: how do complex systems process information under constraints?
 
 ---
 
@@ -64,6 +62,6 @@ These aren't electives I took casually. They're the other half of what I'm actua
 ## 📌 On-Campus Affiliations
 
 - [Cornell Perfect Match](https://perfectmatch.ai/) - **Head of Engineering** _(Jan 2023 – May 2025)_
-- [Cornell Design & Tech Initiative](https://www.cornelldti.org/) - **Technical Product Manager** _(Mar 2022 – Dec 2023)_
+- [Cornell Digital Tech & Innovations](https://www.cornelldti.org/) - **Technical Product Manager** _(Mar 2022 – Dec 2023)_
 - [Cornell Wushu - Chinese Martial Arts Club](https://cornellwushu.github.io/) - **Vice-President** _(Sep 2021 – May 2024)_
 - [Cornell Association of CS Undergrads](https://acsu.cornell.edu/) - **Member**

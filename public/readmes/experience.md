@@ -8,7 +8,7 @@ DECA Lab builds tools for researchers and field workers - people operating in me
 - Engineered an offline-first mobile app (Legend State + MMKV, background sync) that lets auditors start, pause, and resume field audits in low-connectivity environments without losing work. The design assumption: the network will fail. Build around that.
 - Built normalized scoring pipelines with client-side CSV/XLSX/PDF export. Hardened draft-save flows against duplicate-key failures and extended data integrity guarantees across multi-round field testing.
 
-*Technologies:* `React Native` `Expo` `Next.js` `FastAPI` `SQLAlchemy` `PostgreSQL` `TypeScript`
+_Technologies:_ `React Native` `Expo` `Next.js` `FastAPI` `SQLAlchemy` `PostgreSQL` `TypeScript`
 
 ---
 
@@ -20,7 +20,7 @@ Halo is building hardware-software systems for real-time social context. The cha
 - Modularized a legacy UI codebase: 40% reduction in code redundancy, 30% reduction in app size, 25% faster streaming performance. Legacy code accumulates until someone decides it's worth fixing - I made that decision.
 - Redesigned the Celery + Redis backend architecture with multi-layered OpenAI prompts, cutting face-search processing time from 3 minutes to under 50 seconds. That's the difference between a feature people use and one they abandon.
 
-*Technologies:* `Swift` `ESP32` `Celery` `Redis` `FastAPI` `OpenAI`
+_Technologies:_ `Swift` `ESP32` `Celery` `Redis` `FastAPI` `OpenAI`
 
 ---
 
@@ -31,13 +31,13 @@ Embedded systems work - the kind where the constraints are physical and the user
 - Built a PyQt-based touchscreen GUI for BeagleBone hardware, enabling lab researchers to monitor and control food processing equipment without needing to touch a terminal.
 - Wrote Linux shell scripts and cron jobs to automate system operations, removing manual steps from recurring tasks that researchers were doing by hand.
 
-*Technologies:* `Linux` `Shell Scripts` `PyQt4` `BeagleBone`
+_Technologies:_ `Linux` `Shell Scripts` `PyQt4` `BeagleBone`
 
 ---
 
 ### **Software Engineering Intern** @ rapStudy _(June 2023 – August 2023)_
 
-*Los Angeles, California*
+_Los Angeles, California_
 
 rapStudy is an EdTech platform using music to teach literacy and reading comprehension. The technical challenge was performance and synchronization at scale.
 
@@ -45,36 +45,36 @@ rapStudy is an EdTech platform using music to teach literacy and reading compreh
 - Architected a song-sharing feature using React, Firebase, and 10+ custom Firestore security rules, enabling controlled access for external users while maintaining platform integrity.
 - Built a synchronized SongView component that displays lyrics in sync with playback at 95% accuracy, which is the kind of synchronization problem that sounds simple until you're debugging timing edge cases across variable network conditions.
 
-*Technologies:* `React.js` `Redux` `Firebase` `Firestore`
+_Technologies:_ `React.js` `Redux` `Firebase` `Firestore`
 
 ---
 
 ### **Data Engineer** @ Cornell College of Engineering _(June 2023 – September 2023)_
 
-*Ithaca, New York*
+_Ithaca, New York_
 
 - Built an ETL pipeline using Selenium and NLP to process financial data for 3,000+ companies, reducing processing time by 83% through parallel processing. The previous approach was sequential. Most slow pipelines are.
 - Architected and deployed a full-stack application with Next.js and Flask, using Server-Sent Events for real-time data retrieval - 66% reduction in data latency compared to the polling approach it replaced.
 
-*Technologies:* `Next.js` `Flask` `Selenium` `NLP` `Server-Sent Events`
+_Technologies:_ `Next.js` `Flask` `Selenium` `NLP` `Server-Sent Events`
 
 ---
 
 ### **Software Developer** @ Cornell Yang-Tan Institute _(July 2022 – December 2022)_
 
-*Ithaca, New York*
+_Ithaca, New York_
 
 The Yang-Tan Institute focuses on disability employment research and policy. AskEarn.org is their public-facing resource hub, serving 100,000+ monthly active users.
 
 - Built a flexible slug management system using PHP, Laravel, and Strapi CMS - a deceptively important feature. Clean, modifiable URLs directly affect SEO, content discoverability, and the ability of a non-technical team to manage their own site without developer intervention.
 
-*Technologies:* `PHP` `Laravel` `Strapi CMS`
+_Technologies:_ `PHP` `Laravel` `Strapi CMS`
 
 ---
 
 ### **Software Engineering Intern** @ Sellpoint _(June 2022 – August 2022)_
 
-*Remote*
+_Remote_
 
 Sellpoint provides product content management for e-commerce. My work was full-stack across AWS services.
 
@@ -82,4 +82,4 @@ Sellpoint provides product content management for e-commerce. My work was full-s
 - Developed a real-time market analysis tool processing data with Pandas and NumPy inside Lambda functions.
 - Built the frontend in React.js with Redux, RTK Query, and react-apex-charts for data visualization.
 
-*Technologies:* `React.js` `Redux` `RTK Query` `AWS` `DynamoDB` `Lambda` `Pandas` `NumPy`
+_Technologies:_ `React.js` `Redux` `RTK Query` `AWS` `DynamoDB` `Lambda` `Pandas` `NumPy`
