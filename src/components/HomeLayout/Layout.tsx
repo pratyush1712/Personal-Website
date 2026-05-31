@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { Box, Container, CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, Container, CssBaseline, Drawer, ThemeProvider, useMediaQuery } from "@mui/material";
 import createTheme from "@/ui/Theme";
 import { isBrowser } from "react-device-detect";
 import AgentsPanel from "./AgentsPanel";
@@ -50,6 +50,8 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 	// Theme is derived purely from darkMode — no in-place palette mutation. Recreated only
 	// when the mode flips.
 	const theme = useMemo(() => createTheme(darkMode), [darkMode]);
+	// Below 768px the side panels become temporary overlay drawers instead of inline columns.
+	const isMobile = useMediaQuery("(max-width:767.98px)");
 	function handleThemeChange() {
 		setDarkMode(prev => {
 			const next = !prev;
@@ -88,6 +90,15 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 
 	useEffect(() => {
 		setDarkMode(JSON.parse(localStorage.getItem("darkMode") || "true"));
+	}, []);
+
+	// On first mount, collapse the side panels on a narrow viewport (they open as drawers there).
+	// Keyed to mount only — not to isMobile — so a user-opened drawer is never force-closed.
+	useEffect(() => {
+		if (typeof window !== "undefined" && window.matchMedia("(max-width:767.98px)").matches) {
+			setExplorerOpen(false);
+			setAgentsOpen(false);
+		}
 	}, []);
 
 	const [{ cache, flush }] = useState(() => {
@@ -130,6 +141,21 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 		);
 	});
 
+	// Defined once and rendered either inline (desktop) or inside a Drawer (mobile).
+	const explorerPanel = (
+		<ExplorerPanel
+			pages={pages}
+			visiblePages={visiblePages}
+			selectedIndex={selectedIndex}
+			setSelectedIndex={setSelectedIndex}
+			currentComponent={currentComponent}
+			setCurrentComponent={setCurrentComponent}
+			visiblePageIndexs={visiblePageIndexs}
+			setVisiblePageIndexs={setVisiblePageIndexs}
+		/>
+	);
+	const agentsPanel = <AgentsPanel onClose={() => setAgentsOpen(false)} currentPage={currentPage} />;
+
 	return (
 		<CacheProvider value={cache}>
 			<ThemeProvider theme={theme}>
@@ -154,19 +180,8 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 						currentPage={currentPage}
 					/>
 					<Box sx={{ flex: 1, minHeight: 0, display: "flex", overflow: "hidden" }}>
-						{/* Explorer sidebar */}
-						{explorerOpen && (
-							<ExplorerPanel
-								pages={pages}
-								visiblePages={visiblePages}
-								selectedIndex={selectedIndex}
-								setSelectedIndex={setSelectedIndex}
-								currentComponent={currentComponent}
-								setCurrentComponent={setCurrentComponent}
-								visiblePageIndexs={visiblePageIndexs}
-								setVisiblePageIndexs={setVisiblePageIndexs}
-							/>
-						)}
+						{/* Explorer sidebar (inline on desktop; a drawer on mobile — see below) */}
+						{!isMobile && explorerOpen && explorerPanel}
 
 						{/* Editor / portfolio content surface */}
 						<Box
@@ -200,8 +215,29 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 							</Box>
 						</Box>
 
-						{/* Right agents panel */}
-						{agentsOpen && <AgentsPanel onClose={() => setAgentsOpen(false)} currentPage={currentPage} />}
+						{/* Right agents panel (inline on desktop; a drawer on mobile — see below) */}
+						{!isMobile && agentsOpen && agentsPanel}
+
+						{/* Mobile: side panels become temporary overlay drawers so they never
+						    squeeze or overflow the content. */}
+						{isMobile && (
+							<>
+								<Drawer
+									anchor="left"
+									open={explorerOpen}
+									onClose={() => setExplorerOpen(false)}
+									ModalProps={{ keepMounted: true }}>
+									{explorerPanel}
+								</Drawer>
+								<Drawer
+									anchor="right"
+									open={agentsOpen}
+									onClose={() => setAgentsOpen(false)}
+									ModalProps={{ keepMounted: true }}>
+									{agentsPanel}
+								</Drawer>
+							</>
+						)}
 					</Box>
 
 					{/* Status bar */}
