@@ -1,7 +1,7 @@
 "use client";
-import { Box, Chip, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { VscChevronRight } from "react-icons/vsc";
 
-// Starter prompts (from the spec). Clicking one sends it as the first message.
 const PROMPTS = [
 	"Summarize Pratyush's background",
 	"What are his strongest projects?",
@@ -18,35 +18,65 @@ interface Props {
 
 export default function AgentPromptSuggestions({ onSelect, disabled }: Props) {
 	return (
-		<Box>
-			<Typography variant="caption" sx={{ display: "block", mb: 0.75, color: "text.secondary" }}>
-				Suggested prompts
+		<Box sx={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+			<Typography
+				sx={{
+					fontSize: "0.67rem",
+					fontWeight: 600,
+					letterSpacing: "0.07em",
+					textTransform: "uppercase",
+					color: "text.disabled",
+					mb: "6px"
+				}}>
+				Suggested
 			</Typography>
-			<Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.75 }}>
-				{PROMPTS.map(prompt => (
-					<Chip
-						key={prompt}
-						label={prompt}
-						size="small"
-						variant="outlined"
-						clickable={!disabled}
-						disabled={disabled}
-						onClick={() => !disabled && onSelect(prompt)}
-						sx={{
-							height: "auto",
-							py: 0.4,
-							borderColor: "divider",
-							color: "text.secondary",
-							"& .MuiChip-label": { px: 1, fontSize: "0.72rem", whiteSpace: "normal" },
-							"&:hover": {
-								borderColor: "primary.main",
-								color: "text.primary",
-								backgroundColor: "action.hover"
-							}
-						}}
-					/>
-				))}
-			</Box>
+
+			{PROMPTS.map(prompt => (
+				<Box
+					key={prompt}
+					role="button"
+					tabIndex={disabled ? -1 : 0}
+					aria-disabled={disabled}
+					onClick={() => !disabled && onSelect(prompt)}
+					onKeyDown={e => {
+						if (!disabled && (e.key === "Enter" || e.key === " ")) {
+							e.preventDefault();
+							onSelect(prompt);
+						}
+					}}
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "space-between",
+						gap: 1,
+						px: "10px",
+						py: "7px",
+						borderRadius: "6px",
+						cursor: disabled ? "default" : "pointer",
+						opacity: disabled ? 0.4 : 1,
+						color: "text.secondary",
+						fontSize: "0.74rem",
+						lineHeight: 1.4,
+						transition: "background-color 100ms ease, color 100ms ease",
+						"&:hover": disabled
+							? {}
+							: {
+									backgroundColor: theme =>
+										theme.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+									color: "text.primary"
+							  },
+						"&:focus-visible": {
+							outline: "2px solid",
+							outlineColor: "primary.main",
+							outlineOffset: "1px"
+						}
+					}}>
+					<Box component="span" sx={{ flex: 1 }}>
+						{prompt}
+					</Box>
+					<VscChevronRight size={12} style={{ flexShrink: 0, opacity: 0.4 }} />
+				</Box>
+			))}
 		</Box>
 	);
 }

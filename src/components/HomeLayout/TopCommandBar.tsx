@@ -1,10 +1,14 @@
 "use client";
-import { Box, Button, IconButton, Tooltip, Typography } from "@mui/material";
+import { Box, Button, ClickAwayListener, IconButton, InputBase, Paper, Tooltip, Typography } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { LuPanelLeft, LuPanelRight, LuSearch } from "react-icons/lu";
+import { VscMarkdown } from "react-icons/vsc";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useId, useMemo, useState } from "react";
 import { links } from "@/utils/links";
+import { highlightText } from "@/utils/searchHighlight";
 
 interface Props {
 	darkMode: boolean;
@@ -16,6 +20,26 @@ interface Props {
 	currentPage: string;
 }
 
+type SearchResult = {
+	file: string;
+	title: string;
+	route: string;
+	href: string;
+	snippet: string;
+	score: number;
+};
+
+type SearchResponse = {
+	query: string;
+	results: SearchResult[];
+};
+
+function isSearchResponse(value: unknown): value is SearchResponse {
+	if (!value || typeof value !== "object") return false;
+	const candidate = value as { query?: unknown; results?: unknown };
+	return typeof candidate.query === "string" && Array.isArray(candidate.results);
+}
+
 export default function TopCommandBar({
 	darkMode,
 	onThemeToggle,
@@ -25,9 +49,65 @@ export default function TopCommandBar({
 	onAgentsToggle,
 	currentPage
 }: Props) {
+	const router = useRouter();
+	const searchListId = useId();
 	const professional = links.filter(link => link.type === "professional");
 	const resume = professional.find(link => link.href.endsWith(".pdf"));
 	const iconLinks = professional.filter(link => link !== resume);
+	const [query, setQuery] = useState("");
+	const [results, setResults] = useState<SearchResult[]>([]);
+	const [open, setOpen] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
+	const trimmedQuery = query.trim();
+
+	const activeResults = useMemo(() => results.filter(result => result.href), [results]);
+
+	useEffect(() => {
+		if (!trimmedQuery) {
+			setResults([]);
+			setError("");
+			setLoading(false);
+			return;
+		}
+
+		const controller = new AbortController();
+		const timeout = window.setTimeout(() => {
+			setLoading(true);
+			setError("");
+			fetch(`/api/portfolio-search?q=${encodeURIComponent(trimmedQuery)}`, { signal: controller.signal })
+				.then(response => {
+					if (!response.ok) throw new Error(`Search failed with status ${response.status}`);
+					return response.json() as Promise<unknown>;
+				})
+				.then(data => {
+					if (!isSearchResponse(data)) throw new Error("Search returned an unexpected response.");
+					setResults(data.results);
+					setOpen(true);
+				})
+				.catch(fetchError => {
+					if (fetchError instanceof DOMException && fetchError.name === "AbortError") return;
+					setError(fetchError instanceof Error ? fetchError.message : "Search failed.");
+					setResults([]);
+					setOpen(true);
+				})
+				.finally(() => setLoading(false));
+		}, 180);
+
+		return () => {
+			window.clearTimeout(timeout);
+			controller.abort();
+		};
+	}, [trimmedQuery]);
+
+	function navigateToResult(result: SearchResult) {
+		setOpen(false);
+		router.push(`${result.href}?q=${encodeURIComponent(trimmedQuery)}`);
+	}
+
+	function handleSubmit() {
+		if (activeResults[0]) navigateToResult(activeResults[0]);
+	}
 
 	const iconButtonSx = {
 		color: "text.secondary",
@@ -49,7 +129,6 @@ export default function TopCommandBar({
 				borderColor: "divider",
 				backgroundColor: "background.paper"
 			}}>
-			{/* Left: explorer toggle + workspace identity */}
 			<Tooltip title={explorerOpen ? "Hide explorer" : "Show explorer"} arrow>
 				<IconButton
 					size="small"
@@ -82,31 +161,137 @@ export default function TopCommandBar({
 				</Typography>
 			</Box>
 
-			{/* Center: command/search affordance (presentational this phase — no command palette) */}
 			<Box sx={{ flex: 1, display: { xs: "none", sm: "flex" }, justifyContent: "center", px: 2 }}>
-				<Box
-					aria-hidden
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: 1,
-						width: "100%",
-						maxWidth: 420,
-						height: 28,
-						px: 1.5,
-						borderRadius: 1.5,
-						border: 1,
-						borderColor: "divider",
-						color: "text.secondary",
-						fontSize: "0.8rem",
-						userSelect: "none"
-					}}>
-					<LuSearch size={14} />
-					<span>Search portfolio or ask agent…</span>
-				</Box>
+				<ClickAwayListener onClickAway={() => setOpen(false)}>
+					<Box
+						component="form"
+						role="search"
+						onSubmit={event => event.preventDefault()}
+						sx={{ position: "relative", width: "100%", maxWidth: 460 }}>
+						<Box
+							sx={{
+								display: "flex",
+								alignItems: "center",
+								gap: 1,
+								height: 30,
+								px: 1.25,
+								borderRadius: 1.5,
+								border: 1,
+								borderColor: open ? "primary.main" : "divider",
+								color: "text.secondary",
+								backgroundColor: "background.default",
+								transition: "border-color 160ms ease, background-color 160ms ease"
+							}}>
+							<LuSearch size={14} />
+							<InputBase
+								value={query}
+								onChange={event => {
+									setQuery(event.target.value);
+									setOpen(true);
+								}}
+								onFocus={() => trimmedQuery && setOpen(true)}
+								onKeyDown={event => {
+									if (event.key === "Enter") {
+										event.preventDefault();
+										handleSubmit();
+									}
+									if (event.key === "Escape") setOpen(false);
+								}}
+								placeholder="Search portfolio files..."
+								inputProps={{
+									"aria-label": "Search portfolio files",
+									"aria-controls": searchListId,
+									"aria-expanded": open
+								}}
+								sx={{ flex: 1, fontSize: "0.8rem", color: "text.primary", minWidth: 0 }}
+							/>
+						</Box>
+
+						{open && trimmedQuery && (
+							<Paper
+								id={searchListId}
+								role="listbox"
+								elevation={8}
+								sx={{
+									position: "absolute",
+									top: 36,
+									left: 0,
+									right: 0,
+									zIndex: theme => theme.zIndex.modal,
+									overflow: "hidden",
+									border: 1,
+									borderColor: "divider",
+									backgroundColor: "background.paper"
+								}}>
+								{loading && (
+									<Typography
+										variant="caption"
+										sx={{ display: "block", px: 1.5, py: 1, color: "text.secondary" }}>
+										Searching files...
+									</Typography>
+								)}
+								{error && (
+									<Typography
+										variant="caption"
+										sx={{ display: "block", px: 1.5, py: 1, color: "error.main" }}>
+										{error}
+									</Typography>
+								)}
+								{!loading && !error && results.length === 0 && (
+									<Typography
+										variant="caption"
+										sx={{ display: "block", px: 1.5, py: 1, color: "text.secondary" }}>
+										No matching portfolio files.
+									</Typography>
+								)}
+								{!error &&
+									results.map(result => (
+										<Box
+											key={result.file}
+											component="button"
+											type="button"
+											role="option"
+											onClick={() => navigateToResult(result)}
+											sx={{
+												width: "100%",
+												border: 0,
+												borderBottom: 1,
+												borderColor: "divider",
+												backgroundColor: "transparent",
+												color: "text.primary",
+												textAlign: "left",
+												px: 1.5,
+												py: 1,
+												cursor: "pointer",
+												"&:hover, &:focus-visible": {
+													backgroundColor: "action.hover",
+													outline: "none"
+												},
+												"&:active": { transform: "translateY(1px)" }
+											}}>
+											<Box sx={{ display: "flex", alignItems: "center", gap: 0.75, mb: 0.25 }}>
+												<Box
+													component="span"
+													sx={{ color: "text.secondary", display: "inline-flex" }}>
+													<VscMarkdown size={14} />
+												</Box>
+												<Typography component="span" variant="body2" sx={{ fontWeight: 600 }}>
+													{highlightText(result.file, trimmedQuery)}
+												</Typography>
+											</Box>
+											<Typography
+												variant="caption"
+												sx={{ color: "text.secondary", display: "block", lineHeight: 1.4 }}>
+												{highlightText(result.snippet, trimmedQuery)}
+											</Typography>
+										</Box>
+									))}
+							</Paper>
+						)}
+					</Box>
+				</ClickAwayListener>
 			</Box>
 
-			{/* Right: relocated professional links + toggles */}
 			<Box sx={{ display: "flex", alignItems: "center", gap: 0.25, ml: "auto" }}>
 				{resume && (
 					<Button

@@ -4,6 +4,7 @@ import { BiSolidHandRight } from "react-icons/bi";
 import Icon from "@/components/Markdown/CustomIcon";
 import Image from "next/image";
 import { Children, isValidElement } from "react";
+import { headingIdFromChildren } from "@/utils/markdownAnchors";
 
 export function MarkdownLink(props: any) {
 	return (
@@ -58,9 +59,12 @@ export function MarkdownCode(props: any) {
 }
 
 export function MarkdownH1(props: any) {
+	const headingId = headingIdFromChildren(props.children);
+
 	return (
 		<>
 			<Typography
+				id={headingId}
 				variant="h1"
 				sx={{
 					fontSize: "2em",
@@ -78,9 +82,12 @@ export function MarkdownH1(props: any) {
 }
 
 export function MarkdownH2(props: any) {
+	const headingId = headingIdFromChildren(props.children);
+
 	return (
 		<>
 			<Typography
+				id={headingId}
 				variant="h2"
 				sx={{
 					fontSize: "1.5em",
@@ -98,9 +105,12 @@ export function MarkdownH2(props: any) {
 }
 
 export function MarkdownH3(props: any) {
+	const headingId = headingIdFromChildren(props.children);
+
 	return (
 		<>
 			<Typography
+				id={headingId}
 				variant="h3"
 				sx={{
 					fontSize: "1.25em",
@@ -117,9 +127,12 @@ export function MarkdownH3(props: any) {
 }
 
 export function MarkdownH4(props: any) {
+	const headingId = headingIdFromChildren(props.children);
+
 	return (
 		<>
 			<Typography
+				id={headingId}
 				variant="h4"
 				sx={{
 					fontSize: "1em",

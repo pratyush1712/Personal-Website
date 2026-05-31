@@ -1,6 +1,6 @@
 "use client";
-import { Box, IconButton, Tooltip, Typography } from "@mui/material";
-import { VscAdd, VscChromeClose } from "react-icons/vsc";
+import { Box, IconButton, Tooltip } from "@mui/material";
+import { VscAdd, VscClose, VscEdit } from "react-icons/vsc";
 import { AgentTab, MAX_TABS } from "@/utils/agentStorage";
 
 interface Props {
@@ -14,12 +14,30 @@ interface Props {
 
 export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate, canCreate }: Props) {
 	return (
-		<Box sx={{ flexShrink: 0, borderBottom: 1, borderColor: "divider" }}>
+		<Box
+			sx={{
+				flexShrink: 0,
+				borderBottom: "1px solid",
+				borderColor: "divider",
+				display: "flex",
+				alignItems: "center",
+				minHeight: 34,
+				// Cursor uses a very slightly lighter bg for the tab bar
+				backgroundColor: theme =>
+					theme.palette.mode === "dark" ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.02)"
+			}}>
+			{/* Scrollable tab list */}
 			<Box
 				role="tablist"
 				aria-label="Agent chat tabs"
-				sx={{ display: "flex", alignItems: "stretch", overflowX: "auto", scrollbarWidth: "thin" }}>
-				{" "}
+				sx={{
+					display: "flex",
+					alignItems: "stretch",
+					flex: 1,
+					overflowX: "auto",
+					scrollbarWidth: "none",
+					"&::-webkit-scrollbar": { display: "none" }
+				}}>
 				{tabs.map(t => {
 					const active = t.id === activeId;
 					return (
@@ -31,25 +49,64 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 							sx={{
 								display: "flex",
 								alignItems: "center",
-								gap: 0.5,
-								pl: 1,
-								pr: 0.5,
-								py: 0.5,
+								gap: "3px",
+								pl: "10px",
+								pr: "6px",
+								height: 34,
 								cursor: "pointer",
 								whiteSpace: "nowrap",
-								borderRight: 1,
-								borderColor: "divider",
-								borderTop: "2px solid",
-								borderTopColor: active ? "primary.main" : "transparent",
-								backgroundColor: active ? "background.default" : "transparent",
+								position: "relative",
+								userSelect: "none",
+								// Active tab: slightly lighter bg + bottom accent line
+								backgroundColor: active
+									? theme =>
+											theme.palette.mode === "dark"
+												? "rgba(255,255,255,0.05)"
+												: "rgba(0,0,0,0.04)"
+									: "transparent",
 								color: active ? "text.primary" : "text.secondary",
-								"&:hover": { color: "text.primary" }
+								// Bottom border as active indicator — Cursor uses a subtle 1px accent
+								"&::after": active
+									? {
+											content: '""',
+											position: "absolute",
+											bottom: 0,
+											left: 0,
+											right: 0,
+											height: "1px",
+											backgroundColor: theme =>
+												theme.palette.mode === "dark"
+													? "rgba(255,255,255,0.3)"
+													: theme.palette.primary.main
+									  }
+									: {},
+								"&:hover": {
+									color: "text.primary",
+									backgroundColor: theme =>
+										theme.palette.mode === "dark" ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)"
+								},
+								// Right separator between tabs
+								"&:not(:last-of-type)": {
+									borderRight: "1px solid",
+									borderColor: "divider"
+								}
 							}}>
-							<Typography
-								variant="caption"
-								sx={{ maxWidth: 110, overflow: "hidden", textOverflow: "ellipsis", color: "inherit" }}>
+							{/* Pencil icon — mirrors Cursor's edit icon on agent tabs */}
+							<VscEdit size={11} style={{ opacity: active ? 0.7 : 0.4, flexShrink: 0 }} />
+
+							<Box
+								component="span"
+								sx={{
+									fontSize: "0.72rem",
+									maxWidth: 90,
+									overflow: "hidden",
+									textOverflow: "ellipsis",
+									color: "inherit"
+								}}>
 								{t.title}
-							</Typography>
+							</Box>
+
+							{/* Close button — appears on hover or when active */}
 							<Box
 								component="span"
 								role="button"
@@ -61,33 +118,57 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 								sx={{
 									display: "inline-flex",
 									alignItems: "center",
-									borderRadius: 0.5,
-									p: 0.25,
-									"&:hover": { backgroundColor: "action.hover", color: "text.primary" }
+									justifyContent: "center",
+									width: 16,
+									height: 16,
+									borderRadius: "3px",
+									flexShrink: 0,
+									opacity: active ? 0.6 : 0,
+									color: "text.secondary",
+									transition: "opacity 120ms ease, background-color 120ms ease",
+									".MuiBox-root:hover &": { opacity: 0.6 },
+									"&:hover": {
+										opacity: "1 !important",
+										backgroundColor: theme =>
+											theme.palette.mode === "dark"
+												? "rgba(255,255,255,0.12)"
+												: "rgba(0,0,0,0.1)",
+										color: "text.primary"
+									}
 								}}>
-								<VscChromeClose size={11} />
+								<VscClose size={11} />
 							</Box>
 						</Box>
 					);
 				})}
-				<Tooltip title={canCreate ? "New chat" : `Limit reached: ${MAX_TABS} local agent tabs.`} arrow>
-					<span style={{ display: "inline-flex", alignItems: "center" }}>
-						<IconButton
-							size="small"
-							onClick={onCreate}
-							disabled={!canCreate}
-							aria-label="New chat"
-							sx={{ mx: 0.25, color: "text.secondary", backgroundColor: "transparent" }}>
-							<VscAdd size={13} />
-						</IconButton>
-					</span>
-				</Tooltip>
 			</Box>
-			{!canCreate && (
-				<Typography variant="caption" sx={{ display: "block", px: 1, py: 0.25, color: "text.disabled" }}>
-					Limit reached: {MAX_TABS} local agent tabs.
-				</Typography>
-			)}
+
+			{/* New chat button — always visible at the right end */}
+			<Tooltip title={canCreate ? "New chat" : `Max ${MAX_TABS} tabs`} arrow>
+				<span>
+					<IconButton
+						size="small"
+						onClick={onCreate}
+						disabled={!canCreate}
+						aria-label="New chat"
+						sx={{
+							width: 28,
+							height: 28,
+							mx: 0.5,
+							flexShrink: 0,
+							borderRadius: "5px",
+							color: "text.secondary",
+							"&:hover": {
+								color: "text.primary",
+								backgroundColor: theme =>
+									theme.palette.mode === "dark" ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"
+							},
+							"&.Mui-disabled": { opacity: 0.3 }
+						}}>
+						<VscAdd size={14} />
+					</IconButton>
+				</span>
+			</Tooltip>
 		</Box>
 	);
 }

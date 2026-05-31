@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Box, IconButton, Tooltip, Typography } from "@mui/material";
-import { VscClose } from "react-icons/vsc";
+import { Box, IconButton, Tooltip } from "@mui/material";
+import { VscLayoutSidebarRight } from "react-icons/vsc";
 import { useLocalAgentTabs } from "@/utils/useLocalAgentTabs";
 import AgentTabs from "./AgentTabs";
 import AgentChat from "./AgentChat";
@@ -12,8 +12,6 @@ interface Props {
 	currentPage?: string;
 }
 
-// Shown when the agent endpoint is missing/unconfigured or errors. The panel never crashes the
-// page; it degrades to this message and the visitor can keep exploring the portfolio.
 const UNAVAILABLE_MESSAGE =
 	"Portfolio Agent isn't connected yet. You can still explore Pratyush's portfolio using the files in the explorer.";
 
@@ -22,7 +20,6 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 		useLocalAgentTabs();
 	const [pending, setPending] = useState(false);
 
-	// Re-open the panel with a fresh tab after the visitor closed the last one.
 	useEffect(() => {
 		if (hydrated && tabs.length === 0) createTab();
 	}, [hydrated, tabs.length, createTab]);
@@ -75,34 +72,55 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				height: "100%",
 				display: "flex",
 				flexDirection: "column",
-				borderLeft: 1,
+				borderLeft: "1px solid",
 				borderColor: "divider",
-				backgroundColor: "background.paper"
+				// Match Cursor's near-black panel background
+				backgroundColor: theme => (theme.palette.mode === "dark" ? "#1e1e1e" : theme.palette.background.paper),
+				overflow: "hidden"
 			}}>
+			{/* ── Top bar: title + close ── */}
 			<Box
 				sx={{
-					height: 44,
+					height: 35,
 					flexShrink: 0,
 					display: "flex",
 					alignItems: "center",
+					justifyContent: "space-between",
 					px: 1.5,
-					borderBottom: 1,
+					borderBottom: "1px solid",
 					borderColor: "divider"
 				}}>
-				<Typography variant="body2" sx={{ fontWeight: 600 }}>
-					Agents
-				</Typography>
-				<Tooltip title="Hide agents panel" arrow>
+				<Box
+					sx={{
+						fontSize: "0.72rem",
+						fontWeight: 600,
+						letterSpacing: "0.06em",
+						textTransform: "uppercase",
+						color: "text.secondary"
+					}}>
+					Chat
+				</Box>
+				<Tooltip title="Close panel" arrow>
 					<IconButton
 						size="small"
 						onClick={onClose}
-						aria-label="Hide agents panel"
-						sx={{ ml: "auto", color: "text.secondary", backgroundColor: "transparent" }}>
-						<VscClose size={16} />
+						aria-label="Close agents panel"
+						sx={{
+							p: "3px",
+							color: "text.secondary",
+							borderRadius: "4px",
+							"&:hover": {
+								color: "text.primary",
+								backgroundColor: theme =>
+									theme.palette.mode === "dark" ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"
+							}
+						}}>
+						<VscLayoutSidebarRight size={15} />
 					</IconButton>
 				</Tooltip>
 			</Box>
 
+			{/* ── Tab bar ── */}
 			{hydrated && (
 				<AgentTabs
 					tabs={tabs}
@@ -114,7 +132,10 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				/>
 			)}
 
+			{/* ── Message area ── */}
 			<AgentChat tab={activeTab} pending={pending} onPromptSelect={send} />
+
+			{/* ── Cursor-style input box ── */}
 			<AgentInput onSend={send} pending={pending} />
 		</Box>
 	);

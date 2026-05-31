@@ -7,6 +7,7 @@ import { VscMarkdown, VscChromeClose, VscRepo } from "react-icons/vsc";
 import Link from "next/link";
 import AppTree from "./AppTree";
 import { Page } from "@/types";
+import { slugifyHeading } from "@/utils/markdownAnchors";
 
 interface Props {
 	pages: Page[];
@@ -19,9 +20,13 @@ interface Props {
 	setVisiblePageIndexs: Dispatch<SetStateAction<number[]>>;
 }
 
-// Featured work, sourced from real entries in public/readmes/projects.md. These intentionally
-// link to the existing /projects route — no new routed content is introduced.
-const FEATURED_PROJECTS = ["Personal Agent Homebase", "BrainDump", "ADHD-Friendly Text Enhancer"];
+// Featured work is sourced from real headings in public/readmes/projects.md.
+// Each item deep-links to its heading in the existing projects file to avoid duplicating project content.
+const FEATURED_PROJECTS = [
+	"Personal Agent Homebase",
+	"BrainDump - AI Thought-Mapping Canvas",
+	"ADHD-Friendly Text Enhancer"
+];
 
 function fileRowSx(active: boolean) {
 	return {
@@ -177,20 +182,33 @@ export default function ExplorerPanel({
 			</Section>
 
 			<Section title="FEATURED PROJECTS" defaultOpen={false}>
-				{FEATURED_PROJECTS.map(name => (
-					<Link key={name} href="/projects" style={{ textDecoration: "none" }}>
-						<Box sx={fileRowSx(false)}>
-							<Box component="span" sx={{ display: "inline-flex", color: "text.secondary" }}>
-								<VscRepo />
-							</Box>
+				{FEATURED_PROJECTS.map(name => {
+					const projectsPage = pages.find(page => page.route === "projects");
+					const projectHref = `/projects#${slugifyHeading(name)}`;
+
+					return (
+						<Link key={name} href={projectHref} style={{ textDecoration: "none" }}>
 							<Box
-								component="span"
-								sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-								{name}
+								onClick={() => {
+									if (projectsPage && !visiblePageIndexs.includes(projectsPage.index)) {
+										setVisiblePageIndexs([...visiblePageIndexs, projectsPage.index]);
+									}
+									if (projectsPage) setSelectedIndex(projectsPage.index);
+									setCurrentComponent("featured-projects");
+								}}
+								sx={fileRowSx(false)}>
+								<Box component="span" sx={{ display: "inline-flex", color: "text.secondary" }}>
+									<VscRepo />
+								</Box>
+								<Box
+									component="span"
+									sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+									{name}
+								</Box>
 							</Box>
-						</Box>
-					</Link>
-				))}
+						</Link>
+					);
+				})}
 			</Section>
 		</Box>
 	);
