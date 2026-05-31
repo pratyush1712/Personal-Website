@@ -1,12 +1,41 @@
 import { createTheme, darkScrollbar } from "@mui/material";
 
+// Cursor Dark+ inspired design tokens. Phase A foundation: surfaces, text, borders and the
+// accent all flow from here, so later phases recolor by adjusting tokens rather than touching
+// individual components. Ordering from darkest to lightest in dark mode: appBg < panel < surface.
+const TOKENS = {
+	dark: {
+		appBg: "#0d0d0f", // near-black app background (root / gaps between panels)
+		panel: "#161618", // sidebar + side panels, slightly lifted off black
+		surface: "#1a1a1c", // editor / content surface, dark neutral
+		elevated: "#202024", // hover / raised state
+		border: "#2a2a2e", // subtle, muted divider
+		textPrimary: "#e6e6e6", // off-white
+		textSecondary: "#8a8a92", // muted gray
+		accent: "#4d9cf0" // minimal, refined accent — used sparingly
+	},
+	light: {
+		appBg: "#ffffff",
+		panel: "#f5f5f5",
+		surface: "#ffffff",
+		elevated: "#ececec",
+		border: "#e2e2e2",
+		textPrimary: "#1a1a1a",
+		textSecondary: "#5f5f5f",
+		accent: "#007acc"
+	}
+};
+
 export default function theme(darkMode: boolean, paletteOverrides?: any) {
+	const t = darkMode ? TOKENS.dark : TOKENS.light;
+
 	const defaultPalette = {
 		mode: darkMode ? "dark" : "light",
-		background: { default: darkMode ? "#1e1e1e" : "#FFFFFF" },
-		primary: { main: darkMode ? "#0e639c" : "#007acc" },
-		secondary: { main: darkMode ? "#0e639c" : "#007acc" },
-		text: { primary: darkMode ? "#FFFFFF" : "#000000" }
+		background: { default: t.appBg, paper: t.panel },
+		primary: { main: t.accent },
+		secondary: { main: t.accent },
+		text: { primary: t.textPrimary, secondary: t.textSecondary },
+		divider: t.border
 	};
 	const palette = { ...defaultPalette, ...paletteOverrides?.palette };
 
@@ -14,26 +43,26 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 		MuiCssBaseline: {
 			styleOverrides: {
 				body: darkMode ? darkScrollbar() : null,
-				textDecorationColor: !darkMode ? "#000000" : "#FFFFFF",
+				textDecorationColor: t.textPrimary,
 				"@media (max-width:600px)": { fontSize: "0.875rem" }
 			}
 		},
-		MuiPaper: { styleOverrides: { root: { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" } } },
+		MuiPaper: { styleOverrides: { root: { backgroundColor: t.panel } } },
 		MuiContainer: {
 			styleOverrides: {
 				root: {
 					ownerState: { disableGutters: true },
-					backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
-					textDecorationColor: !darkMode ? "#000000" : "#FFFFFF"
+					backgroundColor: t.surface,
+					textDecorationColor: t.textPrimary
 				}
 			}
 		},
 		MuiButton: {
 			styleOverrides: {
 				root: {
-					color: !darkMode ? "#000000" : "#FFFFFF",
-					backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
-					"&:hover": { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" },
+					color: t.textPrimary,
+					backgroundColor: t.surface,
+					"&:hover": { backgroundColor: t.surface },
 					"@media (max-width:600px)": { padding: "4px 8px" }
 				}
 			}
@@ -41,9 +70,9 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 		MuiIconButton: {
 			styleOverrides: {
 				root: {
-					color: !darkMode ? "#000000" : "#FFFFFF",
-					backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
-					"&:hover": { backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e" },
+					color: t.textPrimary,
+					backgroundColor: t.surface,
+					"&:hover": { backgroundColor: t.surface },
 					"@media (max-width:600px)": { padding: "4px" }
 				}
 			}
@@ -51,28 +80,28 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 		MuiTabs: {
 			styleOverrides: {
 				root: {
-					backgroundColor: !darkMode ? "#FFFFFF" : "#1e1e1e",
-					color: !darkMode ? "#000000" : "#FFFFFF"
+					backgroundColor: t.surface,
+					color: t.textPrimary
 				}
 			}
 		},
 		MuiTab: {
 			styleOverrides: {
 				root: {
-					color: !darkMode ? "#000000" : "#FFFFFF",
-					"&:hover": { color: !darkMode ? "#000000" : "#FFFFFF" },
+					color: t.textPrimary,
+					"&:hover": { color: t.textPrimary },
 					"@media (max-width:600px)": { fontSize: "0.425rem" }
 				}
 			}
 		},
 		MuiTypography: {
-			styleOverrides: { root: { color: !darkMode ? "#000000" : "#FFFFFF" } }
+			styleOverrides: { root: { color: t.textPrimary } }
 		},
 		MuiListItem: {
 			styleOverrides: {
 				root: {
-					color: !darkMode ? "#000000" : "#FFFFFF",
-					"&:hover": { color: !darkMode ? "#000000" : "#FFFFFF" },
+					color: t.textPrimary,
+					"&:hover": { color: t.textPrimary },
 					"@media (max-width:600px)": { padding: "4px 8px" }
 				}
 			}
