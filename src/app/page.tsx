@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Divider, Grid, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { links } from "@/utils/links";
 import Image from "next/image";
 import AnimatedTextComponent from "@/ui/HomePageCaption";
