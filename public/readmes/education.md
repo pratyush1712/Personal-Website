@@ -6,7 +6,7 @@
 
 ## `2021 – 2026`
 
-The CS + Math + Psychology combination isn't an accident. I came into college knowing I wanted to build systems, but the psych and cog sci courses changed what I thought systems were _for_. By my junior year I was taking Advanced ML Systems alongside Adult Psychopathology and Cognitive Development - which sounds strange until you realize those courses are all asking the same underlying question: how do complex systems process information under constraints?
+The CS + Math + Psychology combination isn't an accident. I came into college knowing I wanted to pursue computer science, but the psych and cog sci courses changed what I thought computer systems were _for_. By my senior year I was taking Advanced ML Systems alongside Adult Psychopathology and Cognitive Development - which sounds strange until you realize those courses are all asking the same underlying question: how do complex systems process information under constraints?
 
 ## 📑 Relevant Coursework
 
@@ -28,15 +28,16 @@ The CS + Math + Psychology combination isn't an accident. I came into college kn
 
 -   Numerical Analysis (Math 4260)
 -   Introduction to Combinatorics II (Math 4420)
+-   Linear Algebra (Math 4310)
 -   Basic Probability (Math 4710)
 -   Applicable Algebra (Math 3360)
 -   Discrete Structures (CS 2800)
 -   Multivariable Calculus (Math 2220)
--   Linear Algebra (Math 2940)
+-   Linear Algebra for Engineers (Math 2940)
 
 ### Applied Mathematics & Engineering
 
--   Engineering Applications of Operations Research (ENGRI 1101) - where I first encountered LP and matching theory
+-   Engineering Applications of Operations Research (ENGRI 1101)
 -   Data Science for Engineers (ENGRD 2720)
 -   Developing an Entrepreneurial Mindset (HADM 4144)
 

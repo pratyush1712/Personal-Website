@@ -6,8 +6,6 @@
 
 Perfect Match is Cornell's student-run dating platform, serving 5,000+ users each cycle. I joined as an engineer and eventually became Head of Engineering - which meant owning the technical direction of a system where the output is real human connections, and getting it wrong has real consequences.
 
-The most significant work: transitioning from offline batch matching to real-time matching using a Gale-Shapley stable matching algorithm paired with Google OR-Tools for optimization. Stable matching has a mathematical guarantee I care about - no two people would both prefer each other over their assigned partners. That fairness property matters when you're allocating something as personal as a match. The system delivered 50,000+ matches.
-
 Beyond the algorithm work:
 
 -   Architected a Flask microservice for a live analytics dashboard, handling real-time data for 5,000+ active users. Used MongoDB Map-Reduce for aggregation and server-side caching for latency.
@@ -63,5 +61,3 @@ Cornell Wushu is a competitive martial arts club focusing on Chinese martial art
 
 -   Worked with the President and Practice Leaders to run practices and help newer members develop their forms.
 -   Planned and arranged events, including competition prep sessions and public performances.
-
-The non-technical affiliations matter. Wushu taught me how to work a body, how to perform under pressure, and how to coach - which is just a different kind of systems thinking. You observe someone's form, identify where the pattern breaks down, and figure out how to communicate the fix in a way they can actually receive.
