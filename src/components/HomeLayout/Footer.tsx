@@ -1,163 +1,67 @@
-import { Box, Grid, Link, Paper, Stack, Typography } from "@mui/material";
+import { Box, Link, Paper, Typography } from "@mui/material";
 import { VscRemote, VscError, VscWarning, VscBell, VscFeedback, VscCheck } from "react-icons/vsc";
 import { IoIosGitBranch } from "react-icons/io";
 
+// Muted Cursor-style status bar: panel background with a thin top border, secondary text
+// that brightens on hover. No VS Code blue/green blocks.
+const itemSx = {
+	display: "flex",
+	alignItems: "center",
+	gap: 0.4,
+	px: 0.5,
+	color: "text.secondary",
+	"&:hover": { color: "text.primary" }
+} as const;
+
+const labelSx = { fontSize: "0.62rem", color: "inherit" } as const;
+
 export default function Footer() {
 	return (
-		<Box component={Paper} square elevation={0} sx={{ height: "20px", color: "white" }} display="flex">
-			<Grid container>
-				<Grid
-					item
-					sx={{
-						width: "35px",
-						backgroundColor: "#2E8461",
-						justifyContent: "center",
-						alignItems: "center",
-						cursor: "pointer",
-						"&:hover": {
-							background: "#329171"
-						}
-					}}
-					display="flex">
-					<VscRemote fontSize="0.9rem" />
-				</Grid>
-				<Grid item sx={{ backgroundColor: "#3279CB", width: "200px" }} display="flex">
-					<Stack direction="row" spacing={0.5} sx={{ pl: 1 }}>
-						<Box
-							component={Link}
-							href="https://github.com/pratyush1712"
-							underline="none"
-							color="white"
-							target="_blank"
-							display="flex"
-							sx={{
-								px: 0.5,
-								justifyContent: "center",
-								alignItems: "center",
-								"&:hover": { background: "#1f8ad2" }
-							}}>
-							<IoIosGitBranch fontSize="0.9rem" />
-							<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem", color: "white" }}>
-								master
-							</Typography>
-						</Box>
+		<Box
+			component={Paper}
+			square
+			elevation={0}
+			sx={{
+				height: "22px",
+				display: "flex",
+				alignItems: "center",
+				gap: 1,
+				px: 1,
+				backgroundColor: "background.paper",
+				borderTop: 1,
+				borderColor: "divider",
+				color: "text.secondary"
+			}}>
+			<Box
+				component={Link}
+				href="https://github.com/pratyush1712"
+				target="_blank"
+				underline="none"
+				sx={{ ...itemSx, cursor: "pointer" }}>
+				<VscRemote fontSize="0.8rem" />
+				<IoIosGitBranch fontSize="0.8rem" />
+				<Typography sx={labelSx}>master</Typography>
+			</Box>
 
-						<Stack
-							direction="row"
-							spacing={0.5}
-							sx={{
-								px: 0.5,
-								cursor: "pointer",
-								"&:hover": { background: "#1f8ad2" }
-							}}>
-							<Box
-								display="flex"
-								sx={{
-									justifyContent: "center",
-									alignItems: "center",
-									py: 0.3
-								}}>
-								<VscError fontSize="0.9rem" />
-							</Box>
-							<Box
-								display="flex"
-								sx={{
-									justifyContent: "center",
-									alignItems: "center",
-									pt: 0.3
-								}}>
-								<Typography
-									sx={{
-										fontSize: "0.6rem",
-										color: "white"
-									}}>
-									0
-								</Typography>
-							</Box>
+			<Box sx={itemSx}>
+				<VscError fontSize="0.8rem" />
+				<Typography sx={labelSx}>0</Typography>
+				<VscWarning fontSize="0.8rem" />
+				<Typography sx={labelSx}>0</Typography>
+			</Box>
 
-							<Box
-								display="flex"
-								sx={{
-									justifyContent: "center",
-									alignItems: "center",
-									py: 0.3
-								}}>
-								<VscWarning fontSize="0.9rem" />
-							</Box>
-							<Box
-								display="flex"
-								sx={{
-									justifyContent: "center",
-									alignItems: "center",
-									pt: 0.3
-								}}>
-								<Typography
-									sx={{
-										fontSize: "0.6rem",
-										color: "white"
-									}}>
-									0
-								</Typography>
-							</Box>
-						</Stack>
-					</Stack>
-				</Grid>
-				<Grid
-					item
-					sx={{ backgroundColor: "#3279CB", minWidth: `calc(100% - 235px)` }}
-					display="flex"
-					justifyContent="flex-end">
-					<Box display="flex" justifyContent="flex-end">
-						<Stack
-							// display="flex"
-							justifyContent="end"
-							direction="row"
-							spacing={0.8}
-							sx={{ pr: 1.5 }}>
-							<Box
-								display="flex"
-								sx={{
-									px: 0.5,
-									justifyContent: "center",
-									alignItems: "center",
-									cursor: "pointer",
-									"&:hover": { background: "#1f8ad2" }
-								}}>
-								<VscCheck fontSize="0.9rem" />
-								<Typography sx={{ ml: 0.5, mt: 0.1, fontSize: "0.6rem", color: "white" }}>
-									Prettier
-								</Typography>
-							</Box>
+			<Box sx={{ flex: 1 }} />
 
-							<Box
-								display="flex"
-								sx={{
-									justifyContent: "center",
-									alignItems: "center",
-									py: 0.3,
-									px: 0.5,
-									cursor: "pointer",
-									"&:hover": { background: "#1f8ad2" }
-								}}>
-								<VscFeedback fontSize="0.9rem" />
-							</Box>
-							<Box
-								display="flex"
-								sx={{
-									width: "50%",
-									justifyContent: "center",
-									alignItems: "center",
-									py: 0.3,
-									px: 0.5,
-									cursor: "pointer",
-									"&:hover": { background: "#1f8ad2" }
-								}}>
-								<VscBell fontSize="0.9rem" />
-							</Box>
-						</Stack>
-					</Box>
-				</Grid>
-			</Grid>
+			<Box sx={{ ...itemSx, cursor: "pointer" }}>
+				<VscCheck fontSize="0.8rem" />
+				<Typography sx={labelSx}>Prettier</Typography>
+			</Box>
+			<Box sx={{ ...itemSx, cursor: "pointer" }}>
+				<VscFeedback fontSize="0.8rem" />
+			</Box>
+			<Box sx={{ ...itemSx, cursor: "pointer" }}>
+				<VscBell fontSize="0.8rem" />
+			</Box>
 		</Box>
 	);
 }

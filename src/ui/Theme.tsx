@@ -3,7 +3,7 @@ import { createTheme, darkScrollbar } from "@mui/material";
 // Cursor Dark+ inspired design tokens. Phase A foundation: surfaces, text, borders and the
 // accent all flow from here, so later phases recolor by adjusting tokens rather than touching
 // individual components. Ordering from darkest to lightest in dark mode: appBg < panel < surface.
-const TOKENS = {
+export const TOKENS = {
 	dark: {
 		appBg: "#0d0d0f", // near-black app background (root / gaps between panels)
 		panel: "#161618", // sidebar + side panels, slightly lifted off black
