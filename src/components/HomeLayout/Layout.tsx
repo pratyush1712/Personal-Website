@@ -6,7 +6,7 @@ import { isBrowser } from "react-device-detect";
 import AppButtons from "./AppButtons";
 import AppTree from "./AppTree";
 import Footer from "./Footer";
-import Sidebar from "./Sidebar";
+import TopCommandBar from "./TopCommandBar";
 import pages, { routeToPage } from "@/utils/pages";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import createCache from "@emotion/cache";
@@ -38,9 +38,8 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 	const params = useParams();
 	const pathname = usePathname();
 	const [explorerOpen, setExplorerOpen] = useState(isBrowser);
-	// Right-side agents panel slot. Reserved here in the shell; the toggle is wired up in
-	// Phase C (top bar) and the panel itself is built in Phase F.
-	const [agentsOpen] = useState(false);
+	// Right-side agents panel. Toggled from the top bar; the panel content is built in Phase F.
+	const [agentsOpen, setAgentsOpen] = useState(false);
 	const [selectedIndex, setSelectedIndex] = useState(routeToPage[params.slug as string]?.index ?? null);
 	const [currentComponent, setCurrentComponent] = useState("");
 	const [visiblePageIndexs, setVisiblePageIndexs] = useState(initVisiblePageIndexs(pages));
@@ -57,6 +56,9 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 			return next;
 		});
 	}
+
+	// Human-readable label of the current route for the top bar (normalizes "/overview" -> "overview").
+	const currentPage = pathname && pathname !== "/" ? pathname.replace(/^\/+/, "") : "Home";
 
 	const deletedIndex: number | undefined = visiblePages.find(x => !visiblePageIndexs.includes(x.index))?.index;
 	useEffect(() => {
@@ -141,19 +143,16 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 						flexDirection: "column",
 						backgroundColor: "background.default"
 					}}>
+					<TopCommandBar
+						darkMode={darkMode}
+						onThemeToggle={handleThemeChange}
+						explorerOpen={explorerOpen}
+						onExplorerToggle={() => setExplorerOpen(prev => !prev)}
+						agentsOpen={agentsOpen}
+						onAgentsToggle={() => setAgentsOpen(prev => !prev)}
+						currentPage={currentPage}
+					/>
 					<Box sx={{ flex: 1, minHeight: 0, display: "flex", overflow: "hidden" }}>
-						{/* Left activity rail (replaced by the top bar in Phase C) */}
-						{isBrowser && (
-							<Box sx={{ width: 50, flexShrink: 0 }}>
-								<Sidebar
-									setExpanded={setExplorerOpen}
-									expanded={explorerOpen}
-									darkMode={darkMode}
-									handleThemeChange={handleThemeChange}
-								/>
-							</Box>
-						)}
-
 						{/* Explorer sidebar (restyled in Phase D) */}
 						{explorerOpen && (
 							<Box
@@ -211,9 +210,38 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 							</Box>
 						</Box>
 
-						{/* Right agents panel — reserved slot, populated in Phase F */}
+						{/* Right agents panel — minimal placeholder; full panel built in Phase F */}
 						{agentsOpen && (
-							<Box sx={{ width: 320, flexShrink: 0, borderLeft: 1, borderColor: "divider" }} />
+							<Box
+								sx={{
+									width: 320,
+									flexShrink: 0,
+									borderLeft: 1,
+									borderColor: "divider",
+									backgroundColor: "background.paper",
+									display: "flex",
+									flexDirection: "column"
+								}}>
+								<Box
+									sx={{
+										height: 44,
+										flexShrink: 0,
+										display: "flex",
+										alignItems: "center",
+										px: 2,
+										borderBottom: 1,
+										borderColor: "divider"
+									}}>
+									<Typography variant="body2" sx={{ fontWeight: 600 }}>
+										Agents
+									</Typography>
+								</Box>
+								<Box sx={{ p: 2 }}>
+									<Typography variant="caption" sx={{ color: "text.secondary" }}>
+										Portfolio Agent — coming soon.
+									</Typography>
+								</Box>
+							</Box>
 						)}
 					</Box>
 
