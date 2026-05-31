@@ -3,6 +3,7 @@ import { Table, TableCell, TableContainer } from "@mui/material";
 import { BiSolidHandRight } from "react-icons/bi";
 import Icon from "@/components/Markdown/CustomIcon";
 import Image from "next/image";
+import { Children, isValidElement } from "react";
 
 export function MarkdownLink(props: any) {
 	return (
@@ -151,12 +152,12 @@ export function MarkdownUnderline(props: any) {
 }
 
 export function MarkdownImage(props: any) {
-	props.style.width = props.style.width?.split("px")[0] || "15";
-	props.style.height = props.style.height?.split("px")[0] || "25";
+	const width = props.style?.width?.split("px")[0] || "15";
+	const height = props.style?.height?.split("px")[0] || "25";
 	if (props?.className === "overview") {
 		return <Icon component="img" src={props.src} />;
 	}
-	return <Image {...props} width={props.style.width} height={props.style.height} alt={props?.alt || ""} />;
+	return <Image {...props} width={width} height={height} alt={props?.alt || ""} />;
 }
 
 export const MarkdownLabel = (props: any) => {
@@ -170,57 +171,25 @@ export const MarkdownLabel = (props: any) => {
 export function MarkdownParagraph(props: any) {
 	if (!props.children) return <Typography>{props.children}</Typography>;
 
-	const element: any = props.children;
-	const result = [];
+	const children = Children.toArray(props.children);
+	const hasInlineElement = children.some(child => isValidElement(child));
 
-	let anyInlineElement = false;
-	for (const e of element) {
-		if (e.type) {
-			anyInlineElement = true;
-		}
-	}
-
-	if (anyInlineElement) {
-		for (const e of element) {
-			if (e.type) {
-				const uniqueID = `${e.key} ${Math.random()}`;
-				if (e.type === "strong") {
-					result.push(
-						<Typography key={uniqueID} display="inline" mb={1}>
-							<strong>{e}</strong>
-						</Typography>
-					);
-				} else if (e.type === "em") {
-					result.push(
-						<Typography key={uniqueID} display="inline" mb={1}>
-							<i>{e}</i>
-						</Typography>
-					);
-				} else {
-					result.push({ ...e });
+	return (
+		<>
+			{children.map((child, index) => {
+				if (isValidElement(child)) {
+					return child;
 				}
-			} else {
-				const uniqueID = `${e.key} ${Math.random()}`;
-				result.push(
-					<Typography key={uniqueID} display="inline" mb={1}>
-						{e}
+
+				return (
+					<Typography
+						key={`${String(child)}-${index}`}
+						display={hasInlineElement ? "inline" : "block"}
+						mb={hasInlineElement ? 1 : 2}>
+						{child}
 					</Typography>
 				);
-			}
-		}
-	} else {
-		for (const e of element) {
-			const uniqueID = `${e.key} ${Math.random()}`;
-			if (e.type) {
-				result.push({ ...e });
-			} else {
-				result.push(
-					<Typography key={uniqueID} mb={2}>
-						{e}
-					</Typography>
-				);
-			}
-		}
-	}
-	return <>{result}</>;
+			})}
+		</>
+	);
 }

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { links } from "@/utils/links";
 import { Grid, IconButton, Typography, Link } from "@mui/material";
-import GitHubCalendar from "react-github-calendar";
+import { GitHubCalendar } from "react-github-calendar";
 import { FaGithub } from "react-icons/fa";
 
 export default function GitHubPortfolio() {

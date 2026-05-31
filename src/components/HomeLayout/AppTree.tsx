@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { TreeView } from "@mui/x-tree-view";
+import { SimpleTreeView } from "@mui/x-tree-view";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { TreeItem } from "@mui/x-tree-view";
@@ -61,18 +61,13 @@ export default function AppTree({
 	}
 
 	return (
-		<TreeView
+		<SimpleTreeView
 			aria-label="file system navigator"
-			defaultCollapseIcon={
-				<Link href="/" style={{ alignItems: "center", justifyContent: "center", display: "flex" }}>
-					<ExpandMoreIcon />
-				</Link>
-			}
-			defaultExpandIcon={<ChevronRightIcon />}
+			slots={{ collapseIcon: ExpandMoreIcon, expandIcon: ChevronRightIcon }}
 			sx={{ minWidth: 220 }}
-			defaultExpanded={["-1"]}>
+			defaultExpandedItems={["-1"]}>
 			<TreeItem
-				nodeId="-1"
+				itemId="-1"
 				label={<span style={{ textDecoration: "none", color: "inherit" }}>Home</span>}
 				sx={{
 					color: renderTreeItemColor(-2),
@@ -84,15 +79,26 @@ export default function AppTree({
 				{pages.map(({ index, name, route }) => (
 					<Link href={route} key={index}>
 						<TreeItem
-							nodeId={index.toString()}
-							label={<span style={{ textDecoration: "none", color: "inherit" }}>{name}</span>}
+							itemId={index.toString()}
+							label={
+								<span
+									style={{
+										alignItems: "center",
+										display: "inline-flex",
+										gap: 4,
+										textDecoration: "none",
+										color: "inherit"
+									}}>
+									<VscMarkdown color="#6997d5" />
+									{name}
+								</span>
+							}
 							sx={{
 								color: renderTreeItemColor(index),
 								backgroundColor: renderTreeItemBgColor(index),
 								"&& .Mui-selected": { backgroundColor: renderTreeItemBgColor(index) }
 							}}
-							icon={<VscMarkdown color="#6997d5" />}
-							onClick={(e: any) => {
+							onClick={() => {
 								if (!visiblePageIndexs.includes(index)) {
 									const newIndexs = [...visiblePageIndexs, index];
 									setVisiblePageIndexs(newIndexs);
@@ -104,6 +110,6 @@ export default function AppTree({
 					</Link>
 				))}
 			</TreeItem>
-		</TreeView>
+		</SimpleTreeView>
 	);
 }
