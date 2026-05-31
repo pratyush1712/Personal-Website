@@ -40,14 +40,16 @@ This repository contains the source code for my personal website. The website is
 ---
 
 ## 🎉 Features
+
 VSCode-themed personal website.
+
 -   **Pages**: Home, Overview, Experience, Education, Projects, Skills, and Resume.
-	-   **Home Page**: Apple Watch-themed landing page with bubbles showing my spotify playlist.
-	-   **Overview.md**: A markdown file that contains an overview of my personal information.
-	-   **Experience.md**: A markdown file that contains my work experience.
-	-   **Education.md**: A markdown file that contains my educational background.
-	-   **Projects.md**: A markdown file that contains my projects.
-	-   **Skills.md**: A markdown file that contains my skills.
+    -   **Home Page**: Apple Watch-themed landing page with bubbles showing my spotify playlist.
+    -   **Overview.md**: A markdown file that contains an overview of my personal information.
+    -   **Experience.md**: A markdown file that contains my work experience.
+    -   **Education.md**: A markdown file that contains my educational background.
+    -   **Projects.md**: A markdown file that contains my projects.
+    -   **Skills.md**: A markdown file that contains my skills.
 -   **Resume**: A downloadable resume.
 -   **Dark Mode**: Toggle between light and dark themes.
 
