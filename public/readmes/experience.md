@@ -9,7 +9,7 @@ DECA Lab builds tools for researchers and field workers - people operating in me
 -   Built normalized scoring pipelines with client-side CSV/XLSX/PDF export. Hardened draft-save flows against duplicate-key failures and extended data integrity guarantees across multi-round field testing.
 
 _Technologies:_ `React Native` `Expo` `Next.js` `FastAPI` `SQLAlchemy` `PostgreSQL` `TypeScript`
-
+<br/>
 
 ---
 
@@ -22,7 +22,7 @@ Halo is building hardware-software systems for real-time social context. The cha
 -   Redesigned the Celery + Redis backend architecture with multi-layered OpenAI prompts, cutting face-search processing time from 3 minutes to under 50 seconds. That's the difference between a feature people use and one they abandon.
 
 _Technologies:_ `Swift` `ESP32` `Celery` `Redis` `FastAPI` `OpenAI`
-
+<br/>
 
 ---
 
@@ -34,7 +34,7 @@ Embedded systems work - the kind where the constraints are physical and the user
 -   Wrote Linux shell scripts and cron jobs to automate system operations, removing manual steps from recurring tasks that researchers were doing by hand.
 
 _Technologies:_ `Linux` `Shell Scripts` `PyQt4` `BeagleBone`
-
+<br/>
 
 ---
 
@@ -49,7 +49,7 @@ rapStudy is an EdTech platform using music to teach literacy and reading compreh
 -   Built a synchronized SongView component that displays lyrics in sync with playback at 95% accuracy, which is the kind of synchronization problem that sounds simple until you're debugging timing edge cases across variable network conditions.
 
 _Technologies:_ `React.js` `Redux` `Firebase` `Firestore`
-
+<br/>
 
 ---
 
@@ -61,7 +61,7 @@ _Ithaca, New York_
 -   Architected and deployed a full-stack application with Next.js and Flask, using Server-Sent Events for real-time data retrieval - 66% reduction in data latency compared to the polling approach it replaced.
 
 _Technologies:_ `Next.js` `Flask` `Selenium` `NLP` `Server-Sent Events`
-
+<br/>
 
 ---
 
@@ -74,7 +74,7 @@ The Yang-Tan Institute focuses on disability employment research and policy. Ask
 -   Built a flexible slug management system using PHP, Laravel, and Strapi CMS - a deceptively important feature. Clean, modifiable URLs directly affect SEO, content discoverability, and the ability of a non-technical team to manage their own site without developer intervention.
 
 _Technologies:_ `PHP` `Laravel` `Strapi CMS`
-
+<br/>
 
 ---
 

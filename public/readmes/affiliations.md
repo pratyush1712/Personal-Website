@@ -14,7 +14,7 @@ Beyond the algorithm work:
 -   Ran marketing strategy alongside the technical work: 185% increase in Instagram engagement. Engineering leadership at a student org means you do both.
 
 **Key Technologies:** `Next.js` `TypeScript` `Flask` `Google OR-Tools` `Gale-Shapley` `MongoDB` `GCP` `Cron Jobs` `Vercel`
-
+<br/>
 
 ---
 
@@ -43,7 +43,7 @@ Carriage is Cornell's accessible transportation platform, used by students with 
 -   Redesigned the homepage to improve user engagement.
 
 **Key Technologies:** `React.js` `TypeScript` `AWS DynamoDB` `Docker` `Kubernetes` `Express` `GCP` `Flutter`
-
+<br />
 
 ---
 
