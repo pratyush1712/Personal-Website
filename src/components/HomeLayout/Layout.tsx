@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Container, CssBaseline, Grid, Stack, ThemeProvider, Typography } from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
+import { Box, Container, CssBaseline, Stack, ThemeProvider, Typography } from "@mui/material";
 import createTheme from "@/ui/Theme";
 import { isBrowser } from "react-device-detect";
 import AppButtons from "./AppButtons";
@@ -28,27 +28,34 @@ function initVisiblePageIndexs(pages: Page[]) {
 	return tabs;
 }
 
-interface VSCodeLayoutProps {
+interface WorkspaceLayoutProps {
 	options: any;
 	children: React.ReactNode;
 }
 
-export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
+export default function WorkspaceLayout({ options, children }: WorkspaceLayoutProps) {
 	const router = useRouter();
 	const params = useParams();
 	const pathname = usePathname();
-	const [expanded, setExpanded] = useState(isBrowser);
+	const [explorerOpen, setExplorerOpen] = useState(isBrowser);
+	// Right-side agents panel slot. Reserved here in the shell; the toggle is wired up in
+	// Phase C (top bar) and the panel itself is built in Phase F.
+	const [agentsOpen] = useState(false);
 	const [selectedIndex, setSelectedIndex] = useState(routeToPage[params.slug as string]?.index ?? null);
 	const [currentComponent, setCurrentComponent] = useState("");
 	const [visiblePageIndexs, setVisiblePageIndexs] = useState(initVisiblePageIndexs(pages));
 	const [darkMode, setDarkMode] = useState(true);
 	const [visiblePages, setVisiblePages] = useState(pages);
 
-	const theme = createTheme(darkMode);
+	// Theme is derived purely from darkMode — no in-place palette mutation. Recreated only
+	// when the mode flips.
+	const theme = useMemo(() => createTheme(darkMode), [darkMode]);
 	function handleThemeChange() {
-		setDarkMode(!darkMode);
-		theme.palette.mode = darkMode ? "dark" : "light";
-		localStorage.setItem("darkMode", JSON.stringify(!darkMode));
+		setDarkMode(prev => {
+			const next = !prev;
+			localStorage.setItem("darkMode", JSON.stringify(next));
+			return next;
+		});
 	}
 
 	const deletedIndex: number | undefined = visiblePages.find(x => !visiblePageIndexs.includes(x.index))?.index;
@@ -124,74 +131,97 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 		<CacheProvider value={cache}>
 			<ThemeProvider theme={theme}>
 				<CssBaseline enableColorScheme />
-				<Container sx={{ m: 0, p: 0, overflowY: "hidden" }} maxWidth={false} disableGutters>
-					<Grid container sx={{ overflow: "auto", overflowY: "hidden" }}>
-						<Grid container sx={{ overflow: "auto" }}>
-							{isBrowser && (
-								<Grid item sx={{ width: 50 }}>
-									<Sidebar
-										setExpanded={setExpanded}
-										expanded={expanded}
-										darkMode={darkMode}
-										handleThemeChange={handleThemeChange}
-									/>
-								</Grid>
-							)}
-							{expanded && (
-								<Grid item sx={{ backgroundColor: darkMode ? "#252527" : "#f3f3f3", width: 220 }}>
-									<Stack sx={{ mt: 1 }}>
-										<Typography variant="caption" color="text.secondary" sx={{ ml: 4 }}>
-											EXPLORER
-										</Typography>
-										<AppTree
-											pages={pages}
-											selectedIndex={selectedIndex}
-											setSelectedIndex={setSelectedIndex}
-											currentComponent={currentComponent}
-											setCurrentComponent={setCurrentComponent}
-											visiblePageIndexs={visiblePageIndexs}
-											setVisiblePageIndexs={setVisiblePageIndexs}
-										/>
-									</Stack>
-								</Grid>
-							)}
+				{/* Workspace shell: a fixed-height column of [main row] + [status bar]. The main
+				    row lays out the workspace regions horizontally. */}
+				<Box
+					sx={{
+						height: "100vh",
+						overflow: "hidden",
+						display: "flex",
+						flexDirection: "column",
+						backgroundColor: "background.default"
+					}}>
+					<Box sx={{ flex: 1, minHeight: 0, display: "flex", overflow: "hidden" }}>
+						{/* Left activity rail (replaced by the top bar in Phase C) */}
+						{isBrowser && (
+							<Box sx={{ width: 50, flexShrink: 0 }}>
+								<Sidebar
+									setExpanded={setExplorerOpen}
+									expanded={explorerOpen}
+									darkMode={darkMode}
+									handleThemeChange={handleThemeChange}
+								/>
+							</Box>
+						)}
 
-							<Grid item xs zeroMinWidth sx={{ width: "100%" }}>
-								<Grid item sx={{ height: "33px" }}>
-									<AppButtons
-										pages={visiblePages}
+						{/* Explorer sidebar (restyled in Phase D) */}
+						{explorerOpen && (
+							<Box
+								sx={{
+									width: 220,
+									flexShrink: 0,
+									backgroundColor: darkMode ? "#252527" : "#f3f3f3"
+								}}>
+								<Stack sx={{ mt: 1 }}>
+									<Typography variant="caption" color="text.secondary" sx={{ ml: 4 }}>
+										EXPLORER
+									</Typography>
+									<AppTree
+										pages={pages}
 										selectedIndex={selectedIndex}
 										setSelectedIndex={setSelectedIndex}
-										// currentComponent={currentComponent}
+										currentComponent={currentComponent}
 										setCurrentComponent={setCurrentComponent}
 										visiblePageIndexs={visiblePageIndexs}
 										setVisiblePageIndexs={setVisiblePageIndexs}
 									/>
-								</Grid>
-								<Grid
-									sx={{
-										scrollBehavior: "smooth",
-										overflowY: "auto",
-										maxHeight: "calc(100vh - 53px)",
-										background: !darkMode ? "#FFFFFF" : "#1e1e1e"
-									}}>
-									<Container
-										sx={{
-											minHeight: "calc(100vh - 53px)",
-											maxHeight: "calc(100vh - 53px)",
-											overflowY: "auto",
-											overflowX: "hidden"
-										}}>
-										{children}
-									</Container>
-								</Grid>
-							</Grid>
-						</Grid>
-						<Grid item lg={12} md={12} sm={12} xs={12}>
-							<Footer />
-						</Grid>
-					</Grid>
-				</Container>
+								</Stack>
+							</Box>
+						)}
+
+						{/* Editor / portfolio content surface */}
+						<Box
+							sx={{
+								flex: 1,
+								minWidth: 0,
+								display: "flex",
+								flexDirection: "column",
+								overflow: "hidden"
+							}}>
+							<Box sx={{ height: "33px", flexShrink: 0 }}>
+								<AppButtons
+									pages={visiblePages}
+									selectedIndex={selectedIndex}
+									setSelectedIndex={setSelectedIndex}
+									setCurrentComponent={setCurrentComponent}
+									visiblePageIndexs={visiblePageIndexs}
+									setVisiblePageIndexs={setVisiblePageIndexs}
+								/>
+							</Box>
+							<Box
+								sx={{
+									flex: 1,
+									minHeight: 0,
+									scrollBehavior: "smooth",
+									overflowY: "auto",
+									overflowX: "hidden",
+									background: !darkMode ? "#FFFFFF" : "#1e1e1e"
+								}}>
+								<Container sx={{ minHeight: "100%", overflowX: "hidden" }}>{children}</Container>
+							</Box>
+						</Box>
+
+						{/* Right agents panel — reserved slot, populated in Phase F */}
+						{agentsOpen && (
+							<Box sx={{ width: 320, flexShrink: 0, borderLeft: 1, borderColor: "divider" }} />
+						)}
+					</Box>
+
+					{/* Status bar */}
+					<Box sx={{ flexShrink: 0 }}>
+						<Footer />
+					</Box>
+				</Box>
 			</ThemeProvider>
 		</CacheProvider>
 	);

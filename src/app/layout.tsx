@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import VSCodeLayout from "@/components/HomeLayout/Layout";
+import WorkspaceLayout from "@/components/HomeLayout/Layout";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "@/app/globals.css";
 
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en" suppressHydrationWarning>
 			<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ID!} />
 			<body className={inter.className}>
-				<VSCodeLayout options={{ key: "mui" }}>{children}</VSCodeLayout>
+				<WorkspaceLayout options={{ key: "mui" }}>{children}</WorkspaceLayout>
 			</body>
 		</html>
 	);
