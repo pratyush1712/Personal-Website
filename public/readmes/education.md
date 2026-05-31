@@ -8,8 +8,6 @@
 
 The CS + Math + Psychology combination isn't an accident. I came into college knowing I wanted to build systems, but the psych and cog sci courses changed what I thought systems were _for_. By my junior year I was taking Advanced ML Systems alongside Adult Psychopathology and Cognitive Development - which sounds strange until you realize those courses are all asking the same underlying question: how do complex systems process information under constraints?
 
----
-
 ## 📑 Relevant Coursework
 
 ### Computer Science & Systems
@@ -44,8 +42,6 @@ The CS + Math + Psychology combination isn't an accident. I came into college kn
 
 ### Cognitive Science, Neuroscience & Psychology
 
-These aren't electives I took casually. They're the other half of what I'm actually interested in.
-
 -   Adult Psychopathology (PSYCH 3250)
 -   Cognitive Development (COGST 2300)
 -   Human Bonding (HD 3620)
@@ -56,8 +52,6 @@ These aren't electives I took casually. They're the other half of what I'm actua
 -   Introduction to Oceanography
 -   Introduction to Music Theory
 -   Beginning & Intermediate Taekwondo
-
----
 
 ## 📌 On-Campus Affiliations
 
