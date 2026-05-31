@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { Box, Container, CssBaseline, Stack, ThemeProvider, Typography } from "@mui/material";
+import { Box, Container, CssBaseline, ThemeProvider, Typography } from "@mui/material";
 import createTheme from "@/ui/Theme";
 import { isBrowser } from "react-device-detect";
 import AppButtons from "./AppButtons";
-import AppTree from "./AppTree";
+import ExplorerPanel from "./ExplorerPanel";
 import Footer from "./Footer";
 import TopCommandBar from "./TopCommandBar";
 import pages, { routeToPage } from "@/utils/pages";
@@ -153,29 +153,18 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 						currentPage={currentPage}
 					/>
 					<Box sx={{ flex: 1, minHeight: 0, display: "flex", overflow: "hidden" }}>
-						{/* Explorer sidebar (restyled in Phase D) */}
+						{/* Explorer sidebar */}
 						{explorerOpen && (
-							<Box
-								sx={{
-									width: 220,
-									flexShrink: 0,
-									backgroundColor: darkMode ? "#252527" : "#f3f3f3"
-								}}>
-								<Stack sx={{ mt: 1 }}>
-									<Typography variant="caption" color="text.secondary" sx={{ ml: 4 }}>
-										EXPLORER
-									</Typography>
-									<AppTree
-										pages={pages}
-										selectedIndex={selectedIndex}
-										setSelectedIndex={setSelectedIndex}
-										currentComponent={currentComponent}
-										setCurrentComponent={setCurrentComponent}
-										visiblePageIndexs={visiblePageIndexs}
-										setVisiblePageIndexs={setVisiblePageIndexs}
-									/>
-								</Stack>
-							</Box>
+							<ExplorerPanel
+								pages={pages}
+								visiblePages={visiblePages}
+								selectedIndex={selectedIndex}
+								setSelectedIndex={setSelectedIndex}
+								currentComponent={currentComponent}
+								setCurrentComponent={setCurrentComponent}
+								visiblePageIndexs={visiblePageIndexs}
+								setVisiblePageIndexs={setVisiblePageIndexs}
+							/>
 						)}
 
 						{/* Editor / portfolio content surface */}

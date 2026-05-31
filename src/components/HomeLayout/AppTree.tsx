@@ -1,11 +1,7 @@
 "use client";
 import * as React from "react";
-import { SimpleTreeView } from "@mui/x-tree-view";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { TreeItem } from "@mui/x-tree-view";
 import { useEffect } from "react";
-import { useTheme } from "@mui/material/styles";
+import { Box } from "@mui/material";
 import { VscMarkdown } from "react-icons/vsc";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -27,6 +23,8 @@ interface Props {
 	setVisiblePageIndexs: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
+// Flat, Cursor-style file list (the "Portfolio Files" tree). Collapsing is owned by the
+// parent ExplorerPanel section, so this no longer needs the VS Code SimpleTreeView wrapper.
 export default function AppTree({
 	pages,
 	selectedIndex,
@@ -36,80 +34,61 @@ export default function AppTree({
 	visiblePageIndexs,
 	setVisiblePageIndexs
 }: Props) {
-	const theme = useTheme();
 	const pathname = usePathname();
-	const page: Page = pages.find(x => x.route === pathname)!;
+	// Normalize "/overview" -> "overview" so the active route actually matches page.route.
+	const currentRoute = pathname ? pathname.replace(/^\/+/, "") : "";
+	const activePage = pages.find(x => x.route === currentRoute);
 
 	useEffect(() => {
-		if (page) setSelectedIndex(page.index);
-	}, [page, setSelectedIndex]);
+		if (activePage) setSelectedIndex(activePage.index);
+	}, [activePage, setSelectedIndex]);
 
-	function renderTreeItemBgColor(index: number) {
-		if (theme.palette.mode === "dark") {
-			return selectedIndex === index ? "rgba(144,202,249,0.16)" : "#252527";
-		} else {
-			return selectedIndex === index ? "#295fbf" : "#f3f3f3";
+	function openPage(index: number) {
+		if (!visiblePageIndexs.includes(index)) {
+			setVisiblePageIndexs([...visiblePageIndexs, index]);
 		}
-	}
-
-	function renderTreeItemColor(index: number) {
-		if (theme.palette.mode === "dark") {
-			return selectedIndex === index && currentComponent === "tree" ? "white" : "#bdc3cf";
-		} else {
-			return selectedIndex === index ? "#e2ffff" : "#69665f";
-		}
+		setSelectedIndex(index);
+		setCurrentComponent("tree");
 	}
 
 	return (
-		<SimpleTreeView
-			aria-label="file system navigator"
-			slots={{ collapseIcon: ExpandMoreIcon, expandIcon: ChevronRightIcon }}
-			sx={{ minWidth: 220 }}
-			defaultExpandedItems={["-1"]}>
-			<TreeItem
-				itemId="-1"
-				label={<span style={{ textDecoration: "none", color: "inherit" }}>Home</span>}
-				sx={{
-					color: renderTreeItemColor(-2),
-					backgroundColor: renderTreeItemBgColor(-2)
-				}}
-				onClick={() => {
-					setSelectedIndex(-1);
-				}}>
-				{pages.map(({ index, name, route }) => (
-					<Link href={route} key={index}>
-						<TreeItem
-							itemId={index.toString()}
-							label={
-								<span
-									style={{
-										alignItems: "center",
-										display: "inline-flex",
-										gap: 4,
-										textDecoration: "none",
-										color: "inherit"
-									}}>
-									<VscMarkdown color="#6997d5" />
-									{name}
-								</span>
-							}
+		<Box role="list" aria-label="Portfolio files">
+			{pages.map(({ index, name, route }) => {
+				const active = selectedIndex === index;
+				return (
+					<Link key={index} href={route} style={{ textDecoration: "none" }}>
+						<Box
+							role="listitem"
+							aria-current={active ? "page" : undefined}
+							onClick={() => openPage(index)}
 							sx={{
-								color: renderTreeItemColor(index),
-								backgroundColor: renderTreeItemBgColor(index),
-								"&& .Mui-selected": { backgroundColor: renderTreeItemBgColor(index) }
-							}}
-							onClick={() => {
-								if (!visiblePageIndexs.includes(index)) {
-									const newIndexs = [...visiblePageIndexs, index];
-									setVisiblePageIndexs(newIndexs);
+								display: "flex",
+								alignItems: "center",
+								gap: 0.75,
+								pl: 3,
+								pr: 1.5,
+								py: 0.5,
+								fontSize: "0.82rem",
+								lineHeight: 1.6,
+								cursor: "pointer",
+								userSelect: "none",
+								color: active ? "text.primary" : "text.secondary",
+								backgroundColor: active ? "action.selected" : "transparent",
+								borderLeft: "2px solid",
+								borderColor: active && currentComponent === "tree" ? "primary.main" : "transparent",
+								"&:hover": {
+									backgroundColor: active ? "action.selected" : "action.hover",
+									color: "text.primary"
 								}
-								setSelectedIndex(index);
-								setCurrentComponent("tree");
-							}}
-						/>
+							}}>
+							<Box component="span" sx={{ display: "inline-flex", color: "text.secondary" }}>
+								<VscMarkdown />
+							</Box>
+							{name}
+						</Box>
 					</Link>
-				))}
-			</TreeItem>
-		</SimpleTreeView>
+				);
+			})}
+		</Box>
 	);
 }
