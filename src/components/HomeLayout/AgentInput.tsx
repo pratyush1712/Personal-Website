@@ -45,6 +45,7 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 				onKeyDown={onKeyDown}
 				disabled={disabled}
 				rows={1}
+				maxLength={2000}
 				placeholder={disabled ? "Agent unavailable" : "Ask about Pratyush…"}
 				aria-label="Message the Portfolio Agent"
 				sx={{

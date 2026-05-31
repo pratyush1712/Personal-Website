@@ -62,7 +62,7 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 				root: {
 					color: t.textPrimary,
 					backgroundColor: t.surface,
-					"&:hover": { backgroundColor: t.surface },
+					"&:hover": { backgroundColor: t.elevated },
 					"@media (max-width:600px)": { padding: "4px 8px" }
 				}
 			}
@@ -72,7 +72,7 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 				root: {
 					color: t.textPrimary,
 					backgroundColor: t.surface,
-					"&:hover": { backgroundColor: t.surface },
+					"&:hover": { backgroundColor: t.elevated },
 					"@media (max-width:600px)": { padding: "4px" }
 				}
 			}

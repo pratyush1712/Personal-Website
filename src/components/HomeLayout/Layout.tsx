@@ -38,7 +38,7 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 	const router = useRouter();
 	const params = useParams();
 	const pathname = usePathname();
-	const [explorerOpen, setExplorerOpen] = useState(isBrowser);
+	const [explorerOpen, setExplorerOpen] = useState(false);
 	// Right-side agents panel. Toggled from the top bar; the panel content is built in Phase F.
 	const [agentsOpen, setAgentsOpen] = useState(false);
 	const [selectedIndex, setSelectedIndex] = useState(routeToPage[params.slug as string]?.index ?? null);
@@ -95,8 +95,9 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 	// On first mount, collapse the side panels on a narrow viewport (they open as drawers there).
 	// Keyed to mount only — not to isMobile — so a user-opened drawer is never force-closed.
 	useEffect(() => {
-		if (typeof window !== "undefined" && window.matchMedia("(max-width:767.98px)").matches) {
-			setExplorerOpen(false);
+		if (typeof window !== "undefined") {
+			const isMobileViewport = window.matchMedia("(max-width:767.98px)").matches;
+			setExplorerOpen(isBrowser && !isMobileViewport);
 			setAgentsOpen(false);
 		}
 	}, []);

@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useRef } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { AgentTab } from "@/utils/agentStorage";
 import AgentPromptSuggestions from "./AgentPromptSuggestions";
@@ -11,6 +12,11 @@ interface Props {
 
 export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 	const isEmpty = !tab || tab.messages.length === 0;
+	const bottomRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+	}, [tab?.messages, pending]);
 
 	return (
 		<Box sx={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
@@ -70,6 +76,7 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 							<Typography variant="caption">Thinking&hellip;</Typography>
 						</Box>
 					)}
+					<div ref={bottomRef} />
 				</Box>
 			)}
 		</Box>

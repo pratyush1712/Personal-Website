@@ -15,7 +15,11 @@ interface Props {
 export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate, canCreate }: Props) {
 	return (
 		<Box sx={{ flexShrink: 0, borderBottom: 1, borderColor: "divider" }}>
-			<Box sx={{ display: "flex", alignItems: "stretch", overflowX: "auto", scrollbarWidth: "thin" }}>
+			<Box
+				role="tablist"
+				aria-label="Agent chat tabs"
+				sx={{ display: "flex", alignItems: "stretch", overflowX: "auto", scrollbarWidth: "thin" }}>
+				{" "}
 				{tabs.map(t => {
 					const active = t.id === activeId;
 					return (

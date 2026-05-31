@@ -35,6 +35,16 @@ const hits = new Map<string, { count: number; resetAt: number }>();
 
 function isRateLimited(ip: string): boolean {
 	const now = Date.now();
+
+	// Prevent memory leak by pruning expired entries when the map grows
+	if (hits.size > 1000) {
+		for (const [key, value] of hits.entries()) {
+			if (now > value.resetAt) {
+				hits.delete(key);
+			}
+		}
+	}
+
 	const record = hits.get(ip);
 	if (!record || now > record.resetAt) {
 		hits.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
@@ -57,7 +67,9 @@ function json(body: unknown, status: number): Response {
 export async function POST(req: NextRequest): Promise<Response> {
 	// 1. Reject oversized bodies early (header, then actual length).
 	const declaredLength = Number(req.headers.get("content-length") || 0);
-	if (declaredLength > MAX_BODY_BYTES) return json({ error: "Request too large.", code: "too_large" }, 413);
+	if (Number.isNaN(declaredLength) || declaredLength > MAX_BODY_BYTES) {
+		return json({ error: "Request too large or invalid content length.", code: "too_large" }, 413);
+	}
 
 	// 2. Soft per-IP rate limit.
 	if (isRateLimited(clientIp(req))) {

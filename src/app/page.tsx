@@ -7,9 +7,15 @@ export default function Home() {
 	const iconLink = (link: any) => {
 		return (
 			<Tooltip key={link.index} title={link.title} arrow>
-				<Link target="_blank" href={link.href} underline="none" color="inherit">
-					<IconButton color="inherit">{link.icon}</IconButton>
-				</Link>
+				<IconButton
+					component="a"
+					href={link.href}
+					target="_blank"
+					rel="noopener noreferrer"
+					color="inherit"
+					aria-label={link.title}>
+					{link.icon}
+				</IconButton>
 			</Tooltip>
 		);
 	};

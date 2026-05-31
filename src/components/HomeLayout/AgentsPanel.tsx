@@ -34,13 +34,21 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ messages: outgoing, currentPage })
 			});
-			if (!res.ok) throw new Error(`status ${res.status}`);
+
+			let errorMsg = UNAVAILABLE_MESSAGE;
+			if (!res.ok) {
+				try {
+					const errJson = await res.json();
+					if (errJson?.error) errorMsg = errJson.error;
+				} catch {}
+				throw new Error(errorMsg);
+			}
+
 			const data = await res.json();
 			const reply = typeof data?.reply === "string" && data.reply.trim() ? data.reply : UNAVAILABLE_MESSAGE;
 			appendMessage(id, { role: "assistant", content: reply });
-		} catch {
-			// No endpoint yet (Phase G), no API key, or a network/server error — fail gracefully.
-			appendMessage(id, { role: "assistant", content: UNAVAILABLE_MESSAGE });
+		} catch (err: any) {
+			appendMessage(id, { role: "assistant", content: err.message || UNAVAILABLE_MESSAGE });
 		} finally {
 			setPending(false);
 		}
