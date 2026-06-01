@@ -4,42 +4,42 @@
 	--font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",
 		"Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
-	/* Cursor-inspired tokens, mirrored from src/ui/Theme.tsx (light) */
-	--foreground-rgb: 26, 26, 26;
-	--background-start-rgb: 255, 255, 255;
-	--background-end-rgb: 255, 255, 255;
+	/* Cursor Light (VS Code "Light Modern") tokens, mirrored from src/ui/Theme.tsx (light) */
+	--foreground-rgb: 59, 59, 59;
+	--background-start-rgb: 248, 248, 248;
+	--background-end-rgb: 248, 248, 248;
 
-	--primary-glow: radial-gradient(rgba(0, 122, 204, 0.06), rgba(0, 122, 204, 0));
+	--primary-glow: radial-gradient(rgba(0, 95, 184, 0.06), rgba(0, 95, 184, 0));
 	--secondary-glow: radial-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0));
 
-	--tile-start-rgb: 239, 245, 249;
-	--tile-end-rgb: 228, 232, 233;
+	--tile-start-rgb: 255, 255, 255;
+	--tile-end-rgb: 248, 248, 248;
 	--tile-border: conic-gradient(#00000080, #00000040, #00000030, #00000020, #00000010, #00000010, #00000080);
 
-	--callout-rgb: 238, 240, 241;
-	--callout-border-rgb: 172, 175, 176;
-	--card-rgb: 180, 185, 188;
-	--card-border-rgb: 131, 134, 135;
+	--callout-rgb: 248, 248, 248;
+	--callout-border-rgb: 229, 229, 229;
+	--card-rgb: 255, 255, 255;
+	--card-border-rgb: 229, 229, 229;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		/* Cursor-inspired tokens, mirrored from src/ui/Theme.tsx (dark) */
-		--foreground-rgb: 230, 230, 230;
-		--background-start-rgb: 13, 13, 15;
-		--background-end-rgb: 13, 13, 15;
+		/* Cursor Dark (VS Code "Dark Modern") tokens, mirrored from src/ui/Theme.tsx (dark) */
+		--foreground-rgb: 204, 204, 204;
+		--background-start-rgb: 24, 24, 24;
+		--background-end-rgb: 24, 24, 24;
 
-		--primary-glow: radial-gradient(rgba(77, 156, 240, 0.08), rgba(77, 156, 240, 0));
-		--secondary-glow: radial-gradient(rgba(77, 156, 240, 0.05), rgba(77, 156, 240, 0));
+		--primary-glow: radial-gradient(rgba(0, 120, 212, 0.08), rgba(0, 120, 212, 0));
+		--secondary-glow: radial-gradient(rgba(0, 120, 212, 0.05), rgba(0, 120, 212, 0));
 
-		--tile-start-rgb: 22, 22, 24;
-		--tile-end-rgb: 13, 13, 15;
+		--tile-start-rgb: 31, 31, 31;
+		--tile-end-rgb: 24, 24, 24;
 		--tile-border: conic-gradient(#ffffff20, #ffffff15, #ffffff10, #ffffff10, #ffffff08, #ffffff08, #ffffff20);
 
-		--callout-rgb: 22, 22, 24;
-		--callout-border-rgb: 42, 42, 46;
-		--card-rgb: 26, 26, 28;
-		--card-border-rgb: 42, 42, 46;
+		--callout-rgb: 24, 24, 24;
+		--callout-border-rgb: 43, 43, 43;
+		--card-rgb: 31, 31, 31;
+		--card-border-rgb: 43, 43, 43;
 	}
 }
 

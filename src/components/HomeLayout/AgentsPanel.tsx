@@ -74,8 +74,8 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				flexDirection: "column",
 				borderLeft: "1px solid",
 				borderColor: "divider",
-				// Match Cursor's near-black panel background
-				backgroundColor: theme => (theme.palette.mode === "dark" ? "#1e1e1e" : theme.palette.background.paper),
+				// Same chrome tone as the explorer side bar (Cursor's side-bar background)
+				backgroundColor: "background.paper",
 				overflow: "hidden"
 			}}>
 			{/* ── Top bar: title + close ── */}

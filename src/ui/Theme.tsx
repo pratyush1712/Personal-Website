@@ -1,28 +1,28 @@
 import { createTheme, darkScrollbar } from "@mui/material";
 
-// Cursor Dark+ inspired design tokens. Phase A foundation: surfaces, text, borders and the
-// accent all flow from here, so later phases recolor by adjusting tokens rather than touching
-// individual components. Ordering from darkest to lightest in dark mode: appBg < panel < surface.
+// Cursor Dark (VS Code "Dark Modern") design tokens. Phase A foundation: surfaces, text, borders
+// and the accent all flow from here, so later phases recolor by adjusting tokens rather than
+// touching individual components. Values mirror Cursor's default dark theme exactly.
 export const TOKENS = {
 	dark: {
-		appBg: "#0d0d0f", // near-black app background (root / gaps between panels)
-		panel: "#161618", // sidebar + side panels, slightly lifted off black
-		surface: "#1a1a1c", // editor / content surface, dark neutral
-		elevated: "#202024", // hover / raised state
-		border: "#2a2a2e", // subtle, muted divider
-		textPrimary: "#e6e6e6", // off-white
-		textSecondary: "#8a8a92", // muted gray
-		accent: "#4d9cf0" // minimal, refined accent — used sparingly
+		appBg: "#181818", // window chrome — title bar, activity/side bar, tab strip, status bar
+		panel: "#181818", // side panels (explorer / agents); same chrome tone as the activity bar
+		surface: "#1f1f1f", // editor content surface (active tab + scroll area)
+		elevated: "#2a2a2a", // hover / raised state
+		border: "#2b2b2b", // universal divider between regions
+		textPrimary: "#cccccc", // editor foreground
+		textSecondary: "#9d9d9d", // muted — inactive tabs, descriptions
+		accent: "#0078d4" // Cursor / VS Code accent blue
 	},
 	light: {
-		appBg: "#ffffff",
-		panel: "#f5f5f5",
-		surface: "#ffffff",
-		elevated: "#ececec",
-		border: "#e2e2e2",
-		textPrimary: "#1a1a1a",
-		textSecondary: "#5f5f5f",
-		accent: "#007acc"
+		appBg: "#f8f8f8", // window chrome — title bar, activity/side bar, tab strip, status bar
+		panel: "#f8f8f8", // side panels (explorer / agents); same chrome tone as the activity bar
+		surface: "#ffffff", // editor content surface (active tab + scroll area)
+		elevated: "#e8e8e8", // hover / raised state
+		border: "#e5e5e5", // universal divider between regions
+		textPrimary: "#3b3b3b", // editor foreground
+		textSecondary: "#6e6e6e", // muted — inactive tabs, descriptions
+		accent: "#005fb8" // Cursor / VS Code "Light Modern" accent blue
 	}
 };
 
