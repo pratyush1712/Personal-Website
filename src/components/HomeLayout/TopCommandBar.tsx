@@ -174,7 +174,7 @@ export default function TopCommandBar({
 						lineHeight: 1,
 						display: { xs: "none", md: "block" }
 					}}>
-					— {currentPage}
+					- {currentPage}
 				</Typography>
 			</Box>
 

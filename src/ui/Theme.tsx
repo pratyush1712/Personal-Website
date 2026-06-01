@@ -6,7 +6,7 @@ import { createTheme, darkScrollbar } from "@mui/material";
 export const TOKENS = {
 	dark: {
 		appBg: "#1e1e1e", // outer window shell background
-		panel: "#252526", // elevated panels — toolbar, tab strip, search dropdown
+		panel: "#252526", // elevated panels - toolbar, tab strip, search dropdown
 		surface: "#1e1e1e", // editor content surface (active tab + scroll area)
 		elevated: "#2d2d2d", // hover / raised state
 		border: "#3a3a3a", // universal divider between regions
@@ -15,13 +15,13 @@ export const TOKENS = {
 		accent: "#0078d4"
 	},
 	light: {
-		appBg: "#f8f8f8", // window chrome — title bar, activity/side bar, tab strip, status bar
+		appBg: "#f8f8f8", // window chrome - title bar, activity/side bar, tab strip, status bar
 		panel: "#f8f8f8", // side panels (explorer / agents); same chrome tone as the activity bar
 		surface: "#ffffff", // editor content surface (active tab + scroll area)
 		elevated: "#e8e8e8", // hover / raised state
 		border: "#e5e5e5", // universal divider between regions
 		textPrimary: "#3b3b3b", // editor foreground
-		textSecondary: "#6e6e6e", // muted — inactive tabs, descriptions
+		textSecondary: "#6e6e6e", // muted - inactive tabs, descriptions
 		accent: "#005fb8" // Cursor / VS Code "Light Modern" accent blue
 	}
 };

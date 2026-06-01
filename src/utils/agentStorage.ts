@@ -49,7 +49,7 @@ export function loadTabs(): AgentTab[] {
 		if (!Array.isArray(parsed)) throw new Error("corrupt: expected an array");
 		return parsed.filter(isTab).slice(0, MAX_TABS);
 	} catch {
-		// Corrupt / unreadable storage — reset rather than crash.
+		// Corrupt / unreadable storage - reset rather than crash.
 		try {
 			window.sessionStorage.removeItem(STORAGE_KEY);
 		} catch {
@@ -64,7 +64,7 @@ export function saveTabs(tabs: AgentTab[]): void {
 	try {
 		window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(tabs.slice(0, MAX_TABS)));
 	} catch {
-		/* sessionStorage unavailable or full — non-fatal, chat just won't persist */
+		/* sessionStorage unavailable or full - non-fatal, chat just won't persist */
 	}
 }
 
@@ -82,7 +82,7 @@ export function newTab(): AgentTab {
 	return { id: createId(), title: DEFAULT_TITLE, messages: [], createdAt: now, updatedAt: now };
 }
 
-// Title derived from the first user message — no LLM call (per the spec).
+// Title derived from the first user message - no LLM call (per the spec).
 export function deriveTitle(content: string): string {
 	const words = content.trim().split(/\s+/).slice(0, 6).join(" ");
 	if (!words) return DEFAULT_TITLE;

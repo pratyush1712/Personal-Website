@@ -106,7 +106,7 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 									borderColor: (theme: any) => (theme.palette.mode === "dark" ? "#2d2d2d" : "divider")
 								}
 							}}>
-							{/* Codicon speech-bubble — mirrors Cursor's "comment" tab icon */}
+							{/* Codicon speech-bubble - mirrors Cursor's "comment" tab icon */}
 							<LuMessageSquare size={14} style={{ opacity: active ? 0.75 : 0.4, flexShrink: 0 }} />
 
 							<Box
@@ -122,7 +122,7 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 								{t.title}
 							</Box>
 
-							{/* Close button — appears on hover or when the tab is active */}
+							{/* Close button - appears on hover or when the tab is active */}
 							<Box
 								component="span"
 								role="button"
@@ -197,14 +197,14 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 					</span>
 				</Tooltip>
 
-				{/* Chat history — Codicon "history" (circular clock) */}
+				{/* Chat history - Codicon "history" (circular clock) */}
 				<Tooltip title="Chat history" arrow>
 					<IconButton size="small" aria-label="Chat history" sx={actionBtnSx}>
 						<VscHistory size={14} />
 					</IconButton>
 				</Tooltip>
 
-				{/* More options — Codicon "ellipsis" (⋯) */}
+				{/* More options - Codicon "ellipsis" (⋯) */}
 				<Tooltip title="More options" arrow>
 					<IconButton size="small" aria-label="More options" sx={actionBtnSx}>
 						<VscEllipsis size={14} />

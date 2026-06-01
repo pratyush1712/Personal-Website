@@ -47,7 +47,7 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 	const [darkMode, setDarkMode] = useState(true);
 	const [visiblePages, setVisiblePages] = useState(pages);
 
-	// Theme is derived purely from darkMode — no in-place palette mutation. Recreated only
+	// Theme is derived purely from darkMode - no in-place palette mutation. Recreated only
 	// when the mode flips.
 	const theme = useMemo(() => createTheme(darkMode), [darkMode]);
 	// Below 768px the side panels become temporary overlay drawers instead of inline columns.
@@ -97,7 +97,7 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 	}, [darkMode]);
 
 	// On first mount, collapse the side panels on a narrow viewport (they open as drawers there).
-	// Keyed to mount only — not to isMobile — so a user-opened drawer is never force-closed.
+	// Keyed to mount only - not to isMobile - so a user-opened drawer is never force-closed.
 	useEffect(() => {
 		if (typeof window !== "undefined") {
 			const isMobileViewport = window.matchMedia("(max-width:767.98px)").matches;
@@ -185,7 +185,7 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 						currentPage={currentPage}
 					/>
 					<Box sx={{ flex: 1, minHeight: 0, display: "flex", overflow: "hidden" }}>
-						{/* Explorer sidebar (inline on desktop; a drawer on mobile — see below) */}
+						{/* Explorer sidebar (inline on desktop; a drawer on mobile - see below) */}
 						{!isMobile && explorerOpen && explorerPanel}
 
 						{/* Editor / portfolio content surface */}
@@ -220,7 +220,7 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 							</Box>
 						</Box>
 
-						{/* Right agents panel (inline on desktop; a drawer on mobile — see below) */}
+						{/* Right agents panel (inline on desktop; a drawer on mobile - see below) */}
 						{!isMobile && agentsOpen && agentsPanel}
 
 						{/* Mobile: side panels become temporary overlay drawers so they never

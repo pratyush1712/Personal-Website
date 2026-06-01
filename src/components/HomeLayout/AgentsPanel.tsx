@@ -69,7 +69,7 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 		}
 	}
 
-	// Cursor-spec header icon button — 26×26, no bg by default
+	// Cursor-spec header icon button - 26×26, no bg by default
 	const headerIconSx = {
 		width: 26,
 		height: 26,
@@ -96,7 +96,7 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				borderLeft: "1px solid",
 				// Cursor uses #2d2d2d for dividers in the dark theme
 				borderColor: theme => (theme.palette.mode === "dark" ? "#2d2d2d" : "divider"),
-				// Cursor Agent panel bg is #252526 — slightly lighter than the editor chrome (#1e1e1e)
+				// Cursor Agent panel bg is #252526 - slightly lighter than the editor chrome (#1e1e1e)
 				backgroundColor: theme => (theme.palette.mode === "dark" ? "#252526" : "#f3f3f3"),
 				overflow: "hidden"
 			}}>

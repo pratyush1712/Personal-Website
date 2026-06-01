@@ -118,7 +118,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 		messages.push({ role: m.role, content: m.content });
 	}
 
-	// 5. Fail closed when unconfigured — never crash, never leak which key is missing.
+	// 5. Fail closed when unconfigured - never crash, never leak which key is missing.
 	const apiKey = process.env.OPENAI_API_KEY;
 	if (!apiKey) return json({ error: "Portfolio Agent is not configured.", code: "not_configured" }, 503);
 
@@ -139,7 +139,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 		currentPage ? `\nThe visitor is currently viewing the "${currentPage}" section.` : ""
 	].join("\n");
 
-	// 6. Call the provider (plain fetch — no SDK dependency). Swappable in one place.
+	// 6. Call the provider (plain fetch - no SDK dependency). Swappable in one place.
 	try {
 		const response = await fetch("https://api.openai.com/v1/chat/completions", {
 			method: "POST",

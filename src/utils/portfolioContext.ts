@@ -4,7 +4,7 @@ import pages from "@/utils/pages";
 import { links } from "@/utils/links";
 
 // SERVER-ONLY. Reads the same markdown the site renders and distills it into compact plain text
-// for the agent's system prompt. Never import this into client code — it uses `fs`.
+// for the agent's system prompt. Never import this into client code - it uses `fs`.
 
 const MAX_CONTEXT_CHARS = 20000;
 

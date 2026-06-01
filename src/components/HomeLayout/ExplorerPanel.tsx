@@ -182,7 +182,7 @@ export default function ExplorerPanel({
 					</IconButton>
 				</Tooltip>
 
-				<Tooltip title="Source Control — open on GitHub" arrow>
+				<Tooltip title="Source Control" arrow>
 					<IconButton
 						size="small"
 						disableRipple

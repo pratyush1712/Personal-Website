@@ -63,27 +63,27 @@ names. This resolves the review's ambiguity concern by not introducing an ambigu
 
 ## 3. Final file modification plan
 
-- **`src/app/layout.tsx`** — update the single import `VSCodeLayout` -> `WorkspaceLayout`. No
+- **`src/app/layout.tsx`** - update the single import `VSCodeLayout` -> `WorkspaceLayout`. No
   other change.
-- **`src/components/HomeLayout/Layout.tsx`** — rename export; replace 3-`Grid` body with the
+- **`src/components/HomeLayout/Layout.tsx`** - rename export; replace 3-`Grid` body with the
   new shell (top bar / explorer / editor / agents / status bar) driven by responsive queries
   + panel-visibility state; **preserve verbatim** the
   `createCache`+`useServerInsertedHTML`+`CacheProvider`+`ThemeProvider`+`CssBaseline
   enableColorScheme` block and the tab state machine; **fix** `handleThemeChange` (remove
   `theme.palette.mode = ...` mutation; theme via `useMemo(() => createTheme(darkMode),
   [darkMode])`); add `agentsOpen`/`explorerOpen`/`mobileDrawer` state.
-- **`src/components/HomeLayout/Sidebar.tsx`** — delete; relocate theme toggle + source link to
+- **`src/components/HomeLayout/Sidebar.tsx`** - delete; relocate theme toggle + source link to
   `TopCommandBar`. Social/professional link icons remain reachable via the top bar
   (professional) and the unchanged home page (full set).
-- **`src/components/HomeLayout/AppTree.tsx`** — fix selection with
+- **`src/components/HomeLayout/AppTree.tsx`** - fix selection with
   `pathname.replace(/^\//, "")`; recolor to muted tokens (no bright-blue selection); keep
   `next/link href={route}` + `setVisiblePageIndexs`/`setSelectedIndex` wiring.
-- **`src/components/HomeLayout/AppButtons.tsx`** — restyle tabs (subdued bg, thin borders,
+- **`src/components/HomeLayout/AppButtons.tsx`** - restyle tabs (subdued bg, thin borders,
   clean active); horizontal scroll on overflow; keep logic.
-- **`src/components/HomeLayout/Footer.tsx`** — muted status bar using theme tokens.
-- **`src/ui/Theme.tsx`** — Cursor Dark+ palette as named tokens; replace hardcoded
+- **`src/components/HomeLayout/Footer.tsx`** - muted status bar using theme tokens.
+- **`src/ui/Theme.tsx`** - Cursor Dark+ palette as named tokens; replace hardcoded
   `#1e1e1e`/`#007acc`; keep light mode readable; keep breakpoints object intact.
-- **`src/app/globals.css`** — align CSS vars/glows to the new palette; add
+- **`src/app/globals.css`** - align CSS vars/glows to the new palette; add
   `prefers-reduced-motion` guard.
 - **No change** to `[slug]/page.tsx`, `Markdown/*`, `BrainLayout/*`, `github/`, `founders/`,
   `brain/`, `page.tsx`, `links.tsx`, `pages.ts`, `api/contact/route.ts` (functionally). Light
@@ -97,21 +97,21 @@ names. This resolves the review's ambiguity concern by not introducing an ambigu
 Each UI phase carries the **A11y checklist** (below). Site is shippable after **F**; **G** is
 additive.
 
-- **Phase A — Theme tokens.** Define palette tokens in `Theme.tsx`; update `globals.css`;
+- **Phase A - Theme tokens.** Define palette tokens in `Theme.tsx`; update `globals.css`;
   reduced-motion. No structural change.
-- **Phase B — Shell + symbol rename.** Rename `VSCodeLayout` -> `WorkspaceLayout`; rebuild
+- **Phase B - Shell + symbol rename.** Rename `VSCodeLayout` -> `WorkspaceLayout`; rebuild
   grid with responsive regions; fix dark-mode mutation; preserve Emotion/tab logic.
   Checkpoint for review (highest risk).
-- **Phase C — Top bar + retire rail.** Add `TopCommandBar`; delete `Sidebar.tsx`; rewire
+- **Phase C - Top bar + retire rail.** Add `TopCommandBar`; delete `Sidebar.tsx`; rewire
   theme toggle + explorer/agents/mobile toggles.
-- **Phase D — Explorer.** Add `ExplorerPanel` (Open Editors + Portfolio Files); modify
+- **Phase D - Explorer.** Add `ExplorerPanel` (Open Editors + Portfolio Files); modify
   `AppTree`; fix path normalization. **Featured Projects** group links **only** to the
-  existing `/projects` route (and in-page anchors if present) — no new content/routes.
-- **Phase E — Tabs + status bar.** Restyle `AppButtons` + `Footer`.
-- **Phase F — Agents panel (static, no LLM).** Add panel, tabs, chat view, suggestions,
+  existing `/projects` route (and in-page anchors if present) - no new content/routes.
+- **Phase E - Tabs + status bar.** Restyle `AppButtons` + `Footer`.
+- **Phase F - Agents panel (static, no LLM).** Add panel, tabs, chat view, suggestions,
   input; wire `useLocalAgentTabs` + `agentStorage`; full local tab CRUD. With no key, send
   shows "not configured." **Ships without LLM.**
-- **Phase G — LLM (live when configured).** Add `portfolioContext.ts` +
+- **Phase G - LLM (live when configured).** Add `portfolioContext.ts` +
   `api/portfolio-agent/route.ts`; wire `AgentInput` send -> fetch -> render. Satisfies
   configured chat behavior; fail-closed otherwise.
 
@@ -130,7 +130,7 @@ additive.
 
 ## 5. Final API route design
 
-`src/app/api/portfolio-agent/route.ts` — **reuses only the server-only env pattern** from the
+`src/app/api/portfolio-agent/route.ts` - **reuses only the server-only env pattern** from the
 contact route; implements its own stricter JSON validation (the contact route is not the
 security model).
 
@@ -142,7 +142,7 @@ security model).
 - **Caps (hard):** <= **10 messages**/request (else trim to last 10); each `content` trimmed,
   non-empty, <= **2000 chars** (reject empty/whitespace-only -> `400`).
 - **Rate limit:** in-memory fixed-window per-IP (~**10 req/min**), best-effort (per-instance,
-  resets on cold start); documented `TODO` for durable limiting — **no DB/KV** added. Over
+  resets on cold start); documented `TODO` for durable limiting - **no DB/KV** added. Over
   limit -> `429` `{code:"rate_limited"}`.
 - **No key:** if `!process.env.OPENAI_API_KEY` -> `503` `{code:"not_configured"}` (fail-closed,
   never crashes).
@@ -168,19 +168,19 @@ security model).
   **5-tab cap enforced in the utility** (writes beyond 5 rejected), not just UI.
 - **Tab limit UX:** at 5, "New" disabled + message `Limit reached: 5 local agent tabs.`
 - **Titles:** start `New Chat`; after first user message, derive from first few words
-  (slice) — **no LLM call** for titling.
+  (slice) - **no LLM call** for titling.
 - **Lifecycle:** create, close, switch; send disabled while a request is pending.
 
 ---
 
 ## 7. Final portfolio context design
 
-`src/utils/portfolioContext.ts` — **server-only** (uses `fs`; never imported by client; only
+`src/utils/portfolioContext.ts` - **server-only** (uses `fs`; never imported by client; only
 the API route imports it).
 
 - **Source reuse:** section list from `pages.ts`; body from existing `public/readmes/*.md`.
   No duplicated bio content.
-- **Curated builder (not raw dump):** strip markdown noise — remove images, reduce
+- **Curated builder (not raw dump):** strip markdown noise - remove images, reduce
   `[text](url)` -> `text`, strip HTML tags, drop heading markers, collapse blank
   lines/whitespace.
 - **Structure:** assemble `{ name, headline, bio, education, experience, affiliations,
@@ -231,14 +231,14 @@ Explicit `useMediaQuery` pixel queries (theme `breakpoints` object left intact f
   open/close; selection matches route.
 - **Theme:** toggle works, persists across reload, no palette-mutation regression; light mode
   readable.
-- **Responsive:** 360 / 768 / 1200 / 1440 px — drawers open/close + focus behavior; tab
+- **Responsive:** 360 / 768 / 1200 / 1440 px - drawers open/close + focus behavior; tab
   overflow scrolls; no horizontal overflow.
 - **Agents (no key):** unset `OPENAI_API_KEY` -> panel + suggestions render; send shows "not
   configured"; **build passes; no crash.**
 - **Agents (with key):** happy path returns a reply; grounded answers; "not in context"
   behavior.
 - **API validation:** empty message, >2000 chars, >10 messages, non-POST, oversized body,
-  rate-limit trip — all return correct codes; no key/provider details leaked.
+  rate-limit trip - all return correct codes; no key/provider details leaked.
 - **Storage:** 5-tab cap (UI + util), corrupt-JSON reset, session-scoped persistence, titles
   without LLM.
 - **A11y:** keyboard nav, visible focus, aria-labels, live-region updates, reduced motion.

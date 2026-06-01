@@ -130,7 +130,7 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 				/* ── Empty state ── */
 				<Box sx={{ p: "12px 12px 8px", display: "flex", flexDirection: "column", gap: "10px" }}>
 					{/*
-					 * Agent identity card — Cursor spec:
+					 * Agent identity card - Cursor spec:
 					 *   bg:     rgba(255,255,255,0.03) dark  |  rgba(0,0,0,0.02) light
 					 *   border: rgba(255,255,255,0.08) dark  |  rgba(0,0,0,0.08) light
 					 *   radius: 6px
@@ -221,7 +221,7 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 								}}>
 								{isUser ? (
 									/*
-									 * User message — right-aligned pill
+									 * User message - right-aligned pill
 									 * Cursor spec:
 									 *   bg:     rgba(255,255,255,0.08) dark
 									 *   border: rgba(255,255,255,0.10) dark
@@ -254,7 +254,7 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 									</Box>
 								) : (
 									/*
-									 * Assistant message — left-aligned, no bg bubble
+									 * Assistant message - left-aligned, no bg bubble
 									 * Cursor spec: subtle left 2px accent border, editor-native prose
 									 */
 									<Box

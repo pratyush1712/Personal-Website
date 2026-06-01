@@ -48,10 +48,10 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 			sx={{
 				flexShrink: 0,
 				p: "10px 10px 12px"
-				// Cursor's input sits flush against the bottom edge with no visible top border — the
+				// Cursor's input sits flush against the bottom edge with no visible top border - the
 				// container card itself provides separation.
 			}}>
-			{/* Outer card — mirrors Cursor's rounded input container, elevated off the panel */}
+			{/* Outer card - mirrors Cursor's rounded input container, elevated off the panel */}
 			<Box
 				sx={{
 					borderRadius: "10px",
@@ -119,7 +119,7 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 						pb: "7px",
 						gap: "6px"
 					}}>
-					{/* "Agent" mode pill — cosmetic, mirrors Cursor's model selector */}
+					{/* "Agent" mode pill - cosmetic, mirrors Cursor's model selector */}
 					<Box
 						sx={{
 							display: "flex",
