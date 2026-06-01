@@ -1,6 +1,6 @@
 # 👨‍🎓 Education
 
-## Cornell University - College of Engineering
+## <img style="height:35px;width:35px;margin-bottom:-6px" src="/icons/cornell_seal.svg"> Cornell University - College of Engineering
 
 **B.S. Computer Science** | Minor: Mathematics (A&S), Psychology (A&S)
 

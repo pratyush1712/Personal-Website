@@ -1,4 +1,4 @@
-# Cornell University On-Campus Affiliations
+# <img style="height:35px;width:35px;margin-bottom:-6px" src="/icons/cornell_seal.svg"> Cornell University On-Campus Affiliations
 
 ## Head of Engineering at [Cornell Perfect Match](https://perfectmatch.ai/)
 
