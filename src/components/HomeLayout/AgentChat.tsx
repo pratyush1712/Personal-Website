@@ -24,7 +24,7 @@ function isSuccessfulAssistantMessage(content: string): boolean {
 	return !FAILURE_SNIPPETS.some(snippet => lower.includes(snippet.toLowerCase()));
 }
 
-/** Animated three-dot "thinking" indicator, mirroring Cursor's style */
+/** Cursor-style animated three-dot thinking indicator */
 function ThinkingDots() {
 	return (
 		<Box
@@ -34,8 +34,8 @@ function ThinkingDots() {
 				display: "flex",
 				alignItems: "center",
 				gap: "4px",
-				pl: 0.5,
-				py: 0.5
+				pl: "10px",
+				py: "6px"
 			}}>
 			{[0, 1, 2].map(i => (
 				<Box
@@ -44,7 +44,7 @@ function ThinkingDots() {
 						width: 5,
 						height: 5,
 						borderRadius: "50%",
-						backgroundColor: "text.disabled",
+						backgroundColor: theme => (theme.palette.mode === "dark" ? "#6b6b6b" : "#aaaaaa"),
 						animation: "agentPulse 1.2s ease-in-out infinite",
 						animationDelay: `${i * 0.2}s`,
 						"@keyframes agentPulse": {
@@ -94,11 +94,11 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 		return "standby";
 	}, [configured, hasSuccessfulReply]);
 
-	// Status indicator colors — subtle, editor-native
+	// Cursor-spec status dot colors
 	const statusDotColor: Record<AgentStatus, string> = {
-		checking: "rgba(255,255,255,0.2)",
+		checking: "rgba(255,255,255,0.18)",
 		unavailable: "#e5a050",
-		standby: "rgba(255,255,255,0.25)",
+		standby: "rgba(255,255,255,0.22)",
 		ready: "#4caf7d"
 	};
 	const statusLabel: Record<AgentStatus, string> = {
@@ -115,30 +115,38 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 				minHeight: 0,
 				overflowY: "auto",
 				overflowX: "hidden",
+				// Cursor-style thin scrollbar
 				scrollbarWidth: "thin",
 				scrollbarColor: theme =>
-					`${theme.palette.mode === "dark" ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)"} transparent`,
+					`${theme.palette.mode === "dark" ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.12)"} transparent`,
 				"&::-webkit-scrollbar": { width: 4 },
 				"&::-webkit-scrollbar-thumb": {
 					borderRadius: 2,
 					backgroundColor: theme =>
-						theme.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"
+						theme.palette.mode === "dark" ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.10)"
 				}
 			}}>
 			{isEmpty ? (
-				<Box sx={{ p: 2, display: "flex", flexDirection: "column", gap: 2 }}>
-					{/* Agent identity card — Cursor-style compact card */}
+				/* ── Empty state ── */
+				<Box sx={{ p: "12px 12px 8px", display: "flex", flexDirection: "column", gap: "10px" }}>
+					{/*
+					 * Agent identity card — Cursor spec:
+					 *   bg:     rgba(255,255,255,0.03) dark  |  rgba(0,0,0,0.02) light
+					 *   border: rgba(255,255,255,0.08) dark  |  rgba(0,0,0,0.08) light
+					 *   radius: 6px
+					 *   p:      10px 12px
+					 */}
 					<Box
 						sx={{
-							borderRadius: "8px",
+							borderRadius: "6px",
 							border: "1px solid",
 							borderColor: theme =>
 								theme.palette.mode === "dark" ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
 							backgroundColor: theme =>
 								theme.palette.mode === "dark" ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
-							p: "12px 14px"
+							p: "10px 12px"
 						}}>
-						<Box sx={{ display: "flex", alignItems: "center", gap: "8px", mb: "6px" }}>
+						<Box sx={{ display: "flex", alignItems: "center", gap: "8px", mb: "5px" }}>
 							{/* Status dot */}
 							<Box
 								aria-hidden
@@ -148,18 +156,18 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 									borderRadius: "50%",
 									backgroundColor: statusDotColor[agentStatus],
 									flexShrink: 0,
-									// Subtle glow for "ready" state
 									...(agentStatus === "ready" && {
-										boxShadow: "0 0 0 2px rgba(76,175,125,0.2)"
+										boxShadow: "0 0 0 2px rgba(76,175,125,0.18)"
 									})
 								}}
 							/>
 							<Typography
 								sx={{
-									fontSize: "0.78rem",
+									fontSize: "0.8125rem", // 13px
 									fontWeight: 600,
-									color: "text.primary",
-									letterSpacing: "0.01em"
+									color: theme => (theme.palette.mode === "dark" ? "#d4d4d4" : "#3b3b3b"),
+									letterSpacing: "0.01em",
+									lineHeight: 1
 								}}>
 								Portfolio Agent
 							</Typography>
@@ -167,7 +175,7 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 								aria-live="polite"
 								sx={{
 									ml: "auto",
-									fontSize: "0.68rem",
+									fontSize: "0.6875rem", // 11px
 									color: "text.disabled",
 									letterSpacing: "0.02em"
 								}}>
@@ -176,12 +184,12 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 						</Box>
 						<Typography
 							sx={{
-								fontSize: "0.72rem",
+								fontSize: "0.75rem", // 12px
 								color: "text.secondary",
-								lineHeight: 1.55,
+								lineHeight: 1.5,
 								letterSpacing: "0.01em"
 							}}>
-							Ask about Pratyush&rsquo;s projects, experience, research, skills, resume, and background.
+							Ask about Pratyush&rsquo;s projects, experience, research, skills, and background.
 						</Typography>
 					</Box>
 
@@ -189,16 +197,19 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 					<AgentPromptSuggestions onSelect={onPromptSelect} />
 				</Box>
 			) : (
+				/* ── Message thread ── */
 				<Box
 					sx={{
-						px: 2,
-						py: 1.5,
+						px: "12px",
+						py: "10px",
 						display: "flex",
 						flexDirection: "column",
 						gap: "2px"
 					}}>
 					{tab!.messages.map((m, i) => {
 						const isUser = m.role === "user";
+						const isLastOfGroup = i === tab!.messages.length - 1 || tab!.messages[i + 1].role !== m.role;
+
 						return (
 							<Box
 								key={i}
@@ -206,14 +217,18 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 									display: "flex",
 									flexDirection: "column",
 									alignItems: isUser ? "flex-end" : "flex-start",
-									// Group consecutive messages with tighter spacing
-									mb:
-										i < tab!.messages.length - 1 && tab!.messages[i + 1].role !== m.role
-											? "10px"
-											: "2px"
+									mb: isLastOfGroup ? "8px" : "2px"
 								}}>
 								{isUser ? (
-									// User message: right-aligned pill with subtle bg
+									/*
+									 * User message — right-aligned pill
+									 * Cursor spec:
+									 *   bg:     rgba(255,255,255,0.08) dark
+									 *   border: rgba(255,255,255,0.10) dark
+									 *   radius: 12px 12px 2px 12px
+									 *   px: 12px  py: 7px
+									 *   font: 13px
+									 */
 									<Box
 										sx={{
 											maxWidth: "85%",
@@ -227,27 +242,29 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 											border: "1px solid",
 											borderColor: theme =>
 												theme.palette.mode === "dark"
-													? "rgba(255,255,255,0.1)"
+													? "rgba(255,255,255,0.10)"
 													: "rgba(0,0,0,0.08)",
-											fontSize: "0.78rem",
-											lineHeight: 1.55,
-											color: "text.primary",
+											fontSize: "0.8125rem", // 13px
+											lineHeight: 1.5,
+											color: theme => (theme.palette.mode === "dark" ? "#d4d4d4" : "#3b3b3b"),
 											whiteSpace: "pre-wrap",
 											wordBreak: "break-word"
 										}}>
 										{m.content}
 									</Box>
 								) : (
-									// Assistant message: left-aligned, no bg — editor-native prose
+									/*
+									 * Assistant message — left-aligned, no bg bubble
+									 * Cursor spec: subtle left 2px accent border, editor-native prose
+									 */
 									<Box
 										sx={{
 											maxWidth: "100%",
-											fontSize: "0.78rem",
+											fontSize: "0.8125rem", // 13px
 											lineHeight: 1.65,
-											color: "text.primary",
+											color: theme => (theme.palette.mode === "dark" ? "#d4d4d4" : "#3b3b3b"),
 											whiteSpace: "pre-wrap",
 											wordBreak: "break-word",
-											// Subtle left accent line for AI responses
 											pl: "10px",
 											borderLeft: "2px solid",
 											borderColor: theme =>
@@ -263,7 +280,7 @@ export default function AgentChat({ tab, pending, onPromptSelect }: Props) {
 					})}
 
 					{pending && (
-						<Box sx={{ display: "flex", alignItems: "flex-start", pl: "10px" }}>
+						<Box sx={{ display: "flex", alignItems: "flex-start" }}>
 							<ThinkingDots />
 						</Box>
 					)}

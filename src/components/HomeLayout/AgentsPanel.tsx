@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Button, IconButton, Tooltip } from "@mui/material";
+import { VscLayoutSidebarRight, VscSettingsGear } from "react-icons/vsc";
+import { LuMessageSquare } from "react-icons/lu";
 import { useLocalAgentTabs } from "@/utils/useLocalAgentTabs";
 import AgentTabs from "./AgentTabs";
 import AgentChat from "./AgentChat";
@@ -67,6 +69,20 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 		}
 	}
 
+	// Cursor-spec header icon button — 26×26, no bg by default
+	const headerIconSx = {
+		width: 26,
+		height: 26,
+		borderRadius: "5px",
+		color: "text.secondary",
+		backgroundColor: "transparent",
+		"&:hover": {
+			color: "text.primary",
+			backgroundColor: (theme: any) =>
+				theme.palette.mode === "dark" ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"
+		}
+	};
+
 	return (
 		<Box
 			component="aside"
@@ -78,9 +94,10 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				display: "flex",
 				flexDirection: "column",
 				borderLeft: "1px solid",
-				borderColor: "divider",
-				// Same chrome tone as the explorer side bar (Cursor's side-bar background)
-				backgroundColor: "background.paper",
+				// Cursor uses #2d2d2d for dividers in the dark theme
+				borderColor: theme => (theme.palette.mode === "dark" ? "#2d2d2d" : "divider"),
+				// Cursor Agent panel bg is #252526 — slightly lighter than the editor chrome (#1e1e1e)
+				backgroundColor: theme => (theme.palette.mode === "dark" ? "#252526" : "#f3f3f3"),
 				overflow: "hidden"
 			}}>
 			{/* ── Tab bar ── */}
@@ -95,7 +112,7 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				/>
 			)}
 
-			{/* ── Message area ── */}
+			{/* ── Message / chat area ── */}
 			<AgentChat tab={activeTab} pending={pendingMap[activeId ?? ""] ?? false} onPromptSelect={send} />
 
 			{/* ── Cursor-style input box ── */}
