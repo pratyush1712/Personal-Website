@@ -80,7 +80,7 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 												theme.palette.mode === "dark"
 													? "rgba(255,255,255,0.3)"
 													: theme.palette.primary.main
-									  }
+										}
 									: {},
 								"&:hover": {
 									color: "text.primary",

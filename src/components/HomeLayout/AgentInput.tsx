@@ -174,7 +174,7 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 													theme.palette.mode === "dark"
 														? "rgba(255,255,255,0.2)"
 														: "rgba(0,0,0,0.14)"
-										  }
+											}
 										: {},
 									"&.Mui-disabled": {
 										color: "text.disabled",

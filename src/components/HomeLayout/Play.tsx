@@ -335,7 +335,7 @@ function BubbleElement(props: { children: string | any[]; options: any; classNam
 												distanceToCenter: distance,
 												maxSize: options?.size,
 												minSize: options?.minSize
-										  })
+											})
 										: comp
 								);
 							})
@@ -372,7 +372,7 @@ function BubbleElement(props: { children: string | any[]; options: any; classNam
 									options?.shape == "ellipse" ? "50%" : options?.cornerRadius + options?.fringeWidth
 							}
 						})
-				  )
+					)
 				: null
 		)
 	);

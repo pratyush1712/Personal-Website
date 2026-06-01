@@ -1,9 +1,18 @@
 "use client";
 import { useId, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
-import { Box, Button, Collapse, IconButton, Typography } from "@mui/material";
+import { Box, Button, Collapse, IconButton, Tooltip, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { VscArrowDown, VscChromeClose, VscRepo } from "react-icons/vsc";
+import {
+	VscMarkdown,
+	VscChromeClose,
+	VscRepo,
+	VscFiles,
+	VscSearch,
+	VscSourceControl,
+	VscExtensions,
+	VscChevronDown
+} from "react-icons/vsc";
 import Link from "next/link";
 import AppTree from "./AppTree";
 import { Page } from "@/types";
@@ -132,6 +141,96 @@ export default function ExplorerPanel({
 				borderRight: "1px solid #3a3a3a",
 				pt: 0
 			}}>
+			{/* Activity toolbar */}
+			<Box
+				sx={{
+					display: "flex",
+					alignItems: "center",
+					height: "35px",
+					px: "8px",
+					gap: "2px",
+					borderBottom: "1px solid #3a3a3a",
+					flexShrink: 0
+				}}>
+				<Tooltip title="Explorer" arrow>
+					<IconButton
+						size="small"
+						disableRipple
+						sx={{
+							color: "#ffffff",
+							backgroundColor: "rgba(255,255,255,0.08)",
+							borderRadius: "4px",
+							p: "4px",
+							"&:hover": { backgroundColor: "rgba(255,255,255,0.12)" }
+						}}>
+						<VscFiles size={16} />
+					</IconButton>
+				</Tooltip>
+
+				<Tooltip title="Search" arrow>
+					<IconButton
+						size="small"
+						disableRipple
+						onClick={() => window.dispatchEvent(new CustomEvent("focus-sidebar-search"))}
+						sx={{
+							color: "#858585",
+							borderRadius: "4px",
+							p: "4px",
+							"&:hover": { backgroundColor: "rgba(255,255,255,0.05)", color: "#cccccc" }
+						}}>
+						<VscSearch size={16} />
+					</IconButton>
+				</Tooltip>
+
+				<Tooltip title="Source Control — open on GitHub" arrow>
+					<IconButton
+						size="small"
+						disableRipple
+						component={Link}
+						href="https://github.com/pratyush1712/Personal-Website"
+						target="_blank"
+						sx={{
+							color: "#858585",
+							borderRadius: "4px",
+							p: "4px",
+							"&:hover": { backgroundColor: "rgba(255,255,255,0.05)", color: "#cccccc" }
+						}}>
+						<VscSourceControl size={16} />
+					</IconButton>
+				</Tooltip>
+
+				<Tooltip title="Skills" arrow>
+					<IconButton
+						size="small"
+						disableRipple
+						component={Link}
+						href="/skills"
+						sx={{
+							color: "#858585",
+							borderRadius: "4px",
+							p: "4px",
+							"&:hover": { backgroundColor: "rgba(255,255,255,0.05)", color: "#cccccc" }
+						}}>
+						<VscExtensions size={16} />
+					</IconButton>
+				</Tooltip>
+
+				<Tooltip title="More actions" arrow>
+					<IconButton
+						size="small"
+						disableRipple
+						sx={{
+							color: "#858585",
+							borderRadius: "4px",
+							p: "4px",
+							ml: "auto",
+							"&:hover": { backgroundColor: "rgba(255,255,255,0.05)", color: "#cccccc" }
+						}}>
+						<VscChevronDown size={16} />
+					</IconButton>
+				</Tooltip>
+			</Box>
+
 			<Section title="OPEN EDITORS" defaultOpen={false}>
 				{visiblePages.length === 0 ? (
 					<Typography variant="caption" sx={{ display: "block", pl: 3, color: "text.disabled" }}>
@@ -148,24 +247,39 @@ export default function ExplorerPanel({
 										setSelectedIndex(p.index);
 										setCurrentComponent("tree");
 									}}
-									sx={fileRowSx(active)}>
+									sx={{
+										...fileRowSx(active),
+										paddingRight: "8px",
+										justifyContent: "space-between",
+										"& .explorer-close-btn": { opacity: 0, transition: "opacity 80ms" },
+										"&:hover .explorer-close-btn": { opacity: 1 }
+									}}>
 									<Box
-										component="span"
-										sx={{ display: "inline-flex", color: "#4fc1ff", flexShrink: 0 }}>
-										<VscArrowDown size={14} />
-									</Box>
-									<Box
-										component="span"
 										sx={{
-											flex: 1,
-											overflow: "hidden",
-											textOverflow: "ellipsis",
-											whiteSpace: "nowrap"
+											display: "flex",
+											alignItems: "center",
+											gap: "6px",
+											minWidth: 0,
+											flex: 1
 										}}>
-										{p.name}
+										<Box
+											component="span"
+											sx={{ display: "inline-flex", color: "#519aba", flexShrink: 0 }}>
+											<VscMarkdown size={16} />
+										</Box>
+										<Box
+											component="span"
+											sx={{
+												overflow: "hidden",
+												textOverflow: "ellipsis",
+												whiteSpace: "nowrap"
+											}}>
+											{p.name}
+										</Box>
 									</Box>
 									<IconButton
 										size="small"
+										className="explorer-close-btn"
 										aria-label={`Close ${p.name}`}
 										onClick={e => {
 											e.preventDefault();
@@ -173,11 +287,14 @@ export default function ExplorerPanel({
 											setVisiblePageIndexs(visiblePageIndexs.filter(x => x !== p.index));
 										}}
 										sx={{
-											p: 0.25,
-											ml: 0.5,
-											color: "text.secondary",
+											p: "2px",
+											width: 16,
+											height: 16,
+											borderRadius: "3px",
+											flexShrink: 0,
+											color: "#858585",
 											backgroundColor: "transparent",
-											"&:hover": { backgroundColor: "action.hover", color: "text.primary" }
+											"&:hover": { backgroundColor: "rgba(255,255,255,0.1)", color: "#ffffff" }
 										}}>
 										<VscChromeClose size={12} />
 									</IconButton>

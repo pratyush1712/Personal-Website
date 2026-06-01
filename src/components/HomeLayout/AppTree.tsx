@@ -2,7 +2,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { Box } from "@mui/material";
-import { VscArrowDown } from "react-icons/vsc";
+import { DiMarkdown } from "react-icons/di";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -82,8 +82,8 @@ export default function AppTree({
 									backgroundColor: active ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.05)"
 								}
 							}}>
-							<Box component="span" sx={{ display: "inline-flex", color: "#4fc1ff", flexShrink: 0 }}>
-								<VscArrowDown size={14} />
+							<Box component="span" sx={{ display: "inline-flex", color: "#519aba", flexShrink: 0 }}>
+								<DiMarkdown size={16} />
 							</Box>
 							{name}
 						</Box>

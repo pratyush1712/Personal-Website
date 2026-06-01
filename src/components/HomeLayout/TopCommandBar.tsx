@@ -6,7 +6,7 @@ import { LuPanelLeft, LuPanelRight, LuSearch } from "react-icons/lu";
 import { VscMarkdown } from "react-icons/vsc";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { links } from "@/utils/links";
 import { highlightText } from "@/utils/searchHighlight";
 
@@ -51,6 +51,7 @@ export default function TopCommandBar({
 }: Props) {
 	const router = useRouter();
 	const searchListId = useId();
+	const searchInputRef = useRef<HTMLInputElement>(null);
 	const professional = links.filter(link => link.type === "professional");
 	const resume = professional.find(link => link.href.endsWith(".pdf"));
 	const iconLinks = professional.filter(link => link !== resume);
@@ -98,6 +99,15 @@ export default function TopCommandBar({
 			window.clearTimeout(timeout);
 			controller.abort();
 		};
+	}, [trimmedQuery]);
+
+	useEffect(() => {
+		const handler = () => {
+			searchInputRef.current?.focus();
+			if (trimmedQuery) setOpen(true);
+		};
+		window.addEventListener("focus-sidebar-search", handler);
+		return () => window.removeEventListener("focus-sidebar-search", handler);
 	}, [trimmedQuery]);
 
 	function navigateToResult(result: SearchResult) {
@@ -191,6 +201,7 @@ export default function TopCommandBar({
 							}}>
 							<LuSearch size={14} />
 							<InputBase
+								inputRef={searchInputRef}
 								value={query}
 								onChange={event => {
 									setQuery(event.target.value);
