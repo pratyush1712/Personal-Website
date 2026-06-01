@@ -10,7 +10,8 @@ import { Container, TableBody, TableFooter, TableHead, TableRow } from "@mui/mat
 import { MarkdownH1, MarkdownH2, MarkdownH3, MarkdownH4 } from "@/components/Markdown/Markdown";
 import { MarkdownLink, MarkdownCode, MarkdownImage, MarkdownListItem } from "@/components/Markdown/Markdown";
 import { MarkdownParagraph, MarkdownButton, MarkdownTable, MarkdownTableCell } from "@/components/Markdown/Markdown";
-import { MarkdownLabel, MarkdownUnderline } from "@/components/Markdown/Markdown";
+import { MarkdownItalic, MarkdownLabel, MarkdownUnderline } from "@/components/Markdown/Markdown";
+import MarkdownSearchHighlighter from "@/components/Markdown/MarkdownSearchHighlighter";
 
 // Static Page Imports
 import pages, { routeToPage } from "@/utils/pages";
@@ -47,7 +48,8 @@ export default async function MDContainer({ params }: Props) {
 	const { slug } = await params;
 	const content = getContent(slug);
 	return (
-		<Container maxWidth="md" sx={{ pb: 1, minWidth: "100%" }}>
+		<Container id="portfolio-markdown-content" maxWidth="md" sx={{ pb: 1, minWidth: "100%" }}>
+			<MarkdownSearchHighlighter contentId="portfolio-markdown-content" />
 			<ReactMarkdown
 				components={{
 					code: MarkdownCode,
@@ -66,6 +68,7 @@ export default async function MDContainer({ params }: Props) {
 					h2: MarkdownH2,
 					h3: MarkdownH3,
 					h4: MarkdownH4,
+					em: MarkdownItalic,
 					ins: MarkdownUnderline,
 					li: MarkdownListItem,
 					button: MarkdownButton

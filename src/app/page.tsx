@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, IconButton, Link, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Divider, Grid, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { links } from "@/utils/links";
 import Image from "next/image";
 import AnimatedTextComponent from "@/ui/HomePageCaption";
@@ -7,9 +7,15 @@ export default function Home() {
 	const iconLink = (link: any) => {
 		return (
 			<Tooltip key={link.index} title={link.title} arrow>
-				<Link target="_blank" href={link.href} underline="none" color="inherit">
-					<IconButton color="inherit">{link.icon}</IconButton>
-				</Link>
+				<IconButton
+					component="a"
+					href={link.href}
+					target="_blank"
+					rel="noopener noreferrer"
+					color="inherit"
+					aria-label={link.title}>
+					{link.icon}
+				</IconButton>
 			</Tooltip>
 		);
 	};

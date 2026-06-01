@@ -10,6 +10,12 @@ const nextConfig = {
 			static: 180
 		}
 	},
+	// The portfolio-agent route reads public/readmes/*.md at runtime; public/ assets are not
+	// traced into serverless functions by default, so include them explicitly for that route.
+	outputFileTracingIncludes: {
+		"/api/portfolio-agent": ["./public/readmes/*.md"],
+		"/api/portfolio-search": ["./public/readmes/*.md"]
+	},
 	images: {
 		remotePatterns: [
 			{

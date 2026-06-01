@@ -1,12 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Container, CssBaseline, Grid, Stack, ThemeProvider, Typography } from "@mui/material";
-import createTheme from "@/ui/Theme";
+import { useEffect, useMemo, useState } from "react";
+import { Box, Container, CssBaseline, Drawer, ThemeProvider, useMediaQuery } from "@mui/material";
+import createTheme, { TOKENS } from "@/ui/Theme";
 import { isBrowser } from "react-device-detect";
+import AgentsPanel from "./AgentsPanel";
 import AppButtons from "./AppButtons";
-import AppTree from "./AppTree";
+import ExplorerPanel from "./ExplorerPanel";
 import Footer from "./Footer";
-import Sidebar from "./Sidebar";
+import TopCommandBar from "./TopCommandBar";
 import pages, { routeToPage } from "@/utils/pages";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import createCache from "@emotion/cache";
@@ -28,28 +29,39 @@ function initVisiblePageIndexs(pages: Page[]) {
 	return tabs;
 }
 
-interface VSCodeLayoutProps {
+interface WorkspaceLayoutProps {
 	options: any;
 	children: React.ReactNode;
 }
 
-export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
+export default function WorkspaceLayout({ options, children }: WorkspaceLayoutProps) {
 	const router = useRouter();
 	const params = useParams();
 	const pathname = usePathname();
-	const [expanded, setExpanded] = useState(isBrowser);
+	const [explorerOpen, setExplorerOpen] = useState(false);
+	// Right-side agents panel. Toggled from the top bar; the panel content is built in Phase F.
+	const [agentsOpen, setAgentsOpen] = useState(false);
 	const [selectedIndex, setSelectedIndex] = useState(routeToPage[params.slug as string]?.index ?? null);
 	const [currentComponent, setCurrentComponent] = useState("");
 	const [visiblePageIndexs, setVisiblePageIndexs] = useState(initVisiblePageIndexs(pages));
 	const [darkMode, setDarkMode] = useState(true);
 	const [visiblePages, setVisiblePages] = useState(pages);
 
-	const theme = createTheme(darkMode);
+	// Theme is derived purely from darkMode — no in-place palette mutation. Recreated only
+	// when the mode flips.
+	const theme = useMemo(() => createTheme(darkMode), [darkMode]);
+	// Below 768px the side panels become temporary overlay drawers instead of inline columns.
+	const isMobile = useMediaQuery("(max-width:767.98px)");
 	function handleThemeChange() {
-		setDarkMode(!darkMode);
-		theme.palette.mode = darkMode ? "dark" : "light";
-		localStorage.setItem("darkMode", JSON.stringify(!darkMode));
+		setDarkMode(prev => {
+			const next = !prev;
+			localStorage.setItem("darkMode", JSON.stringify(next));
+			return next;
+		});
 	}
+
+	// Human-readable label of the current route for the top bar (normalizes "/overview" -> "overview").
+	const currentPage = pathname && pathname !== "/" ? pathname.replace(/^\/+/, "") : "Home";
 
 	const deletedIndex: number | undefined = visiblePages.find(x => !visiblePageIndexs.includes(x.index))?.index;
 	useEffect(() => {
@@ -78,6 +90,20 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 
 	useEffect(() => {
 		setDarkMode(JSON.parse(localStorage.getItem("darkMode") || "true"));
+	}, []);
+
+	useEffect(() => {
+		document.documentElement.style.colorScheme = darkMode ? "dark" : "light";
+	}, [darkMode]);
+
+	// On first mount, collapse the side panels on a narrow viewport (they open as drawers there).
+	// Keyed to mount only — not to isMobile — so a user-opened drawer is never force-closed.
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const isMobileViewport = window.matchMedia("(max-width:767.98px)").matches;
+			setExplorerOpen(isBrowser && !isMobileViewport);
+			setAgentsOpen(false);
+		}
 	}, []);
 
 	const [{ cache, flush }] = useState(() => {
@@ -120,78 +146,110 @@ export default function VSCodeLayout({ options, children }: VSCodeLayoutProps) {
 		);
 	});
 
+	// Defined once and rendered either inline (desktop) or inside a Drawer (mobile).
+	const explorerPanel = (
+		<ExplorerPanel
+			pages={pages}
+			visiblePages={visiblePages}
+			selectedIndex={selectedIndex}
+			setSelectedIndex={setSelectedIndex}
+			currentComponent={currentComponent}
+			setCurrentComponent={setCurrentComponent}
+			visiblePageIndexs={visiblePageIndexs}
+			setVisiblePageIndexs={setVisiblePageIndexs}
+		/>
+	);
+	const agentsPanel = <AgentsPanel onClose={() => setAgentsOpen(false)} currentPage={currentPage} />;
+
 	return (
 		<CacheProvider value={cache}>
 			<ThemeProvider theme={theme}>
 				<CssBaseline enableColorScheme />
-				<Container sx={{ m: 0, p: 0, overflowY: "hidden" }} maxWidth={false} disableGutters>
-					<Grid container sx={{ overflow: "auto", overflowY: "hidden" }}>
-						<Grid container sx={{ overflow: "auto" }}>
-							{isBrowser && (
-								<Grid item sx={{ width: 50 }}>
-									<Sidebar
-										setExpanded={setExpanded}
-										expanded={expanded}
-										darkMode={darkMode}
-										handleThemeChange={handleThemeChange}
-									/>
-								</Grid>
-							)}
-							{expanded && (
-								<Grid item sx={{ backgroundColor: darkMode ? "#252527" : "#f3f3f3", width: 220 }}>
-									<Stack sx={{ mt: 1 }}>
-										<Typography variant="caption" color="text.secondary" sx={{ ml: 4 }}>
-											EXPLORER
-										</Typography>
-										<AppTree
-											pages={pages}
-											selectedIndex={selectedIndex}
-											setSelectedIndex={setSelectedIndex}
-											currentComponent={currentComponent}
-											setCurrentComponent={setCurrentComponent}
-											visiblePageIndexs={visiblePageIndexs}
-											setVisiblePageIndexs={setVisiblePageIndexs}
-										/>
-									</Stack>
-								</Grid>
-							)}
+				{/* Workspace shell: a fixed-height column of [main row] + [status bar]. The main
+				    row lays out the workspace regions horizontally. */}
+				<Box
+					sx={{
+						height: "100vh",
+						overflow: "hidden",
+						display: "flex",
+						flexDirection: "column",
+						backgroundColor: "background.default"
+					}}>
+					<TopCommandBar
+						darkMode={darkMode}
+						onThemeToggle={handleThemeChange}
+						explorerOpen={explorerOpen}
+						onExplorerToggle={() => setExplorerOpen(prev => !prev)}
+						agentsOpen={agentsOpen}
+						onAgentsToggle={() => setAgentsOpen(prev => !prev)}
+						currentPage={currentPage}
+					/>
+					<Box sx={{ flex: 1, minHeight: 0, display: "flex", overflow: "hidden" }}>
+						{/* Explorer sidebar (inline on desktop; a drawer on mobile — see below) */}
+						{!isMobile && explorerOpen && explorerPanel}
 
-							<Grid item xs zeroMinWidth sx={{ width: "100%" }}>
-								<Grid item sx={{ height: "33px" }}>
-									<AppButtons
-										pages={visiblePages}
-										selectedIndex={selectedIndex}
-										setSelectedIndex={setSelectedIndex}
-										// currentComponent={currentComponent}
-										setCurrentComponent={setCurrentComponent}
-										visiblePageIndexs={visiblePageIndexs}
-										setVisiblePageIndexs={setVisiblePageIndexs}
-									/>
-								</Grid>
-								<Grid
-									sx={{
-										scrollBehavior: "smooth",
-										overflowY: "auto",
-										maxHeight: "calc(100vh - 53px)",
-										background: !darkMode ? "#FFFFFF" : "#1e1e1e"
-									}}>
-									<Container
-										sx={{
-											minHeight: "calc(100vh - 53px)",
-											maxHeight: "calc(100vh - 53px)",
-											overflowY: "auto",
-											overflowX: "hidden"
-										}}>
-										{children}
-									</Container>
-								</Grid>
-							</Grid>
-						</Grid>
-						<Grid item lg={12} md={12} sm={12} xs={12}>
-							<Footer />
-						</Grid>
-					</Grid>
-				</Container>
+						{/* Editor / portfolio content surface */}
+						<Box
+							sx={{
+								flex: 1,
+								minWidth: 0,
+								display: "flex",
+								flexDirection: "column",
+								overflow: "hidden"
+							}}>
+							<Box sx={{ height: "33px", flexShrink: 0 }}>
+								<AppButtons
+									pages={visiblePages}
+									selectedIndex={selectedIndex}
+									setSelectedIndex={setSelectedIndex}
+									setCurrentComponent={setCurrentComponent}
+									visiblePageIndexs={visiblePageIndexs}
+									setVisiblePageIndexs={setVisiblePageIndexs}
+								/>
+							</Box>
+							<Box
+								sx={{
+									flex: 1,
+									minHeight: 0,
+									scrollBehavior: "smooth",
+									overflowY: "auto",
+									overflowX: "hidden",
+									backgroundColor: darkMode ? TOKENS.dark.surface : TOKENS.light.surface
+								}}>
+								<Container sx={{ minHeight: "100%", overflowX: "hidden" }}>{children}</Container>
+							</Box>
+						</Box>
+
+						{/* Right agents panel (inline on desktop; a drawer on mobile — see below) */}
+						{!isMobile && agentsOpen && agentsPanel}
+
+						{/* Mobile: side panels become temporary overlay drawers so they never
+						    squeeze or overflow the content. */}
+						{isMobile && (
+							<>
+								<Drawer
+									anchor="left"
+									open={explorerOpen}
+									onClose={() => setExplorerOpen(false)}
+									ModalProps={{ keepMounted: true }}>
+									{explorerPanel}
+								</Drawer>
+								<Drawer
+									anchor="right"
+									open={agentsOpen}
+									onClose={() => setAgentsOpen(false)}
+									ModalProps={{ keepMounted: true }}>
+									{agentsPanel}
+								</Drawer>
+							</>
+						)}
+					</Box>
+
+					{/* Status bar */}
+					<Box sx={{ flexShrink: 0 }}>
+						<Footer />
+					</Box>
+				</Box>
 			</ThemeProvider>
 		</CacheProvider>
 	);
