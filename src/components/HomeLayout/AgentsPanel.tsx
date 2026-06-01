@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Box, IconButton, Tooltip } from "@mui/material";
-import { VscLayoutSidebarRight } from "react-icons/vsc";
+import { Box } from "@mui/material";
 import { useLocalAgentTabs } from "@/utils/useLocalAgentTabs";
 import AgentTabs from "./AgentTabs";
 import AgentChat from "./AgentChat";

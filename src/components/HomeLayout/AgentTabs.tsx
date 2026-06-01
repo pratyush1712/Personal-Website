@@ -1,6 +1,8 @@
 "use client";
 import { Box, IconButton, Tooltip } from "@mui/material";
-import { VscAdd, VscClose, VscEdit } from "react-icons/vsc";
+import { VscAdd, VscChromeClose, VscClose, VscEdit } from "react-icons/vsc";
+import { BiComment } from "react-icons/bi";
+
 import { AgentTab, MAX_TABS } from "@/utils/agentStorage";
 
 interface Props {
@@ -17,7 +19,7 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 		<Box
 			sx={{
 				flexShrink: 0,
-				borderBottom: "1px solid",
+				borderTop: "1px solid",
 				borderColor: "divider",
 				display: "flex",
 				alignItems: "center",
@@ -92,13 +94,14 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 								}
 							}}>
 							{/* Pencil icon — mirrors Cursor's edit icon on agent tabs */}
-							<VscEdit size={11} style={{ opacity: active ? 0.7 : 0.4, flexShrink: 0 }} />
+							<BiComment size={14} style={{ opacity: active ? 0.7 : 0.4, flexShrink: 0 }} />
 
 							<Box
 								component="span"
 								sx={{
-									fontSize: "0.72rem",
+									fontSize: "0.8rem",
 									maxWidth: 90,
+									fontWeight: 500,
 									overflow: "hidden",
 									textOverflow: "ellipsis",
 									color: "inherit"
@@ -136,7 +139,7 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 										color: "text.primary"
 									}
 								}}>
-								<VscClose size={11} />
+								<VscChromeClose size={16} />
 							</Box>
 						</Box>
 					);
