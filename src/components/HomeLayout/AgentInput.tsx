@@ -60,6 +60,10 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 						theme.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.12)",
 					backgroundColor: theme =>
 						theme.palette.mode === "dark" ? TOKENS.dark.surface : TOKENS.light.surface,
+					boxShadow: theme =>
+						theme.palette.mode === "dark"
+							? "0 4px 16px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3)"
+							: "0 4px 16px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)",
 					display: "flex",
 					flexDirection: "column",
 					transition: "border-color 150ms ease",
