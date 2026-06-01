@@ -17,7 +17,7 @@ const UNAVAILABLE_MESSAGE =
 export default function AgentsPanel({ onClose, currentPage }: Props) {
 	const { tabs, activeTab, activeId, hydrated, canCreate, createTab, closeTab, selectTab, appendMessage } =
 		useLocalAgentTabs();
-	const [pending, setPending] = useState(false);
+	const [pendingMap, setPendingMap] = useState<Record<string, boolean>>({});
 
 	useEffect(() => {
 		if (hydrated && tabs.length === 0) createTab();
@@ -30,12 +30,13 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 	}
 
 	async function send(text: string) {
-		if (!activeTab || pending) return;
+		if (!activeTab) return;
 		const id = activeTab.id;
+		if (pendingMap[id]) return;
 		// Cap to last 10 messages client-side so the body never exceeds the route's 32KB limit
 		const outgoing = [...activeTab.messages, { role: "user" as const, content: text }].slice(-10);
 		appendMessage(id, { role: "user", content: text });
-		setPending(true);
+		setPendingMap(m => ({ ...m, [id]: true }));
 		try {
 			const res = await fetch("/api/portfolio-agent", {
 				method: "POST",
@@ -58,7 +59,11 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 		} catch (err: any) {
 			appendMessage(id, { role: "assistant", content: err.message || UNAVAILABLE_MESSAGE });
 		} finally {
-			setPending(false);
+			setPendingMap(m => {
+				const next = { ...m };
+				delete next[id];
+				return next;
+			});
 		}
 	}
 
@@ -91,10 +96,10 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 			)}
 
 			{/* ── Message area ── */}
-			<AgentChat tab={activeTab} pending={pending} onPromptSelect={send} />
+			<AgentChat tab={activeTab} pending={pendingMap[activeId ?? ""] ?? false} onPromptSelect={send} />
 
 			{/* ── Cursor-style input box ── */}
-			<AgentInput onSend={send} pending={pending} />
+			<AgentInput onSend={send} pending={pendingMap[activeId ?? ""] ?? false} />
 		</Box>
 	);
 }

@@ -44,8 +44,7 @@ function titleFromMarkdown(markdown: string, fileName: string): string {
 	const heading = markdown.match(/^#\s+(.+)$/m)?.[1];
 	if (heading) {
 		return heading
-			.replace(/<[^>]*>/g, "") // strip complete tags
-			.replace(/[<>]/g, "") // strip remaining angle brackets (e.g. unclosed <script)
+			.replace(/[<>]/g, "") // remove all angle brackets in one pass — no multi-char pattern for CodeQL to flag
 			.replace(/[^\x20-\x7E]/g, "")
 			.replace(/\s+/g, " ")
 			.trim();
