@@ -5,14 +5,14 @@ import { createTheme, darkScrollbar } from "@mui/material";
 // touching individual components. Values mirror Cursor's default dark theme exactly.
 export const TOKENS = {
 	dark: {
-		appBg: "#181818", // window chrome — title bar, activity/side bar, tab strip, status bar
-		panel: "#181818", // side panels (explorer / agents); same chrome tone as the activity bar
-		surface: "#1f1f1f", // editor content surface (active tab + scroll area)
-		elevated: "#2a2a2a", // hover / raised state
-		border: "#2b2b2b", // universal divider between regions
-		textPrimary: "#cccccc", // editor foreground
-		textSecondary: "#9d9d9d", // muted — inactive tabs, descriptions
-		accent: "#0078d4" // Cursor / VS Code accent blue
+		appBg: "#1e1e1e", // outer window shell background
+		panel: "#252526", // elevated panels — toolbar, tab strip, search dropdown
+		surface: "#1e1e1e", // editor content surface (active tab + scroll area)
+		elevated: "#2d2d2d", // hover / raised state
+		border: "#3a3a3a", // universal divider between regions
+		textPrimary: "#cccccc",
+		textSecondary: "#858585",
+		accent: "#0078d4"
 	},
 	light: {
 		appBg: "#f8f8f8", // window chrome — title bar, activity/side bar, tab strip, status bar
@@ -35,7 +35,10 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 		primary: { main: t.accent },
 		secondary: { main: t.accent },
 		text: { primary: t.textPrimary, secondary: t.textSecondary },
-		divider: t.border
+		divider: t.border,
+		action: darkMode
+			? { hover: "rgba(255,255,255,0.05)", selected: "rgba(255,255,255,0.08)", active: "#ffffff" }
+			: { hover: "rgba(0,0,0,0.04)", selected: "rgba(0,0,0,0.08)", active: "#000000" }
 	};
 	const palette = { ...defaultPalette, ...paletteOverrides?.palette };
 
@@ -113,6 +116,10 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 	return createTheme({
 		palette,
 		components,
+		typography: {
+			fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif',
+			allVariants: { fontStyle: "normal" }
+		},
 		breakpoints: {
 			values: {
 				xs: 0,

@@ -1,36 +1,32 @@
-import { Box, Link, Paper, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { VscRemote, VscError, VscWarning, VscBell, VscFeedback, VscCheck } from "react-icons/vsc";
 import { IoIosGitBranch } from "react-icons/io";
 
-// Muted Cursor-style status bar: panel background with a thin top border, secondary text
-// that brightens on hover. No VS Code blue/green blocks.
 const itemSx = {
 	display: "flex",
 	alignItems: "center",
-	gap: 0.4,
-	px: 0.5,
-	color: "text.secondary",
-	"&:hover": { color: "text.primary" }
+	gap: "4px",
+	px: "4px",
+	color: "inherit",
+	textDecoration: "none",
+	"&:hover": { backgroundColor: "rgba(255,255,255,0.12)" }
 } as const;
 
-const labelSx = { fontSize: "0.62rem", color: "inherit" } as const;
+const labelSx = { fontSize: "12px", color: "inherit", lineHeight: 1 } as const;
 
 export default function Footer() {
 	return (
 		<Box
-			component={Paper}
-			square
-			elevation={0}
+			component="footer"
 			sx={{
 				height: "22px",
 				display: "flex",
 				alignItems: "center",
-				gap: 1,
-				px: 1,
-				backgroundColor: "background.paper",
-				borderTop: 1,
-				borderColor: "divider",
-				color: "text.secondary"
+				gap: "8px",
+				px: "8px",
+				backgroundColor: "#007acc",
+				color: "#ffffff",
+				flexShrink: 0
 			}}>
 			<Box
 				component={Link}

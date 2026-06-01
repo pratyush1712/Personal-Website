@@ -2,7 +2,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { Box } from "@mui/material";
-import { VscMarkdown } from "react-icons/vsc";
+import { VscArrowDown } from "react-icons/vsc";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -64,25 +64,26 @@ export default function AppTree({
 							sx={{
 								display: "flex",
 								alignItems: "center",
-								gap: 0.75,
-								pl: 3,
-								pr: 1.5,
-								py: 0.5,
-								fontSize: "0.82rem",
-								lineHeight: 1.6,
+								gap: "6px",
+								paddingLeft: "20px",
+								paddingRight: "12px",
+								paddingTop: 0,
+								paddingBottom: 0,
+								height: "22px",
+								lineHeight: "22px",
+								fontSize: "13px",
+								fontWeight: 400,
+								fontStyle: "normal",
 								cursor: "pointer",
 								userSelect: "none",
-								color: active ? "text.primary" : "text.secondary",
-								backgroundColor: active ? "action.selected" : "transparent",
-								borderLeft: "2px solid",
-								borderColor: active && currentComponent === "tree" ? "primary.main" : "transparent",
+								color: "#cccccc",
+								backgroundColor: active ? "rgba(255,255,255,0.08)" : "transparent",
 								"&:hover": {
-									backgroundColor: active ? "action.selected" : "action.hover",
-									color: "text.primary"
+									backgroundColor: active ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.05)"
 								}
 							}}>
-							<Box component="span" sx={{ display: "inline-flex", color: "text.secondary" }}>
-								<VscMarkdown />
+							<Box component="span" sx={{ display: "inline-flex", color: "#4fc1ff", flexShrink: 0 }}>
+								<VscArrowDown size={14} />
 							</Box>
 							{name}
 						</Box>

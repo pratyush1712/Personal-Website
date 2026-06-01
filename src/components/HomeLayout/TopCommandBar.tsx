@@ -119,15 +119,14 @@ export default function TopCommandBar({
 		<Box
 			component="header"
 			sx={{
-				height: 44,
+				height: 35,
 				flexShrink: 0,
 				display: "flex",
 				alignItems: "center",
 				gap: 1,
 				px: 1,
-				borderBottom: 1,
-				borderColor: "divider",
-				backgroundColor: "background.paper"
+				borderBottom: "1px solid #3a3a3a",
+				backgroundColor: "#252526"
 			}}>
 			<Tooltip title={explorerOpen ? "Hide explorer" : "Show explorer"} arrow>
 				<IconButton
@@ -140,22 +139,30 @@ export default function TopCommandBar({
 				</IconButton>
 			</Tooltip>
 
-			<Box sx={{ display: "flex", alignItems: "baseline", gap: 0.75, minWidth: 0 }}>
-				<Typography variant="body2" sx={{ fontWeight: 600, whiteSpace: "nowrap" }}>
+			<Box sx={{ display: "flex", alignItems: "center", gap: "6px", minWidth: 0 }}>
+				<Typography
+					sx={{ fontSize: "13px", fontWeight: 400, color: "#e0e0e0", whiteSpace: "nowrap", lineHeight: 1 }}>
 					Pratyush Sudhakar
 				</Typography>
 				<Typography
-					variant="body2"
-					sx={{ color: "text.secondary", whiteSpace: "nowrap", display: { xs: "none", sm: "block" } }}>
+					sx={{
+						fontSize: "13px",
+						fontWeight: 400,
+						color: "#858585",
+						whiteSpace: "nowrap",
+						lineHeight: 1,
+						display: { xs: "none", sm: "block" }
+					}}>
 					/ Portfolio Workspace
 				</Typography>
 				<Typography
-					variant="caption"
 					sx={{
-						color: "text.secondary",
+						fontSize: "13px",
+						fontWeight: 400,
+						color: "#858585",
 						whiteSpace: "nowrap",
-						display: { xs: "none", md: "block" },
-						ml: 0.5
+						lineHeight: 1,
+						display: { xs: "none", md: "block" }
 					}}>
 					— {currentPage}
 				</Typography>

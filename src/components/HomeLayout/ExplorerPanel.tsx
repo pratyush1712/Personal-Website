@@ -3,7 +3,7 @@ import { useId, useState, type Dispatch, type ReactNode, type SetStateAction } f
 import { Box, Button, Collapse, IconButton, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { VscMarkdown, VscChromeClose, VscRepo } from "react-icons/vsc";
+import { VscArrowDown, VscChromeClose, VscRepo } from "react-icons/vsc";
 import Link from "next/link";
 import AppTree from "./AppTree";
 import { Page } from "@/types";
@@ -32,16 +32,21 @@ function fileRowSx(active: boolean) {
 	return {
 		display: "flex",
 		alignItems: "center",
-		gap: 0.75,
-		pl: 3,
-		pr: 0.5,
-		py: 0.4,
-		fontSize: "0.82rem",
+		gap: "6px",
+		paddingLeft: "20px",
+		paddingRight: "4px",
+		paddingTop: 0,
+		paddingBottom: 0,
+		height: "22px",
+		lineHeight: "22px",
+		fontSize: "13px",
+		fontWeight: 400,
+		fontStyle: "normal",
 		cursor: "pointer",
 		userSelect: "none",
-		color: active ? "text.primary" : "text.secondary",
-		backgroundColor: active ? "action.selected" : "transparent",
-		"&:hover": { backgroundColor: active ? "action.selected" : "action.hover", color: "text.primary" }
+		color: "#cccccc",
+		backgroundColor: active ? "rgba(255,255,255,0.08)" : "transparent",
+		"&:hover": { backgroundColor: active ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.05)" }
 	} as const;
 }
 
@@ -59,7 +64,7 @@ function Section({
 	const contentId = `${panelId.replace(/:/g, "")}-content`;
 
 	return (
-		<Box sx={{ mb: 0.5 }}>
+		<Box>
 			<Button
 				onClick={() => setOpen(o => !o)}
 				disableRipple
@@ -68,17 +73,30 @@ function Section({
 				fullWidth
 				sx={{
 					justifyContent: "flex-start",
-					gap: 0.5,
-					px: 0.5,
-					py: 0.25,
+					gap: "4px",
+					px: "8px",
+					py: 0,
+					height: "22px",
 					minHeight: 0,
+					borderRadius: 0,
 					textTransform: "none",
-					color: "text.secondary",
 					backgroundColor: "transparent",
-					"&:hover": { backgroundColor: "transparent", color: "text.primary" }
+					"&:hover": { backgroundColor: "rgba(255,255,255,0.05)" }
 				}}>
-				{open ? <ExpandMoreIcon sx={{ fontSize: 16 }} /> : <ChevronRightIcon sx={{ fontSize: 16 }} />}
-				<Typography variant="caption" sx={{ fontWeight: 700, letterSpacing: "0.06em", color: "inherit" }}>
+				{open ? (
+					<ExpandMoreIcon sx={{ fontSize: "10px", color: "#c5c5c5", flexShrink: 0 }} />
+				) : (
+					<ChevronRightIcon sx={{ fontSize: "10px", color: "#c5c5c5", flexShrink: 0 }} />
+				)}
+				<Typography
+					sx={{
+						fontSize: "11px",
+						fontWeight: 700,
+						textTransform: "uppercase",
+						letterSpacing: "0.08em",
+						color: "#bbbbbb",
+						lineHeight: "22px"
+					}}>
 					{title}
 				</Typography>
 			</Button>
@@ -110,10 +128,9 @@ export default function ExplorerPanel({
 				flexShrink: 0,
 				height: "100%",
 				overflowY: "auto",
-				backgroundColor: "background.paper",
-				borderRight: 1,
-				borderColor: "divider",
-				pt: 0.5
+				backgroundColor: "#1e1e1e",
+				borderRight: "1px solid #3a3a3a",
+				pt: 0
 			}}>
 			<Section title="OPEN EDITORS" defaultOpen={false}>
 				{visiblePages.length === 0 ? (
@@ -132,8 +149,10 @@ export default function ExplorerPanel({
 										setCurrentComponent("tree");
 									}}
 									sx={fileRowSx(active)}>
-									<Box component="span" sx={{ display: "inline-flex", color: "text.secondary" }}>
-										<VscMarkdown />
+									<Box
+										component="span"
+										sx={{ display: "inline-flex", color: "#4fc1ff", flexShrink: 0 }}>
+										<VscArrowDown size={14} />
 									</Box>
 									<Box
 										component="span"
@@ -197,8 +216,8 @@ export default function ExplorerPanel({
 									setCurrentComponent("featured-projects");
 								}}
 								sx={fileRowSx(false)}>
-								<Box component="span" sx={{ display: "inline-flex", color: "text.secondary" }}>
-									<VscRepo />
+								<Box component="span" sx={{ display: "inline-flex", color: "#858585", flexShrink: 0 }}>
+									<VscRepo size={14} />
 								</Box>
 								<Box
 									component="span"
