@@ -93,7 +93,19 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 	}, []);
 
 	useEffect(() => {
-		document.documentElement.style.colorScheme = darkMode ? "dark" : "light";
+		const root = document.documentElement;
+		root.style.colorScheme = darkMode ? "dark" : "light";
+		// Override the CSS custom properties so they track the user's manual toggle,
+		// not just the system prefers-color-scheme media query (which globals.css uses).
+		if (darkMode) {
+			root.style.setProperty("--foreground-rgb", "204, 204, 204");
+			root.style.setProperty("--background-start-rgb", "24, 24, 24");
+			root.style.setProperty("--background-end-rgb", "24, 24, 24");
+		} else {
+			root.style.setProperty("--foreground-rgb", "59, 59, 59");
+			root.style.setProperty("--background-start-rgb", "248, 248, 248");
+			root.style.setProperty("--background-end-rgb", "248, 248, 248");
+		}
 	}, [darkMode]);
 
 	// On first mount, collapse the side panels on a narrow viewport (they open as drawers there).

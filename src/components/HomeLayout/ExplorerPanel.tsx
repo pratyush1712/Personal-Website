@@ -1,6 +1,7 @@
 "use client";
 import { useId, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
 import { Box, Button, Collapse, IconButton, Tooltip, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import {
@@ -13,6 +14,7 @@ import {
 	VscExtensions,
 	VscChevronDown
 } from "react-icons/vsc";
+import { DiMarkdown } from "react-icons/di";
 import Link from "next/link";
 import AppTree from "./AppTree";
 import { Page } from "@/types";
@@ -29,15 +31,15 @@ interface Props {
 	setVisiblePageIndexs: Dispatch<SetStateAction<number[]>>;
 }
 
-// Featured work is sourced from real headings in public/readmes/projects.md.
-// Each item deep-links to its heading in the existing projects file to avoid duplicating project content.
 const FEATURED_PROJECTS = [
 	"Personal Agent Homebase",
 	"BrainDump - AI Thought-Mapping Canvas",
 	"ADHD-Friendly Text Enhancer"
 ];
 
-function fileRowSx(active: boolean) {
+function fileRowSx(active: boolean, dark: boolean) {
+	const activeBg = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)";
+	const hoverBg = dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)";
 	return {
 		display: "flex",
 		alignItems: "center",
@@ -53,9 +55,9 @@ function fileRowSx(active: boolean) {
 		fontStyle: "normal",
 		cursor: "pointer",
 		userSelect: "none",
-		color: "#cccccc",
-		backgroundColor: active ? "rgba(255,255,255,0.08)" : "transparent",
-		"&:hover": { backgroundColor: active ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.05)" }
+		color: dark ? "#cccccc" : "#3b3b3b",
+		backgroundColor: active ? activeBg : "transparent",
+		"&:hover": { backgroundColor: active ? activeBg : hoverBg }
 	} as const;
 }
 
@@ -71,6 +73,8 @@ function Section({
 	const [open, setOpen] = useState(defaultOpen);
 	const panelId = useId();
 	const contentId = `${panelId.replace(/:/g, "")}-content`;
+	const theme = useTheme();
+	const dark = theme.palette.mode === "dark";
 
 	return (
 		<Box>
@@ -90,12 +94,12 @@ function Section({
 					borderRadius: 0,
 					textTransform: "none",
 					backgroundColor: "transparent",
-					"&:hover": { backgroundColor: "rgba(255,255,255,0.05)" }
+					"&:hover": { backgroundColor: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)" }
 				}}>
 				{open ? (
-					<ExpandMoreIcon sx={{ fontSize: "10px", color: "#c5c5c5", flexShrink: 0 }} />
+					<ExpandMoreIcon sx={{ fontSize: "10px", color: dark ? "#c5c5c5" : "#717171", flexShrink: 0 }} />
 				) : (
-					<ChevronRightIcon sx={{ fontSize: "10px", color: "#c5c5c5", flexShrink: 0 }} />
+					<ChevronRightIcon sx={{ fontSize: "10px", color: dark ? "#c5c5c5" : "#717171", flexShrink: 0 }} />
 				)}
 				<Typography
 					sx={{
@@ -103,7 +107,7 @@ function Section({
 						fontWeight: 700,
 						textTransform: "uppercase",
 						letterSpacing: "0.08em",
-						color: "#bbbbbb",
+						color: dark ? "#bbbbbb" : "#6f6f6f",
 						lineHeight: "22px"
 					}}>
 					{title}
@@ -128,6 +132,20 @@ export default function ExplorerPanel({
 	visiblePageIndexs,
 	setVisiblePageIndexs
 }: Props) {
+	const theme = useTheme();
+	const dark = theme.palette.mode === "dark";
+
+	const sidebarBg = dark ? "#1e1e1e" : "#f3f3f3";
+	const borderStyle = dark ? "1px solid #3a3a3a" : `1px solid ${theme.palette.divider}`;
+	const iconActive = dark ? "#ffffff" : "#333333";
+	const iconActiveBg = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
+	const iconActiveHover = dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)";
+	const iconInactive = dark ? "#858585" : "#717171";
+	const iconHoverBg = dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)";
+	const iconHoverColor = dark ? "#cccccc" : "#333333";
+	const closeHoverBg = dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)";
+	const closeHoverColor = dark ? "#ffffff" : "#111111";
+
 	return (
 		<Box
 			component="nav"
@@ -137,8 +155,8 @@ export default function ExplorerPanel({
 				flexShrink: 0,
 				height: "100%",
 				overflowY: "auto",
-				backgroundColor: "#1e1e1e",
-				borderRight: "1px solid #3a3a3a",
+				backgroundColor: sidebarBg,
+				borderRight: borderStyle,
 				pt: 0
 			}}>
 			{/* Activity toolbar */}
@@ -149,7 +167,7 @@ export default function ExplorerPanel({
 					height: "35px",
 					px: "8px",
 					gap: "2px",
-					borderBottom: "1px solid #3a3a3a",
+					borderBottom: borderStyle,
 					flexShrink: 0
 				}}>
 				<Tooltip title="Explorer" arrow>
@@ -157,11 +175,11 @@ export default function ExplorerPanel({
 						size="small"
 						disableRipple
 						sx={{
-							color: "#ffffff",
-							backgroundColor: "rgba(255,255,255,0.08)",
+							color: iconActive,
+							backgroundColor: iconActiveBg,
 							borderRadius: "4px",
 							p: "4px",
-							"&:hover": { backgroundColor: "rgba(255,255,255,0.12)" }
+							"&:hover": { backgroundColor: iconActiveHover }
 						}}>
 						<VscFiles size={16} />
 					</IconButton>
@@ -173,16 +191,16 @@ export default function ExplorerPanel({
 						disableRipple
 						onClick={() => window.dispatchEvent(new CustomEvent("focus-sidebar-search"))}
 						sx={{
-							color: "#858585",
+							color: iconInactive,
 							borderRadius: "4px",
 							p: "4px",
-							"&:hover": { backgroundColor: "rgba(255,255,255,0.05)", color: "#cccccc" }
+							"&:hover": { backgroundColor: iconHoverBg, color: iconHoverColor }
 						}}>
 						<VscSearch size={16} />
 					</IconButton>
 				</Tooltip>
 
-				<Tooltip title="Source Control" arrow>
+				<Tooltip title="Source Control — open on GitHub" arrow>
 					<IconButton
 						size="small"
 						disableRipple
@@ -190,10 +208,10 @@ export default function ExplorerPanel({
 						href="https://github.com/pratyush1712/Personal-Website"
 						target="_blank"
 						sx={{
-							color: "#858585",
+							color: iconInactive,
 							borderRadius: "4px",
 							p: "4px",
-							"&:hover": { backgroundColor: "rgba(255,255,255,0.05)", color: "#cccccc" }
+							"&:hover": { backgroundColor: iconHoverBg, color: iconHoverColor }
 						}}>
 						<VscSourceControl size={16} />
 					</IconButton>
@@ -206,10 +224,10 @@ export default function ExplorerPanel({
 						component={Link}
 						href="/skills"
 						sx={{
-							color: "#858585",
+							color: iconInactive,
 							borderRadius: "4px",
 							p: "4px",
-							"&:hover": { backgroundColor: "rgba(255,255,255,0.05)", color: "#cccccc" }
+							"&:hover": { backgroundColor: iconHoverBg, color: iconHoverColor }
 						}}>
 						<VscExtensions size={16} />
 					</IconButton>
@@ -220,11 +238,11 @@ export default function ExplorerPanel({
 						size="small"
 						disableRipple
 						sx={{
-							color: "#858585",
+							color: iconInactive,
 							borderRadius: "4px",
 							p: "4px",
 							ml: "auto",
-							"&:hover": { backgroundColor: "rgba(255,255,255,0.05)", color: "#cccccc" }
+							"&:hover": { backgroundColor: iconHoverBg, color: iconHoverColor }
 						}}>
 						<VscChevronDown size={16} />
 					</IconButton>
@@ -248,7 +266,7 @@ export default function ExplorerPanel({
 										setCurrentComponent("tree");
 									}}
 									sx={{
-										...fileRowSx(active),
+										...fileRowSx(active, dark),
 										paddingRight: "8px",
 										justifyContent: "space-between",
 										"& .explorer-close-btn": { opacity: 0, transition: "opacity 80ms" },
@@ -269,11 +287,7 @@ export default function ExplorerPanel({
 										</Box>
 										<Box
 											component="span"
-											sx={{
-												overflow: "hidden",
-												textOverflow: "ellipsis",
-												whiteSpace: "nowrap"
-											}}>
+											sx={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
 											{p.name}
 										</Box>
 									</Box>
@@ -292,9 +306,9 @@ export default function ExplorerPanel({
 											height: 16,
 											borderRadius: "3px",
 											flexShrink: 0,
-											color: "#858585",
+											color: iconInactive,
 											backgroundColor: "transparent",
-											"&:hover": { backgroundColor: "rgba(255,255,255,0.1)", color: "#ffffff" }
+											"&:hover": { backgroundColor: closeHoverBg, color: closeHoverColor }
 										}}>
 										<VscChromeClose size={12} />
 									</IconButton>
@@ -321,19 +335,19 @@ export default function ExplorerPanel({
 				{FEATURED_PROJECTS.map(name => {
 					const projectsPage = pages.find(page => page.route === "projects");
 					const projectHref = `/projects#${slugifyHeading(name)}`;
-
 					return (
 						<Link key={name} href={projectHref} style={{ textDecoration: "none" }}>
 							<Box
 								onClick={() => {
-									if (projectsPage && !visiblePageIndexs.includes(projectsPage.index)) {
+									if (projectsPage && !visiblePageIndexs.includes(projectsPage.index))
 										setVisiblePageIndexs([...visiblePageIndexs, projectsPage.index]);
-									}
 									if (projectsPage) setSelectedIndex(projectsPage.index);
 									setCurrentComponent("featured-projects");
 								}}
-								sx={fileRowSx(false)}>
-								<Box component="span" sx={{ display: "inline-flex", color: "#858585", flexShrink: 0 }}>
+								sx={fileRowSx(false, dark)}>
+								<Box
+									component="span"
+									sx={{ display: "inline-flex", color: iconInactive, flexShrink: 0 }}>
 									<VscRepo size={14} />
 								</Box>
 								<Box

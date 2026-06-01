@@ -2,6 +2,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { DiMarkdown } from "react-icons/di";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -34,6 +35,8 @@ export default function AppTree({
 	visiblePageIndexs,
 	setVisiblePageIndexs
 }: Props) {
+	const theme = useTheme();
+	const dark = theme.palette.mode === "dark";
 	const pathname = usePathname();
 	// Normalize "/overview" -> "overview" so the active route actually matches page.route.
 	const currentRoute = pathname ? pathname.replace(/^\/+/, "") : "";
@@ -76,10 +79,20 @@ export default function AppTree({
 								fontStyle: "normal",
 								cursor: "pointer",
 								userSelect: "none",
-								color: "#cccccc",
-								backgroundColor: active ? "rgba(255,255,255,0.08)" : "transparent",
+								color: dark ? "#cccccc" : "#3b3b3b",
+								backgroundColor: active
+									? dark
+										? "rgba(255,255,255,0.08)"
+										: "rgba(0,0,0,0.07)"
+									: "transparent",
 								"&:hover": {
-									backgroundColor: active ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.05)"
+									backgroundColor: active
+										? dark
+											? "rgba(255,255,255,0.08)"
+											: "rgba(0,0,0,0.07)"
+										: dark
+											? "rgba(255,255,255,0.05)"
+											: "rgba(0,0,0,0.04)"
 								}
 							}}>
 							<Box component="span" sx={{ display: "inline-flex", color: "#519aba", flexShrink: 0 }}>

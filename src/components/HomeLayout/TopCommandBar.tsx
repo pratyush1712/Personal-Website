@@ -135,8 +135,8 @@ export default function TopCommandBar({
 				alignItems: "center",
 				gap: 1,
 				px: 1,
-				borderBottom: "1px solid #3a3a3a",
-				backgroundColor: "#252526"
+				borderBottom: darkMode ? "1px solid #3a3a3a" : "1px solid #e5e5e5",
+				backgroundColor: darkMode ? "#252526" : "#f3f3f3"
 			}}>
 			<Tooltip title={explorerOpen ? "Hide explorer" : "Show explorer"} arrow>
 				<IconButton
@@ -151,14 +151,20 @@ export default function TopCommandBar({
 
 			<Box sx={{ display: "flex", alignItems: "center", gap: "6px", minWidth: 0 }}>
 				<Typography
-					sx={{ fontSize: "13px", fontWeight: 400, color: "#e0e0e0", whiteSpace: "nowrap", lineHeight: 1 }}>
+					sx={{
+						fontSize: "13px",
+						fontWeight: 400,
+						color: darkMode ? "#e0e0e0" : "#333333",
+						whiteSpace: "nowrap",
+						lineHeight: 1
+					}}>
 					Pratyush Sudhakar
 				</Typography>
 				<Typography
 					sx={{
 						fontSize: "13px",
 						fontWeight: 400,
-						color: "#858585",
+						color: darkMode ? "#858585" : "#717171",
 						whiteSpace: "nowrap",
 						lineHeight: 1,
 						display: { xs: "none", sm: "block" }
@@ -169,7 +175,7 @@ export default function TopCommandBar({
 					sx={{
 						fontSize: "13px",
 						fontWeight: 400,
-						color: "#858585",
+						color: darkMode ? "#858585" : "#717171",
 						whiteSpace: "nowrap",
 						lineHeight: 1,
 						display: { xs: "none", md: "block" }
