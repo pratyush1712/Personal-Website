@@ -1,6 +1,6 @@
 "use client";
 import { Box, IconButton, Tooltip } from "@mui/material";
-import { VscAdd, VscChromeClose, VscClose, VscEdit } from "react-icons/vsc";
+import { VscAdd, VscChromeClose } from "react-icons/vsc";
 import { BiComment } from "react-icons/bi";
 
 import { AgentTab, MAX_TABS } from "@/utils/agentStorage";
