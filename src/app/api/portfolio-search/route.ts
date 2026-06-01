@@ -44,8 +44,7 @@ function titleFromMarkdown(markdown: string, fileName: string): string {
 	const heading = markdown.match(/^#\s+(.+)$/m)?.[1];
 	if (heading) {
 		return heading
-			.replace(/<[^>]*>/g, "") // strip complete tags
-			.replace(/[<>]/g, "") // strip remaining angle brackets (e.g. unclosed <script)
+			.replace(/[<>]/g, "") // strip angle brackets to prevent HTML tag injection (including malformed tags like <script)
 			.replace(/[^\x20-\x7E]/g, "")
 			.replace(/\s+/g, " ")
 			.trim();
