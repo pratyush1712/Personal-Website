@@ -44,7 +44,8 @@ function titleFromMarkdown(markdown: string, fileName: string): string {
 	const heading = markdown.match(/^#\s+(.+)$/m)?.[1];
 	if (heading) {
 		return heading
-			.replace(/<[^>]+>/g, "")
+			.replace(/<[^>]*>/g, "") // strip complete tags
+			.replace(/[<>]/g, "") // strip remaining angle brackets (e.g. unclosed <script)
 			.replace(/[^\x20-\x7E]/g, "")
 			.replace(/\s+/g, " ")
 			.trim();
@@ -125,5 +126,9 @@ export function GET(request: Request) {
 		return NextResponse.json({ query, results: [] });
 	}
 
-	return NextResponse.json({ query, results: searchReadmes(query) });
+	try {
+		return NextResponse.json({ query, results: searchReadmes(query) });
+	} catch {
+		return NextResponse.json({ query, results: [] });
+	}
 }
