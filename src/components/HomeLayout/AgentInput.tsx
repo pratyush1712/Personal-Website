@@ -1,8 +1,9 @@
 "use client";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { Box, IconButton, Tooltip } from "@mui/material";
-import { VscSend } from "react-icons/vsc";
+import { VscChevronDown, VscSend } from "react-icons/vsc";
 import { TbInfinity } from "react-icons/tb";
+import { TOKENS } from "@/ui/Theme";
 
 interface Props {
 	onSend: (text: string) => void;
@@ -50,7 +51,7 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 				// Cursor's input sits flush against the bottom edge with no visible top border — the
 				// container card itself provides separation.
 			}}>
-			{/* Outer card — mirrors Cursor's rounded input container */}
+			{/* Outer card — mirrors Cursor's rounded input container, elevated off the panel */}
 			<Box
 				sx={{
 					borderRadius: "10px",
@@ -58,7 +59,7 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 					borderColor: theme =>
 						theme.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.12)",
 					backgroundColor: theme =>
-						theme.palette.mode === "dark" ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
+						theme.palette.mode === "dark" ? TOKENS.dark.surface : TOKENS.light.surface,
 					display: "flex",
 					flexDirection: "column",
 					transition: "border-color 150ms ease",
@@ -137,6 +138,7 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 						}}>
 						<TbInfinity size={11} />
 						Agent
+						<VscChevronDown size={10} style={{ opacity: 0.7 }} />
 					</Box>
 
 					{/* Spacer */}
