@@ -202,7 +202,7 @@ const ThinkingDots = memo(function ThinkingDots() {
 });
 
 export default function AgentChat({ tab, pending }: Props) {
-	const messages = tab?.messages ?? [];
+	const messages = useMemo(() => tab?.messages ?? [], [tab?.messages]);
 	const blocks = useMemo(() => buildBlocks(messages), [messages]);
 
 	const scrollRef = useRef<HTMLDivElement>(null);
@@ -375,7 +375,6 @@ export default function AgentChat({ tab, pending }: Props) {
 			<Box
 				sx={{
 					px: "14px",
-					py: "10px",
 					display: "flex",
 					flexDirection: "column"
 				}}>
@@ -456,7 +455,6 @@ const userPromptCardSx: SystemStyleObject<Theme> = {
 const stickyContextCardSx: SystemStyleObject<Theme> = {
 	...sharedCardBaseSx,
 	boxSizing: "border-box",
-	minHeight: "40px",
 	px: "12px",
 	py: "8px",
 	fontSize: "0.78rem",
