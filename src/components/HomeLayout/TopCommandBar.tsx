@@ -138,53 +138,66 @@ export default function TopCommandBar({
 				borderBottom: darkMode ? "1px solid #3a3a3a" : "1px solid #e5e5e5",
 				backgroundColor: darkMode ? "#252526" : "#f3f3f3"
 			}}>
-			<Tooltip title={explorerOpen ? "Hide explorer" : "Show explorer"} arrow>
-				<IconButton
-					size="small"
-					onClick={onExplorerToggle}
-					aria-label={explorerOpen ? "Hide explorer" : "Show explorer"}
-					aria-pressed={explorerOpen}
-					sx={iconButtonSx}>
-					<LuPanelLeft size={18} />
-				</IconButton>
-			</Tooltip>
+			{/* Left + right clusters carry equal flex weight, so the fixed-width search box
+			    between them stays locked to the bar's center regardless of the (variable-length)
+			    title / page name. */}
+			<Box sx={{ flex: 1, minWidth: 0, display: "flex", alignItems: "center", gap: 1 }}>
+				<Tooltip title={explorerOpen ? "Hide explorer" : "Show explorer"} arrow>
+					<IconButton
+						size="small"
+						onClick={onExplorerToggle}
+						aria-label={explorerOpen ? "Hide explorer" : "Show explorer"}
+						aria-pressed={explorerOpen}
+						sx={iconButtonSx}>
+						<LuPanelLeft size={18} />
+					</IconButton>
+				</Tooltip>
 
-			<Box sx={{ display: "flex", alignItems: "center", gap: "6px", minWidth: 0 }}>
-				<Typography
-					sx={{
-						fontSize: "13px",
-						fontWeight: 400,
-						color: darkMode ? "#e0e0e0" : "#333333",
-						whiteSpace: "nowrap",
-						lineHeight: 1
-					}}>
-					Pratyush Sudhakar
-				</Typography>
-				<Typography
-					sx={{
-						fontSize: "13px",
-						fontWeight: 400,
-						color: darkMode ? "#a8a8a8" : "#5d5d5d",
-						whiteSpace: "nowrap",
-						lineHeight: 1,
-						display: { xs: "none", sm: "block" }
-					}}>
-					/ Portfolio Workspace
-				</Typography>
-				<Typography
-					sx={{
-						fontSize: "13px",
-						fontWeight: 400,
-						color: darkMode ? "#a8a8a8" : "#5d5d5d",
-						whiteSpace: "nowrap",
-						lineHeight: 1,
-						display: { xs: "none", md: "block" }
-					}}>
-					- {currentPage}
-				</Typography>
+				<Box sx={{ display: "flex", alignItems: "center", gap: "6px", minWidth: 0 }}>
+					<Typography
+						sx={{
+							fontSize: "13px",
+							fontWeight: 400,
+							color: darkMode ? "#e0e0e0" : "#333333",
+							whiteSpace: "nowrap",
+							lineHeight: 1
+						}}>
+						Pratyush Sudhakar
+					</Typography>
+					<Typography
+						sx={{
+							fontSize: "13px",
+							fontWeight: 400,
+							color: darkMode ? "#a8a8a8" : "#5d5d5d",
+							whiteSpace: "nowrap",
+							lineHeight: 1,
+							display: { xs: "none", sm: "block" }
+						}}>
+						/ Portfolio Workspace
+					</Typography>
+					<Typography
+						sx={{
+							fontSize: "13px",
+							fontWeight: 400,
+							color: darkMode ? "#a8a8a8" : "#5d5d5d",
+							whiteSpace: "nowrap",
+							lineHeight: 1,
+							display: { xs: "none", md: "block" }
+						}}>
+						- {currentPage}
+					</Typography>
+				</Box>
 			</Box>
 
-			<Box sx={{ flex: 1, display: { xs: "none", sm: "flex" }, justifyContent: "center", px: 2 }}>
+			{/* Center search: fixed flex basis with no grow, so it never reflows when the
+			    title cluster changes width. */}
+			<Box
+				sx={{
+					flex: "0 1 460px",
+					maxWidth: 460,
+					display: { xs: "none", sm: "flex" },
+					justifyContent: "center"
+				}}>
 				<ClickAwayListener onClickAway={() => setOpen(false)}>
 					<Box
 						component="form"
@@ -316,7 +329,16 @@ export default function TopCommandBar({
 				</ClickAwayListener>
 			</Box>
 
-			<Box sx={{ display: "flex", alignItems: "center", gap: 0.25, ml: "auto" }}>
+			{/* Right cluster: equal flex weight to the left cluster keeps the search centered. */}
+			<Box
+				sx={{
+					flex: 1,
+					minWidth: 0,
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "flex-end",
+					gap: 0.25
+				}}>
 				{resume && (
 					<Button
 						component={Link}

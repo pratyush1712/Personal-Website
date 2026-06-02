@@ -253,7 +253,7 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 				/>
 			)}
 
-			<Box sx={{ px: "14px", py: "9px", borderBottom: "1px solid", borderColor: "divider" }}>
+			<Box sx={{ px: "14px", py: "9px" }}>
 				<Typography sx={{ fontSize: "0.78rem", fontWeight: 600, color: "text.primary", lineHeight: 1.35 }}>
 					Ask about Pratyush&apos;s work
 				</Typography>

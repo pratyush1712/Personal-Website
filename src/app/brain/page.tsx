@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import NeurodivergentExperienceDiagram from "@/components/BrainLayout/Experience";
@@ -24,8 +23,10 @@ export const metadata: Metadata = {
 export default function Page() {
 	return (
 		<Box sx={{ flexGrow: 1, p: 4 }}>
-			<Grid container spacing={2} alignItems="flex-start">
-				<Grid container xs={12}>
+			{/* Sections are separated by Grid spacing rather than Dividers so the columns read as
+			    related views of one diagram instead of being chopped apart by hard rules. */}
+			<Grid container spacing={4} alignItems="flex-start">
+				<Grid container item xs={12} spacing={4}>
 					<Grid item xs={12} md={6}>
 						<Typography variant="h5" align="center" gutterBottom>
 							Neurodivergent Experience
@@ -33,17 +34,13 @@ export default function Page() {
 						<NeurodivergentExperienceDiagram />
 					</Grid>
 
-					<Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
-
-					<Grid item xs={12} md={5}>
+					<Grid item xs={12} md={6}>
 						<Typography variant="h5" align="center" gutterBottom>
 							Alexithymia Map
 						</Typography>
 						<AlexithymiaGraph />
 					</Grid>
 				</Grid>
-
-				<Divider orientation="horizontal" flexItem sx={{ mx: 2 }} />
 
 				<Grid item xs={12}>
 					<Typography variant="h5" align="center" gutterBottom>
