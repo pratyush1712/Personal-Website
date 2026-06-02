@@ -148,6 +148,14 @@ export function MarkdownH4(props: any) {
 	);
 }
 
+export function MarkdownBold(props: any) {
+	return (
+		<Typography variant="inherit" display="inline">
+			<strong>{props.children}</strong>
+		</Typography>
+	);
+}
+
 export function MarkdownItalic(props: any) {
 	return (
 		<Typography
