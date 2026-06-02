@@ -233,7 +233,7 @@ export default function ExplorerPanel({
 					</IconButton>
 				</Tooltip>
 
-				<Tooltip title="Source Control — open on GitHub" arrow>
+				<Tooltip title="Source Control" arrow>
 					<IconButton
 						size="small"
 						disableRipple
@@ -294,13 +294,13 @@ export default function ExplorerPanel({
 								aria-label="Close all editors"
 								onClick={() => setVisiblePageIndexs([])}
 								sx={{
-									width: 20,
-									height: 20,
+									width: 22,
+									height: 22,
 									borderRadius: "4px",
 									color: iconInactive,
 									"&:hover": { backgroundColor: iconHoverBg, color: iconHoverColor }
 								}}>
-								<VscCloseAll size={14} />
+								<VscCloseAll size={22} />
 							</IconButton>
 						</Tooltip>
 					) : null

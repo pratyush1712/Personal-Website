@@ -1,18 +1,20 @@
 "use client";
 
 import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { Box, type Theme } from "@mui/material";
+import { Box, Typography, type Theme } from "@mui/material";
 import { type SystemStyleObject } from "@mui/system";
 import { AgentTab } from "@/utils/agentStorage";
 import { TOKENS } from "@/ui/Theme";
 
 const STICKY_TOP_OFFSET_PX = 10;
-const STICKY_TRANSITION_MS = 140;
+const STICKY_TRANSITION_MS = 160;
 const AUTO_SCROLL_THRESHOLD_PX = 96;
 
 interface Props {
 	tab: AgentTab | null;
 	pending: boolean;
+	streamingReply?: string;
+	statusText?: string;
 }
 
 type ChatMessage = AgentTab["messages"][number];
@@ -22,12 +24,15 @@ type Segment =
 	| { kind: "inline-code"; value: string }
 	| { kind: "code-block"; lang: string; value: string };
 
+type TextPart = { bold: boolean; value: string };
+
 type ChatBlock = {
 	userIndex: number | null;
 	userContent: string | null;
 	responses: Array<{
 		index: number;
 		content: string;
+		streaming?: boolean;
 	}>;
 };
 
@@ -50,6 +55,27 @@ function splitInline(text: string): Segment[] {
 	}
 
 	return out;
+}
+
+function splitBold(text: string): TextPart[] {
+	const out: TextPart[] = [];
+	const boldRe = /\*\*([\s\S]+?)\*\*/g;
+	let lastIndex = 0;
+	let match: RegExpExecArray | null;
+
+	while ((match = boldRe.exec(text)) !== null) {
+		if (match.index > lastIndex) {
+			out.push({ bold: false, value: text.slice(lastIndex, match.index) });
+		}
+		out.push({ bold: true, value: match[1] });
+		lastIndex = match.index + match[0].length;
+	}
+
+	if (lastIndex < text.length) {
+		out.push({ bold: false, value: text.slice(lastIndex) });
+	}
+
+	return out.length > 0 ? out : [{ bold: false, value: text }];
 }
 
 function parseAssistantContent(input: string): Segment[] {
@@ -79,7 +105,7 @@ function parseAssistantContent(input: string): Segment[] {
 	return segments;
 }
 
-function buildBlocks(messages: ChatMessage[]): ChatBlock[] {
+function buildBlocks(messages: ChatMessage[], streamingReply = ""): ChatBlock[] {
 	const blocks: ChatBlock[] = [];
 	let current: ChatBlock | null = null;
 
@@ -111,19 +137,43 @@ function buildBlocks(messages: ChatMessage[]): ChatBlock[] {
 		});
 	}
 
+	if (streamingReply) {
+		if (!current) {
+			current = {
+				userIndex: null,
+				userContent: null,
+				responses: []
+			};
+			blocks.push(current);
+		}
+
+		current.responses.push({
+			index: messages.length,
+			content: streamingReply,
+			streaming: true
+		});
+	}
+
 	return blocks;
 }
 
-function getMessageKey(message: ChatMessage, index: number) {
-	const maybeId = (message as { id?: string | number }).id;
-	return maybeId != null ? String(maybeId) : `${message.role}-${index}`;
+function getMessageKey(message: ChatMessage | undefined, index: number, streaming?: boolean) {
+	if (streaming) return `streaming-${index}`;
+	const maybeId = message ? (message as { id?: string | number }).id : null;
+	return maybeId != null ? String(maybeId) : `${message?.role ?? "assistant"}-${index}`;
 }
 
 function isNearBottom(el: HTMLDivElement, threshold = AUTO_SCROLL_THRESHOLD_PX) {
 	return el.scrollHeight - el.scrollTop - el.clientHeight <= threshold;
 }
 
-const AssistantContent = memo(function AssistantContent({ content }: { content: string }) {
+const AssistantContent = memo(function AssistantContent({
+	content,
+	streaming
+}: {
+	content: string;
+	streaming?: boolean;
+}) {
 	const segments = useMemo(() => parseAssistantContent(content), [content]);
 
 	return (
@@ -145,75 +195,72 @@ const AssistantContent = memo(function AssistantContent({ content }: { content: 
 					);
 				}
 
+				const parts = splitBold(seg.value);
+
 				return (
 					<Box key={`text-${i}`} component="span" sx={{ whiteSpace: "pre-wrap" }}>
-						{seg.value}
+						{parts.map((part, j) =>
+							part.bold ? (
+								<Box key={`bold-${j}`} component="strong" sx={boldTextSx}>
+									{part.value}
+								</Box>
+							) : (
+								<Box key={`plain-${j}`} component="span">
+									{part.value}
+								</Box>
+							)
+						)}
 					</Box>
 				);
 			})}
+			{streaming && <Box component="span" aria-hidden sx={streamingCursorSx} />}
 		</>
 	);
 });
 
 const AssistantMessage = memo(function AssistantMessage({
 	content,
-	firstInBlock
+	firstInBlock,
+	streaming
 }: {
 	content: string;
 	firstInBlock: boolean;
+	streaming?: boolean;
 }) {
 	return (
 		<Box sx={[assistantMessageSx, firstInBlock ? assistantMessageFirstSx : assistantMessageFollowSx]}>
-			<AssistantContent content={content} />
+			<AssistantContent content={content} streaming={streaming} />
 		</Box>
 	);
 });
 
-const ThinkingDots = memo(function ThinkingDots() {
+const StatusLine = memo(function StatusLine({ label }: { label: string }) {
 	return (
-		<Box
-			aria-live="polite"
-			aria-label="Thinking"
-			sx={{
-				display: "flex",
-				alignItems: "center",
-				gap: "4px",
-				py: "6px",
-				"@keyframes agentPulse": {
-					"0%, 80%, 100%": { opacity: 0.25, transform: "scale(0.85)" },
-					"40%": { opacity: 1, transform: "scale(1)" }
-				}
-			}}>
-			{[0, 1, 2].map(i => (
-				<Box
-					key={i}
-					sx={{
-						width: 5,
-						height: 5,
-						borderRadius: "50%",
-						backgroundColor: theme => (theme.palette.mode === "dark" ? "#9a9a9a" : "#aaaaaa"),
-						animation: "agentPulse 1.2s ease-in-out infinite",
-						animationDelay: `${i * 0.2}s`
-					}}
-				/>
-			))}
+		<Box sx={statusLineSx} aria-live="polite">
+			<Box sx={statusPulseSx} />
+			<Typography component="span" sx={statusTextSx}>
+				{label}
+			</Typography>
 		</Box>
 	);
 });
 
-export default function AgentChat({ tab, pending }: Props) {
+export default function AgentChat({ tab, pending, streamingReply = "", statusText }: Props) {
 	const messages = useMemo(() => tab?.messages ?? [], [tab?.messages]);
-	const blocks = useMemo(() => buildBlocks(messages), [messages]);
+	const hasStreamingReply = streamingReply.length > 0;
+	const blocks = useMemo(() => buildBlocks(messages, streamingReply), [messages, streamingReply]);
 
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const bottomRef = useRef<HTMLDivElement>(null);
 	const rafRef = useRef<number | null>(null);
+	const scrollRafRef = useRef<number | null>(null);
 	const userCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
 	const shouldStickToBottomRef = useRef(true);
 	const previousLastSignatureRef = useRef<string>("");
 
 	const [activeUserIndex, setActiveUserIndex] = useState<number | null>(null);
 	const [showStickyHeader, setShowStickyHeader] = useState(false);
+	const [stickyHeight, setStickyHeight] = useState(0);
 
 	const userIndices = useMemo(
 		() => blocks.flatMap(block => (block.userIndex != null ? [block.userIndex] : [])),
@@ -223,8 +270,8 @@ export default function AgentChat({ tab, pending }: Props) {
 	const lastMessage = messages.length > 0 ? messages[messages.length - 1] : null;
 	const lastIsUser = lastMessage?.role === "user";
 	const lastMessageSignature = lastMessage
-		? `${messages.length}:${lastMessage.role}:${lastMessage.content.length}`
-		: "0";
+		? `${messages.length}:${lastMessage.role}:${lastMessage.content.length}:${streamingReply.length}`
+		: `0:${streamingReply.length}`;
 
 	const activeStickyContent =
 		activeUserIndex != null && messages[activeUserIndex]?.role === "user" ? messages[activeUserIndex].content : "";
@@ -260,15 +307,18 @@ export default function AgentChat({ tab, pending }: Props) {
 		if (candidate == null) {
 			setActiveUserIndex(prev => (prev === null ? prev : null));
 			setShowStickyHeader(prev => (prev ? false : prev));
+			setStickyHeight(prev => (prev === 0 ? prev : 0));
 			return;
 		}
 
 		const candidateEl = userCardRefs.current.get(candidate);
 		const candidateRect = candidateEl?.getBoundingClientRect();
 		const shouldShow = Boolean(candidateRect && candidateRect.top < anchorTop - 1);
+		const nextStickyHeight = candidateRect ? Math.ceil(candidateRect.height) : 0;
 
 		setActiveUserIndex(prev => (prev === candidate ? prev : candidate));
 		setShowStickyHeader(prev => (prev === shouldShow ? prev : shouldShow));
+		setStickyHeight(prev => (Math.abs(prev - nextStickyHeight) <= 1 ? prev : nextStickyHeight));
 	}, [userIndices]);
 
 	const scheduleMeasure = useCallback(() => {
@@ -288,6 +338,23 @@ export default function AgentChat({ tab, pending }: Props) {
 		scheduleMeasure();
 	}, [scheduleMeasure]);
 
+	const scrollToBottom = useCallback((behavior: ScrollBehavior) => {
+		const scrollEl = scrollRef.current;
+		if (!scrollEl) return;
+
+		if (scrollRafRef.current != null) {
+			cancelAnimationFrame(scrollRafRef.current);
+		}
+
+		scrollRafRef.current = requestAnimationFrame(() => {
+			scrollRafRef.current = null;
+			scrollEl.scrollTo({
+				top: scrollEl.scrollHeight,
+				behavior
+			});
+		});
+	}, []);
+
 	useEffect(() => {
 		const scrollEl = scrollRef.current;
 		if (!scrollEl) return;
@@ -304,6 +371,11 @@ export default function AgentChat({ tab, pending }: Props) {
 			if (rafRef.current != null) {
 				cancelAnimationFrame(rafRef.current);
 				rafRef.current = null;
+			}
+
+			if (scrollRafRef.current != null) {
+				cancelAnimationFrame(scrollRafRef.current);
+				scrollRafRef.current = null;
 			}
 		};
 	}, [handleScroll, scheduleMeasure]);
@@ -323,7 +395,7 @@ export default function AgentChat({ tab, pending }: Props) {
 
 	useLayoutEffect(() => {
 		measureStickyState();
-	}, [measureStickyState, messages, pending]);
+	}, [measureStickyState, messages, pending, streamingReply]);
 
 	useEffect(() => {
 		const signatureChanged = previousLastSignatureRef.current !== lastMessageSignature;
@@ -332,11 +404,8 @@ export default function AgentChat({ tab, pending }: Props) {
 		if (!signatureChanged) return;
 		if (!shouldStickToBottomRef.current) return;
 
-		bottomRef.current?.scrollIntoView({
-			behavior: lastIsUser ? "smooth" : "auto",
-			block: "end"
-		});
-	}, [lastIsUser, lastMessageSignature]);
+		scrollToBottom(hasStreamingReply ? "auto" : "smooth");
+	}, [hasStreamingReply, lastMessageSignature, scrollToBottom]);
 
 	return (
 		<Box
@@ -357,16 +426,18 @@ export default function AgentChat({ tab, pending }: Props) {
 					top: `${STICKY_TOP_OFFSET_PX}px`,
 					zIndex: 5,
 					px: "14px",
-					pointerEvents: "none"
+					pointerEvents: "none",
+					overflow: "visible"
 				}}>
 				<Box
 					aria-hidden={!showStickyHeader}
 					sx={{
-						...stickyContextCardSx,
+						...stickyPromptOverlaySx,
+						height: stickyHeight > 0 ? `${stickyHeight}px` : "auto",
 						opacity: showStickyHeader ? 1 : 0,
-						transform: showStickyHeader ? "translateY(0)" : "translateY(-4px)",
+						transform: showStickyHeader ? "translateY(0)" : "translateY(-1px)",
 						visibility: activeUserIndex != null ? "visible" : "hidden",
-						transition: `opacity ${STICKY_TRANSITION_MS}ms ease, transform ${STICKY_TRANSITION_MS}ms ease`
+						transition: `opacity ${STICKY_TRANSITION_MS}ms ease, transform ${STICKY_TRANSITION_MS}ms ease, box-shadow ${STICKY_TRANSITION_MS}ms ease`
 					}}>
 					{activeStickyContent}
 				</Box>
@@ -381,6 +452,7 @@ export default function AgentChat({ tab, pending }: Props) {
 				{blocks.map((block, blockIndex) => {
 					const blockKey =
 						block.userIndex != null ? `block-user-${block.userIndex}` : `block-assistant-${blockIndex}`;
+					const isLastBlock = blockIndex === blocks.length - 1;
 
 					return (
 						<Box
@@ -394,7 +466,7 @@ export default function AgentChat({ tab, pending }: Props) {
 									ref={setUserCardRef(block.userIndex)}
 									sx={{
 										width: "100%",
-										mb: block.responses.length > 0 ? "6px" : 0
+										mb: block.responses.length > 0 || pending ? "6px" : 0
 									}}>
 									<Box sx={userPromptCardSx}>{block.userContent}</Box>
 								</Box>
@@ -402,24 +474,25 @@ export default function AgentChat({ tab, pending }: Props) {
 
 							{block.responses.map((response, responseIndex) => (
 								<AssistantMessage
-									key={getMessageKey(messages[response.index], response.index)}
+									key={getMessageKey(messages[response.index], response.index, response.streaming)}
 									content={response.content}
 									firstInBlock={responseIndex === 0 && block.userIndex != null}
+									streaming={response.streaming}
 								/>
 							))}
 
-							{pending && blockIndex === blocks.length - 1 && lastIsUser && (
+							{pending && isLastBlock && !hasStreamingReply && (
 								<Box sx={thinkingRowAfterUserSx}>
-									<ThinkingDots />
+									<StatusLine label={statusText ?? "Reading portfolio context…"} />
 								</Box>
 							)}
 						</Box>
 					);
 				})}
 
-				{pending && !lastIsUser && (
-					<Box sx={thinkingRowSx}>
-						<ThinkingDots />
+				{pending && hasStreamingReply && (
+					<Box sx={streamingStatusRowSx}>
+						<StatusLine label={statusText ?? "Writing response…"} />
 					</Box>
 				)}
 
@@ -431,6 +504,7 @@ export default function AgentChat({ tab, pending }: Props) {
 
 const sharedCardBaseSx: SystemStyleObject<Theme> = {
 	width: "100%",
+	boxSizing: "border-box",
 	borderRadius: "12px",
 	border: "1px solid",
 	borderColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.border : "rgba(0,0,0,0.12)"),
@@ -446,29 +520,21 @@ const userPromptCardSx: SystemStyleObject<Theme> = {
 			: "0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)",
 	fontSize: "0.8125rem",
 	lineHeight: 1.6,
+	transition: "box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease",
 	whiteSpace: "pre-wrap",
 	wordBreak: "break-word",
 	px: "14px",
 	py: "10px"
 };
 
-const stickyContextCardSx: SystemStyleObject<Theme> = {
-	...sharedCardBaseSx,
-	boxSizing: "border-box",
-	px: "12px",
-	py: "8px",
-	fontSize: "0.78rem",
-	lineHeight: 1.5,
-	whiteSpace: "pre-wrap",
-	wordBreak: "break-word",
+const stickyPromptOverlaySx: SystemStyleObject<Theme> = {
+	...userPromptCardSx,
 	overflow: "hidden",
-	display: "-webkit-box",
-	WebkitLineClamp: 2,
-	WebkitBoxOrient: "vertical",
+	willChange: "opacity, transform",
 	boxShadow: theme =>
 		theme.palette.mode === "dark"
-			? "0 1px 4px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.04)"
-			: "0 1px 3px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.6)"
+			? "0 8px 22px rgba(0,0,0,0.34), 0 2px 8px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.05)"
+			: "0 8px 22px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.75)"
 };
 
 const assistantMessageSx: SystemStyleObject<Theme> = {
@@ -477,7 +543,7 @@ const assistantMessageSx: SystemStyleObject<Theme> = {
 	marginRight: "1px",
 	boxSizing: "border-box",
 	fontSize: "0.8125rem",
-	lineHeight: 1.6,
+	lineHeight: 1.65,
 	color: theme => (theme.palette.mode === "dark" ? "#e4e4e4" : "#3b3b3b"),
 	wordBreak: "break-word"
 };
@@ -491,20 +557,62 @@ const assistantMessageFollowSx: SystemStyleObject<Theme> = {
 	py: "4px"
 };
 
-const thinkingRowSx: SystemStyleObject<Theme> = {
-	width: "calc(100% - 2px)",
-	marginLeft: "1px",
-	marginRight: "1px",
-	boxSizing: "border-box",
-	pt: "4px"
-};
-
 const thinkingRowAfterUserSx: SystemStyleObject<Theme> = {
 	width: "calc(100% - 2px)",
 	marginLeft: "1px",
 	marginRight: "1px",
 	boxSizing: "border-box",
 	pt: "2px"
+};
+
+const streamingStatusRowSx: SystemStyleObject<Theme> = {
+	width: "calc(100% - 2px)",
+	marginLeft: "1px",
+	marginRight: "1px",
+	boxSizing: "border-box",
+	pt: "6px",
+	pb: "2px"
+};
+
+const statusLineSx: SystemStyleObject<Theme> = {
+	display: "inline-flex",
+	alignItems: "center",
+	gap: "7px",
+	minHeight: "22px",
+	color: "text.secondary"
+};
+
+const statusTextSx: SystemStyleObject<Theme> = {
+	fontSize: "0.75rem",
+	lineHeight: 1.4,
+	color: "text.secondary"
+};
+
+const statusPulseSx: SystemStyleObject<Theme> = {
+	width: 6,
+	height: 6,
+	borderRadius: "50%",
+	backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.accent : TOKENS.light.accent),
+	"@keyframes agentStatusPulse": {
+		"0%, 100%": { opacity: 0.35, transform: "scale(0.9)" },
+		"50%": { opacity: 1, transform: "scale(1.12)" }
+	},
+	animation: "agentStatusPulse 1.25s ease-in-out infinite"
+};
+
+const streamingCursorSx: SystemStyleObject<Theme> = {
+	display: "inline-block",
+	width: "7px",
+	height: "1.05em",
+	ml: "2px",
+	mb: "-2px",
+	borderRadius: "1px",
+	backgroundColor: "currentColor",
+	"@keyframes agentCursorBlink": {
+		"0%, 45%": { opacity: 0.75 },
+		"46%, 100%": { opacity: 0.12 }
+	},
+	animation: "agentCursorBlink 1s step-end infinite"
 };
 
 const codeBlockSx: SystemStyleObject<Theme> = {
@@ -523,6 +631,11 @@ const codeBlockSx: SystemStyleObject<Theme> = {
 	m: 0
 };
 
+const boldTextSx: SystemStyleObject<Theme> = {
+	fontWeight: 600,
+	color: "inherit"
+};
+
 const inlineCodeSx: SystemStyleObject<Theme> = {
 	px: "5px",
 	py: "1px",
@@ -539,6 +652,7 @@ const inlineCodeSx: SystemStyleObject<Theme> = {
 const scrollAreaSx: SystemStyleObject<Theme> = {
 	overflowY: "auto",
 	overflowX: "hidden",
+	scrollBehavior: "smooth",
 	scrollbarWidth: "thin",
 	scrollbarColor: theme =>
 		`${theme.palette.mode === "dark" ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.12)"} transparent`,

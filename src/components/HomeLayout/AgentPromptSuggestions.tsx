@@ -1,14 +1,15 @@
 "use client";
+
 import { Box, Typography } from "@mui/material";
 import { VscChevronRight } from "react-icons/vsc";
 
 const PROMPTS = [
-	"Summarize Pratyush's background",
-	"What are his strongest projects?",
-	"What kind of roles is he a good fit for?",
-	"Show me his technical skills",
-	"What experience does he have with AI/backend work?",
-	"How can I contact him?"
+	"Summarize Pratyush for a recruiter",
+	"Which projects show backend strength?",
+	"Explain Perfect Match technically",
+	"What roles is he strongest for?",
+	"Show AI and data engineering experience",
+	"How should I contact him?"
 ];
 
 interface Props {
@@ -19,16 +20,25 @@ interface Props {
 export default function AgentPromptSuggestions({ onSelect, disabled }: Props) {
 	return (
 		<Box sx={{ display: "flex", flexDirection: "column" }}>
-			{/* Section label - Cursor spec: 11px, all-caps, muted, 0.08em tracking */}
+			<Box sx={{ px: "14px", pt: "12px", pb: "8px" }}>
+				<Typography sx={{ fontSize: "0.82rem", fontWeight: 600, color: "text.primary", mb: "3px" }}>
+					Portfolio Agent
+				</Typography>
+				<Typography sx={{ fontSize: "0.74rem", lineHeight: 1.45, color: "text.secondary" }}>
+					Ask concise questions about projects, skills, experience, or role fit. Answers stream in as they are
+					written.
+				</Typography>
+			</Box>
+
 			<Typography
 				sx={{
-					fontSize: "0.6875rem", // 11px
+					fontSize: "0.6875rem",
 					fontWeight: 700,
 					letterSpacing: "0.08em",
 					textTransform: "uppercase",
 					color: "text.disabled",
 					px: "14px",
-					pt: "10px",
+					pt: "6px",
 					pb: "4px"
 				}}>
 				Suggested
@@ -54,11 +64,10 @@ export default function AgentPromptSuggestions({ onSelect, disabled }: Props) {
 						gap: "8px",
 						px: "14px",
 						py: "7px",
-						borderRadius: 0, // Cursor uses flat full-width row chips
+						borderRadius: 0,
 						cursor: disabled ? "default" : "pointer",
 						opacity: disabled ? 0.4 : 1,
 						color: "text.secondary",
-						// Cursor spec: 13px for primary interactive labels
 						fontSize: "0.8125rem",
 						fontWeight: 400,
 						lineHeight: 1.4,
@@ -81,7 +90,6 @@ export default function AgentPromptSuggestions({ onSelect, disabled }: Props) {
 					<Box component="span" sx={{ flex: 1 }}>
 						{prompt}
 					</Box>
-					{/* Cursor uses a small right-chevron at ~11px */}
 					<VscChevronRight
 						className="chev"
 						size={11}

@@ -26,7 +26,8 @@ function stripMarkdown(md: string): string {
 
 function readReadme(route: string): string {
 	try {
-		return readFileSync(join(process.cwd(), "public/readmes", `${route}.md`), "utf8");
+		const normalizedRoute = route.replace(/^\/+/, "") || "home";
+		return readFileSync(join(process.cwd(), "public/readmes", `${normalizedRoute}.md`), "utf8");
 	} catch {
 		return "";
 	}

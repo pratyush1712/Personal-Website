@@ -1,12 +1,20 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { Box } from "@mui/material";
+
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Box, Typography } from "@mui/material";
 import { useLocalAgentTabs } from "@/utils/useLocalAgentTabs";
 import { TOKENS } from "@/ui/Theme";
 import AgentTabs from "./AgentTabs";
 import AgentChat from "./AgentChat";
 import AgentInput from "./AgentInput";
 import AgentPromptSuggestions from "./AgentPromptSuggestions";
+import {
+	consumeAgentRateLimit,
+	formatResetDistance,
+	getAgentRateLimitSnapshot,
+	type RateLimitSnapshot
+} from "@/utils/agentRateLimit";
+import { readAgentResponse } from "@/utils/agentStreaming";
 
 interface Props {
 	onClose: () => void;
@@ -14,56 +22,36 @@ interface Props {
 }
 
 const UNAVAILABLE_MESSAGE =
-	"Portfolio Agent isn't connected yet. You can still explore Pratyush's portfolio using the files in the explorer.";
+	"Portfolio Agent is temporarily unavailable. You can still explore Pratyush's work from the files on the left.";
 
-const FAILURE_SNIPPETS = [
-	"Portfolio Agent is not configured.",
-	"Portfolio Agent isn't connected yet",
-	"temporarily unavailable",
-	"returned an empty response"
-];
+const STATUS_COPY = {
+	connecting: "Reading portfolio context…",
+	streaming: "Writing response…",
+	stopping: "Stopping response…"
+} as const;
+
+type PendingState = {
+	status: keyof typeof STATUS_COPY;
+};
 
 function isSuccessfulReply(text: string): boolean {
 	const lower = text.toLowerCase();
-	return !FAILURE_SNIPPETS.some(s => lower.includes(s.toLowerCase()));
+	return ![
+		"portfolio agent is not configured",
+		"portfolio agent is temporarily unavailable",
+		"portfolio agent returned an empty response",
+		"hourly message limit reached"
+	].some(snippet => lower.includes(snippet));
 }
 
-/**
- * Ask the agent for a tight 3-5 word conversation title. Returns null on any failure so the
- * caller can keep the auto-derived fallback in place.
- */
-async function generateTitle(firstUser: string, firstAssistant: string): Promise<string | null> {
-	try {
-		const res = await fetch("/api/portfolio-agent", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				messages: [
-					{
-						role: "user",
-						content:
-							"Generate a 3-5 word title for the following conversation. " +
-							"Respond with ONLY the title — no quotes, no punctuation, no prefix like 'Title:'.\n\n" +
-							`User: ${firstUser.slice(0, 400)}\nAssistant: ${firstAssistant.slice(0, 400)}`
-					}
-				]
-			})
-		});
-		if (!res.ok) return null;
-		const data = await res.json();
-		const raw = typeof data?.reply === "string" ? data.reply.trim() : "";
-		if (!raw) return null;
-		// Strip any quotes/punctuation the model may add despite instructions
-		const cleaned = raw
-			.replace(/^["'`]+|["'`.]+$/g, "")
-			.replace(/^title:\s*/i, "")
-			.split(/\r?\n/)[0]
-			.trim();
-		if (!cleaned) return null;
-		return cleaned.length > 34 ? `${cleaned.slice(0, 34)}…` : cleaned;
-	} catch {
-		return null;
-	}
+function titleFromPrompt(prompt: string): string {
+	const cleaned = prompt
+		.replace(/[^a-zA-Z0-9\s-]/g, "")
+		.replace(/\s+/g, " ")
+		.trim();
+	const words = cleaned.split(" ").filter(Boolean).slice(0, 5);
+	const title = words.join(" ") || "New chat";
+	return title.length > 34 ? `${title.slice(0, 34)}…` : title;
 }
 
 export default function AgentsPanel({ onClose, currentPage }: Props) {
@@ -79,59 +67,123 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 		appendMessage,
 		setTabTitle
 	} = useLocalAgentTabs();
-	const [pendingMap, setPendingMap] = useState<Record<string, boolean>>({});
-	// Track which tab IDs already had an AI title generated (or attempted) so we don't loop.
+
+	const [pendingMap, setPendingMap] = useState<Record<string, PendingState>>({});
+	const [streamingMap, setStreamingMap] = useState<Record<string, string>>({});
+	const [rateLimit, setRateLimit] = useState<RateLimitSnapshot | null>(null);
+	const abortControllersRef = useRef<Map<string, AbortController>>(new Map());
 	const titledRef = useRef<Set<string>>(new Set());
 
 	useEffect(() => {
 		if (hydrated && tabs.length === 0) createTab();
 	}, [hydrated, tabs.length, createTab]);
 
+	useEffect(() => {
+		setRateLimit(getAgentRateLimitSnapshot());
+	}, []);
+
+	useEffect(() => {
+		if (!rateLimit?.limited) return;
+		const timer = window.setInterval(() => setRateLimit(getAgentRateLimitSnapshot()), 30_000);
+		return () => window.clearInterval(timer);
+	}, [rateLimit?.limited]);
+
 	function handleCloseTab(id: string) {
 		const isLastTab = tabs.length === 1;
 		titledRef.current.delete(id);
+		abortControllersRef.current.get(id)?.abort();
+		abortControllersRef.current.delete(id);
+		setStreamingMap(m => {
+			const next = { ...m };
+			delete next[id];
+			return next;
+		});
+		setPendingMap(m => {
+			const next = { ...m };
+			delete next[id];
+			return next;
+		});
 		closeTab(id);
 		if (isLastTab) onClose();
 	}
+
+	const stopActiveResponse = useCallback(() => {
+		if (!activeId) return;
+		const controller = abortControllersRef.current.get(activeId);
+		if (!controller) return;
+		setPendingMap(m => ({ ...m, [activeId]: { status: "stopping" } }));
+		controller.abort();
+	}, [activeId]);
 
 	async function send(text: string) {
 		if (!activeTab) return;
 		const id = activeTab.id;
 		if (pendingMap[id]) return;
-		// Cap to last 10 messages client-side so the body never exceeds the route's 32KB limit
+
+		const currentLimit = getAgentRateLimitSnapshot();
+		if (currentLimit.limited) {
+			setRateLimit(currentLimit);
+			return;
+		}
+
+		const consumed = consumeAgentRateLimit();
+		setRateLimit(consumed);
+
 		const outgoing = [...activeTab.messages, { role: "user" as const, content: text }].slice(-10);
+		const controller = new AbortController();
+		abortControllersRef.current.set(id, controller);
+
 		appendMessage(id, { role: "user", content: text });
-		setPendingMap(m => ({ ...m, [id]: true }));
+		if (!titledRef.current.has(id)) {
+			titledRef.current.add(id);
+			setTabTitle(id, titleFromPrompt(text));
+		}
+
+		setStreamingMap(m => ({ ...m, [id]: "" }));
+		setPendingMap(m => ({ ...m, [id]: { status: "connecting" } }));
+
+		let accumulated = "";
+
 		try {
 			const res = await fetch("/api/portfolio-agent", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ messages: outgoing, currentPage })
+				body: JSON.stringify({ messages: outgoing, currentPage, stream: true }),
+				signal: controller.signal
 			});
 
-			let errorMsg = UNAVAILABLE_MESSAGE;
-			if (!res.ok) {
-				try {
-					const errJson = await res.json();
-					if (errJson?.error) errorMsg = errJson.error;
-				} catch {}
-				throw new Error(errorMsg);
-			}
+			accumulated = await readAgentResponse(res, {
+				onChunk: chunk => {
+					accumulated += chunk;
+					setPendingMap(m => ({ ...m, [id]: { status: "streaming" } }));
+					setStreamingMap(m => ({ ...m, [id]: accumulated }));
+				}
+			});
 
-			const data = await res.json();
-			const reply = typeof data?.reply === "string" && data.reply.trim() ? data.reply : UNAVAILABLE_MESSAGE;
+			const reply = accumulated.trim() || UNAVAILABLE_MESSAGE;
 			appendMessage(id, { role: "assistant", content: reply });
 
-			// Fire-and-forget: after the first successful exchange, ask the agent for a real title.
-			if (!titledRef.current.has(id) && isSuccessfulReply(reply)) {
-				titledRef.current.add(id);
-				generateTitle(text, reply).then(title => {
-					if (title) setTabTitle(id, title);
-				});
+			if (!isSuccessfulReply(reply)) {
+				setRateLimit(getAgentRateLimitSnapshot());
 			}
-		} catch (err: any) {
-			appendMessage(id, { role: "assistant", content: err.message || UNAVAILABLE_MESSAGE });
+		} catch (err) {
+			if (err instanceof DOMException && err.name === "AbortError") {
+				if (accumulated.trim()) {
+					appendMessage(id, { role: "assistant", content: `${accumulated.trim()}\n\n_Response stopped._` });
+				} else {
+					appendMessage(id, { role: "assistant", content: "Response stopped." });
+				}
+			} else {
+				const message = err instanceof Error && err.message ? err.message : UNAVAILABLE_MESSAGE;
+				appendMessage(id, { role: "assistant", content: message });
+			}
 		} finally {
+			abortControllersRef.current.delete(id);
+			setStreamingMap(m => {
+				const next = { ...m };
+				delete next[id];
+				return next;
+			});
 			setPendingMap(m => {
 				const next = { ...m };
 				delete next[id];
@@ -140,15 +192,30 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 		}
 	}
 
-	const pendingActive = pendingMap[activeId ?? ""] ?? false;
+	const pendingActive = activeId ? Boolean(pendingMap[activeId]) : false;
+	const activeStatus = activeId && pendingMap[activeId] ? STATUS_COPY[pendingMap[activeId].status] : undefined;
+	const activeStreamingReply = activeId ? (streamingMap[activeId] ?? "") : "";
 	const isEmpty = !activeTab || activeTab.messages.length === 0;
+	const pendingBooleanMap = useMemo(
+		() => Object.fromEntries(Object.keys(pendingMap).map(id => [id, true])),
+		[pendingMap]
+	);
+
+	const usageLabel = rateLimit
+		? `${rateLimit.remaining}/${rateLimit.limit} messages left this hour`
+		: "Enter to send · Shift+Enter for newline";
+	const limitNotice = rateLimit?.limited
+		? `Hourly limit reached. Try again in ${formatResetDistance(rateLimit.resetAt)}.`
+		: undefined;
+	const inputDisabled = Boolean(limitNotice);
 
 	return (
 		<Box
 			component="aside"
 			aria-label="Agents panel"
 			sx={{
-				width: 340,
+				width: { xs: "100vw", sm: 380 },
+				maxWidth: "100vw",
 				flexShrink: 0,
 				height: "100%",
 				display: "flex",
@@ -158,7 +225,6 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg),
 				overflow: "hidden"
 			}}>
-			{/* ── Tab bar ── */}
 			{hydrated && (
 				<AgentTabs
 					tabs={tabs}
@@ -167,24 +233,47 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 					onClose={handleCloseTab}
 					onCreate={createTab}
 					canCreate={canCreate}
-					pendingMap={pendingMap}
+					pendingMap={pendingBooleanMap}
 				/>
 			)}
 
+			<Box sx={{ px: "14px", py: "9px", borderBottom: "1px solid", borderColor: "divider" }}>
+				<Typography sx={{ fontSize: "0.78rem", fontWeight: 600, color: "text.primary", lineHeight: 1.35 }}>
+					Ask about Pratyush&apos;s work
+				</Typography>
+				<Typography sx={{ mt: "2px", fontSize: "0.7rem", color: "text.secondary", lineHeight: 1.35 }}>
+					{currentPage ? `Context: ${currentPage}` : "Context-aware portfolio assistant"}
+				</Typography>
+			</Box>
+
 			{isEmpty ? (
-				/*
-				 * Empty state: input near the top, suggestions immediately below.
-				 * The free space at the bottom mirrors Cursor's blank-chat layout.
-				 */
 				<Box sx={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", overflowY: "auto" }}>
-					<AgentInput onSend={send} pending={pendingActive} />
-					<AgentPromptSuggestions onSelect={send} />
+					<AgentInput
+						onSend={send}
+						onStop={stopActiveResponse}
+						pending={pendingActive}
+						disabled={inputDisabled}
+						usageLabel={usageLabel}
+						notice={limitNotice}
+					/>
+					<AgentPromptSuggestions onSelect={send} disabled={pendingActive || inputDisabled} />
 				</Box>
 			) : (
-				/* Conversation: messages take the space, input pins to the bottom. */
 				<>
-					<AgentChat tab={activeTab} pending={pendingActive} />
-					<AgentInput onSend={send} pending={pendingActive} />
+					<AgentChat
+						tab={activeTab}
+						pending={pendingActive}
+						streamingReply={activeStreamingReply}
+						statusText={activeStatus}
+					/>
+					<AgentInput
+						onSend={send}
+						onStop={stopActiveResponse}
+						pending={pendingActive}
+						disabled={inputDisabled}
+						usageLabel={usageLabel}
+						notice={limitNotice}
+					/>
 				</>
 			)}
 		</Box>
