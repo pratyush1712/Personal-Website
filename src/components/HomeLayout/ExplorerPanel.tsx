@@ -118,7 +118,7 @@ function Section({
 					<Typography
 						sx={{
 							fontSize: "11px",
-							fontWeight: 700,
+							fontWeight: 600,
 							textTransform: "uppercase",
 							letterSpacing: "0.08em",
 							color: dark ? "#d4d4d4" : "#555555",

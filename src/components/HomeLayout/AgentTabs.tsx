@@ -124,6 +124,8 @@ function tabSx(active: boolean): SystemStyleObject<Theme> {
 		whiteSpace: "nowrap",
 		position: "relative",
 		userSelect: "none",
+		// Match the close button's 120ms timing so hover feels uniform across the tab strip.
+		transition: "background-color 120ms ease, color 120ms ease",
 		backgroundColor: active
 			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.elevated : "#ffffff")
 			: "transparent",

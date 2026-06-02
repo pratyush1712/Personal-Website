@@ -33,7 +33,7 @@ export default function AgentPromptSuggestions({ onSelect, disabled }: Props) {
 			<Typography
 				sx={{
 					fontSize: "0.6875rem",
-					fontWeight: 700,
+					fontWeight: 600,
 					letterSpacing: "0.08em",
 					textTransform: "uppercase",
 					color: "text.disabled",
