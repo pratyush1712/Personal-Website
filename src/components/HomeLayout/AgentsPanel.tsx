@@ -238,10 +238,7 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 				flexDirection: "column",
 				borderLeft: "1px solid",
 				borderColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.border : TOKENS.light.border),
-				// Panel body uses the lighter panel tone to match the inactive tab strip,
-				// creating a unified chrome surface. The active tab is darker (appBg) so it
-				// visually "sinks" into the content area below.
-				backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.panel : TOKENS.light.panel),
+				backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg),
 				overflow: "hidden"
 			}}>
 			{hydrated && (
