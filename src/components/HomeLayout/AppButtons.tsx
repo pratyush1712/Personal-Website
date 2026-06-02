@@ -57,7 +57,7 @@ export default function AppButtons({
 							// recede into the panel-colored tab strip.
 							backgroundColor: active ? t.surface : t.panel,
 							color: active ? t.textPrimary : t.textSecondary,
-							borderTop: "2px solid",
+							borderTop: "1px solid",
 							borderTopColor: active ? t.accent : "transparent",
 							"&.MuiButtonBase-root:hover": {
 								backgroundColor: active ? t.surface : t.elevated,

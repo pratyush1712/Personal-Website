@@ -18,16 +18,18 @@ interface Props {
 
 export default function AgentPromptSuggestions({ onSelect, disabled }: Props) {
 	return (
-		<Box sx={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-			{/* Section label - Cursor spec: 11px, all-caps, muted, 0.07em tracking */}
+		<Box sx={{ display: "flex", flexDirection: "column" }}>
+			{/* Section label - Cursor spec: 11px, all-caps, muted, 0.08em tracking */}
 			<Typography
 				sx={{
 					fontSize: "0.6875rem", // 11px
-					fontWeight: 600,
-					letterSpacing: "0.07em",
+					fontWeight: 700,
+					letterSpacing: "0.08em",
 					textTransform: "uppercase",
 					color: "text.disabled",
-					mb: "4px"
+					px: "14px",
+					pt: "10px",
+					pb: "4px"
 				}}>
 				Suggested
 			</Typography>
@@ -50,9 +52,9 @@ export default function AgentPromptSuggestions({ onSelect, disabled }: Props) {
 						alignItems: "center",
 						justifyContent: "space-between",
 						gap: "8px",
-						px: "8px",
-						py: "6px",
-						borderRadius: "4px", // Cursor spec: 4px for small elements
+						px: "14px",
+						py: "7px",
+						borderRadius: 0, // Cursor uses flat full-width row chips
 						cursor: disabled ? "default" : "pointer",
 						opacity: disabled ? 0.4 : 1,
 						color: "text.secondary",
@@ -66,24 +68,27 @@ export default function AgentPromptSuggestions({ onSelect, disabled }: Props) {
 							: {
 									backgroundColor: theme =>
 										theme.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
-									color: theme => (theme.palette.mode === "dark" ? "#d4d4d4" : "#3b3b3b")
+									color: theme => (theme.palette.mode === "dark" ? "#e0e0e0" : "#3b3b3b"),
+									"& .chev": { opacity: 0.6 }
 								},
 						"&:active": disabled ? {} : { opacity: 0.75 },
 						"&:focus-visible": {
 							outline: "2px solid",
 							outlineColor: "primary.main",
-							outlineOffset: "1px"
+							outlineOffset: "-2px"
 						}
 					}}>
 					<Box component="span" sx={{ flex: 1 }}>
 						{prompt}
 					</Box>
-					{/* Cursor uses a small right-chevron at ~12px */}
+					{/* Cursor uses a small right-chevron at ~11px */}
 					<VscChevronRight
-						size={12}
+						className="chev"
+						size={11}
 						style={{
 							flexShrink: 0,
-							opacity: 0.35
+							opacity: 0.3,
+							transition: "opacity 100ms ease"
 						}}
 					/>
 				</Box>

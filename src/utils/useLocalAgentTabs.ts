@@ -68,5 +68,22 @@ export function useLocalAgentTabs() {
 		);
 	}, []);
 
-	return { tabs, activeTab, activeId, hydrated, canCreate, createTab, closeTab, selectTab, appendMessage };
+	const setTabTitle = useCallback((id: string, title: string) => {
+		const trimmed = title.trim();
+		if (!trimmed) return;
+		setTabs(prev => prev.map(t => (t.id === id ? { ...t, title: trimmed } : t)));
+	}, []);
+
+	return {
+		tabs,
+		activeTab,
+		activeId,
+		hydrated,
+		canCreate,
+		createTab,
+		closeTab,
+		selectTab,
+		appendMessage,
+		setTabTitle
+	};
 }

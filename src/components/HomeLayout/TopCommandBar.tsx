@@ -120,9 +120,9 @@ export default function TopCommandBar({
 	}
 
 	const iconButtonSx = {
-		color: "text.secondary",
+		color: darkMode ? "#c5c5c5" : "#555555",
 		backgroundColor: "transparent",
-		"&:hover": { backgroundColor: "action.hover", color: "text.primary" }
+		"&:hover": { backgroundColor: "action.hover", color: darkMode ? "#ffffff" : "#000000" }
 	};
 
 	return (
@@ -164,7 +164,7 @@ export default function TopCommandBar({
 					sx={{
 						fontSize: "13px",
 						fontWeight: 400,
-						color: darkMode ? "#858585" : "#717171",
+						color: darkMode ? "#a8a8a8" : "#5d5d5d",
 						whiteSpace: "nowrap",
 						lineHeight: 1,
 						display: { xs: "none", sm: "block" }
@@ -175,7 +175,7 @@ export default function TopCommandBar({
 					sx={{
 						fontSize: "13px",
 						fontWeight: 400,
-						color: darkMode ? "#858585" : "#717171",
+						color: darkMode ? "#a8a8a8" : "#5d5d5d",
 						whiteSpace: "nowrap",
 						lineHeight: 1,
 						display: { xs: "none", md: "block" }
@@ -371,7 +371,10 @@ export default function TopCommandBar({
 						onClick={onAgentsToggle}
 						aria-label={agentsOpen ? "Hide agents panel" : "Show agents panel"}
 						aria-pressed={agentsOpen}
-						sx={{ ...iconButtonSx, color: agentsOpen ? "primary.main" : "text.secondary" }}>
+						sx={{
+							...iconButtonSx,
+							color: agentsOpen ? "primary.main" : iconButtonSx.color
+						}}>
 						<LuPanelRight size={18} />
 					</IconButton>
 				</Tooltip>

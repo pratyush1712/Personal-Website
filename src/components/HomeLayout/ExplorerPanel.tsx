@@ -7,6 +7,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import {
 	VscMarkdown,
 	VscChromeClose,
+	VscCloseAll,
 	VscRepo,
 	VscFiles,
 	VscSearch,
@@ -64,11 +65,14 @@ function fileRowSx(active: boolean, dark: boolean) {
 function Section({
 	title,
 	children,
-	defaultOpen = true
+	defaultOpen = true,
+	actions
 }: {
 	title: string;
 	children: ReactNode;
 	defaultOpen?: boolean;
+	/** Optional action buttons rendered on the right of the section header (visible on hover). */
+	actions?: ReactNode;
 }) {
 	const [open, setOpen] = useState(defaultOpen);
 	const panelId = useId();
@@ -78,41 +82,70 @@ function Section({
 
 	return (
 		<Box>
-			<Button
-				onClick={() => setOpen(o => !o)}
-				disableRipple
-				aria-expanded={open}
-				aria-controls={contentId}
-				fullWidth
+			<Box
 				sx={{
-					justifyContent: "flex-start",
-					gap: "4px",
-					px: "8px",
-					py: 0,
-					height: "22px",
-					minHeight: 0,
-					borderRadius: 0,
-					textTransform: "none",
-					backgroundColor: "transparent",
-					"&:hover": { backgroundColor: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)" }
+					position: "relative",
+					"& .section-actions": { opacity: 0, transition: "opacity 100ms ease" },
+					"&:hover .section-actions": { opacity: 1 },
+					"&:focus-within .section-actions": { opacity: 1 }
 				}}>
-				{open ? (
-					<ExpandMoreIcon sx={{ fontSize: "10px", color: dark ? "#c5c5c5" : "#717171", flexShrink: 0 }} />
-				) : (
-					<ChevronRightIcon sx={{ fontSize: "10px", color: dark ? "#c5c5c5" : "#717171", flexShrink: 0 }} />
-				)}
-				<Typography
+				<Button
+					onClick={() => setOpen(o => !o)}
+					disableRipple
+					aria-expanded={open}
+					aria-controls={contentId}
+					fullWidth
 					sx={{
-						fontSize: "11px",
-						fontWeight: 700,
-						textTransform: "uppercase",
-						letterSpacing: "0.08em",
-						color: dark ? "#bbbbbb" : "#6f6f6f",
-						lineHeight: "22px"
+						justifyContent: "flex-start",
+						gap: "4px",
+						px: "8px",
+						pr: actions ? "44px" : "8px",
+						py: 0,
+						height: "22px",
+						minHeight: 0,
+						borderRadius: 0,
+						textTransform: "none",
+						backgroundColor: "transparent",
+						"&:hover": { backgroundColor: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)" }
 					}}>
-					{title}
-				</Typography>
-			</Button>
+					{open ? (
+						<ExpandMoreIcon sx={{ fontSize: "10px", color: dark ? "#d4d4d4" : "#555555", flexShrink: 0 }} />
+					) : (
+						<ChevronRightIcon
+							sx={{ fontSize: "10px", color: dark ? "#d4d4d4" : "#555555", flexShrink: 0 }}
+						/>
+					)}
+					<Typography
+						sx={{
+							fontSize: "11px",
+							fontWeight: 700,
+							textTransform: "uppercase",
+							letterSpacing: "0.08em",
+							color: dark ? "#d4d4d4" : "#555555",
+							lineHeight: "22px"
+						}}>
+						{title}
+					</Typography>
+				</Button>
+				{actions && (
+					<Box
+						className="section-actions"
+						sx={{
+							position: "absolute",
+							right: "4px",
+							top: 0,
+							height: "22px",
+							display: "flex",
+							alignItems: "center",
+							gap: "2px",
+							pointerEvents: "auto"
+						}}
+						// Don't toggle the section when interacting with action buttons.
+						onClick={e => e.stopPropagation()}>
+						{actions}
+					</Box>
+				)}
+			</Box>
 			<Box id={contentId}>
 				<Collapse in={open} unmountOnExit>
 					<Box sx={{ pb: 0.5 }}>{children}</Box>
@@ -138,9 +171,9 @@ export default function ExplorerPanel({
 	const sidebarBg = dark ? "#1e1e1e" : "#f3f3f3";
 	const borderStyle = dark ? "1px solid #3a3a3a" : `1px solid ${theme.palette.divider}`;
 	const iconActive = dark ? "#ffffff" : "#333333";
-	const iconActiveBg = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)";
-	const iconActiveHover = dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)";
-	const iconInactive = dark ? "#858585" : "#717171";
+	const iconActiveBg = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)";
+	const iconActiveHover = dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.07)";
+	const iconInactive = dark ? "#c5c5c5" : "#5a5a5a";
 	const iconHoverBg = dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)";
 	const iconHoverColor = dark ? "#cccccc" : "#333333";
 	const closeHoverBg = dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)";
@@ -249,7 +282,29 @@ export default function ExplorerPanel({
 				</Tooltip>
 			</Box>
 
-			<Section title="OPEN EDITORS" defaultOpen={false}>
+			<Section
+				title="OPEN EDITORS"
+				defaultOpen={false}
+				actions={
+					visiblePages.length > 0 ? (
+						<Tooltip title="Close All Editors" arrow>
+							<IconButton
+								size="small"
+								disableRipple
+								aria-label="Close all editors"
+								onClick={() => setVisiblePageIndexs([])}
+								sx={{
+									width: 20,
+									height: 20,
+									borderRadius: "4px",
+									color: iconInactive,
+									"&:hover": { backgroundColor: iconHoverBg, color: iconHoverColor }
+								}}>
+								<VscCloseAll size={14} />
+							</IconButton>
+						</Tooltip>
+					) : null
+				}>
 				{visiblePages.length === 0 ? (
 					<Typography variant="caption" sx={{ display: "block", pl: 3, color: "text.disabled" }}>
 						No open editors

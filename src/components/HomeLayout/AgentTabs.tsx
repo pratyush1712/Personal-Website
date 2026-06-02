@@ -1,9 +1,10 @@
 "use client";
 import { Box, IconButton, Tooltip } from "@mui/material";
-import { VscAdd, VscChromeClose, VscHistory, VscEllipsis } from "react-icons/vsc";
+import { VscAdd, VscChromeClose, VscHistory, VscEllipsis, VscLoading } from "react-icons/vsc";
 
 import { AgentTab, MAX_TABS } from "@/utils/agentStorage";
 import { LuMessageSquare } from "react-icons/lu";
+import { TOKENS } from "@/ui/Theme";
 
 interface Props {
 	tabs: AgentTab[];
@@ -12,35 +13,37 @@ interface Props {
 	onClose: (id: string) => void;
 	onCreate: () => void;
 	canCreate: boolean;
+	/** Map of tab id → whether that agent is currently responding. */
+	pendingMap?: Record<string, boolean>;
 }
 
-export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate, canCreate }: Props) {
+export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate, canCreate, pendingMap = {} }: Props) {
 	// Shared style for the right-side icon buttons (+, history, ellipsis)
 	const actionBtnSx = {
 		width: 24,
 		height: 24,
 		borderRadius: "4px",
-		color: "text.secondary",
+		color: (theme: any) => (theme.palette.mode === "dark" ? "#c5c5c5" : "#555555"),
 		backgroundColor: "transparent",
 		"&:hover": {
-			color: "text.primary",
+			color: (theme: any) => (theme.palette.mode === "dark" ? "#ffffff" : "#000000"),
 			backgroundColor: (theme: any) =>
 				theme.palette.mode === "dark" ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"
 		},
-		"&.Mui-disabled": { opacity: 0.3 }
+		"&.Mui-disabled": { opacity: 0.4 }
 	};
 
 	return (
 		<Box
 			sx={{
 				flexShrink: 0,
-				// Cursor: tab bar bg matches panel bg (#252526), active tab dips to #1e1e1e
-				backgroundColor: theme => (theme.palette.mode === "dark" ? "#252526" : "#f3f3f3"),
+				// Cursor: tab bar bg matches panel bg (#1e1e1e); active tab is the lighter #2d2d2d card
+				backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg),
 				display: "flex",
 				alignItems: "center",
 				height: 35, // ~35px per Cursor spec
 				borderBottom: "1px solid",
-				borderColor: theme => (theme.palette.mode === "dark" ? "#2d2d2d" : "divider")
+				borderColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.border : TOKENS.light.border)
 			}}>
 			{/* Scrollable tab list */}
 			<Box
@@ -56,6 +59,7 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 				}}>
 				{tabs.map(t => {
 					const active = t.id === activeId;
+					const isPending = !!pendingMap[t.id];
 					return (
 						<Box
 							key={t.id}
@@ -65,49 +69,90 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 							sx={{
 								display: "flex",
 								alignItems: "center",
-								gap: "4px",
-								pl: "10px",
-								pr: "6px",
+								gap: "6px",
+								pl: "12px",
+								pr: "8px",
 								height: 35,
 								cursor: "pointer",
 								whiteSpace: "nowrap",
 								position: "relative",
 								userSelect: "none",
-								// Active tab: drops to editor bg (#1e1e1e); inactive stays at panel bg
+								// Active tab: lifts to elevated bg (#2d2d2d); inactive stays at panel bg
 								backgroundColor: active
-									? (theme: any) => (theme.palette.mode === "dark" ? "#1e1e1e" : "#ffffff")
+									? (theme: any) => (theme.palette.mode === "dark" ? TOKENS.dark.elevated : "#ffffff")
 									: "transparent",
 								color: active
-									? (theme: any) => (theme.palette.mode === "dark" ? "#d4d4d4" : "#3b3b3b")
-									: "text.secondary",
-								// Cursor active-tab bottom accent line
-								"&::after": active
+									? (theme: any) =>
+											theme.palette.mode === "dark"
+												? TOKENS.dark.textPrimary
+												: TOKENS.light.textPrimary
+									: (theme: any) => (theme.palette.mode === "dark" ? "#bbbbbb" : "#666666"),
+								// Cursor active-tab TOP accent line in accent blue
+								"&::before": active
 									? {
 											content: '""',
 											position: "absolute",
-											bottom: 0,
+											top: 0,
 											left: 0,
 											right: 0,
 											height: "1px",
 											backgroundColor: (theme: any) =>
-												theme.palette.mode === "dark"
-													? "rgba(255,255,255,0.25)"
-													: theme.palette.primary.main
+												theme.palette.mode === "dark" ? TOKENS.dark.accent : TOKENS.light.accent
 										}
 									: {},
+								// Subtle side borders on active tab to seat it inside the bar
+								...(active && {
+									borderLeft: "1px solid",
+									borderRight: "1px solid",
+									borderColor: (theme: any) =>
+										theme.palette.mode === "dark" ? TOKENS.dark.border : TOKENS.light.border,
+									ml: "-1px"
+								}),
 								"&:hover": {
 									color: "text.primary",
 									backgroundColor: (theme: any) =>
-										theme.palette.mode === "dark" ? "#2a2a2a" : "rgba(0,0,0,0.03)"
+										active
+											? theme.palette.mode === "dark"
+												? TOKENS.dark.elevated
+												: "#ffffff"
+											: theme.palette.mode === "dark"
+												? "rgba(255,255,255,0.04)"
+												: "rgba(0,0,0,0.03)"
 								},
-								// Vertical separator between tabs
-								"&:not(:last-of-type)": {
-									borderRight: "1px solid",
-									borderColor: (theme: any) => (theme.palette.mode === "dark" ? "#2d2d2d" : "divider")
-								}
+								// Vertical separator between tabs (skip on active, it has its own borders)
+								"&:not(:last-of-type)": !active
+									? {
+											borderRight: "1px solid",
+											borderColor: (theme: any) =>
+												theme.palette.mode === "dark" ? "rgba(255,255,255,0.04)" : "divider"
+										}
+									: {}
 							}}>
-							{/* Codicon speech-bubble - mirrors Cursor's "comment" tab icon */}
-							<LuMessageSquare size={14} style={{ opacity: active ? 0.75 : 0.4, flexShrink: 0 }} />
+							{/* Codicon speech-bubble — swaps to a spinner while the agent is responding */}
+							<Box
+								component="span"
+								sx={{
+									display: "inline-flex",
+									alignItems: "center",
+									justifyContent: "center",
+									width: 14,
+									height: 14,
+									flexShrink: 0,
+									opacity: isPending ? 1 : active ? 1 : 0.75,
+									color: isPending
+										? (theme: any) =>
+												theme.palette.mode === "dark"
+													? TOKENS.dark.textPrimary
+													: TOKENS.light.textPrimary
+										: "inherit",
+									"@keyframes agentTabSpin": {
+										from: { transform: "rotate(0deg)" },
+										to: { transform: "rotate(360deg)" }
+									},
+									"& > svg": isPending ? { animation: "agentTabSpin 1.1s linear infinite" } : {}
+								}}>
+								{isPending ? <VscLoading size={13} /> : <LuMessageSquare size={14} />}
+							</Box>
 
 							<Box
 								component="span"

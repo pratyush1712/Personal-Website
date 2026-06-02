@@ -38,7 +38,7 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 		setValue(e.target.value);
 		const el = e.target;
 		el.style.height = "auto";
-		el.style.height = Math.min(el.scrollHeight, 120) + "px";
+		el.style.height = Math.min(el.scrollHeight, 220) + "px";
 	}
 
 	const canSend = !disabled && !pending && value.trim().length > 0;
@@ -47,29 +47,32 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 		<Box
 			sx={{
 				flexShrink: 0,
-				p: "10px 10px 12px"
-				// Cursor's input sits flush against the bottom edge with no visible top border - the
-				// container card itself provides separation.
+				p: "12px 14px 12px"
 			}}>
-			{/* Outer card - mirrors Cursor's rounded input container, elevated off the panel */}
+			{/* Outer card - elevated #2d2d2d well. The layered shadow (soft drop + tight contact +
+			    inset top highlight) lifts it off the panel and gives the field the "text sits inside
+			    it" depth Cursor's composer has. */}
 			<Box
 				sx={{
 					borderRadius: "10px",
 					border: "1px solid",
-					borderColor: theme =>
-						theme.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.12)",
+					borderColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.border : "rgba(0,0,0,0.12)"),
 					backgroundColor: theme =>
-						theme.palette.mode === "dark" ? TOKENS.dark.surface : TOKENS.light.surface,
+						theme.palette.mode === "dark" ? TOKENS.dark.elevated : TOKENS.light.surface,
 					boxShadow: theme =>
 						theme.palette.mode === "dark"
-							? "0 4px 16px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3)"
-							: "0 4px 16px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)",
+							? "0 2px 6px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)"
+							: "0 2px 6px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.7)",
 					display: "flex",
 					flexDirection: "column",
-					transition: "border-color 150ms ease",
+					transition: "border-color 150ms ease, box-shadow 150ms ease",
 					"&:focus-within": {
 						borderColor: theme =>
-							theme.palette.mode === "dark" ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.28)"
+							theme.palette.mode === "dark" ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.2)",
+						boxShadow: theme =>
+							theme.palette.mode === "dark"
+								? "0 3px 12px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(0,120,212,0.35)"
+								: "0 3px 12px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8), 0 0 0 1px rgba(0,95,184,0.3)"
 					}
 				}}>
 				{/* Textarea */}
@@ -80,9 +83,9 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 					onChange={handleChange}
 					onKeyDown={onKeyDown}
 					disabled={disabled}
-					rows={1}
+					rows={3}
 					maxLength={2000}
-					placeholder={disabled ? "Agent unavailable" : "Ask about Pratyush…"}
+					placeholder={disabled ? "Agent unavailable" : "Ask about Pratyush's projects, experience, skills…"}
 					aria-label="Message the Portfolio Agent"
 					sx={{
 						display: "block",
@@ -92,14 +95,14 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 						color: "text.primary",
 						border: "none",
 						outline: "none",
-						px: "12px",
-						pt: "10px",
-						pb: "6px",
+						px: "14px",
+						pt: "12px",
+						pb: "8px",
 						fontFamily: "inherit",
-						fontSize: "0.8rem",
-						lineHeight: 1.5,
-						minHeight: "36px",
-						maxHeight: "120px",
+						fontSize: "0.8125rem", // 13px – Cursor input text size
+						lineHeight: 1.55,
+						minHeight: "72px",
+						maxHeight: "220px",
 						overflowY: "auto",
 						scrollbarWidth: "none",
 						"&::-webkit-scrollbar": { display: "none" },
@@ -127,28 +130,33 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 							gap: "4px",
 							px: "8px",
 							py: "3px",
-							borderRadius: "20px",
+							borderRadius: "999px",
 							border: "1px solid",
-							borderColor: theme =>
-								theme.palette.mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
-							backgroundColor: theme =>
-								theme.palette.mode === "dark" ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
-							color: "text.secondary",
-							fontSize: "0.67rem",
+							borderColor: theme => (theme.palette.mode === "dark" ? "#404040" : "rgba(0,0,0,0.12)"),
+							backgroundColor: "transparent",
+							color: theme =>
+								theme.palette.mode === "dark" ? TOKENS.dark.textPrimary : TOKENS.light.textPrimary,
+							fontSize: "0.72rem", // 11.5px
 							fontWeight: 500,
-							letterSpacing: "0.02em",
+							letterSpacing: "0.01em",
 							userSelect: "none",
-							cursor: "default"
+							cursor: "default",
+							transition: "background-color 120ms ease, border-color 120ms ease",
+							"&:hover": {
+								backgroundColor: theme =>
+									theme.palette.mode === "dark" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
+								borderColor: theme => (theme.palette.mode === "dark" ? "#555555" : "rgba(0,0,0,0.2)")
+							}
 						}}>
-						<TbInfinity size={11} />
+						<TbInfinity size={12} style={{ opacity: 0.75, color: "currentColor" }} />
 						Agent
-						<VscChevronDown size={10} style={{ opacity: 0.7 }} />
+						<VscChevronDown size={10} style={{ opacity: 0.65 }} />
 					</Box>
 
 					{/* Spacer */}
 					<Box sx={{ flex: 1 }} />
 
-					{/* Send */}
+					{/* Send - turns accent blue when there's text to send */}
 					<Tooltip title="Send (Enter)" arrow>
 						<span>
 							<IconButton
@@ -157,23 +165,21 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 								disabled={!canSend}
 								size="small"
 								sx={{
-									width: 26,
-									height: 26,
+									width: 28,
+									height: 28,
 									borderRadius: "6px",
-									color: canSend ? "text.primary" : "text.disabled",
-									backgroundColor: canSend
+									color: canSend
 										? theme =>
-												theme.palette.mode === "dark"
-													? "rgba(255,255,255,0.12)"
-													: "rgba(0,0,0,0.08)"
-										: "transparent",
+												theme.palette.mode === "dark" ? TOKENS.dark.accent : TOKENS.light.accent
+										: "text.disabled",
+									backgroundColor: "transparent",
 									transition: "background-color 120ms ease, color 120ms ease",
 									"&:hover": canSend
 										? {
 												backgroundColor: theme =>
 													theme.palette.mode === "dark"
-														? "rgba(255,255,255,0.2)"
-														: "rgba(0,0,0,0.14)"
+														? "rgba(255,255,255,0.08)"
+														: "rgba(0,0,0,0.06)"
 											}
 										: {},
 									"&.Mui-disabled": {
@@ -181,7 +187,7 @@ export default function AgentInput({ onSend, disabled, pending }: Props) {
 										backgroundColor: "transparent"
 									}
 								}}>
-								<VscSend size={13} />
+								<VscSend size={14} />
 							</IconButton>
 						</span>
 					</Tooltip>
