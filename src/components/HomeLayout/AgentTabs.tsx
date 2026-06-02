@@ -93,9 +93,9 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 
 const barSx: SystemStyleObject<Theme> = {
 	flexShrink: 0,
-	// Strip container stays on appBg — the same base tone as the AgentsPanel wrapper.
-	// Individual tab pills carry their own surface/transparent fills for contrast.
-	backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg),
+	// Tab strip uses the lighter panel tone. Active tabs use the darker appBg,
+	// so the selected tab "sinks" visually into the panel body below it.
+	backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.panel : TOKENS.light.panel),
 	display: "flex",
 	alignItems: "center",
 	height: 33,
@@ -125,10 +125,11 @@ function tabSx(active: boolean): SystemStyleObject<Theme> {
 		position: "relative",
 		userSelect: "none",
 		transition: "background-color 120ms ease, color 120ms ease",
-		// Active tab lifts to the content surface tone so it reads as "open/selected".
-		// Inactive tabs stay transparent so they recede into the strip background.
+		// Active tab is darker (appBg) so it reads as "selected" by sinking into
+		// the panel body below. Inactive tabs are transparent, showing the lighter
+		// panel strip background behind them.
 		backgroundColor: active
-			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.surface : TOKENS.light.surface)
+			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg)
 			: "transparent",
 		color: active
 			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.textPrimary : TOKENS.light.textPrimary)
@@ -155,11 +156,11 @@ function tabSx(active: boolean): SystemStyleObject<Theme> {
 			backgroundColor: theme =>
 				active
 					? theme.palette.mode === "dark"
-						? TOKENS.dark.surface
-						: TOKENS.light.surface
+						? TOKENS.dark.appBg
+						: TOKENS.light.appBg
 					: theme.palette.mode === "dark"
-						? "rgba(255,255,255,0.04)"
-						: "rgba(0,0,0,0.03)"
+						? "rgba(255,255,255,0.06)"
+						: "rgba(0,0,0,0.05)"
 		},
 		"&:focus-visible": {
 			outline: "2px solid",

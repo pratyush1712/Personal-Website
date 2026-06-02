@@ -238,7 +238,10 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 				flexDirection: "column",
 				borderLeft: "1px solid",
 				borderColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.border : TOKENS.light.border),
-				backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg),
+				// Panel body uses the lighter panel tone to match the inactive tab strip,
+				// creating a unified chrome surface. The active tab is darker (appBg) so it
+				// visually "sinks" into the content area below.
+				backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.panel : TOKENS.light.panel),
 				overflow: "hidden"
 			}}>
 			{hydrated && (
@@ -253,8 +256,6 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 				/>
 			)}
 
-			{/* Header sits flush on the same appBg surface as the tab strip and panel body.
-			    No tonal overlay — the text content alone identifies this as the context header. */}
 			<Box sx={{ px: "14px", py: "9px" }}>
 				<Typography sx={{ fontSize: "0.78rem", fontWeight: 600, color: "text.primary", lineHeight: 1.35 }}>
 					Ask about Pratyush&apos;s work
