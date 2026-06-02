@@ -22,6 +22,7 @@ import ResizeHandle from "./ResizeHandle";
 import { Page } from "@/types";
 import { slugifyHeading } from "@/utils/markdownAnchors";
 import { useResizableWidth } from "@/utils/useResizableWidth";
+import { TOKENS } from "@/ui/Theme";
 
 const MIN_WIDTH = 200;
 const MAX_WIDTH = 480;
@@ -185,7 +186,8 @@ export default function ExplorerPanel({
 		side: "right"
 	});
 
-	const sidebarBg = dark ? "#1e1e1e" : "#f3f3f3";
+	// Mirror the agents panel: side panels share appBg so both recede behind the editor surface.
+	const sidebarBg = dark ? TOKENS.dark.appBg : "#f3f3f3";
 	const borderStyle = dark ? "1px solid #3a3a3a" : `1px solid ${theme.palette.divider}`;
 	const iconActive = dark ? "#ffffff" : "#333333";
 	const iconActiveBg = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)";
@@ -215,7 +217,9 @@ export default function ExplorerPanel({
 				sx={{
 					display: "flex",
 					alignItems: "center",
-					height: "35px",
+					// Match the editor tab strip (AppButtons) / agent tab strip height so the
+					// sidebar's first row lines up with the editor tabs across the workspace.
+					height: "33px",
 					px: "8px",
 					gap: "2px",
 					borderBottom: borderStyle,

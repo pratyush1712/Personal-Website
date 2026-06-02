@@ -5,9 +5,9 @@ import { createTheme, darkScrollbar } from "@mui/material";
 // touching individual components. Values mirror Cursor's default dark theme exactly.
 export const TOKENS = {
 	dark: {
-		appBg: "#1e1e1e", // outer window shell background
+		appBg: "#181818", // outer window shell + side panels (explorer/agents); sits darker than the editor
 		panel: "#252526", // elevated panels - toolbar, tab strip, search dropdown
-		surface: "#1e1e1e", // editor content surface (active tab + scroll area)
+		surface: "#1e1e1e", // editor content surface (active tab + scroll area); lighter than the side panels
 		elevated: "#2d2d2d", // hover / raised state
 		border: "#3a3a3a", // universal divider between regions
 		textPrimary: "#cccccc",
