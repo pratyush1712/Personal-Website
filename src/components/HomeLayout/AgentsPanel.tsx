@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
-import { useLocalAgentTabs } from "@/utils/useLocalAgentTabs";
+import { useLocalAgentTabs } from "@/utils/agents/useLocalAgentTabs";
 import { TOKENS } from "@/ui/Theme";
 import AgentTabs from "./AgentTabs";
 import AgentChat from "./AgentChat";
@@ -13,8 +13,8 @@ import {
 	formatResetDistance,
 	getAgentRateLimitSnapshot,
 	type RateLimitSnapshot
-} from "@/utils/agentRateLimit";
-import { readAgentResponse } from "@/utils/agentStreaming";
+} from "@/utils/agents/agentRateLimit";
+import { readAgentResponse } from "@/utils/agents/agentStreaming";
 
 interface Props {
 	onClose: () => void;

@@ -5,7 +5,7 @@ import { type SystemStyleObject } from "@mui/system";
 import { VscAdd, VscChromeClose, VscLoading } from "react-icons/vsc";
 import { LuMessageSquare } from "react-icons/lu";
 
-import { AgentTab, MAX_TABS } from "@/utils/agentStorage";
+import { AgentTab, MAX_TABS } from "@/utils/agents/agentStorage";
 import { TOKENS } from "@/ui/Theme";
 
 interface Props {

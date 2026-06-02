@@ -6,6 +6,8 @@
 		"dev": "next dev --turbopack",
 		"build": "next build --webpack",
 		"start": "next start",
+		"ingest:github": "tsx scripts/ingest-github-context.ts",
+		"test": "tsx --test tests/*.test.ts",
 		"lint": "eslint .",
 		"format": "prettier --write .",
 		"format-check": "prettier --check .",
@@ -50,6 +52,7 @@
 		"husky": "^9.1.7",
 		"lint-staged": "^15.5.2",
 		"prettier": "^3.8.3",
+		"tsx": "^4.22.4",
 		"typescript": "^5.9.3"
 	},
 	"packageManager": "pnpm@10.6.3"

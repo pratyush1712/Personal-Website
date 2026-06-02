@@ -7,6 +7,22 @@ import { links } from "@/utils/links";
 // for the agent's system prompt. Never import this into client code - it uses `fs`.
 
 const MAX_CONTEXT_CHARS = 20000;
+export const PORTFOLIO_AGENT_EXTRA_CONTEXT_FILE_CHARS = positiveInt(
+	process.env.PORTFOLIO_AGENT_EXTRA_CONTEXT_FILE_CHARS,
+	4_000
+);
+
+const EXTRA_CONTEXT_FILES = [
+	{ path: "github.md", header: "GITHUB CONTEXT" },
+	{ path: "linkedin.md", header: "LINKEDIN CONTEXT" },
+	{ path: "featured.md", header: "FEATURED POSTS AND PUBLIC CONTENT" },
+	{ path: "writing.md", header: "WRITING AND ARTICLES" }
+] as const;
+
+function positiveInt(value: string | undefined, fallback: number): number {
+	const parsed = Number.parseInt(value ?? "", 10);
+	return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
 
 function stripMarkdown(md: string): string {
 	return md
@@ -24,10 +40,23 @@ function stripMarkdown(md: string): string {
 		.trim();
 }
 
+function capText(text: string, maxChars: number): string {
+	return text.length > maxChars ? `${text.slice(0, maxChars)}\n…(truncated)` : text;
+}
+
 function readReadme(route: string): string {
 	try {
 		const normalizedRoute = route.replace(/^\/+/, "") || "home";
 		return readFileSync(join(process.cwd(), "public/readmes", `${normalizedRoute}.md`), "utf8");
+	} catch {
+		return "";
+	}
+}
+
+export function readOptionalContextFile(relativePath: string): string {
+	try {
+		const raw = readFileSync(join(process.cwd(), "public/agent-context", relativePath), "utf8");
+		return capText(stripMarkdown(raw), PORTFOLIO_AGENT_EXTRA_CONTEXT_FILE_CHARS);
 	} catch {
 		return "";
 	}
@@ -44,6 +73,11 @@ export function buildPortfolioContext(): string {
 
 	const contact = stripMarkdown(readReadme("contact"));
 	if (contact) sections.push(`CONTACT\n${contact}`);
+
+	for (const file of EXTRA_CONTEXT_FILES) {
+		const text = readOptionalContextFile(file.path);
+		if (text) sections.push(`${file.header}\n${text}`);
+	}
 
 	for (const page of pages) {
 		const text = stripMarkdown(readReadme(page.route));

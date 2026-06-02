@@ -3,7 +3,7 @@
 import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Box, Typography, type Theme } from "@mui/material";
 import { type SystemStyleObject } from "@mui/system";
-import { AgentTab } from "@/utils/agentStorage";
+import { AgentTab } from "@/utils/agents/agentStorage";
 import { TOKENS } from "@/ui/Theme";
 
 const STICKY_TOP_OFFSET_PX = 10;
