@@ -253,15 +253,9 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 				/>
 			)}
 
-			{/* Header reads as its own band via a faint background tone shift rather than a hard
-			    1px rule, keeping the seamless flow from the tab strip into the chat below. */}
-			<Box
-				sx={{
-					px: "14px",
-					py: "9px",
-					backgroundColor: theme =>
-						theme.palette.mode === "dark" ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)"
-				}}>
+			{/* Header sits flush on the same appBg surface as the tab strip and panel body.
+			    No tonal overlay — the text content alone identifies this as the context header. */}
+			<Box sx={{ px: "14px", py: "9px" }}>
 				<Typography sx={{ fontSize: "0.78rem", fontWeight: 600, color: "text.primary", lineHeight: 1.35 }}>
 					Ask about Pratyush&apos;s work
 				</Typography>

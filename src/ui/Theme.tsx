@@ -74,7 +74,10 @@ export default function theme(darkMode: boolean, paletteOverrides?: any) {
 			styleOverrides: {
 				root: {
 					color: t.textPrimary,
-					backgroundColor: t.surface,
+					// Use transparent so icon buttons in sidebar panel headers (explorer toolbar,
+					// agent tab strip, etc.) don't inherit a raised surface background that boxes
+					// them in. Active/selected backgrounds are applied per-component via inline sx.
+					backgroundColor: "transparent",
 					"&:hover": { backgroundColor: t.elevated },
 					"@media (max-width:600px)": { padding: "4px" }
 				}
