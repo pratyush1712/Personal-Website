@@ -6,8 +6,47 @@ const OUTPUT_FILE = join(process.cwd(), "public/agent-context/github.md");
 const README_EXCERPT_CHARS = 2_000;
 
 const CURATED_REPOS = [
-	"pratyush1712/personal-website"
-	// TODO: Add other public portfolio-worthy repositories, for example "owner/repo".
+	// Portfolio / personal brand
+	"pratyush1712/Personal-Website",
+	"pratyush1712/pratyush1712",
+	"pratyush1712/Personal-Agent-Homebase",
+	"pratyush1712/braindump",
+	// Current high-signal personal systems / AI-adjacent work
+	"pratyush1712/Habits-OS",
+	"pratyush1712/legacy-support-adjudication-skill",
+	"pratyush1712/house-chores-tracker",
+
+	// Neuroinclusive / accessibility / mental health aligned projects
+	"pratyush1712/ADHD-Friendly-Text-Enhancer",
+	"pratyush1712/cornell-mind-matters",
+	"pratyush1712/bipolar-disorder",
+	"pratyush1712/CleverHug",
+	"pratyush1712/Actigraphy-Based-Mood-Disorder-Analysis",
+
+	// Cornell / research / audit tooling
+	"Audit-Tools-DECA-Lab-Cornell/audit-tools-backend",
+	"Audit-Tools-DECA-Lab-Cornell/audit-tools-playspace-frontend",
+	"Audit-Tools-DECA-Lab-Cornell/audit-tools-playspace-mobile",
+	"pratyush1712/Rizvi-Lab",
+
+	// Data / backend / systems projects
+	"pratyush1712/phylogentic-tree",
+	"pratyush1712/AIGeoLocator",
+	"pratyush1712/data-engineering",
+	"pratyush1712/Timebite-Backend",
+	"pratyush1712/find_my_party_backend",
+
+	// Product / app projects
+	"pratyush1712/Personal-Content-Sharing-Platform",
+	"pratyush1712/Wi-Find",
+	"pratyush1712/Wi-Find-Server",
+	"pratyush1712/Harmonious-Sounds",
+
+	// Community / educational context
+	"pratyush1712/CornellCSWiki",
+
+	// Perfect Match
+	"Perfect-Match-Org/perfect-match-web"
 ] as const;
 
 type GitHubRepo = {
