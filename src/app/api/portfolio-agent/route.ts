@@ -14,6 +14,10 @@ const MAX_MESSAGE_CHARS = 2_000;
 const MAX_CONTEXT_CHARS = positiveInt(process.env.PORTFOLIO_AGENT_MAX_CONTEXT_CHARS, 12_000);
 
 const OPENAI_MODEL = process.env.PORTFOLIO_AGENT_MODEL ?? "gpt-5-nano";
+const OPENAI_MAX_COMPLETION_TOKENS = positiveInt(process.env.PORTFOLIO_AGENT_MAX_COMPLETION_TOKENS, 900);
+const OPENAI_REASONING_EFFORT = reasoningEffort(process.env.PORTFOLIO_AGENT_REASONING_EFFORT);
+const OPENAI_EMPTY_RESPONSE_MESSAGE =
+	"Portfolio Agent could not generate a response. Please ask a shorter question about Pratyush's projects, skills, or background.";
 
 const SYSTEM_PROMPT = `You are Portfolio Agent, a helpful assistant embedded in Pratyush Sudhakar's personal website.
 
@@ -83,6 +87,14 @@ function positiveInt(value: string | undefined, fallback: number): number {
 	return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
+function reasoningEffort(value: string | undefined): "minimal" | "low" | "medium" | "high" {
+	return value === "low" || value === "medium" || value === "high" ? value : "minimal";
+}
+
+function supportsGpt5Controls(model: string): boolean {
+	return /^gpt-5(?:\b|-)/i.test(model);
+}
+
 function getClientKey(req: NextRequest): string {
 	const forwardedFor = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
 	const realIp = req.headers.get("x-real-ip")?.trim();
@@ -139,6 +151,21 @@ function json(data: unknown, status = 200, headers: Record<string, string> = {})
 		status,
 		headers
 	});
+}
+
+function parseJsonObject(raw: string): unknown | null {
+	try {
+		return JSON.parse(raw) as unknown;
+	} catch {
+		return null;
+	}
+}
+
+async function readOpenAIErrorMessage(response: Response, fallback: string): Promise<string> {
+	const raw = await response.text();
+	const parsed = parseJsonObject(raw) as { error?: { message?: unknown } } | null;
+	const message = parsed?.error?.message;
+	return typeof message === "string" && message.trim() ? message.trim() : fallback;
 }
 
 function sanitizeMessages(messages: unknown): ClientMessage[] {
@@ -212,33 +239,31 @@ async function callOpenAI(messages: ClientMessage[], currentPage: string | undef
 		throw new Error("Portfolio Agent is not configured. Add OPENAI_API_KEY on the server.");
 	}
 
+	const body: Record<string, unknown> = {
+		model: OPENAI_MODEL,
+		stream,
+		max_completion_tokens: OPENAI_MAX_COMPLETION_TOKENS,
+		messages: buildOpenAIMessages(messages, currentPage)
+	};
+
+	if (supportsGpt5Controls(OPENAI_MODEL)) {
+		body.reasoning_effort = OPENAI_REASONING_EFFORT;
+		body.verbosity = "low";
+	} else {
+		body.temperature = 0.4;
+	}
+
 	const response = await fetch("https://api.openai.com/v1/chat/completions", {
 		method: "POST",
 		headers: {
 			Authorization: `Bearer ${apiKey}`,
 			"Content-Type": "application/json"
 		},
-		body: JSON.stringify({
-			model: OPENAI_MODEL,
-			stream,
-			max_completion_tokens: 512,
-			messages: buildOpenAIMessages(messages, currentPage)
-		})
+		body: JSON.stringify(body)
 	});
 
 	if (!response.ok) {
-		let detail = "Portfolio Agent is temporarily unavailable.";
-
-		try {
-			const data = await response.json();
-			if (typeof data?.error?.message === "string") {
-				detail = data.error.message;
-			}
-		} catch {
-			// Keep the generic message.
-		}
-
-		throw new Error(detail);
+		throw new Error(await readOpenAIErrorMessage(response, "Portfolio Agent is temporarily unavailable."));
 	}
 
 	return response;
@@ -250,7 +275,7 @@ async function createNonStreamingReply(messages: ClientMessage[], currentPage?: 
 
 	const reply = data?.choices?.[0]?.message?.content;
 
-	return typeof reply === "string" && reply.trim() ? reply.trim() : "Portfolio Agent returned an empty response.";
+	return typeof reply === "string" && reply.trim() ? reply.trim() : OPENAI_EMPTY_RESPONSE_MESSAGE;
 }
 
 function createStreamingReply(
@@ -262,6 +287,14 @@ function createStreamingReply(
 
 	const stream = new ReadableStream<Uint8Array>({
 		async start(controller) {
+			let wroteToken = false;
+
+			const enqueueText = (text: string) => {
+				if (!text) return;
+				wroteToken = true;
+				controller.enqueue(encoder.encode(text));
+			};
+
 			try {
 				const response = await callOpenAI(messages, currentPage, true);
 				const reader = response.body?.getReader();
@@ -291,6 +324,7 @@ function createStreamingReply(
 						if (!payload) continue;
 
 						if (payload === "[DONE]") {
+							if (!wroteToken) enqueueText(OPENAI_EMPTY_RESPONSE_MESSAGE);
 							controller.close();
 							return;
 						}
@@ -300,7 +334,7 @@ function createStreamingReply(
 							const token = parsed?.choices?.[0]?.delta?.content;
 
 							if (typeof token === "string" && token.length > 0) {
-								controller.enqueue(encoder.encode(token));
+								enqueueText(token);
 							}
 						} catch {
 							// Ignore malformed SSE fragments and keep reading.
@@ -308,11 +342,12 @@ function createStreamingReply(
 					}
 				}
 
+				if (!wroteToken) enqueueText(OPENAI_EMPTY_RESPONSE_MESSAGE);
 				controller.close();
 			} catch (error) {
 				const message = error instanceof Error ? error.message : "Portfolio Agent is temporarily unavailable.";
 
-				controller.enqueue(encoder.encode(message));
+				enqueueText(message);
 				controller.close();
 			}
 		}
