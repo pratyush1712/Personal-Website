@@ -93,8 +93,8 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 
 const barSx: SystemStyleObject<Theme> = {
 	flexShrink: 0,
-	// Use appBg (the outer panel chrome tone) so the tab strip is flush with the
-	// AgentsPanel wrapper below it — no visible seam between the two regions.
+	// Strip container stays on appBg — the same base tone as the AgentsPanel wrapper.
+	// Individual tab pills carry their own surface/transparent fills for contrast.
 	backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg),
 	display: "flex",
 	alignItems: "center",
@@ -124,10 +124,11 @@ function tabSx(active: boolean): SystemStyleObject<Theme> {
 		whiteSpace: "nowrap",
 		position: "relative",
 		userSelect: "none",
-		// Match the close button's 120ms timing so hover feels uniform across the tab strip.
 		transition: "background-color 120ms ease, color 120ms ease",
+		// Active tab lifts to the content surface tone so it reads as "open/selected".
+		// Inactive tabs stay transparent so they recede into the strip background.
 		backgroundColor: active
-			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg)
+			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.surface : TOKENS.light.surface)
 			: "transparent",
 		color: active
 			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.textPrimary : TOKENS.light.textPrimary)
@@ -154,8 +155,8 @@ function tabSx(active: boolean): SystemStyleObject<Theme> {
 			backgroundColor: theme =>
 				active
 					? theme.palette.mode === "dark"
-						? TOKENS.dark.appBg
-						: TOKENS.light.appBg
+						? TOKENS.dark.surface
+						: TOKENS.light.surface
 					: theme.palette.mode === "dark"
 						? "rgba(255,255,255,0.04)"
 						: "rgba(0,0,0,0.03)"
