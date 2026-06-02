@@ -169,9 +169,12 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 			setCurrentComponent={setCurrentComponent}
 			visiblePageIndexs={visiblePageIndexs}
 			setVisiblePageIndexs={setVisiblePageIndexs}
+			resizable={!isMobile}
 		/>
 	);
-	const agentsPanel = <AgentsPanel onClose={() => setAgentsOpen(false)} currentPage={currentPage} />;
+	const agentsPanel = (
+		<AgentsPanel onClose={() => setAgentsOpen(false)} currentPage={currentPage} resizable={!isMobile} />
+	);
 
 	return (
 		<CacheProvider value={cache}>

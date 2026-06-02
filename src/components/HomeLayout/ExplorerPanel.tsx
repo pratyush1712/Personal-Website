@@ -18,8 +18,14 @@ import {
 import { DiMarkdown } from "react-icons/di";
 import Link from "next/link";
 import AppTree from "./AppTree";
+import ResizeHandle from "./ResizeHandle";
 import { Page } from "@/types";
 import { slugifyHeading } from "@/utils/markdownAnchors";
+import { useResizableWidth } from "@/utils/useResizableWidth";
+
+const MIN_WIDTH = 160;
+const MAX_WIDTH = 480;
+const DEFAULT_WIDTH = 240;
 
 interface Props {
 	pages: Page[];
@@ -30,6 +36,8 @@ interface Props {
 	setCurrentComponent: Dispatch<SetStateAction<string>>;
 	visiblePageIndexs: number[];
 	setVisiblePageIndexs: Dispatch<SetStateAction<number[]>>;
+	/** When true, render a drag-to-resize handle (inline desktop layout only). */
+	resizable?: boolean;
 }
 
 const FEATURED_PROJECTS = [
@@ -163,10 +171,19 @@ export default function ExplorerPanel({
 	currentComponent,
 	setCurrentComponent,
 	visiblePageIndexs,
-	setVisiblePageIndexs
+	setVisiblePageIndexs,
+	resizable = false
 }: Props) {
 	const theme = useTheme();
 	const dark = theme.palette.mode === "dark";
+
+	const { width, isDragging, startDragging, onKeyDown } = useResizableWidth({
+		storageKey: "explorerWidth",
+		defaultWidth: DEFAULT_WIDTH,
+		minWidth: MIN_WIDTH,
+		maxWidth: MAX_WIDTH,
+		side: "right"
+	});
 
 	const sidebarBg = dark ? "#1e1e1e" : "#f3f3f3";
 	const borderStyle = dark ? "1px solid #3a3a3a" : `1px solid ${theme.palette.divider}`;
@@ -184,7 +201,8 @@ export default function ExplorerPanel({
 			component="nav"
 			aria-label="Portfolio explorer"
 			sx={{
-				width: 240,
+				position: "relative",
+				width: resizable ? width : DEFAULT_WIDTH,
 				flexShrink: 0,
 				height: "100%",
 				overflowY: "auto",
@@ -415,6 +433,19 @@ export default function ExplorerPanel({
 					);
 				})}
 			</Section>
+
+			{resizable && (
+				<ResizeHandle
+					side="right"
+					active={isDragging}
+					onPointerDown={startDragging}
+					onKeyDown={onKeyDown}
+					label="Resize explorer sidebar"
+					width={width}
+					min={MIN_WIDTH}
+					max={MAX_WIDTH}
+				/>
+			)}
 		</Box>
 	);
 }
