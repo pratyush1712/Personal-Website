@@ -93,9 +93,8 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 
 const barSx: SystemStyleObject<Theme> = {
 	flexShrink: 0,
-	// Tab strip uses the chrome/panel tone; the active tab drops to the chat-panel
-	// background so it merges seamlessly into the content below (same as editor tabs).
-	backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.panel : TOKENS.light.panel),
+	// Share the agents panel base background so the tab strip flows into the header/chat area.
+	backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg),
 	display: "flex",
 	alignItems: "center",
 	height: 33,
@@ -143,12 +142,6 @@ function tabSx(active: boolean): SystemStyleObject<Theme> {
 					backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.accent : TOKENS.light.accent)
 				}
 			: {},
-		...(active && {
-			borderLeft: "1px solid",
-			borderRight: "1px solid",
-			borderColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.border : TOKENS.light.border),
-			ml: "-1px"
-		}),
 		"&:hover": {
 			color: "text.primary",
 			backgroundColor: theme =>
@@ -240,9 +233,10 @@ const actionButtonSx: SystemStyleObject<Theme> = {
 	borderRadius: "4px",
 	color: theme => (theme.palette.mode === "dark" ? "#c5c5c5" : "#555555"),
 	backgroundColor: "transparent",
+	boxShadow: "none",
 	"&:hover": {
 		color: theme => (theme.palette.mode === "dark" ? "#ffffff" : "#000000"),
 		backgroundColor: theme => (theme.palette.mode === "dark" ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)")
 	},
-	"&.Mui-disabled": { opacity: 0.4 }
+	"&.Mui-disabled": { opacity: 0.4, backgroundColor: "transparent" }
 };
