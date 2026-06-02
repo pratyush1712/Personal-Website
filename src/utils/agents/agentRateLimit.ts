@@ -1,4 +1,4 @@
-export const AGENT_RATE_LIMIT = 400;
+export const AGENT_RATE_LIMIT = 20;
 export const AGENT_RATE_WINDOW_MS = 60 * 60 * 1000;
 
 const STORAGE_KEY = "portfolio-agent-rate-limit-v2";
