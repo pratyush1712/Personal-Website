@@ -1,6 +1,6 @@
-# My VSCode-Themed Personal Website
+# My Cursor-Themed Personal Website
 
-Personal Portfolio Built Using Next.js 14 and Material UI: [Live Demo](https://pratyushsudhakar.com/)
+Personal Portfolio built using Next.js 16 (App Router) and Material UI, redesigned as a Cursor-inspired AI-native workspace: [Live Demo](https://pratyushsudhakar.com/)
 
 <p align="left">
 		<em>Developed with the software and tools below.</em>
@@ -25,33 +25,34 @@ Personal Portfolio Built Using Next.js 14 and Material UI: [Live Demo](https://p
 ## 🔗 Quick Links
 
 > -   [📍 Overview](#-overview)
-> -   [� Features](#-features)
+> -   [🎉 Features](#-features)
 > -   [🚀 Getting Started](#-getting-started)
 >     -   [⚙️ Installation](#️-installation)
->     -   [🤖 Running ](#-running)
+>     -   [🤖 Running](#-running)
 > -   [🤝 Contributing](#-contributing)
 
 ---
 
 ## 📍 Overview
 
-This repository contains the source code for my personal website. The website is built using Next.js 14 and Material UI.
+This repository contains the source code for my personal website. Originally a VSCode-themed portfolio, it has been redesigned (Phases A–H) into a Cursor-inspired AI-native workspace built on Next.js 16 and Material UI, with a streaming portfolio AI agent powered by the Vercel AI SDK.
 
 ---
 
 ## 🎉 Features
 
-VSCode-themed personal website.
+Cursor-inspired, AI-native personal workspace.
 
--   **Pages**: Home, Overview, Experience, Education, Projects, Skills, and Resume.
-    -   **Home Page**: Apple Watch-themed landing page with bubbles showing my spotify playlist.
-    -   **Overview.md**: A markdown file that contains an overview of my personal information.
-    -   **Experience.md**: A markdown file that contains my work experience.
-    -   **Education.md**: A markdown file that contains my educational background.
-    -   **Projects.md**: A markdown file that contains my projects.
-    -   **Skills.md**: A markdown file that contains my skills.
+-   **Cursor-style UI**: Redesigned left sidebar, explorer panel, agents panel, and editor surface to match Cursor's IDE aesthetic, with the Cornell seal as a personal touch.
+-   **Portfolio AI Agent**: A streaming chat agent that answers questions about my experience, projects, education, and site usage. Includes:
+    -   Server-streamed responses (Vercel AI SDK)
+    -   Hourly rate limits and guarded prompts to keep the agent on-topic
+    -   Rich context: experience, projects, GitHub activity, and site-support queries
+    -   Markdown rendering (bold, lists, links) in responses
+-   **Content "files"**: Markdown-backed pages for Overview, Experience, Education, Projects, and Skills, opened as tabs inside the workspace.
+-   **Home Page**: Apple Watch-themed landing page with bubbles surfacing my Spotify playlist.
 -   **Resume**: A downloadable resume.
--   **Dark Mode**: Toggle between light and dark themes.
+-   **Light / Dark Mode**: Polished themes across every panel, with light-mode fixes throughout the Cursor redesign.
 
 ---
 
