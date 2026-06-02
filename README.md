@@ -1,6 +1,6 @@
 # My Cursor-Themed Personal Website
 
-Personal Portfolio built using Next.js 16 (App Router) and Material UI, redesigned as a Cursor-inspired AI-native workspace: [Live Demo](https://pratyushsudhakar.com/)
+A Cursor-inspired, AI-native personal workspace built with Next.js 16 (App Router) and Material UI: [Live Demo](https://pratyushsudhakar.com/)
 
 <p align="left">
 		<em>Developed with the software and tools below.</em>
@@ -35,24 +35,22 @@ Personal Portfolio built using Next.js 16 (App Router) and Material UI, redesign
 
 ## 📍 Overview
 
-This repository contains the source code for my personal website. Originally a VSCode-themed portfolio, it has been redesigned (Phases A–H) into a Cursor-inspired AI-native workspace built on Next.js 16 and Material UI, with a streaming portfolio AI agent powered by the Vercel AI SDK.
+The source code for my personal website: a Cursor-style IDE workspace where my portfolio content lives as files in an explorer, opens as tabs, and is queryable through an in-app AI agent.
 
 ---
 
 ## 🎉 Features
 
-Cursor-inspired, AI-native personal workspace.
-
--   **Cursor-style UI**: Redesigned left sidebar, explorer panel, agents panel, and editor surface to match Cursor's IDE aesthetic, with the Cornell seal as a personal touch.
--   **Portfolio AI Agent**: A streaming chat agent that answers questions about my experience, projects, education, and site usage. Includes:
-    -   Server-streamed responses (Vercel AI SDK)
-    -   Hourly rate limits and guarded prompts to keep the agent on-topic
-    -   Rich context: experience, projects, GitHub activity, and site-support queries
+-   **Cursor-style workspace**: Left sidebar, explorer panel, agents panel, and editor surface laid out like the Cursor IDE.
+-   **Portfolio AI Agent**: An in-app chat agent that answers questions about my experience, projects, education, and the site itself.
+    -   Server-streamed responses via the Vercel AI SDK
+    -   Hourly rate limits and prompt guards to keep responses on-topic
+    -   Context-aware: experience, projects, GitHub activity, and site-support questions
     -   Markdown rendering (bold, lists, links) in responses
--   **Content "files"**: Markdown-backed pages for Overview, Experience, Education, Projects, and Skills, opened as tabs inside the workspace.
--   **Home Page**: Apple Watch-themed landing page with bubbles surfacing my Spotify playlist.
--   **Resume**: A downloadable resume.
--   **Light / Dark Mode**: Polished themes across every panel, with light-mode fixes throughout the Cursor redesign.
+-   **Content files**: Markdown-backed pages — Overview, Experience, Education, Projects, Skills — opened as tabs in the workspace.
+-   **Home page**: Apple Watch-themed landing page with bubbles surfacing my Spotify playlist.
+-   **Resume**: Downloadable PDF.
+-   **Light and dark mode**: Themed across every panel.
 
 ---
 
