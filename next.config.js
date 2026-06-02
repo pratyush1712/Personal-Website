@@ -10,39 +10,18 @@ const nextConfig = {
 			static: 180
 		}
 	},
-	// The portfolio-agent route reads markdown context at runtime; public/ assets are not
-	// traced into serverless functions by default, so include them explicitly for that route.
 	outputFileTracingIncludes: {
-		"/api/portfolio-agent": ["./public/readmes/*.md", "./public/agent-context/*.md"],
-		"/api/portfolio-search": ["./public/readmes/*.md"]
+		"/api/portfolio-agent": ["public/readmes/**/*.md", "public/agent-context/**/*.md"],
+		"/api/portfolio-search": ["public/readmes/**/*.md"]
 	},
 	images: {
 		remotePatterns: [
-			{
-				protocol: "https",
-				hostname: "i.scdn.co"
-			},
-			{
-				protocol: "https",
-				hostname: "images.unsplash.com"
-			},
-			{
-				protocol: "https",
-				hostname: "api.githubtrends.io"
-			},
-			{
-				protocol: "https",
-				hostname: "upload.wikimedia.org"
-			},
-			{
-				protocol: "https",
-				hostname: "source.unsplash.com"
-			},
-			{
-				protocol: "https",
-				hostname: "*.s3.amazonaws.com",
-				port: ""
-			}
+			{ protocol: "https", hostname: "i.scdn.co" },
+			{ protocol: "https", hostname: "images.unsplash.com" },
+			{ protocol: "https", hostname: "api.githubtrends.io" },
+			{ protocol: "https", hostname: "upload.wikimedia.org" },
+			{ protocol: "https", hostname: "source.unsplash.com" },
+			{ protocol: "https", hostname: "*.s3.amazonaws.com" }
 		]
 	},
 
@@ -51,18 +30,9 @@ const nextConfig = {
 			{
 				source: "/api/graphql",
 				headers: [
-					{
-						key: "Access-Control-Allow-Credentials",
-						value: "true"
-					},
-					{
-						key: "Access-Control-Allow-Origin",
-						value: "*"
-					},
-					{
-						key: "Access-Control-Allow-Methods",
-						value: "GET,DELETE,PATCH,POST,PUT"
-					},
+					{ key: "Access-Control-Allow-Credentials", value: "true" },
+					{ key: "Access-Control-Allow-Origin", value: "*" },
+					{ key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT" },
 					{
 						key: "Access-Control-Allow-Headers",
 						value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
@@ -71,6 +41,7 @@ const nextConfig = {
 			}
 		];
 	},
+
 	async rewrites() {
 		return [
 			{
@@ -78,14 +49,6 @@ const nextConfig = {
 				destination: "https://private.pratyushsudhakar.com/"
 			}
 		];
-	},
-	webpack: (config, options) => {
-		config.module.rules.push({
-			test: /\.(graphql|gql)/,
-			exclude: /node_modules/,
-			loader: "graphql-tag/loader"
-		});
-		return config;
 	}
 };
 
