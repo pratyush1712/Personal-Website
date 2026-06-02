@@ -113,8 +113,10 @@ export default function WorkspaceLayout({ options, children }: WorkspaceLayoutPr
 	useEffect(() => {
 		if (typeof window !== "undefined") {
 			const isMobileViewport = window.matchMedia("(max-width:767.98px)").matches;
+			// Open both side panels on desktop so first-time visitors discover the
+			// agents panel. On mobile they stay closed (they open as overlay drawers).
 			setExplorerOpen(isBrowser && !isMobileViewport);
-			setAgentsOpen(false);
+			setAgentsOpen(isBrowser && !isMobileViewport);
 		}
 	}, []);
 
