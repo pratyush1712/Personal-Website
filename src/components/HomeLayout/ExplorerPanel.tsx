@@ -23,7 +23,7 @@ import { Page } from "@/types";
 import { slugifyHeading } from "@/utils/markdownAnchors";
 import { useResizableWidth } from "@/utils/useResizableWidth";
 
-const MIN_WIDTH = 160;
+const MIN_WIDTH = 200;
 const MAX_WIDTH = 480;
 const DEFAULT_WIDTH = 240;
 
