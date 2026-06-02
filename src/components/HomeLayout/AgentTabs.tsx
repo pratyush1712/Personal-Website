@@ -99,9 +99,7 @@ const barSx: SystemStyleObject<Theme> = {
 	display: "flex",
 	alignItems: "center",
 	height: 33,
-	minHeight: 33,
-	borderBottom: "1px solid",
-	borderColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.border : TOKENS.light.border)
+	minHeight: 33
 };
 
 const tabListSx: SystemStyleObject<Theme> = {
