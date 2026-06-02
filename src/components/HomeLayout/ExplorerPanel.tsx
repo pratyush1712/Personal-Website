@@ -187,7 +187,7 @@ export default function ExplorerPanel({
 	});
 
 	// Mirror the agents panel: side panels share appBg so both recede behind the editor surface.
-	const sidebarBg = dark ? TOKENS.dark.appBg : "#f3f3f3";
+	const sidebarBg = dark ? TOKENS.dark.appBg : TOKENS.light.appBg;
 	const borderStyle = dark ? "1px solid #3a3a3a" : `1px solid ${theme.palette.divider}`;
 	const iconActive = dark ? "#ffffff" : "#333333";
 	const iconActiveBg = dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)";
