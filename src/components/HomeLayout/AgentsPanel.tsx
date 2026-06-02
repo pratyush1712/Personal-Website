@@ -8,6 +8,8 @@ import AgentTabs from "./AgentTabs";
 import AgentChat from "./AgentChat";
 import AgentInput from "./AgentInput";
 import AgentPromptSuggestions from "./AgentPromptSuggestions";
+import ResizeHandle from "./ResizeHandle";
+import { useResizableWidth } from "@/utils/useResizableWidth";
 import {
 	consumeAgentRateLimit,
 	formatResetDistance,
@@ -19,7 +21,13 @@ import { readAgentResponse } from "@/utils/agents/agentStreaming";
 interface Props {
 	onClose: () => void;
 	currentPage?: string;
+	/** When true, render a drag-to-resize handle (inline desktop layout only). */
+	resizable?: boolean;
 }
+
+const MIN_WIDTH = 280;
+const MAX_WIDTH = 560;
+const DEFAULT_WIDTH = 380;
 
 const UNAVAILABLE_MESSAGE =
 	"Portfolio Agent is temporarily unavailable. You can still explore Pratyush's work from the files on the left.";
@@ -54,7 +62,14 @@ function titleFromPrompt(prompt: string): string {
 	return title.length > 34 ? `${title.slice(0, 34)}…` : title;
 }
 
-export default function AgentsPanel({ onClose, currentPage }: Props) {
+export default function AgentsPanel({ onClose, currentPage, resizable = false }: Props) {
+	const { width, isDragging, startDragging, onKeyDown } = useResizableWidth({
+		storageKey: "agentsWidth",
+		defaultWidth: DEFAULT_WIDTH,
+		minWidth: MIN_WIDTH,
+		maxWidth: MAX_WIDTH,
+		side: "left"
+	});
 	const {
 		tabs,
 		activeTab,
@@ -214,7 +229,8 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 			component="aside"
 			aria-label="Agents panel"
 			sx={{
-				width: { xs: "100vw", sm: 380 },
+				position: "relative",
+				width: resizable ? width : { xs: "100vw", sm: DEFAULT_WIDTH },
 				maxWidth: "100vw",
 				flexShrink: 0,
 				height: "100%",
@@ -237,8 +253,8 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 				/>
 			)}
 
-			{/* Separated from the chat below by a faint background tone shift rather than a hard
-			    1px rule — the tab strip above already provides a structural border. */}
+			{/* Header reads as its own band via a faint background tone shift rather than a hard
+			    1px rule, keeping the seamless flow from the tab strip into the chat below. */}
 			<Box
 				sx={{
 					px: "14px",
@@ -283,6 +299,19 @@ export default function AgentsPanel({ onClose, currentPage }: Props) {
 						notice={limitNotice}
 					/>
 				</>
+			)}
+
+			{resizable && (
+				<ResizeHandle
+					side="left"
+					active={isDragging}
+					onPointerDown={startDragging}
+					onKeyDown={onKeyDown}
+					label="Resize agents panel"
+					width={width}
+					min={MIN_WIDTH}
+					max={MAX_WIDTH}
+				/>
 			)}
 		</Box>
 	);

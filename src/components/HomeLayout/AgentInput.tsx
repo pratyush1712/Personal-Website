@@ -117,6 +117,9 @@ export default function AgentInput({ onSend, onStop, disabled, pending, usageLab
 
 				<Box sx={{ display: "flex", alignItems: "center", px: "8px", pb: "7px", gap: "6px" }}>
 					<Box
+						role="button"
+						tabIndex={0}
+						aria-label="Selected agent: Portfolio Agent"
 						sx={{
 							display: "flex",
 							alignItems: "center",
@@ -132,7 +135,18 @@ export default function AgentInput({ onSend, onStop, disabled, pending, usageLab
 							fontSize: "0.72rem",
 							fontWeight: 500,
 							letterSpacing: "0.01em",
-							userSelect: "none"
+							userSelect: "none",
+							cursor: "pointer",
+							transition: "background-color 120ms ease, border-color 120ms ease",
+							"&:hover": {
+								backgroundColor: theme =>
+									theme.palette.mode === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+								borderColor: theme => (theme.palette.mode === "dark" ? "#5a5a5a" : "rgba(0,0,0,0.24)")
+							},
+							"&:focus-visible": {
+								outline: "none",
+								borderColor: "primary.main"
+							}
 						}}>
 						<TbInfinity size={12} style={{ opacity: 0.75, color: "currentColor" }} />
 						Portfolio Agent
