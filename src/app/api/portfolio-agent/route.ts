@@ -1,9 +1,16 @@
 import { NextRequest } from "next/server";
 import { buildPortfolioContext } from "@/utils/agents/portfolioContext";
-import { getPortfolioRelevanceDecision, PORTFOLIO_AGENT_REFUSAL } from "@/utils/agents/portfolioAgentRelevance";
+import {
+	getPortfolioRelevanceDecision,
+	PORTFOLIO_AGENT_REFUSAL,
+	PortfolioRelevanceDecision
+} from "@/utils/agents/portfolioAgentRelevance";
+import { formatRetrievedContext, retrievePortfolioContext } from "@/utils/agents/portfolioRetriever";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+const DEBUG_RETRIEVAL = process.env.PORTFOLIO_AGENT_DEBUG_RETRIEVAL === "1";
 
 const RATE_LIMIT = positiveInt(process.env.PORTFOLIO_AGENT_RATE_LIMIT_PER_HOUR, 20);
 const WINDOW_MS = 60 * 60 * 1000;
@@ -218,31 +225,88 @@ function normalizeCurrentPage(value: unknown): string | undefined {
 	return trimmed.slice(0, 120);
 }
 
-function buildPortfolioSystemMessage(currentPage?: string): string {
-	const rawContext = buildPortfolioContext();
-	const portfolioContext =
-		rawContext.length > MAX_CONTEXT_CHARS
-			? `${rawContext.slice(0, MAX_CONTEXT_CHARS)}\n...(truncated)`
-			: rawContext;
+function latestUserContent(messages: ClientMessage[]): string {
+	for (let i = messages.length - 1; i >= 0; i--) {
+		if (messages[i].role === "user") return messages[i].content;
+	}
+	return "";
+}
 
+function capContext(context: string): string {
+	return context.length > MAX_CONTEXT_CHARS ? `${context.slice(0, MAX_CONTEXT_CHARS)}\n…(truncated)` : context;
+}
+
+function composeSystemMessage(currentPage: string | undefined, contextBlock: string, hasContext: boolean): string {
 	const currentPageLine = currentPage
 		? `The visitor is currently viewing this portfolio page: ${currentPage}.`
 		: "The visitor's current page is not specified.";
+
+	const contextSection = hasContext
+		? `The following portfolio sections were retrieved as most relevant to the visitor's latest question. Answer using ONLY this retrieved context and the recent conversation.
+
+RETRIEVED PORTFOLIO CONTEXT START
+${capContext(contextBlock)}
+RETRIEVED PORTFOLIO CONTEXT END`
+		: `RETRIEVED PORTFOLIO CONTEXT START
+(no matching portfolio context was found)
+RETRIEVED PORTFOLIO CONTEXT END
+
+RETRIEVAL NOTE: Nothing in the portfolio context answers this question. Tell the visitor you don't see that in the portfolio context, then point them to the most relevant section (Resume, Projects, Experience, GitHub, LinkedIn, Writing, or Contact). Do not invent any details.`;
 
 	return `${SYSTEM_PROMPT}
 
 ${currentPageLine}
 
-PORTFOLIO CONTEXT START
-${portfolioContext || "No portfolio context was found."}
-PORTFOLIO CONTEXT END`;
+${contextSection}`;
 }
 
-function buildOpenAIMessages(messages: ClientMessage[], currentPage?: string) {
+// Retrieval-first prompt assembly: search the portfolio knowledge base for the latest question and
+// build the answer prompt from only the matched sections. The full context is used solely as a
+// fallback when retrieval itself fails, never as the default payload.
+function buildAnswerSystemMessage(
+	messages: ClientMessage[],
+	currentPage: string | undefined,
+	relevance: PortfolioRelevanceDecision
+): string {
+	const latest = latestUserContent(messages);
+
+	try {
+		const retrieval = retrievePortfolioContext(latest, messages);
+
+		if (DEBUG_RETRIEVAL) {
+			console.log(
+				"[portfolio-agent][retrieval]",
+				JSON.stringify({
+					query: latest,
+					dynamicAliasMatched: relevance.isKnownPortfolioEntity,
+					relevanceReason: relevance.rejectionReason,
+					signaledKinds: retrieval.debug.signaledKinds,
+					usedSourceFallback: retrieval.usedSourceFallback,
+					selectedIds: retrieval.chunks.map(chunk => chunk.id),
+					selectedSources: Array.from(new Set(retrieval.chunks.map(chunk => chunk.source))),
+					scores: retrieval.debug.selected
+				})
+			);
+		}
+
+		const hasContext = retrieval.chunks.length > 0;
+		return composeSystemMessage(currentPage, formatRetrievedContext(retrieval), hasContext);
+	} catch (error) {
+		// Retrieval failed (e.g. unreadable knowledge files). Fall back to the full curated context
+		// so the agent still answers from grounded data instead of hallucinating.
+		if (DEBUG_RETRIEVAL) {
+			console.warn("[portfolio-agent][retrieval] failed, using full-context fallback", error);
+		}
+		const fallback = buildPortfolioContext();
+		return composeSystemMessage(currentPage, fallback, fallback.length > 0);
+	}
+}
+
+function buildOpenAIMessages(messages: ClientMessage[], systemMessage: string) {
 	return [
 		{
 			role: "system" as const,
-			content: buildPortfolioSystemMessage(currentPage)
+			content: systemMessage
 		},
 		...messages.map(message => ({
 			role: message.role,
@@ -251,7 +315,7 @@ function buildOpenAIMessages(messages: ClientMessage[], currentPage?: string) {
 	];
 }
 
-async function callOpenAI(messages: ClientMessage[], currentPage: string | undefined, stream: boolean) {
+async function callOpenAI(messages: ClientMessage[], systemMessage: string, stream: boolean) {
 	const apiKey = process.env.OPENAI_API_KEY;
 
 	if (!apiKey) {
@@ -262,7 +326,7 @@ async function callOpenAI(messages: ClientMessage[], currentPage: string | undef
 		model: OPENAI_MODEL,
 		stream,
 		max_completion_tokens: OPENAI_MAX_COMPLETION_TOKENS,
-		messages: buildOpenAIMessages(messages, currentPage)
+		messages: buildOpenAIMessages(messages, systemMessage)
 	};
 
 	if (supportsGpt5Controls(OPENAI_MODEL)) {
@@ -288,8 +352,8 @@ async function callOpenAI(messages: ClientMessage[], currentPage: string | undef
 	return response;
 }
 
-async function createNonStreamingReply(messages: ClientMessage[], currentPage?: string): Promise<string> {
-	const response = await callOpenAI(messages, currentPage, false);
+async function createNonStreamingReply(messages: ClientMessage[], systemMessage: string): Promise<string> {
+	const response = await callOpenAI(messages, systemMessage, false);
 	const data = await response.json();
 
 	const reply = data?.choices?.[0]?.message?.content;
@@ -299,7 +363,7 @@ async function createNonStreamingReply(messages: ClientMessage[], currentPage?: 
 
 function createStreamingReply(
 	messages: ClientMessage[],
-	currentPage: string | undefined,
+	systemMessage: string,
 	headers: Record<string, string>
 ): Response {
 	const encoder = new TextEncoder();
@@ -315,7 +379,7 @@ function createStreamingReply(
 			};
 
 			try {
-				const response = await callOpenAI(messages, currentPage, true);
+				const response = await callOpenAI(messages, systemMessage, true);
 				const reader = response.body?.getReader();
 
 				if (!reader) {
@@ -420,7 +484,8 @@ export async function POST(req: NextRequest) {
 	const wantsStream = body.stream === true;
 	try {
 		const relevance = await getPortfolioRelevanceDecision(messages, {
-			apiKey: process.env.OPENAI_API_KEY
+			apiKey: process.env.OPENAI_API_KEY,
+			currentPage
 		});
 
 		if (!relevance.allowed) {
@@ -437,11 +502,16 @@ export async function POST(req: NextRequest) {
 			);
 		}
 
+		// Retrieval-first: search the portfolio knowledge base for the latest question and build the
+		// prompt from only the matched sections (static system prompt + currentPage + retrieved
+		// context + recent conversation supplied as the chat messages).
+		const systemMessage = buildAnswerSystemMessage(messages, currentPage, relevance);
+
 		if (wantsStream) {
-			return createStreamingReply(messages, currentPage, limit.headers);
+			return createStreamingReply(messages, systemMessage, limit.headers);
 		}
 
-		const reply = await createNonStreamingReply(messages, currentPage);
+		const reply = await createNonStreamingReply(messages, systemMessage);
 
 		return json({ reply }, 200, limit.headers);
 	} catch (error) {

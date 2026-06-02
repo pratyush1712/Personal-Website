@@ -1,4 +1,11 @@
 import { GUARD_SYSTEM_PROMPT, PORTFOLIO_ENTITY_ALIASES } from "./agentPrompts";
+import { getDynamicPortfolioEntities, matchesDynamicPortfolioEntity } from "./portfolioKnowledge";
+
+// Upper bound on how many entity names are listed in the guard prompt. The hand-curated aliases are
+// always included; dynamic (knowledge-derived) entities fill the rest. Deterministic alias matching
+// already short-circuits most known-entity queries before the model is ever called, so this list is
+// only a hint for borderline phrasings.
+const MAX_PROMPT_ENTITIES = 80;
 
 export const PORTFOLIO_AGENT_REFUSAL =
 	"I’m a portfolio assistant for Pratyush Sudhakar, so I can only help with questions about his work, projects, background, portfolio, website, and this chat interface.";
@@ -211,10 +218,33 @@ function normalizeForEntityMatch(input: string): string {
 export function mentionsPortfolioEntity(input: string): boolean {
 	const normalizedInput = ` ${normalizeForEntityMatch(input)} `;
 
-	return PORTFOLIO_ENTITY_ALIASES.some(alias => {
+	const matchesStaticAlias = PORTFOLIO_ENTITY_ALIASES.some(alias => {
 		const normalizedAlias = normalizeForEntityMatch(alias);
 		return normalizedAlias.length > 0 && normalizedInput.includes(` ${normalizedAlias} `);
 	});
+
+	if (matchesStaticAlias) return true;
+
+	// Dynamic entities are discovered from the portfolio knowledge base (repo/project names like
+	// "CleverHug"), so newly-ingested work is recognized without editing the hardcoded alias list.
+	return matchesDynamicPortfolioEntity(input);
+}
+
+// Curated aliases first (highest priority), then knowledge-derived entities, de-duplicated by their
+// normalized form and capped to keep the guard prompt bounded.
+function getKnownPortfolioEntitiesForPrompt(): readonly string[] {
+	const merged: string[] = [];
+	const seen = new Set<string>();
+
+	for (const alias of [...PORTFOLIO_ENTITY_ALIASES, ...getDynamicPortfolioEntities()]) {
+		const normalized = normalizeForEntityMatch(alias);
+		if (!normalized || seen.has(normalized)) continue;
+		seen.add(normalized);
+		merged.push(alias);
+		if (merged.length >= MAX_PROMPT_ENTITIES) break;
+	}
+
+	return merged;
 }
 
 export function isSimpleHarmlessQuery(input: string): boolean {
@@ -387,7 +417,7 @@ async function classifyWithOpenAI(
 					latestUserMessage: latest,
 					recentConversation: buildGuardTranscript(messages),
 					currentPage: options.currentPage,
-					knownPortfolioEntities: PORTFOLIO_ENTITY_ALIASES,
+					knownPortfolioEntities: getKnownPortfolioEntitiesForPrompt(),
 					preapprovedSimpleHarmlessQuery: isSimpleHarmlessQuery(latest)
 				})
 			}
