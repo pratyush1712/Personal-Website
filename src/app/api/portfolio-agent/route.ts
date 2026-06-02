@@ -282,8 +282,10 @@ function buildAnswerSystemMessage(
 					relevanceReason: relevance.rejectionReason,
 					signaledKinds: retrieval.debug.signaledKinds,
 					usedSourceFallback: retrieval.usedSourceFallback,
-					selectedIds: retrieval.chunks.map(chunk => chunk.id),
-					selectedSources: Array.from(new Set(retrieval.chunks.map(chunk => chunk.source))),
+					selectedIds: retrieval.chunks.map((chunk: { id: any }) => chunk.id),
+					selectedSources: Array.from(
+						new Set(retrieval.chunks.map((chunk: { source: any }) => chunk.source))
+					),
 					scores: retrieval.debug.selected
 				})
 			);
