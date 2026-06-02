@@ -93,7 +93,9 @@ export default function AgentTabs({ tabs, activeId, onSelect, onClose, onCreate,
 
 const barSx: SystemStyleObject<Theme> = {
 	flexShrink: 0,
-	backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg),
+	// Tab strip uses the chrome/panel tone; the active tab drops to the chat-panel
+	// background so it merges seamlessly into the content below (same as editor tabs).
+	backgroundColor: theme => (theme.palette.mode === "dark" ? TOKENS.dark.panel : TOKENS.light.panel),
 	display: "flex",
 	alignItems: "center",
 	height: 33,
@@ -125,7 +127,7 @@ function tabSx(active: boolean): SystemStyleObject<Theme> {
 		position: "relative",
 		userSelect: "none",
 		backgroundColor: active
-			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.elevated : "#ffffff")
+			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.appBg : TOKENS.light.appBg)
 			: "transparent",
 		color: active
 			? theme => (theme.palette.mode === "dark" ? TOKENS.dark.textPrimary : TOKENS.light.textPrimary)
@@ -152,8 +154,8 @@ function tabSx(active: boolean): SystemStyleObject<Theme> {
 			backgroundColor: theme =>
 				active
 					? theme.palette.mode === "dark"
-						? TOKENS.dark.elevated
-						: "#ffffff"
+						? TOKENS.dark.appBg
+						: TOKENS.light.appBg
 					: theme.palette.mode === "dark"
 						? "rgba(255,255,255,0.04)"
 						: "rgba(0,0,0,0.03)"
