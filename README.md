@@ -25,6 +25,7 @@ A Cursor-inspired, AI-native personal workspace built with Next.js 16 (App Route
 ## 🔗 Quick Links
 
 > -   [📍 Overview](#-overview)
+> -   [📸 Screenshots](#-screenshots)
 > -   [🎉 Features](#-features)
 > -   [🚀 Getting Started](#-getting-started)
 >     -   [⚙️ Installation](#️-installation)
@@ -36,6 +37,28 @@ A Cursor-inspired, AI-native personal workspace built with Next.js 16 (App Route
 ## 📍 Overview
 
 The source code for my personal website: a Cursor-style IDE workspace where my portfolio content lives as files in an explorer, opens as tabs, and is queryable through an in-app AI agent.
+
+---
+
+## 📸 Screenshots
+
+### Home
+
+Apple Watch-themed landing page inside the Cursor-style workspace.
+
+![Home page](public/screenshots/homepage.png)
+
+### Overview
+
+Portfolio content opened as markdown tabs in the editor surface.
+
+![Overview tab](public/screenshots/overview.png)
+
+### Portfolio Agent
+
+In-app AI agent answering recruiter-style questions with streamed markdown responses.
+
+![Agents panel](public/screenshots/agents-panel.png)
 
 ---
 
