@@ -633,22 +633,22 @@ This app is part of a hierarchical Audit Management System (Account → Projects
 
 #### Dashboard Pages
 
-| Manager Dashboard | Auditor Dashboard | Administrator Dashboard |
-| --- | --- | --- |
+| Manager Dashboard                                                        | Auditor Dashboard                                                        | Administrator Dashboard                                            |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | ![Manager Dashboard](public/screenshots/manager__manager__dashboard.png) | ![Auditor Dashboard](public/screenshots/auditor__auditor__dashboard.png) | ![Admin Dashboard](public/screenshots/admin__admin__dashboard.png) |
 
 <details>
   <summary>Manager Dashboard Pages</summary>
 
-| ![Manager Projects](public/screenshots/manager__manager__projects.png) | ![Manager Places](public/screenshots/manager__manager__places.png) |
-| :-: | :-: |
-| **Manager Projects** | **Manager Places** |
+|        ![Manager Projects](public/screenshots/manager__manager__projects.png)        |        ![Manager Places](public/screenshots/manager__manager__places.png)        |
+| :----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
+|                                 **Manager Projects**                                 |                                **Manager Places**                                |
 | ![Manager Place](public/screenshots/manager__manager__places__placeId_projectId.png) | ![Manager Project](public/screenshots/manager__manager__projects__projectId.png) |
-| **Manager Place** | **Manager Project** |
-| ![Manager Audits](public/screenshots/manager__manager__audits.png) | ![Manager Auditor](public/screenshots/manager__manager__auditors.png) |
-| **Manager Audits** | **Manager Auditor** |
-| ![Manager Assignment](public/screenshots/manager__manager__assignments.png) | ![Manager Settings](public/screenshots/manager__settings.png) |
-| **Manager Assignment** | **Manager Settings** |
+|                                  **Manager Place**                                   |                               **Manager Project**                                |
+|          ![Manager Audits](public/screenshots/manager__manager__audits.png)          |      ![Manager Auditor](public/screenshots/manager__manager__auditors.png)       |
+|                                  **Manager Audits**                                  |                               **Manager Auditor**                                |
+|     ![Manager Assignment](public/screenshots/manager__manager__assignments.png)      |          ![Manager Settings](public/screenshots/manager__settings.png)           |
+|                                **Manager Assignment**                                |                               **Manager Settings**                               |
 
 </details>
 

@@ -7,7 +7,7 @@
 	"useTabs": true,
 	"arrowParens": "avoid",
 	"printWidth": 120,
-	"proseWrap": "never",
 	"endOfLine": "lf",
-	"bracketSameLine": true
+	"bracketSameLine": true,
+	"proseWrap": "preserve"
 }

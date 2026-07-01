@@ -1,6 +1,6 @@
 # 🎯 Professional Experience
 
-### **Full-Stack Developer** @ DECA Lab, Cornell University _(January 2025 – Present)_
+### **Full-Stack Developer** @ DECA Lab, Cornell University _(January 2025 - Present)_
 
 DECA Lab builds tools for researchers and field workers - people operating in messy, real-world environments where connectivity is unreliable and data loss is unacceptable. My job was to build systems that accommodate that reality.
 
@@ -9,10 +9,11 @@ DECA Lab builds tools for researchers and field workers - people operating in me
 - Built normalized scoring pipelines with client-side CSV/XLSX/PDF export. Hardened draft-save flows against duplicate-key failures and extended data integrity guarantees across multi-round field testing.
 
 _Technologies:_ `React Native` `Expo` `Next.js` `FastAPI` `SQLAlchemy` `PostgreSQL` `TypeScript`
+<br/>
 
 ---
 
-### **Software Developer _(Contract)_** @ Halo - Wearable AI _(June 2025 – July 2025)_
+### **Software Developer _(Contract)_** @ Halo - Wearable AI _(June 2025 - July 2025)_
 
 Halo is building hardware-software systems for real-time social context. The challenge: getting face recognition to run fast enough to be useful, on an iOS device, pulling streams from embedded hardware.
 
@@ -21,10 +22,11 @@ Halo is building hardware-software systems for real-time social context. The cha
 - Redesigned the Celery + Redis backend architecture with multi-layered OpenAI prompts, cutting face-search processing time from 3 minutes to under 50 seconds. That's the difference between a feature people use and one they abandon.
 
 _Technologies:_ `Swift` `ESP32` `Celery` `Redis` `FastAPI` `OpenAI` <br/>
+<br/>
 
 ---
 
-### **Computer Systems Developer** @ Rizvi Lab, Cornell University _(July 2024 – September 2024)_
+### **Computer Systems Developer** @ Rizvi Lab, Cornell University _(July 2024 - September 2024)_
 
 Embedded systems work - the kind where the constraints are physical and the users aren't developers.
 
@@ -32,10 +34,11 @@ Embedded systems work - the kind where the constraints are physical and the user
 - Wrote Linux shell scripts and cron jobs to automate system operations, removing manual steps from recurring tasks that researchers were doing by hand.
 
 _Technologies:_ `Linux` `Shell Scripts` `PyQt4` `BeagleBone` <br/>
+<br/>
 
 ---
 
-### **Software Engineering Intern** @ rapStudy _(June 2023 – August 2023)_
+### **Software Engineering Intern** @ rapStudy _(June 2023 - August 2023)_
 
 _Los Angeles, California_
 
@@ -46,10 +49,11 @@ rapStudy is an EdTech platform using music to teach literacy and reading compreh
 - Built a synchronized SongView component that displays lyrics in sync with playback at 95% accuracy, which is the kind of synchronization problem that sounds simple until you're debugging timing edge cases across variable network conditions.
 
 _Technologies:_ `React.js` `Redux` `Firebase` `Firestore` <br/>
+<br/>
 
 ---
 
-### **Data Engineer** @ Cornell College of Engineering _(June 2023 – September 2023)_
+### **Data Engineer** @ Cornell College of Engineering _(June 2023 - September 2023)_
 
 _Ithaca, New York_
 
@@ -57,10 +61,11 @@ _Ithaca, New York_
 - Architected and deployed a full-stack application with Next.js and Flask, using Server-Sent Events for real-time data retrieval - 66% reduction in data latency compared to the polling approach it replaced.
 
 _Technologies:_ `Next.js` `Flask` `Selenium` `NLP` `Server-Sent Events` <br/>
+<br/>
 
 ---
 
-### **Software Developer** @ Cornell Yang-Tan Institute _(July 2022 – December 2022)_
+### **Software Developer** @ Cornell Yang-Tan Institute _(July 2022 - December 2022)_
 
 _Ithaca, New York_
 
@@ -69,10 +74,11 @@ The Yang-Tan Institute focuses on disability employment research and policy. Ask
 - Built a flexible slug management system using PHP, Laravel, and Strapi CMS - a deceptively important feature. Clean, modifiable URLs directly affect SEO, content discoverability, and the ability of a non-technical team to manage their own site without developer intervention.
 
 _Technologies:_ `PHP` `Laravel` `Strapi CMS` <br/>
+<br/>
 
 ---
 
-### **Software Engineering Intern** @ Sellpoint _(June 2022 – August 2022)_
+### **Software Engineering Intern** @ Sellpoint _(June 2022 - August 2022)_
 
 _Remote_
 
