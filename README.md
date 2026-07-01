@@ -24,13 +24,13 @@ A Cursor-inspired, AI-native personal workspace built with Next.js 16 (App Route
 
 ## 🔗 Quick Links
 
-> -   [📍 Overview](#-overview)
-> -   [📸 Screenshots](#-screenshots)
-> -   [🎉 Features](#-features)
-> -   [🚀 Getting Started](#-getting-started)
->     -   [⚙️ Installation](#️-installation)
->     -   [🤖 Running](#-running)
-> -   [🤝 Contributing](#-contributing)
+> - [📍 Overview](#-overview)
+> - [📸 Screenshots](#-screenshots)
+> - [🎉 Features](#-features)
+> - [🚀 Getting Started](#-getting-started)
+>     - [⚙️ Installation](#️-installation)
+>     - [🤖 Running](#-running)
+> - [🤝 Contributing](#-contributing)
 
 ---
 
@@ -64,16 +64,16 @@ In-app AI agent answering recruiter-style questions with streamed markdown respo
 
 ## 🎉 Features
 
--   **Cursor-style workspace**: Left sidebar, explorer panel, agents panel, and editor surface laid out like the Cursor IDE.
--   **Portfolio AI Agent**: An in-app chat agent that answers questions about my experience, projects, education, and the site itself.
-    -   Server-streamed responses via the Vercel AI SDK
-    -   Hourly rate limits and prompt guards to keep responses on-topic
-    -   Context-aware: experience, projects, GitHub activity, and site-support questions
-    -   Markdown rendering (bold, lists, links) in responses
--   **Content files**: Markdown-backed pages — Overview, Experience, Education, Projects, Skills — opened as tabs in the workspace.
--   **Home page**: Apple Watch-themed landing page with bubbles surfacing my Spotify playlist.
--   **Resume**: Downloadable PDF.
--   **Light and dark mode**: Themed across every panel.
+- **Cursor-style workspace**: Left sidebar, explorer panel, agents panel, and editor surface laid out like the Cursor IDE.
+- **Portfolio AI Agent**: An in-app chat agent that answers questions about my experience, projects, education, and the site itself.
+    - Server-streamed responses via the Vercel AI SDK
+    - Hourly rate limits and prompt guards to keep responses on-topic
+    - Context-aware: experience, projects, GitHub activity, and site-support questions
+    - Markdown rendering (bold, lists, links) in responses
+- **Content files**: Markdown-backed pages — Overview, Experience, Education, Projects, Skills — opened as tabs in the workspace.
+- **Home page**: Apple Watch-themed landing page with bubbles surfacing my Spotify playlist.
+- **Resume**: Downloadable PDF.
+- **Light and dark mode**: Themed across every panel.
 
 ---
 
@@ -83,8 +83,8 @@ In-app AI agent answering recruiter-style questions with streamed markdown respo
 
 Ensure you have the following dependencies installed on your system:
 
--   **TypeScript**
--   **pnpm**
+- **TypeScript**
+- **pnpm**
 
 ### ⚙️ Installation
 
@@ -116,9 +116,9 @@ Use the following command to run :
 
 Contributions are welcome! Here are several ways you can contribute:
 
--   **[Submit Pull Requests](https://github.com/pratyush1712/Personal-Website/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
--   **[Join the Discussions](https://github.com/pratyush1712/Personal-Website/discussions)**: Share your insights, provide feedback, or ask questions.
--   **[Report Issues](https://github.com/pratyush1712/Personal-Website/issues)**: Submit bugs found or log feature requests for .
+- **[Submit Pull Requests](https://github.com/pratyush1712/Personal-Website/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
+- **[Join the Discussions](https://github.com/pratyush1712/Personal-Website/discussions)**: Share your insights, provide feedback, or ask questions.
+- **[Report Issues](https://github.com/pratyush1712/Personal-Website/issues)**: Submit bugs found or log feature requests for .
 
 <details closed>
     <summary>Contributing Guidelines</summary>

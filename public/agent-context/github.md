@@ -39,19 +39,18 @@ Personal Portfolio Built Using Next.js 14 and Material UI: [Live Demo](https://p
 
 ## 🔗 Quick Links
 
-> -   [📍 Overview](#-overview)
-> -   [� Features](#-features)
-> -   [🚀 Getting Started](#-getting-started)
->     -   [⚙️ Installation](#️-installation)
->     -   [🤖 Running ](#-running)
-> -   [🤝 Contributing](#-contributing)
+> - [📍 Overview](#-overview)
+> - [� Features](#-features)
+> - [🚀 Getting Started](#-getting-started)
+>     - [⚙️ Installation](#️-installation)
+>     - [🤖 Running ](#-running)
+> - [🤝 Contributing](#-contributing)
 
 ---
 
 ## 📍 Overview
 
-This repository contains the source code for my personal website. The website is built u
-...(README excerpt truncated)
+This repository contains the source code for my personal website. The website is built u ...(README excerpt truncated)
 
 ## pratyush1712/pratyush1712
 
@@ -62,28 +61,14 @@ This repository contains the source code for my personal website. The website is
 ### README excerpt
 
 # `Hi there!!`
-[![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:ps2245@cornell.edu)](mailto:me@pratyushsudhakar.com) 
-[![Linkedin Badge](https://img.shields.io/badge/-Linkedin-4169E1?style=flat-square&logo=Linkedin&logoColor=white&&link=https://www.linkedin.com/in/pratyushsudhakar/)](https://www.linkedin.com/in/pratyushsudhakar/)
-<a style="text-decoration:none;" href="https://pratyushsudhakar.com" target="_blank">
-  ![Personal Website](https://img.shields.io/badge/-Website-red?style=flat-square&color=%23FF8800&link=https%3A%2F%2Fpratyushsudhakar.com%2F)
-</a>
-<a style="text-decoration:none;" href="https://private.pratyushsudhakar.com" target="_blank">
-  ![Blogs](https://img.shields.io/badge/-Blogs-red?style=flat-square&color=%2#D1AB66&link=https%3A%2F%2Fprivate.pratyushsudhakar.com%2F)
-</a>
+
+[![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:ps2245@cornell.edu)](mailto:me@pratyushsudhakar.com) [![Linkedin Badge](https://img.shields.io/badge/-Linkedin-4169E1?style=flat-square&logo=Linkedin&logoColor=white&&link=https://www.linkedin.com/in/pratyushsudhakar/)](https://www.linkedin.com/in/pratyushsudhakar/) <a style="text-decoration:none;" href="https://pratyushsudhakar.com" target="_blank"> ![Personal Website](https://img.shields.io/badge/-Website-red?style=flat-square&color=%23FF8800&link=https%3A%2F%2Fpratyushsudhakar.com%2F) </a> <a style="text-decoration:none;" href="https://private.pratyushsudhakar.com" target="_blank"> ![Blogs](https://img.shields.io/badge/-Blogs-red?style=flat-square&color=%2#D1AB66&link=https%3A%2F%2Fprivate.pratyushsudhakar.com%2F) </a>
 
 👋 Hello! I'm Pratyush Sudhakar, currently pursuing <ins>computer science</ins> :computer:, <ins>mathematics</ins> :abacus:, and <ins>psychology</ins> 🧠 at Cornell University.
 
 ## Programming Languages
-![JavaScript](https://img.shields.io/badge/-JavaScript-%23323330?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![TypeScript](https://img.shields.io/badge/-TypeScript-%23007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![C++](https://img.shields.io/badge/-C++-%2300599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)
-![Python](https://img.shields.io/badge/-Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![Java](https://img.shields.io/badge/-Java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
-![Shell Script](https://img.shields.io/badge/-Shell_Script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
-![C](https://img.shields.io/badge/-C-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
-![HTML5](https://img.shields.io/badge/-HTML5-%23E34F26
-...(README excerpt truncated)
+
+![JavaScript](https://img.shields.io/badge/-JavaScript-%23323330?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![TypeScript](https://img.shields.io/badge/-TypeScript-%23007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![C++](https://img.shields.io/badge/-C++-%2300599C?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white) ![Python](https://img.shields.io/badge/-Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Java](https://img.shields.io/badge/-Java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white) ![Shell Script](https://img.shields.io/badge/-Shell_Script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white) ![C](https://img.shields.io/badge/-C-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) ![HTML5](https://img.shields.io/badge/-HTML5-%23E34F26 ...(README excerpt truncated)
 
 ## pratyush1712/Personal-Agent-Homebase
 
@@ -127,16 +112,16 @@ flowchart TD
 
 ## Files
 
-| Path                                 | Purpose                                                 |
-| ------------------------------------ | ------------------------------------------------------- |
-| `docker-compose.yml`                 | Shared LiteLLM, Mem0, and Qdrant service graph          |
-| `docker-compose.local.yml`           | Local PostgreSQL for LiteLLM and loopback port bindings |
-| `docker-compose.prod.yml`            | Production Caddy bindings and LiteLLM Neon settings     |
-| `mem0/Dockerfile`                    | amd64-safe Mem0 API image build from Python source path |
-| `Caddyfile`                          | HTTPS reverse proxy and status endpoint                 |
-| `litellm.config.yaml`                | Cost-first model routing and LiteLLM settings           |
-| `
-...(README excerpt truncated)
+| Path                       | Purpose                                                 |
+| -------------------------- | ------------------------------------------------------- |
+| `docker-compose.yml`       | Shared LiteLLM, Mem0, and Qdrant service graph          |
+| `docker-compose.local.yml` | Local PostgreSQL for LiteLLM and loopback port bindings |
+| `docker-compose.prod.yml`  | Production Caddy bindings and LiteLLM Neon settings     |
+| `mem0/Dockerfile`          | amd64-safe Mem0 API image build from Python source path |
+| `Caddyfile`                | HTTPS reverse proxy and status endpoint                 |
+| `litellm.config.yaml`      | Cost-first model routing and LiteLLM settings           |
+
+| ` ...(README excerpt truncated)
 
 ## pratyush1712/braindump
 
@@ -155,6 +140,7 @@ An intelligent brain dump application with an infinite canvas that automatically
 ## 🌟 Features
 
 ### Core Capabilities
+
 - **Infinite Canvas**: Free-form thought capture on an unlimited canvas
 - **Auto-Categorization**: AI-powered automatic categorization of thoughts
 - **Connection Discovery**: Intelligent identification of relationships between ideas
@@ -163,6 +149,7 @@ An intelligent brain dump application with an infinite canvas that automatically
 - **Offline Support**: Local storage with IndexedDB for offline capability
 
 ### Smart Organization
+
 - **Semantic Analysis**: Uses OpenAI embeddings to find semantically similar thoughts
 - **Entity Recognition**: Identifies shared topics, people, and concepts
 - **Temporal Connections**: Groups thoughts captured around the same time
@@ -171,25 +158,28 @@ An intelligent brain dump application with an infinite canvas that automatically
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 - OpenAI API key
 
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone <your-repo-url>
 cd network
 ```
 
 2. **Install dependencies**
+
 ```bash
 npm install
 ```
 
-3. **Set up environment variables**
-Create a `.env` file in the root directory:
+3. **Set up environment variables** Create a `.env` file in the root directory:
+
 ```bash
 OPENAI_API_KEY=your_openai_api_key_here
 PORT=3001
@@ -197,26 +187,30 @@ NODE_ENV=development
 ```
 
 4. **Start the application**
+
 ```bash
 npm run dev
 ```
 
 This will start:
+
 - Frontend: http://localhost:3000
 - Backend: http://localhost:3001
 
 ## 💡 Usage
 
 ### Creating Thoughts
+
 1. **Double-click** anywhere on the canvas to create a new thought
 2. Type your thought in the input box
 3. Press **Enter** to save (Shift+Enter for new line)
 4. Press **Esc** to cancel
 
 ### Viewing Connections
+
 - Thoughts are automatically connected based on semantic similarity
 - Different connection types are shown with different colors:
-  
+
 ...(README excerpt truncated)
 
 ## pratyush1712/Habits-OS
@@ -231,18 +225,13 @@ This will start:
 
 # HabitOS
 
-A small, local-first habit dashboard generator that turns tracker data into a
-calm, hyperlinked monthly PDF for **reMarkable 2**.
+A small, local-first habit dashboard generator that turns tracker data into a calm, hyperlinked monthly PDF for **reMarkable 2**.
 
 The full pipeline is wired end to end:
 
 > WHOOP + Day One + manual events → normalized `source_events` → habit rule engine → persisted `habit_entries` → rendered monthly PDF → manual or automated reMarkable sync.
 
-A nightly APScheduler job reconciles a rolling window, recomputes touched
-months, renders the current month, and (optionally) pushes the PDF to the
-reMarkable Cloud via [`ddvk/rmapi`](https://github.com/ddvk/rmapi). The
-manual reMarkable adapter remains the default — it never mutates device or
-cloud state, only returns upload instructions.
+A nightly APScheduler job reconciles a rolling window, recomputes touched months, renders the current month, and (optionally) pushes the PDF to the reMarkable Cloud via [`ddvk/rmapi`](https://github.com/ddvk/rmapi). The manual reMarkable adapter remains the default — it never mutates device or cloud state, only returns upload instructions.
 
 See [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md) for the full plan.
 
@@ -250,9 +239,7 @@ See [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md) for the full plan.
 
 ## Quickstart
 
-Requirements: Python 3.11+, a reachable MongoDB (local or Atlas), and internet
-access to download a Chromium binary the first time (Playwright uses it to
-print HTML → PDF).
+Requirements: Python 3.11+, a reachable MongoDB (local or Atlas), and internet access to download a Chromium binary the first time (Playwright uses it to print HTML → PDF).
 
 ```bash
 make setup          # create .venv, install deps, download Chromium
@@ -266,8 +253,7 @@ make test
 data/generated/2026-05-habit-dashboard.pdf
 ```
 
-A debug HTML twin is written alongside it. The renderer and rule engine work
-on local JSON and need no database — only the API and connectors do.
+A debug HTML twin is written alongside it. The renderer and rule engine work on local JSON and need no database — only the API and connectors do.
 
 To evaluate rules against sample events without the API:
 
@@ -279,12 +265,12 @@ make evaluate-sample
 
 ## Configuration
 
-Copy `.env.example` to `.env` and fill in what you need. The full set of
-variables is documented inline; the essentials are:
+Copy `.env.example` to `.env` and fill in what you need. The full set of variables is documented inline; the essentials are:
 
-| Variable                                                         | Purpose                                                          | Default                     |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------- |
-| `MONGODB_URI`                                                    
+| Variable | Purpose | Default |
+| -------- | ------- | ------- |
+
+| `MONGODB_URI`  
 ...(README excerpt truncated)
 
 ## pratyush1712/legacy-support-adjudication-skill
@@ -300,11 +286,7 @@ variables is documented inline; the essentials are:
 
 # Legacy Support Adjudication
 
-[![Skill](https://img.shields.io/badge/Agent%20Skill-legacy--support--adjudication-blue)](./skills/legacy-support-adjudication/SKILL.md)
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](./skills/legacy-support-adjudication/scripts/legacy_support_scan.py)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
-[![Semgrep Rules](https://img.shields.io/badge/Semgrep-rules-informational)](./skills/legacy-support-adjudication/semgrep/legacy-support-patterns.yml)
-[![skills.sh](https://skills.sh/b/pratyush1712/legacy-support-adjudication-skill)](https://skills.sh/pratyush1712/legacy-support-adjudication-skill)
+[![Skill](https://img.shields.io/badge/Agent%20Skill-legacy--support--adjudication-blue)](./skills/legacy-support-adjudication/SKILL.md) [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](./skills/legacy-support-adjudication/scripts/legacy_support_scan.py) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE) [![Semgrep Rules](https://img.shields.io/badge/Semgrep-rules-informational)](./skills/legacy-support-adjudication/semgrep/legacy-support-patterns.yml) [![skills.sh](https://skills.sh/b/pratyush1712/legacy-support-adjudication-skill)](https://skills.sh/pratyush1712/legacy-support-adjudication-skill)
 
 A professional agent skill for code-review agents that need to decide whether backward-compatibility logic is still required or has become removable technical debt.
 
@@ -324,12 +306,13 @@ Use this skill when a PR touches compatibility logic such as:
 
 The skill produces one of five verdicts:
 
-| Verdict | Meaning |
-|---|---|
-| **RETAIN** | The compatibility contract still exists. |
+| Verdict                  | Meaning                                                          |
+| ------------------------ | ---------------------------------------------------------------- |
+| **RETAIN**               | The compatibility contract still exists.                         |
 | **DEPLOY OBSERVABILITY** | The path may be removable, but runtime/data evidence is missing. |
-| **DEPRECATE** | Consumers may still exist; create a migration and sunset path. |
-| **QUARANTINE** | Isolate the legacy path be
+| **DEPRECATE**            | Consumers may still exist; create a migration and sunset path.   |
+| **QUARANTINE**           | Isolate the legacy path be                                       |
+
 ...(README excerpt truncated)
 
 ## pratyush1712/house-chores-tracker
@@ -354,13 +337,16 @@ The skill produces one of five verdicts:
 # <a href="https://chromewebstore.google.com/detail/adhd-friendly-text-enhanc/mnagpckgpcigjbenomcdpfifellpehnb" target="_blank"><img src="icon.png" style="width:40px;"> ADHD-Friendly Text Enhancer Extension <img src="icon.png" style="width:40px;"></a>
 
 ## Description
+
 This is a Chrome extension that enhances the readability of text on webpages. It is designed to help people with ADHD read more efficiently by improving focus and comprehension. The extension uses a combination of text formatting and color coding to make text more visually appealing and easier to read.
 
 ## Features
+
 - **Text Boldening**: First few letters of each word are boldened to help the reader quickly identify the start of each word.
 - **Sentence Highlighting**: Sentences are highlighted in alternating colors to help the reader track their progress and maintain focus. Some spacing is also added between sentences to make them easier to distinguish.
 
 ## Usage
+
 1. Install the extension by downloading the source code and loading it as an unpacked extension in Chrome.
 2. Open a webpage with text content that you would like to enhance.
 3. Select the text you want to enhance by clicking and dragging your mouse over it.
@@ -368,9 +354,8 @@ This is a Chrome extension that enhances the readability of text on webpages. It
 5. Alternatively, you can use the keyboard shortcuts `Ctrk + Shift + Y`/`Cmd + Shift + Y` to bolden the selected text and `Ctrl + Shift + H`/`Cmd + Shift + H` to highlight the selected text.
 
 ## Screenshots
-![Popup Options](screenshots/popup.png)
-![Boldened Text](screenshots/bold.png)
-![Highlighted Text](screenshots/highlight.png)
+
+![Popup Options](screenshots/popup.png) ![Boldened Text](screenshots/bold.png) ![Highlighted Text](screenshots/highlight.png)
 
 ## pratyush1712/cornell-mind-matters
 
@@ -430,7 +415,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 Bipolar Disorder (BD), a common but serious mental health issue, adversely affects the well-being of individuals, but there exist difficulties in the medical treatment, such as insufficient recognition and delay in the diagnosis. Automatic recognition of bipolar disorder, based on a multi-modal machine learning approach, could help early detection of bipolar disorder and provide an insight into the personalized treatment of bipolar patients. Therefore, this project aims to find the biological descriptors of treatment response and produce an automatic recognition system in bipolar disorder.
 
-
 ## Generalized multi-modal framework on mental disorder recognition
 
 After building the multimodal framework for the BD classification, we consider it as a generalized framework for mental disorder recognition, not limited on BD. We then extend our work on E-DAIC dataset for depression detection task and the experimental results show effective feature learning and a promising application on other mental-related tasks. Our work was accepted the [15th IEEE International Conference on Automatic Face and Gesture Recognition](https://fg2020.org/) with the title **Multimodal Deep Learning Framework for Mental Disorder Recognition**.
@@ -439,43 +423,50 @@ The proposed multi-modal framework is displayed as follows
 
 ![](images/framework.png)
 
-where more information could refer to the dissertation in the folder ```paperwork```
-
+where more information could refer to the dissertation in the folder `paperwork`
 
 ## How to use
 
-Before running the experiment, please 
+Before running the experiment, please
+
 ```
 pip install -r requirements.txt
 conda install --file requirements.txt
 ```
-for building dependencies though ```conda``` is more recommended
+
+for building dependencies though `conda` is more recommended
+
 ```
 python main -h
 python main --help
 ```
+
 for project help
+
 ```
 python main -b
 python main --baseline
 ```
+
 for baseline system in BD recognition
+
 ```
 python main -x
 python main --experiment
 ```
+
 for proposed system in BD recognition
+
 ```
 python main -v
 python main --visualize
 ```
-for visualization
 
+for visualization
 
 ## Note
 
-The provided dataset i
-...(README excerpt truncated)
+The provided dataset i ...(README excerpt truncated)
 
 ## pratyush1712/CleverHug
 
@@ -522,11 +513,9 @@ The frontend is built using `React.js` `Typescript` and `pnpm` and is hosted on 
 
 ### Backend
 
-The backend is built using `Flask` and is hosted on `Vercel` as well.
-The backend uses a variation of the `recurrent` library to parse the `rrule` format from the user's input and schedule the emails accordingly.
+The backend is built using `Flask` and is hosted on `Vercel` as well. The backend uses a variation of the `recurrent` library to parse the `rrule` format from the user's input and schedule the emails accordingly.
 
-[![
-...(README excerpt truncated)
+[![ ...(README excerpt truncated)
 
 ## pratyush1712/Actigraphy-Based-Mood-Disorder-Analysis
 
@@ -566,8 +555,7 @@ The data preprocessing steps include:
 1. Data Cleaning: The data is cleaned by removing any missing values.
 2. CSV to JSON: The data is converted from CSV to JSON format.
 
-<!
-...(README excerpt truncated)
+<! ...(README excerpt truncated)
 
 ## Audit-Tools-DECA-Lab-Cornell/audit-tools-backend
 
@@ -581,13 +569,10 @@ The data preprocessing steps include:
 
 # Audit Tools Backend
 
-FastAPI backend for the Audit Tools platform. This repository serves two product
-namespaces from one codebase:
+FastAPI backend for the Audit Tools platform. This repository serves two product namespaces from one codebase:
 
-- `YEE`: full `User`-backed authentication, onboarding, approvals, invites,
-  dashboard, reporting, and submission workflows
-- `Playspace`: shared-core dashboard and audit APIs plus a lightweight
-  account-based mobile auth bootstrap used by the current mobile client
+- `YEE`: full `User`-backed authentication, onboarding, approvals, invites, dashboard, reporting, and submission workflows
+- `Playspace`: shared-core dashboard and audit APIs plus a lightweight account-based mobile auth bootstrap used by the current mobile client
 
 ## What This Repo Owns
 
@@ -603,13 +588,9 @@ namespaces from one codebase:
 The most important integration boundary in this repository is auth:
 
 - `YEE auth`: implemented with the `users` table in `app/auth.py`
-- `Playspace auth`: uses the same signed `User` session model for
-  `/playspace/auth/signup`, `/playspace/auth/login`, `/playspace/auth/me`,
-  and downstream Playspace product routes, with `x-demo-*` actor headers kept
-  only as a temporary compatibility fallback in `app/core/actors.py`
+- `Playspace auth`: uses the same signed `User` session model for `/playspace/auth/signup`, `/playspace/auth/login`, `/playspace/auth/me`, and downstream Playspace product routes, with `x-demo-*` actor headers kept only as a temporary compatibility fallback in `app/core/actors.py`
 
-That split is intentional for now. Do not assume a change in one product's auth
-flow is automatically safe for the other.
+That split is intentional for now. Do not assume a change in one product's auth flow is automatically safe for the other.
 
 ## Current Status
 
@@ -621,8 +602,7 @@ Implemented today:
 - manager/admin Playspace dashboards with separate audit / survey / full-audit place rollups
 - manager multi-user auth: each manager profile now gets a dedicated `User` record
 - Playspace enum types for structured field values
-- YEE instrument metadata enrichment for section intros, comment prompts, and groupe
-...(README excerpt truncated)
+- YEE instrument metadata enrichment for section intros, comment prompts, and groupe ...(README excerpt truncated)
 
 ## Audit-Tools-DECA-Lab-Cornell/audit-tools-playspace-frontend
 
@@ -654,29 +634,28 @@ This app is part of a hierarchical Audit Management System (Account → Projects
 #### Dashboard Pages
 
 | Manager Dashboard | Auditor Dashboard | Administrator Dashboard |
-| ----------------- | ----------------- | ----------------------- |
+| --- | --- | --- |
 | ![Manager Dashboard](public/screenshots/manager__manager__dashboard.png) | ![Auditor Dashboard](public/screenshots/auditor__auditor__dashboard.png) | ![Admin Dashboard](public/screenshots/admin__admin__dashboard.png) |
 
 <details>
   <summary>Manager Dashboard Pages</summary>
 
-  | ![Manager Projects](public/screenshots/manager__manager__projects.png) | ![Manager Places](public/screenshots/manager__manager__places.png) |
-  | :---: | :---: |
-  | **Manager Projects** | **Manager Places** |
-  | ![Manager Place](public/screenshots/manager__manager__places__placeId_projectId.png) | ![Manager Project](public/screenshots/manager__manager__projects__projectId.png) |
-  | **Manager Place** | **Manager Project** |
-  | ![Manager Audits](public/screenshots/manager__manager__audits.png) | ![Manager Auditor](public/screenshots/manager__manager__auditors.png) |
-  | **Manager Audits** | **Manager Auditor** |
-  | ![Manager Assignment](public/screenshots/manager__manager__assignments.png) | ![Manager Settings](public/screenshots/manager__settings.png) |
-  | **Manager Assignment** | **Manager Settings** |
+| ![Manager Projects](public/screenshots/manager__manager__projects.png) | ![Manager Places](public/screenshots/manager__manager__places.png) |
+| :-: | :-: |
+| **Manager Projects** | **Manager Places** |
+| ![Manager Place](public/screenshots/manager__manager__places__placeId_projectId.png) | ![Manager Project](public/screenshots/manager__manager__projects__projectId.png) |
+| **Manager Place** | **Manager Project** |
+| ![Manager Audits](public/screenshots/manager__manager__audits.png) | ![Manager Auditor](public/screenshots/manager__manager__auditors.png) |
+| **Manager Audits** | **Manager Auditor** |
+| ![Manager Assignment](public/screenshots/manager__manager__assignments.png) | ![Manager Settings](public/screenshots/manager__settings.png) |
+| **Manager Assignment** | **Manager Settings** |
 
 </details>
 
 <details>
   <summary>Auditor Dashboard Pages</summary>
 
-  | ![Auditor Execute Page](public/screenshots/auditor__auditor__execute__placeId_projectId.png) | ![Auditor Places Pa
-...(README excerpt truncated)
+| ![Auditor Execute Page](public/screenshots/auditor__auditor__execute__placeId_projectId.png) | ![Auditor Places Pa ...(README excerpt truncated)
 
 ## Audit-Tools-DECA-Lab-Cornell/audit-tools-playspace-mobile
 
@@ -750,8 +729,7 @@ The following remain **separate web/backend planning tracks** and are not part o
 
 ### Why Legend State + MMKV
 
-The audit flow is **offline-first**, with a clear three-layer st
-...(README excerpt truncated)
+The audit flow is **offline-first**, with a clear three-layer st ...(README excerpt truncated)
 
 ## pratyush1712/Rizvi-Lab
 
@@ -793,34 +771,35 @@ This guide provides detailed instructions on how to set up, run, and deploy the 
 ## Initial Setup
 
 1. **Prepare the Model Folder**:
-   - Place the `data.txt` file in the `model` folder.
-   - Place the `MA_2020.npz` file in the `model` folder.
+    - Place the `data.txt` file in the `model` folder.
+    - Place the `MA_2020.npz` file in the `model` folder.
 
 2. **Environment Configuration**:
-   - Place the `.env` file in the root directory of the project. Ensure all necessary environment variables are set in the `.env` file for proper configuration.
+    - Place the `.env` file in the root directory of the project. Ensure all necessary environment variables are set in the `.env` file for proper configuration.
+
     ```
         export FLASK_ENV=production
         export IMAGE_SOURCE=https://research.cs.cornell.edu/caco/data/graft/MA/
     ```
 
 3. **Virtual Environment (venv) Setup**:
-   - It's recommended to use a virtual environment to isolate the project dependencies. To set up a virtual environment, navigate to the project root and run:
-     ```bash
-     python3 -m venv venv
-     ```
-   - Activate the virtual environment:
-     - On macOS and Linux:
-       ```bash
-       source venv/bin/activate
-       ```
-     - On Windows:
-       ```bash
-       .\venv\Scripts\activate
-       ```
-   - Install the required dependencies using the provided `requirements.txt` file:
-     ```bash
-     pip install -r requirements.txt
-     ```
+    - It's recommended to use a virtual environment to isolate the project dependencies. To set up a virtual environment, navigate to the project root and run:
+        ```bash
+        python3 -m venv venv
+        ```
+    - Activate the virtual environment:
+        - On macOS and Linux:
+            ```bash
+            source venv/bin/activate
+            ```
+        - On Windows:
+            ```bash
+            .\venv\Scripts\activate
+            ```
+    - Install the required dependencies using the provided `requirements.txt` file:
+        ```bash
+        pip install -r requirements.txt
+        ```
 
 ## Running the Application Locally
 
@@ -833,20 +812,22 @@ This guide provides detailed instructions on how to set up, run, and deploy the 
 ## Deploying the Application
 
 1. ### Gunicorn
-   - To deploy the application, navigate to the project root and run:
-       ```bash
-       gunicorn --bind 0.0.0.0 app:app
-       ```
-   - The application will be accessible at `http://<server-ip>:8000/`.
+    - To deploy the application, navigate to the project root and run:
+        ```bash
+        gunicorn --bind 0.0.0.0 app:app
+        ```
+    - The application will be accessible at `http://<server-ip>:8000/`.
 
 2. ### Docker
-   If you're using Docker for deployment, follow the steps below:
 
-   #### Build the image:
-   - For Local Testing:   
-        ```bash
-        docker build --build-arg FLASK_ENV=develo
-...(README excerpt truncated)
+    If you're using Docker for deployment, follow the steps below:
+
+    #### Build the image:
+    - For Local Testing:
+
+        ```bash docker build --build-arg FLASK_ENV=develo ...(README excerpt truncated)
+
+        ```
 
 ## pratyush1712/data-engineering
 
@@ -980,21 +961,27 @@ python index.py
 ### README excerpt
 
 # Time Bite
+
 Automate planning. It takes your tasks and projects. And builds the perfect daily schedule.
 
 ## Overview
+
 - The application automates time management and schedule making for the user based on their prefered work habits.
 - It asks user for their prefered study/work time and the number of hours they can spend working without losing focus.
 - The user can then create their Todo list specfying the number of hours they expect to spend on each task, the duedate for each task, and the importance of every task on a scale of 1-10.
 - The application runs Simplex Algorithm to build an optimized scchedule for the user in which appropriate amount of breaks are involved, and each task in done before its deadline.
 - Then, the application sends the schedule to user's Google Calendar.
+
 ## Code Overview
+
 - Built the backend (SQL Database) using Flask, and SQL-Alchemy.
 - Used Google OR tools to make an Integer Linear Program model to optimize the user's schedule.
 - Integrated Google Calendar API to export the schedule created to user's Google Calendar.
 - Built the frontend using HTML, CSS, JavaScript.
 - Added authentication in the flask-backend.
+
 ## Features to be added
+
 - Cross-platform application (Flutter): The front end of the application is being developed using Flutter.
 - Shared projects: The application enables the user to add members for group assignments. App would sync and create schedules for each members.
 - Close friends: The application enables the user to add their friends in their close friends list so that they can find shared free space in their calendar in which they can hangout.
@@ -1013,6 +1000,7 @@ website link: https://timebite.herokuapp.com/
 Backend written in Flask for Find My Party. Team Submission for Cornell AppDev HackChallenge 2021.
 
 Database model:
+
 - A relational many-to-many database.
 - There are two classes - Party and User - that are linked with an association table.
 
@@ -1069,19 +1057,18 @@ Personal Blogs and Videos Sharing Platform Using Apollo GraphQL: [Live Demo](htt
 
 ## 🔗 Quick Links
 
-> -   [📍 Overview](#-overview)
-> -   [� Features](#-features)
-> -   [🚀 Getting Started](#-getting-started)
->     -   [⚙️ Installation](#️-installation)
->     -   [🤖 Running ](#-running)
-> -   [🤝 Contributing](#-contributing)
+> - [📍 Overview](#-overview)
+> - [� Features](#-features)
+> - [🚀 Getting Started](#-getting-started)
+>     - [⚙️ Installation](#️-installation)
+>     - [🤖 Running ](#-running)
+> - [🤝 Contributing](#-contributing)
 
 ---
 
 ## 📍 Overview
 
-This repository contains the source code for blogs and vide
-...(README excerpt truncated)
+This repository contains the source code for blogs and vide ...(README excerpt truncated)
 
 ## pratyush1712/Wi-Find
 
@@ -1099,14 +1086,10 @@ This repository contains the source code for blogs and vide
 - User logs in
 - Allow access to IP address and location
 - User's initial IP address and wifi speed is stored in the database
-- Map view: whenever user's clicks on the wifi map icon, the server fetches all the data points
-  that the application has access to and uses K-mean clustering to display locations on campus with
-  high wifi speed
-- Every 2 hours, the user's IP address location and wifi speed is noted and added to the database
-  (cron job is set up for every user when the login)
+- Map view: whenever user's clicks on the wifi map icon, the server fetches all the data points that the application has access to and uses K-mean clustering to display locations on campus with high wifi speed
+- Every 2 hours, the user's IP address location and wifi speed is noted and added to the database (cron job is set up for every user when the login)
 - Data points older than 24 hours are deleted from the database (to maintain realtime data)
-- K-means clustered data is cached into user's device to let them access the wifi speed classification
-  even if they are not online
+- K-means clustered data is cached into user's device to let them access the wifi speed classification even if they are not online
 
 ## Technologies that could be used
 
@@ -1147,9 +1130,9 @@ Welcome to Harmonious Sounds - a web app built with React, Express, Flask, and N
 
 - View your top tracks and artists on Spotify
 - See some insights about your top tracks:
-  - average danceability, energy, valence, etc...
-  - top artists and genres
-  - top tracks and artists by decade
+    - average danceability, energy, valence, etc...
+    - top artists and genres
+    - top tracks and artists by decade
 - See a happiness score for your favorite playlists, calculated using machine learning
 
 Website Link: https://nginx-devops-pratyush1712.cloud.okteto.net/
@@ -1210,8 +1193,7 @@ The web service is built with React and Express. It allows users to log in to th
 
 The Flask-based model microservice utilizes machine learning and data analytics to provide users with insights about their top Spotify tracks. The model microservice is multi-threaded to speed up requests.
 
-<ins>Logistic regression</ins> is used to predict the h
-...(README excerpt truncated)
+<ins>Logistic regression</ins> is used to predict the h ...(README excerpt truncated)
 
 ## pratyush1712/CornellCSWiki
 
@@ -1231,9 +1213,7 @@ Content here is licensed under the Creative Commons Attribution-ShareAlike 4.0 I
 
 ## Build Instructions
 
-This uses one Jekyll plugin to
-[add wikilinks](https://github.com/CornellCSWiki/jekyll-wikilinks-plugin). As
-a result, it will not build on GitHub Pages.
+This uses one Jekyll plugin to [add wikilinks](https://github.com/CornellCSWiki/jekyll-wikilinks-plugin). As a result, it will not build on GitHub Pages.
 
 ## Perfect-Match-Org/perfect-match-web
 
@@ -1250,12 +1230,9 @@ a result, it will not build on GitHub Pages.
 
 Welcome to the Cornell Perfect Match repository!
 
-Perfect Match is a matchmaking survey that pairs Cornell students with their "Perfect Matches" based on our machine
-learning algorithm. The survey was first ideated in February 2019 and has grown in popularity, with over 5,000
-participants in the latest iteration.
+Perfect Match is a matchmaking survey that pairs Cornell students with their "Perfect Matches" based on our machine learning algorithm. The survey was first ideated in February 2019 and has grown in popularity, with over 5,000 participants in the latest iteration.
 
-This repository contains the code for the Perfect Match Website, built using Next.js and pnpm. We invite you to take the
-survey and share the link with your friends to help spread some joy in 2026.
+This repository contains the code for the Perfect Match Website, built using Next.js and pnpm. We invite you to take the survey and share the link with your friends to help spread some joy in 2026.
 
 ## Getting Started
 
@@ -1270,12 +1247,10 @@ Note: Please ensure that you have [pnpm](https://pnpm.io/) installed on your mac
 
 ## Contributing
 
-We welcome contributions to the Cornell Perfect Match repository. If you would like to contribute, please fork the
-repository and create a pull request.
+We welcome contributions to the Cornell Perfect Match repository. If you would like to contribute, please fork the repository and create a pull request.
 
 ## Contact
 
-If you have any questions or concerns, please email us at
-[perfectmatch@cornell.edu](mailto:perfectmatch@cornell.edu).
+If you have any questions or concerns, please email us at [perfectmatch@cornell.edu](mailto:perfectmatch@cornell.edu).
 
 Thank you for your interest in Cornell Perfect Match and we hope that you enjoy using our application!

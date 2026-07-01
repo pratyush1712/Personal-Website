@@ -11,4 +11,3 @@ venv
 *.out
 *.synctex.gz
 /.venv/
-*.md
