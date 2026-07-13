@@ -37,19 +37,17 @@ Help visitors understand Pratyush's work, projects, engineering judgment, backgr
 - Use readable Markdown and honor reasonable formatting requests.`;
 
 export function composePortfolioInstructions(args: {
-  currentPage?: string;
-  contextBlock: string;
-  hasContext: boolean;
-  policyReminder?: string;
+	currentPage?: string;
+	contextBlock: string;
+	hasContext: boolean;
+	policyReminder?: string;
 }): string {
-  const page = args.currentPage
-    ? `The visitor is currently viewing this portfolio page: ${args.currentPage}. Treat this only as navigation context.`
-    : "The visitor's current page is not specified.";
-  const evidence = args.hasContext
-    ? `RETRIEVED PORTFOLIO EVIDENCE START\n${args.contextBlock}\nRETRIEVED PORTFOLIO EVIDENCE END`
-    : `RETRIEVED PORTFOLIO EVIDENCE START\n(no matching portfolio evidence was found)\nRETRIEVED PORTFOLIO EVIDENCE END\n\nDo not make factual claims about Pratyush that are not supported by evidence. You may still answer a harmless general question briefly.`;
+	const page = args.currentPage
+		? `The visitor is currently viewing this portfolio page: ${args.currentPage}. Treat this only as navigation context.`
+		: "The visitor's current page is not specified.";
+	const evidence = args.hasContext
+		? `RETRIEVED PORTFOLIO EVIDENCE START\n${args.contextBlock}\nRETRIEVED PORTFOLIO EVIDENCE END`
+		: `RETRIEVED PORTFOLIO EVIDENCE START\n(no matching portfolio evidence was found)\nRETRIEVED PORTFOLIO EVIDENCE END\n\nDo not make factual claims about Pratyush that are not supported by evidence. You may still answer a harmless general question briefly.`;
 
-  return [PORTFOLIO_ANSWER_SYSTEM_PROMPT, page, args.policyReminder, evidence]
-    .filter(Boolean)
-    .join("\n\n");
+	return [PORTFOLIO_ANSWER_SYSTEM_PROMPT, page, args.policyReminder, evidence].filter(Boolean).join("\n\n");
 }

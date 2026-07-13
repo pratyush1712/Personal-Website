@@ -49,7 +49,7 @@ PORTFOLIO_AGENT_EMBEDDING_MODEL=text-embedding-3-small
 PORTFOLIO_AGENT_EMBEDDING_DIMENSIONS=512
 ```
 
-Without Redis/KV credentials, the route uses an in-process limiter. That is safe as a fallback, but counters are not shared across serverless instances.
+Without Redis/KV credentials, the route uses an in-process limiter, emits an operator warning, and identifies the backend in response headers. Those counters are not shared across serverless instances. When Redis/KV is configured but unavailable or only partially configured, the route fails closed with a temporary 503 instead of silently dropping the distributed limit.
 
 ## Acceptance set
 

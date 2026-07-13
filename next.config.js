@@ -1,63 +1,62 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  compiler: {
-    styledComponents: true,
-  },
-  experimental: {
-    esmExternals: true,
-    staleTimes: {
-      dynamic: 30,
-      static: 180,
-    },
-  },
-  outputFileTracingIncludes: {
-    "/api/portfolio-agent": [
-      "content/portfolio-agent/**/*.md",
-      "public/readmes/**/*.md",
-      "public/agent-context/github.md",
-    ],
-    "/api/portfolio-search": ["public/readmes/**/*.md"],
-  },
-  images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "i.scdn.co" },
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "api.githubtrends.io" },
-      { protocol: "https", hostname: "upload.wikimedia.org" },
-      { protocol: "https", hostname: "source.unsplash.com" },
-      { protocol: "https", hostname: "*.s3.amazonaws.com" },
-    ],
-  },
+	compiler: {
+		styledComponents: true
+	},
+	experimental: {
+		esmExternals: true,
+		staleTimes: {
+			dynamic: 30,
+			static: 180
+		}
+	},
+	outputFileTracingIncludes: {
+		"/api/portfolio-agent": [
+			"content/portfolio-agent/**/*.md",
+			"public/readmes/**/*.md",
+			"public/agent-context/github.md"
+		],
+		"/api/portfolio-search": ["public/readmes/**/*.md"]
+	},
+	images: {
+		remotePatterns: [
+			{ protocol: "https", hostname: "i.scdn.co" },
+			{ protocol: "https", hostname: "images.unsplash.com" },
+			{ protocol: "https", hostname: "api.githubtrends.io" },
+			{ protocol: "https", hostname: "upload.wikimedia.org" },
+			{ protocol: "https", hostname: "source.unsplash.com" },
+			{ protocol: "https", hostname: "*.s3.amazonaws.com" }
+		]
+	},
 
-  async headers() {
-    return [
-      {
-        source: "/api/graphql",
-        headers: [
-          { key: "Access-Control-Allow-Credentials", value: "true" },
-          { key: "Access-Control-Allow-Origin", value: "*" },
-          {
-            key: "Access-Control-Allow-Methods",
-            value: "GET,DELETE,PATCH,POST,PUT",
-          },
-          {
-            key: "Access-Control-Allow-Headers",
-            value:
-              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-          },
-        ],
-      },
-    ];
-  },
+	async headers() {
+		return [
+			{
+				source: "/api/graphql",
+				headers: [
+					{ key: "Access-Control-Allow-Credentials", value: "true" },
+					{ key: "Access-Control-Allow-Origin", value: "*" },
+					{
+						key: "Access-Control-Allow-Methods",
+						value: "GET,DELETE,PATCH,POST,PUT"
+					},
+					{
+						key: "Access-Control-Allow-Headers",
+						value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+					}
+				]
+			}
+		];
+	},
 
-  async rewrites() {
-    return [
-      {
-        source: "/close-friends",
-        destination: "https://private.pratyushsudhakar.com/",
-      },
-    ];
-  },
+	async rewrites() {
+		return [
+			{
+				source: "/close-friends",
+				destination: "https://private.pratyushsudhakar.com/"
+			}
+		];
+	}
 };
 
 module.exports = nextConfig;
