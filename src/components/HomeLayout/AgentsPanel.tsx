@@ -10,12 +10,7 @@ import AgentInput from "./AgentInput";
 import AgentPromptSuggestions from "./AgentPromptSuggestions";
 import ResizeHandle from "./ResizeHandle";
 import { useResizableWidth } from "@/utils/useResizableWidth";
-import {
-	consumeAgentRateLimit,
-	formatResetDistance,
-	getAgentRateLimitSnapshot,
-	type RateLimitSnapshot
-} from "@/utils/agents/agentRateLimit";
+import { formatResetDistance, rateLimitFromHeaders, type RateLimitSnapshot } from "@/utils/agents/agentRateLimit";
 import { readAgentResponse } from "@/utils/agents/agentStreaming";
 
 interface Props {
@@ -41,16 +36,6 @@ const STATUS_COPY = {
 type PendingState = {
 	status: keyof typeof STATUS_COPY;
 };
-
-function isSuccessfulReply(text: string): boolean {
-	const lower = text.toLowerCase();
-	return ![
-		"portfolio agent is not configured",
-		"portfolio agent is temporarily unavailable",
-		"portfolio agent returned an empty response",
-		"hourly message limit reached"
-	].some(snippet => lower.includes(snippet));
-}
 
 function titleFromPrompt(prompt: string): string {
 	const cleaned = prompt
@@ -94,14 +79,12 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 	}, [hydrated, tabs.length, createTab]);
 
 	useEffect(() => {
-		setRateLimit(getAgentRateLimitSnapshot());
-	}, []);
-
-	useEffect(() => {
 		if (!rateLimit?.limited) return;
-		const timer = window.setInterval(() => setRateLimit(getAgentRateLimitSnapshot()), 30_000);
+		const timer = window.setInterval(() => {
+			if (rateLimit.resetAt <= Date.now()) setRateLimit(null);
+		}, 1_000);
 		return () => window.clearInterval(timer);
-	}, [rateLimit?.limited]);
+	}, [rateLimit]);
 
 	function handleCloseTab(id: string) {
 		const isLastTab = tabs.length === 1;
@@ -135,15 +118,6 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 		const id = activeTab.id;
 		if (pendingMap[id]) return;
 
-		const currentLimit = getAgentRateLimitSnapshot();
-		if (currentLimit.limited) {
-			setRateLimit(currentLimit);
-			return;
-		}
-
-		const consumed = consumeAgentRateLimit();
-		setRateLimit(consumed);
-
 		const outgoing = [...activeTab.messages, { role: "user" as const, content: text }].slice(-10);
 		const controller = new AbortController();
 		abortControllersRef.current.set(id, controller);
@@ -166,6 +140,8 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 				body: JSON.stringify({ messages: outgoing, currentPage, stream: true }),
 				signal: controller.signal
 			});
+			const serverLimit = rateLimitFromHeaders(res.headers, res.status);
+			if (serverLimit) setRateLimit(serverLimit);
 
 			accumulated = await readAgentResponse(res, {
 				onChunk: chunk => {
@@ -177,16 +153,18 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 
 			const reply = accumulated.trim() || UNAVAILABLE_MESSAGE;
 			appendMessage(id, { role: "assistant", content: reply });
-
-			if (!isSuccessfulReply(reply)) {
-				setRateLimit(getAgentRateLimitSnapshot());
-			}
 		} catch (err) {
 			if (err instanceof DOMException && err.name === "AbortError") {
 				if (accumulated.trim()) {
-					appendMessage(id, { role: "assistant", content: `${accumulated.trim()}\n\n_Response stopped._` });
+					appendMessage(id, {
+						role: "assistant",
+						content: `${accumulated.trim()}\n\n_Response stopped._`
+					});
 				} else {
-					appendMessage(id, { role: "assistant", content: "Response stopped." });
+					appendMessage(id, {
+						role: "assistant",
+						content: "Response stopped."
+					});
 				}
 			} else {
 				const message = err instanceof Error && err.message ? err.message : UNAVAILABLE_MESSAGE;
@@ -217,10 +195,10 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 	);
 
 	const usageLabel = rateLimit
-		? `${rateLimit.remaining}/${rateLimit.limit} messages left this hour`
+		? `${rateLimit.remaining}/${rateLimit.limit} messages left this ${rateLimit.scope}`
 		: "Enter to send · Shift+Enter for newline";
 	const limitNotice = rateLimit?.limited
-		? `Hourly limit reached. Try again in ${formatResetDistance(rateLimit.resetAt)}.`
+		? `${rateLimit.scope === "minute" ? "Minute" : "Hourly"} limit reached. Try again in ${formatResetDistance(rateLimit.resetAt)}.`
 		: undefined;
 	const inputDisabled = Boolean(limitNotice);
 
@@ -254,16 +232,35 @@ export default function AgentsPanel({ onClose, currentPage, resizable = false }:
 			)}
 
 			<Box sx={{ px: "14px", py: "9px" }}>
-				<Typography sx={{ fontSize: "0.78rem", fontWeight: 600, color: "text.primary", lineHeight: 1.35 }}>
+				<Typography
+					sx={{
+						fontSize: "0.78rem",
+						fontWeight: 600,
+						color: "text.primary",
+						lineHeight: 1.35
+					}}>
 					Ask about Pratyush&apos;s work
 				</Typography>
-				<Typography sx={{ mt: "2px", fontSize: "0.7rem", color: "text.secondary", lineHeight: 1.35 }}>
+				<Typography
+					sx={{
+						mt: "2px",
+						fontSize: "0.7rem",
+						color: "text.secondary",
+						lineHeight: 1.35
+					}}>
 					{currentPage ? `Context: ${currentPage}` : "Context-aware portfolio assistant"}
 				</Typography>
 			</Box>
 
 			{isEmpty ? (
-				<Box sx={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", overflowY: "auto" }}>
+				<Box
+					sx={{
+						flex: 1,
+						minHeight: 0,
+						display: "flex",
+						flexDirection: "column",
+						overflowY: "auto"
+					}}>
 					<AgentInput
 						onSend={send}
 						onStop={stopActiveResponse}

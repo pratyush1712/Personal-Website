@@ -20,9 +20,16 @@ test("retrieves CleverHug for the GitHub-qualified phrasing", () => {
 	assert.ok(result.chunks.some(chunk => /cleverhug/i.test(chunk.id)));
 });
 
-test("returns zero chunks for an unrelated query so the agent can refuse", () => {
+test("returns zero chunks for an unrelated query so the prompt can answer briefly without inventing portfolio facts", () => {
 	const result = retrievePortfolioContext("Explain black holes");
 	assert.equal(result.chunks.length, 0);
+});
+
+test("retrieves multiple sources for a disability-advocacy assessment", () => {
+	const result = retrievePortfolioContext("Is Pratyush an advocate for disability rights?");
+
+	assert.ok(result.chunks.some(chunk => chunk.kind === "advocacy"));
+	assert.ok(result.chunks.some(chunk => /Disability:IN|AccessComputing|Tapia/i.test(chunk.text)));
 });
 
 test("retrieves a Perfect Match chunk", () => {
@@ -35,7 +42,9 @@ test("retrieves a Perfect Match chunk", () => {
 });
 
 test("caps retrieved context to the requested char budget", () => {
-	const result = retrievePortfolioContext("What is Perfect Match?", undefined, { maxChars: 3000 });
+	const result = retrievePortfolioContext("What is Perfect Match?", undefined, {
+		maxChars: 3000
+	});
 	// The first chunk is always included even if it alone exceeds the budget; after that the budget holds.
 	assert.ok(result.totalChars <= 3000 || result.chunks.length === 1);
 });
@@ -89,7 +98,9 @@ const injected: PortfolioChunk[] = [
 ];
 
 test("ranks an exact alias match above everything else", () => {
-	const result = retrievePortfolioContext("What is CleverHug?", undefined, { chunks: injected });
+	const result = retrievePortfolioContext("What is CleverHug?", undefined, {
+		chunks: injected
+	});
 	assert.equal(result.chunks[0].id, "x:clever");
 	assert.ok(result.chunks[0].matchedAliases.includes("cleverhug"));
 });

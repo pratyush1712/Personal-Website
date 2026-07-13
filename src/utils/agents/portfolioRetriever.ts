@@ -27,7 +27,12 @@ export type PortfolioRetrievalDebug = {
 	candidateCount: number;
 	signaledKinds: PortfolioChunkKind[];
 	usedSourceFallback: boolean;
-	selected: Array<{ id: string; source: string; score: number; matchedAliases: string[] }>;
+	selected: Array<{
+		id: string;
+		source: string;
+		score: number;
+		matchedAliases: string[];
+	}>;
 };
 
 export type PortfolioRetrievalResult = {
@@ -273,14 +278,28 @@ function resolveChunks(options: RetrievalOptions): PortfolioChunk[] {
 }
 
 const SOURCE_SIGNALS: Array<{ test: RegExp; kinds: PortfolioChunkKind[] }> = [
-	{ test: /\b(?:github|repo|repos|repository|repositories|open source)\b/, kinds: ["github-repo"] },
+	{
+		test: /\b(?:github|repo|repos|repository|repositories|open source)\b/,
+		kinds: ["github-repo"]
+	},
 	{ test: /\b(?:project|projects)\b/, kinds: ["github-repo", "readme"] },
-	{ test: /\b(?:linkedin)\b/, kinds: ["linkedin"] },
+	{ test: /\b(?:linkedin)\b/, kinds: ["linkedin", "public-post"] },
 	{
 		test: /\b(?:writing|wrote|written|article|articles|blog|blogs|essay|essays|post|posts|publication|publications)\b/,
-		kinds: ["writing", "featured", "linkedin"]
+		kinds: ["writing", "featured", "linkedin", "public-post"]
 	},
-	{ test: /\b(?:featured|talk|talks|demo|demos|highlight|highlights)\b/, kinds: ["featured"] }
+	{
+		test: /\b(?:featured|talk|talks|demo|demos|highlight|highlights)\b/,
+		kinds: ["featured", "public-post"]
+	},
+	{
+		test: /\b(?:disability|disabled|accessibility|accessible|neurodiversity|neurodivergent|advocacy|advocate|inclusion)\b/,
+		kinds: ["advocacy"]
+	},
+	{
+		test: /\b(?:background|education|career|interests|profile)\b/,
+		kinds: ["profile"]
+	}
 ];
 
 function detectSignaledKinds(normalizedQuery: string): Set<PortfolioChunkKind> {

@@ -39,6 +39,16 @@ test("all 27 curated repositories become github-repo chunks (no fence swallowing
 	assert.ok(githubChunks.length >= 27, `expected >= 27 github chunks, got ${githubChunks.length}`);
 });
 
+test("loads curated advocacy evidence without loading a raw LinkedIn export", () => {
+	const chunks = loadPortfolioChunks();
+	const advocacy = chunks.find(chunk => chunk.kind === "advocacy" && /Disability:IN/i.test(chunk.text));
+
+	assert.ok(advocacy, "expected curated disability advocacy evidence");
+	assert.match(advocacy.text, /AccessComputing/i);
+	assert.match(advocacy.text, /ADHD-Friendly Text Enhancer/i);
+	assert.ok(chunks.every(chunk => !/LinkedInWhole|media\.licdn/i.test(`${chunk.source}\n${chunk.text}`)));
+});
+
 test("dynamic entities include CleverHug but exclude generic section words", () => {
 	const entities = getDynamicPortfolioEntities();
 

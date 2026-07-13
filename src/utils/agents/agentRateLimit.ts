@@ -1,82 +1,46 @@
-export const AGENT_RATE_LIMIT = 20;
-export const AGENT_RATE_WINDOW_MS = 60 * 60 * 1000;
-
-const STORAGE_KEY = "portfolio-agent-rate-limit-v2";
-
-type RateLimitStore = {
-	windowStartedAt: number;
-	count: number;
-};
-
 export type RateLimitSnapshot = {
 	limit: number;
 	remaining: number;
 	resetAt: number;
 	limited: boolean;
+	scope: "minute" | "hour";
 };
 
-function now() {
-	return Date.now();
+function integerHeader(headers: Headers, primary: string, fallback?: string): number | undefined {
+	const raw = headers.get(primary) ?? (fallback ? headers.get(fallback) : null);
+	if (!raw) return undefined;
+	const value = Number.parseInt(raw, 10);
+	return Number.isFinite(value) && value >= 0 ? value : undefined;
 }
 
-function emptyStore(): RateLimitStore {
-	return { windowStartedAt: now(), count: 0 };
-}
+/** Parse the server-authoritative rate-limit state. No client-side quota is enforced or persisted. */
+export function rateLimitFromHeaders(headers: Headers, status?: number): RateLimitSnapshot | null {
+	const limit = integerHeader(headers, "RateLimit-Limit", "X-RateLimit-Limit");
+	const remaining = integerHeader(headers, "RateLimit-Remaining", "X-RateLimit-Remaining");
+	if (limit === undefined || remaining === undefined) return null;
 
-function readStore(): RateLimitStore {
-	if (typeof window === "undefined") return emptyStore();
-
-	try {
-		const raw = window.localStorage.getItem(STORAGE_KEY);
-		if (!raw) return emptyStore();
-		const parsed = JSON.parse(raw) as Partial<RateLimitStore>;
-		if (typeof parsed.windowStartedAt !== "number" || typeof parsed.count !== "number") return emptyStore();
-		return parsed as RateLimitStore;
-	} catch {
-		return emptyStore();
-	}
-}
-
-function normalizeStore(store: RateLimitStore): RateLimitStore {
-	return now() - store.windowStartedAt >= AGENT_RATE_WINDOW_MS ? emptyStore() : store;
-}
-
-function writeStore(store: RateLimitStore) {
-	if (typeof window === "undefined") return;
-	window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
-}
-
-function snapshotFromStore(store: RateLimitStore): RateLimitSnapshot {
-	const normalized = normalizeStore(store);
-	const remaining = Math.max(0, AGENT_RATE_LIMIT - normalized.count);
+	const retryAfter = integerHeader(headers, "Retry-After");
+	const relativeReset = integerHeader(headers, "RateLimit-Reset");
+	const legacyAbsoluteReset = integerHeader(headers, "X-RateLimit-Reset");
+	const resetAt = retryAfter
+		? Date.now() + retryAfter * 1000
+		: relativeReset !== undefined
+			? Date.now() + relativeReset * 1000
+			: (legacyAbsoluteReset ?? Date.now());
+	const scopeHeader = headers.get("X-RateLimit-Scope");
+	const scope = scopeHeader === "minute" ? "minute" : "hour";
 
 	return {
-		limit: AGENT_RATE_LIMIT,
+		limit,
 		remaining,
-		resetAt: normalized.windowStartedAt + AGENT_RATE_WINDOW_MS,
-		limited: remaining === 0
+		resetAt,
+		limited: status === 429 || remaining === 0,
+		scope
 	};
 }
 
-export function getAgentRateLimitSnapshot(): RateLimitSnapshot {
-	const normalized = normalizeStore(readStore());
-	writeStore(normalized);
-	return snapshotFromStore(normalized);
-}
-
-export function consumeAgentRateLimit(): RateLimitSnapshot {
-	const normalized = normalizeStore(readStore());
-	const current = snapshotFromStore(normalized);
-	if (current.limited) return current;
-
-	const next = { ...normalized, count: normalized.count + 1 };
-	writeStore(next);
-	return snapshotFromStore(next);
-}
-
 export function formatResetDistance(resetAt: number): string {
-	const ms = Math.max(0, resetAt - now());
-	const minutes = Math.ceil(ms / 60000);
+	const minutes = Math.ceil(Math.max(0, resetAt - Date.now()) / 60_000);
 	if (minutes <= 1) return "about 1 minute";
 	if (minutes < 60) return `${minutes} minutes`;
 	return "about 1 hour";

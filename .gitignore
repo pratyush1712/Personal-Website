@@ -51,3 +51,7 @@ index.html
 .agents
 .claude
 .cursor
+
+# Raw profile exports are local inputs, never deployable agent context.
+**/LinkedInWhole.md
+**/LinkedinData/
