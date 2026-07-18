@@ -10,3 +10,7 @@
 |  C / C++   |       Svelte        |  GraphQL / Apollo   |   SQLite   | GitHub Actions |  LangChain   |
 |    SQL     |       Flutter       | Prisma / SQLAlchemy |            | Nginx/Gunicorn |   OR-Tools   |
 |   Shell    |                     |                     |            |     Vercel     |              |
+
+## 📈 Observability & Analytics
+
+PostHog (product analytics, funnels, session data), Sentry (error tracking & performance monitoring), Microsoft Clarity (session replay, heatmaps), Grafana / Loki (metrics & log aggregation)

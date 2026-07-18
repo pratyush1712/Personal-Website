@@ -1,10 +1,10 @@
 # <img style="height:35px;width:35px;margin-bottom:-6px" src="/icons/cornell_seal.svg"> Cornell University On-Campus Affiliations
 
-## Head of Engineering at [Cornell Perfect Match](https://perfectmatch.ai/)
+## Head of Engineering & President at [Cornell Perfect Match](https://perfectmatch.ai/)
 
 **January 2023 - May 2025**
 
-Perfect Match is Cornell's student-run dating platform, serving 5,000+ users each cycle. I joined as an engineer and eventually became Head of Engineering - which meant owning the technical direction of a system where the output is real human connections, and getting it wrong has real consequences.
+Perfect Match is Cornell's student-run dating platform, serving 5,000+ users each cycle. I joined as an engineer and eventually became Head of Engineering and President - which meant owning both the technical direction and the overall organization of a system where the output is real human connections, and getting it wrong has real consequences.
 
 The most significant work: transitioning from offline batch matching to real-time matching using a Gale-Shapley stable matching algorithm paired with Google OR-Tools for optimization. Stable matching has a mathematical guarantee I care about - no two people would both prefer each other over their assigned partners. That fairness property matters when you're allocating something as personal as a match. The system delivered 50,000+ matches.
 

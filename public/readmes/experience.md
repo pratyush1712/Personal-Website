@@ -7,8 +7,9 @@ DECA Lab builds tools for researchers and field workers - people operating in me
 - Designed and built a full-stack audit platform with typed REST APIs supporting multi-role workflows - access control, draft saves, submission, and reporting - with i18n and accessibility configurations tailored for diverse field worker populations.
 - Engineered an offline-first mobile app (Legend State + MMKV, background sync) that lets auditors start, pause, and resume field audits in low-connectivity environments without losing work. The design assumption: the network will fail. Build around that.
 - Built normalized scoring pipelines with client-side CSV/XLSX/PDF export. Hardened draft-save flows against duplicate-key failures and extended data integrity guarantees across multi-round field testing.
+- Instrumented product analytics and observability across both audit products (COPA and YEE) on web and mobile - PostHog for product analytics and funnels, Sentry for error and performance monitoring, and Microsoft Clarity for session replay - turning real field usage into signal for iteration and faster bug triage.
 
-_Technologies:_ `React Native` `Expo` `Next.js` `FastAPI` `SQLAlchemy` `PostgreSQL` `TypeScript`
+_Technologies:_ `React Native` `Expo` `Next.js` `FastAPI` `SQLAlchemy` `PostgreSQL` `TypeScript` `PostHog` `Sentry` `Microsoft Clarity`
 <br/>
 
 ---

@@ -15,7 +15,7 @@ Technically, I lean toward systems and backend - architecture decisions, service
 Some work I'm most proud of:
 
 - **Cornell Perfect Match** - Head of Engineering for a matchmaking platform serving 5,000+ users. Rebuilt the matching system mid-cycle using Gale-Shapley stable matching and Google OR-Tools, delivered 50,000+ matches, and automated personalized engagement that grew active users by 600+.
-- **DECA Lab Audit Platform** - Full-stack offline-first mobile app for field auditors in low-connectivity environments. Built typed REST APIs, multi-role access control, normalized scoring pipelines, and draft-save flows hardened against data loss.
+- **DECA Lab Audit Platform** - Full-stack offline-first mobile app for field auditors in low-connectivity environments. Built typed REST APIs, multi-role access control, normalized scoring pipelines, and draft-save flows hardened against data loss - and instrumented product analytics and observability (PostHog, Sentry, Microsoft Clarity) across both products, web and mobile.
 - **ADHD Text Enhancer** - A Chrome extension that improves reading focus through bionic reading techniques. Built it for myself. 80+ people use it.
 - **TimeBite** - Schedule optimizer using Mixed Integer Linear Programming and Google OR-Tools. The kind of project that reveals how much you care about optimization theory when you build it on a weekend.
 
@@ -54,6 +54,7 @@ I also write about the intersection of technology and human psychology at <a hre
 - **Backend**: FastAPI, Flask, Node.js/Express, Django, NestJS, GraphQL, Prisma, SQLAlchemy
 - **Databases**: PostgreSQL, MongoDB, MySQL, Redis, DynamoDB, SQLite
 - **Cloud & DevOps**: AWS (ECS, ECR, Lambda, S3, CloudWatch), GCP, Azure, Docker, Kubernetes, GitHub Actions, Nginx
+- **Observability & Analytics**: PostHog, Sentry, Microsoft Clarity, Grafana/Loki
 - **ML & Data**: PyTorch, TensorFlow, Scikit-learn, OpenCV, NumPy, Pandas
 
 ## Contact
