@@ -6,7 +6,15 @@ import { PORTFOLIO_AGENT_SOURCES, type PortfolioSource } from "./portfolioSource
 // turns them into small, addressable chunks. Never import this module into client code.
 
 export type PortfolioChunkKind =
-	"github-repo" | "linkedin" | "featured" | "writing" | "readme" | "context" | "profile" | "advocacy" | "public-post";
+	| "github-repo"
+	| "linkedin"
+	| "featured"
+	| "writing"
+	| "readme"
+	| "context"
+	| "profile"
+	| "advocacy"
+	| "public-post";
 
 export type PortfolioChunk = {
 	id: string;
