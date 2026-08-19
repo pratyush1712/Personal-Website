@@ -1,6 +1,6 @@
 # 🎯 Professional Experience
 
-### **Full-Stack Developer** @ DECA Lab, Cornell University _(January 2025 - Present)_
+### **Full-Stack Developer** @ DECA Lab, Cornell University _(February 2026 - Present)_
 
 DECA Lab builds tools for researchers and field workers - people operating in messy, real-world environments where connectivity is unreliable and data loss is unacceptable. My job was to build systems that accommodate that reality.
 

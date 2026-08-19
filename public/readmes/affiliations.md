@@ -63,3 +63,5 @@ Cornell Wushu is a competitive martial arts club focusing on Chinese martial art
 
 - Worked with the President and Practice Leaders to run practices and help newer members develop their forms.
 - Planned and arranged events, including competition prep sessions and public performances.
+
+The non-technical affiliations matter. Wushu taught me how to work a body, how to perform under pressure, and how to coach - which is just a different kind of systems thinking. You observe someone's form, identify where the pattern breaks down, and figure out how to communicate the fix in a way they can actually receive.

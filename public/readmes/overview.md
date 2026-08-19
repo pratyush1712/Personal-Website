@@ -2,7 +2,7 @@
 
 ## Who I Am
 
-I'm Pratyush - a systems thinker who graduated from Cornell with a CS + Math degree and a minor in Psychology, which is not as unusual a combination as it sounds. I've spent four years building backend infrastructure and full-stack platforms while also taking courses in behavioral neuroscience, adult psychopathology, and cognitive development. The throughline is the same question: _how do complex systems - technical or human - actually work under pressure?_
+I'm Pratyush - a systems thinker finishing a B.S. in Computer Science at Cornell, with minors in Mathematics and Psychology, which is not as unusual a combination as it sounds. I've spent four years building backend infrastructure and full-stack platforms while also taking courses in behavioral neuroscience, adult psychopathology, and cognitive development. The throughline is the same question: _how do complex systems - technical or human - actually work under pressure?_
 
 I have ADHD. I say this upfront not as a disclaimer, but because it's the most honest explanation for what I build and why. The ADHD Chrome extension with 80+ users came from my own reading struggles. The admin dashboard I built at Perfect Match came from needing to reduce interruptions to my own workflow. The offline-first field audit app came from designing for auditors in low-connectivity environments who can't afford to lose progress. My best work comes from taking real constraints seriously - including my own.
 
@@ -37,7 +37,7 @@ I also write about the intersection of technology and human psychology at <a hre
 
 **Cornell University** - B.S. Computer Science & Mathematics | Minor: Psychology
 
-- **Graduating**: May 2026
+- **Graduating**: December 2026
 
 **Relevant Coursework:**
 

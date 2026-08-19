@@ -1,5 +1,7 @@
 # 💻 Skills & Expertise
 
+I'm genuinely full-stack, with a lean toward systems and backend architecture. The breadth is real, but so is the depth in the areas that matter most to how I build.
+
 | Languages  |      Frontend       |       Backend       | Databases  | Cloud & DevOps |  ML & Data   |
 | :--------: | :-----------------: | :-----------------: | :--------: | :------------: | :----------: |
 |   Python   |      React.js       |       FastAPI       | PostgreSQL |      AWS       |   PyTorch    |
